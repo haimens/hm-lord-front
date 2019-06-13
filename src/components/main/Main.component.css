@@ -1,0 +1,7 @@
+@media screen and (min-width: 992px) {
+  .main-container-open {
+    padding-left:250px !important
+  }
+  .main-container-close {
+  }
+}

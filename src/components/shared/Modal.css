@@ -1,0 +1,42 @@
+.modal-over-lay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  background-color: rgba(15, 15, 15, 0.7);
+}
+.center {
+  position: fixed;
+  min-width: 320px;
+  min-height: 300px;
+  /* max-height: 50%; */
+  /* overflow-y: scroll; */
+  z-index: 5;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: #ffffff;
+  box-shadow: 0 2px 2px rgba(15, 15, 15, 0.1);
+  overflow: auto !important;
+}
+.modal-right {
+  min-width: 320px;
+  height: 100%;
+  background-color: white;
+  float: right;
+  overflow: scroll !important;
+  overflow-x: hidden !important;
+}
+
+.modal-left {
+  min-width: 320px;
+  height: 100%;
+  background-color: white;
+  float: left;
+  overflow: scroll !important;
+  overflow-x: hidden !important;
+}
