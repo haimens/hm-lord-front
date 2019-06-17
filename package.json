@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",
+    "@trendmicro/react-sidenav": "^0.4.5",
     "alertifyjs": "^1.11.2",
     "body-scroll-lock": "^2.6.1",
     "bootstrap": "^4.3.1",

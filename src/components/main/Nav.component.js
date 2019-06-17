@@ -6,7 +6,7 @@ class Nav extends Component {
   handleClick = type => {
     if (type === "notification") alertify.alert("Bell", "click");
     if (type === "sidebar") {
-      this.props.onClick();
+      this.props.parentProps.toggleSideBar();
     }
   };
 
@@ -16,11 +16,7 @@ class Nav extends Component {
 
   handleChangePassword = () => {
     this.props.parentProps.resetPassword(localStorage.getItem("username"));
-    alertify.notify(
-      "已发送修改密码连接至Email",
-      "已发送修改密码连接至Email",
-      5
-    );
+    alertify.notify("已发送修改密码连接至Email", "已发送修改密码连接至Email", 5);
   };
 
   render() {
@@ -71,7 +67,7 @@ class Nav extends Component {
           </div>
 
           <ImageButton
-            image={`${process.env.PUBLIC_URL}/img/navicon_logout.svg`}
+            image={`${process.env.PUBLIC_URL}/img/icon_logout.svg`}
             type="submit"
             size={24}
             onClick={() => {

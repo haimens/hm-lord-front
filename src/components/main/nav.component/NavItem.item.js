@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { IconButton } from "../../shared";
 
 /**
  * NavItem
@@ -19,7 +20,7 @@ export default class NavItem extends Component {
   }
 
   componentWillReceiveProps() {
-    const { path, history } = this.props;
+    const { name, path, history, showArrow = true } = this.props;
     const parsedLocation = history.location.pathname.split("/");
     if (parsedLocation[1] === path) {
       this.setState({
@@ -35,7 +36,7 @@ export default class NavItem extends Component {
   }
 
   componentDidMount() {
-    const { path, history } = this.props;
+    const { name, path, history, showArrow = true } = this.props;
     const parsedLocation = history.location.pathname.split("/");
     if (parsedLocation[1] === path) {
       this.setState({
@@ -73,10 +74,7 @@ export default class NavItem extends Component {
           <div className="d-flex align-items-center">
             <img
               className="avatar-icon-xs mr-2"
-              src={
-                this.props.image ||
-                `${process.env.PUBLIC_URL}/img/icon_xiafa.svg`
-              }
+              src={this.props.image || `${process.env.PUBLIC_URL}/img/icon_xiafa.svg`}
               alt={"xiafa"}
             />
             <span className="d-block text-white">{name}</span>

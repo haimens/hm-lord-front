@@ -1,0 +1,21 @@
+.display-card{
+  font-size:1.5rem;
+}
+
+.display-card-container{
+  min-height:130px;
+  font-size: 14px;
+}
+
+@media (min-width:992px) {
+  .display-card{
+    font-size:14px;
+  }
+  
+}
+@media (min-width:1200px) {
+  .display-card{
+    font-size:14px;
+  }
+  
+}

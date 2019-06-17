@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Main from "./components/main/Main.component";
 import alertify from "alertifyjs";
 //import ProtectedRoute from "./components/shared/ProtectedRouter";
 import { LoaderAlt } from "./components/shared";
 
-import dashboard from "./containers/dashboard/dashboard.container";
+import Dashboard from "./containers/dashboard/dashboard.container";
 
 const Login = React.lazy(() => import("./containers/login/Login.container"));
 const ResetPassword = React.lazy(() => import("./containers/resetPassword/ResetPassword.container"));
@@ -18,7 +18,8 @@ class App extends Component {
       import("bootstrap/dist/js/bootstrap.min"),
       import("date-input-polyfill"),
       import("@fortawesome/fontawesome-free/css/all.css"),
-      import("./alertify.css")
+      import("./alertify.css"),
+      import("@trendmicro/react-sidenav/dist/react-sidenav.css")
     ]);
   }
 
@@ -29,13 +30,16 @@ class App extends Component {
     alertify.defaults.theme.input = "form-control";
     const NoMatch = () => <Redirect to="/nomatch" />;
     return (
-      <React.Suspense fallback={<LoaderAlt />}>
+      <Suspense fallback={<LoaderAlt />}>
         <Switch>
           <Route exact path="/" component={Login} />
+          <Main>
+            <Route exact path="/dashboard" component={Dashboard} />
+          </Main>
           <Route exact path="/reset" component={ResetPassword} />
           <Route exact path="/nomatch" component={Page404} />
         </Switch>
-      </React.Suspense>
+      </Suspense>
     );
   }
 }

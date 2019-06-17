@@ -1,7 +1,11 @@
-@media screen and (min-width: 992px) {
-  .main-container-open {
-    padding-left:250px !important
-  }
-  .main-container-close {
-  }
+
+.main-container-open{
+  margin-left: 240px !important;
+  width: calc(100% - 240px) !important;
+
+}
+.main-container-close{
+  margin-left: 64px !important;
+  width: calc(100% - 64px) !important;
+  
 }
