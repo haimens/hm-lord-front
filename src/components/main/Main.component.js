@@ -17,9 +17,9 @@ export class Main extends Component {
     const parentProps = {
       toggleSideBar: this.props.toggleSideBar,
       history: this.props.history,
-      resetPassword: this.props.resetPassword
+      resetPassword: this.props.resetPassword,
+      location: this.props.location
     };
-
     const hasPaddingLeft = this.state.opened ? "main-container-open" : "main-container-close";
     return (
       <main>
@@ -27,8 +27,8 @@ export class Main extends Component {
           <Nav parentProps={parentProps} />
         </section>
         <section style={{ zIndex: 9 }}>
-          <SideBar handleSideBarBeenOpened={this.handleSideBarBeenOpened} />
-          <section className={`container-fluid py-5 ${hasPaddingLeft} `}>{this.props.children}</section>
+          <SideBar handleSideBarBeenOpened={this.handleSideBarBeenOpened} parentProps={parentProps} />
+          <div className={`container-fluid py-5 ${hasPaddingLeft} `}>{this.props.children}</div>
         </section>
         {/* Render children */}
       </main>

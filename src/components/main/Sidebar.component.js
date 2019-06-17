@@ -2,32 +2,24 @@ import React, { Component } from "react";
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from "@trendmicro/react-sidenav";
 import "./Sidebar.component.css";
 export default class Sidebar extends Component {
-  handleClick = new_path => {
-    const { history } = this.props.parentProps;
-    history.push(new_path);
-  };
-  handleClickLogo = e => {
-    e.preventDefault();
-    const { history } = this.props.parentProps;
-    history.push("/dashboard");
-  };
-  handleClose = type => {
-    if (type === "sidebar") {
-      this.props.parentProps.toggleSideBar();
-    }
-  };
   handleSideBarBeenOpened = boolean => {
     this.props.handleSideBarBeenOpened(boolean);
   };
 
   render() {
+    const { history, location } = this.props.parentProps;
     return (
       <main className="mr-bg-darkblue">
         <SideNav
           onToggle={boolean => {
             this.handleSideBarBeenOpened(boolean);
           }}
-          onSelect={selected => {}}
+          onSelect={selected => {
+            const to = "/" + selected;
+            if (location.pathname !== to) {
+              history.push(to);
+            }
+          }}
           className="mr-bg-darkblue"
         >
           <Toggle />
