@@ -28,7 +28,7 @@ export default class Sidebar extends Component {
             this.handleSideBarBeenOpened(boolean);
           }}
           onSelect={selected => {}}
-          componentClass={"test"}
+          className="mr-bg-darkblue"
         >
           <Toggle />
           <Nav defaultSelected="home">
