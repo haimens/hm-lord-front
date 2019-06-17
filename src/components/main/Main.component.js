@@ -5,6 +5,7 @@ import { toggleSideBar } from "../../actions/nav.action";
 import "./Main.component.css";
 import { resetPassword } from "../../actions/auth.action";
 import SideBar from "./Sidebar.component";
+import Nav from "./Nav.component";
 export class Main extends Component {
   state = {
     opened: false
@@ -22,7 +23,10 @@ export class Main extends Component {
     const hasPaddingLeft = this.state.opened ? "main-container-open" : "main-container-close";
     return (
       <main>
-        <section style={{ zIndex: 9999, width: "100%" }}>
+        <section>
+          <Nav parentProps={parentProps} />
+        </section>
+        <section style={{ zIndex: 9 }}>
           <SideBar handleSideBarBeenOpened={this.handleSideBarBeenOpened} />
           <section className={`container-fluid py-5 ${hasPaddingLeft} `}>{this.props.children}</section>
         </section>

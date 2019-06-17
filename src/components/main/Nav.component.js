@@ -23,7 +23,7 @@ class Nav extends Component {
     return (
       <nav
         className="navbar navbar-expand-lg navbar-light bg-white d-flex 
-      justify-content-lg-end justify-content-between shadow-sm sticky-top align-items-center"
+      justify-content-lg-end justify-content-between shadow-sm  align-items-center"
         style={{ height: "50px" }}
       >
         <button

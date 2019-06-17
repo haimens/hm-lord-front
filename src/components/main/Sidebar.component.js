@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from "@trendmicro/react-sidenav";
-
+import "./Sidebar.component.css";
 export default class Sidebar extends Component {
   handleClick = new_path => {
     const { history } = this.props.parentProps;
@@ -28,6 +28,7 @@ export default class Sidebar extends Component {
             this.handleSideBarBeenOpened(boolean);
           }}
           onSelect={selected => {}}
+          componentClass={"test"}
         >
           <Toggle />
           <Nav defaultSelected="home">
