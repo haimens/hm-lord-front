@@ -7,5 +7,17 @@
 .main-container-close{
   margin-left: 64px !important;
   width: calc(100% - 64px) !important;
-  
+}
+
+@media only screen and (max-width: 992px) {
+
+  .main-container-open{
+    margin-left: 64px !important;
+  width: calc(100% - 64px) !important;
+  }
+  .main-container-close{
+    margin-left: 64px !important;
+  width: calc(100% - 64px) !important;
+
+  }
 }

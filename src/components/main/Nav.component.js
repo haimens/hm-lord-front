@@ -23,20 +23,9 @@ class Nav extends Component {
     return (
       <nav
         className="navbar navbar-expand-lg navbar-light bg-white d-flex 
-      justify-content-lg-end justify-content-between shadow-sm  align-items-center"
+      justify-content-end shadow-sm  align-items-center"
         style={{ height: "50px" }}
       >
-        <button
-          onClick={() => this.handleClick("sidebar")}
-          className="navbar-toggler mr-2"
-          type="button"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon" />
-        </button>
-
         <div className="d-flex flex-row align-items-center">
           <div className="btn-group mr-2">
             <button
@@ -67,7 +56,7 @@ class Nav extends Component {
           </div>
 
           <ImageButton
-            image={`${process.env.PUBLIC_URL}/img/icon_logout.svg`}
+            image={`${process.env.PUBLIC_URL}/img/navicon_logout.svg`}
             type="submit"
             size={24}
             onClick={() => {

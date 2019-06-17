@@ -9,7 +9,7 @@ export default class Sidebar extends Component {
   render() {
     const { history, location } = this.props.parentProps;
     return (
-      <main className="mr-bg-darkblue">
+      <main>
         <SideNav
           onToggle={boolean => {
             this.handleSideBarBeenOpened(boolean);
@@ -20,21 +20,33 @@ export default class Sidebar extends Component {
               history.push(to);
             }
           }}
-          className="mr-bg-darkblue"
+          className="hm-bg-darkblue "
         >
           <Toggle />
           <Nav defaultSelected="home">
             <NavItem eventKey="home">
               <NavIcon>
-                <i className="fa fa-fw fa-home" style={{ fontSize: "1.75em" }} />
+                <img src={`${process.env.PUBLIC_URL}/img/home.svg`} alt="Home" />
               </NavIcon>
-              <NavText>Home</NavText>
+              <NavText className="text-white">Home</NavText>
             </NavItem>
-            <NavItem eventKey="charts">
+            <NavItem eventKey="company">
               <NavIcon>
-                <i className="fa fa-fw fa-line-chart" style={{ fontSize: "1.75em" }} />
+                <img src={`${process.env.PUBLIC_URL}/img/invoice.svg`} alt="Company" />
               </NavIcon>
-              <NavText>Charts</NavText>
+              <NavText className="text-white">Company</NavText>
+            </NavItem>
+            <NavItem eventKey="invoice">
+              <NavIcon>
+                <img src={`${process.env.PUBLIC_URL}/img/invoice.svg`} alt="Invoice" />
+              </NavIcon>
+              <NavText className="text-white">Invoice</NavText>
+            </NavItem>
+            <NavItem eventKey="settings">
+              <NavIcon>
+                <img src={`${process.env.PUBLIC_URL}/img/invoice.svg`} alt="Settings" />
+              </NavIcon>
+              <NavText className="text-white">Settings</NavText>
             </NavItem>
           </Nav>
         </SideNav>

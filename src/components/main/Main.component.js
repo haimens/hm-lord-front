@@ -28,8 +28,9 @@ export class Main extends Component {
         </section>
         <section style={{ zIndex: 9 }}>
           <SideBar handleSideBarBeenOpened={this.handleSideBarBeenOpened} parentProps={parentProps} />
-          <div className={`container-fluid py-5 ${hasPaddingLeft} `}>{this.props.children}</div>
         </section>
+        <div className={`container-fluid py-5 ${hasPaddingLeft} `}>{this.props.children}</div>
+
         {/* Render children */}
       </main>
     );
