@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { IconButton } from "../../shared";
 
 /**
  * NavItem
@@ -20,7 +19,7 @@ export default class NavItem extends Component {
   }
 
   componentWillReceiveProps() {
-    const { name, path, history, showArrow = true } = this.props;
+    const { path, history } = this.props;
     const parsedLocation = history.location.pathname.split("/");
     if (parsedLocation[1] === path) {
       this.setState({
@@ -36,7 +35,7 @@ export default class NavItem extends Component {
   }
 
   componentDidMount() {
-    const { name, path, history, showArrow = true } = this.props;
+    const { path, history } = this.props;
     const parsedLocation = history.location.pathname.split("/");
     if (parsedLocation[1] === path) {
       this.setState({
