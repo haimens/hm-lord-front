@@ -6,12 +6,20 @@ import "./Main.component.css";
 import { resetPassword } from "../../actions/auth.action";
 import SideBar from "./Sidebar.component";
 import Nav from "./Nav.component";
+import { push as Menu } from "react-burger-menu";
 export class Main extends Component {
   state = {
     opened: false
   };
-  handleSideBarBeenOpened = boolean => {
-    this.setState({ opened: boolean });
+  handleSideBarBeenOpened = async () => {
+    await this.setState(states => ({ opened: !states.opened }));
+  };
+  isMenuOpen = state => {
+    console.log(state);
+    if (this.state.opened !== state.isOpen) {
+      this.setState({ opened: state.isOpen });
+    }
+    return;
   };
   render() {
     const parentProps = {
@@ -20,18 +28,24 @@ export class Main extends Component {
       resetPassword: this.props.resetPassword,
       location: this.props.location
     };
-    const hasPaddingLeft = this.state.opened ? "main-container-open" : "main-container-close";
     return (
       <main>
-        <section>
-          <Nav parentProps={parentProps} />
+        <Menu
+          pageWrapId={"page-wrap"}
+          isOpen={this.state.opened}
+          onStateChange={this.isMenuOpen}
+          customBurgerIcon={false}
+        >
+          <SideBar parentProps={parentProps} />
+        </Menu>
+        <section id="page-wrap">
+          <div>
+            <Nav handleSideBarBeenOpened={this.handleSideBarBeenOpened} parentProps={parentProps} />
+          </div>
+          <div style={{ zIndex: 9 }}>
+            <div className={`container-fluid py-5`}>{this.props.children}</div>
+          </div>
         </section>
-        <section style={{ zIndex: 9 }}>
-          <SideBar handleSideBarBeenOpened={this.handleSideBarBeenOpened} parentProps={parentProps} />
-        </section>
-        <div className={`container-fluid py-5 ${hasPaddingLeft} `}>{this.props.children}</div>
-
-        {/* Render children */}
       </main>
     );
   }

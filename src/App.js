@@ -18,8 +18,7 @@ class App extends Component {
       import("bootstrap/dist/js/bootstrap.min"),
       import("date-input-polyfill"),
       import("@fortawesome/fontawesome-free/css/all.css"),
-      import("./alertify.css"),
-      import("@trendmicro/react-sidenav/dist/react-sidenav.css")
+      import("./alertify.css")
     ]);
   }
 

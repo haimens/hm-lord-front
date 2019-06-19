@@ -51,32 +51,32 @@ code {
   font-size:0.8rem;
 }
 
-.mr-text-green {
+.hm-text-green {
   color:#0CC1A8 !important;
 }
 
-.mr-bg-green{
+.hm-bg-green{
   background-color:#0CC1A8 !important;
 }
 
-.mr-bg-dark {
+.hm-bg-dark {
   background-color: #001C36 !important;
 }
-.mr-bg-darkblue {
+.hm-bg-darkblue {
   background-color:#2d3e4e !important;
 }
-.mr-bg-lessdeepblue {
+.hm-bg-lessdeepblue {
   background-color:#2a3948 !important;
 
 }
-.mr-bg-deepblue {
+.hm-bg-deepblue {
   background-color:#263441 !important;
 }
-.mr-bg-navyblue{
+.hm-bg-navyblue{
   background-color:#5b7cfd !important;
 }
 
-.mr-text-dark {
+.hm-text-dark {
   color:#001C36 !important;
 }
 
@@ -133,7 +133,7 @@ button{
   cursor: pointer;
 }
 
-.mr-button-purple{
+.hm-button-purple{
   border: 1px solid #9f7fd8;
 }
 
@@ -145,11 +145,11 @@ button{
   height: 50vh !important;
   max-width: 778px;
 }
-.mr-purple-text{
+.hm-purple-text{
   color: #9f7fd8 !important;
 }
 
-.mr-break-word{
+.hm-break-word{
   word-break: break-all;
 }
 
@@ -157,25 +157,25 @@ button{
   color: #37b300;
 }
 
-.mr-pointer-cursor{
+.hm-pointer-cursor{
   cursor: pointer;
 }
 
-.mr-pointer-hover:hover{
+.hm-pointer-hover:hover{
   color:#007bff !important;
 }
 
-.mr-text-ellipsis{
+.hm-text-ellipsis{
   white-space: nowrap; 
   overflow: hidden;
   text-overflow:ellipsis
 }
 
-.mr-h-lg{
+.hm-h-lg{
   height:31.5px !important;
 }
 
-.mr-h-xl{
+.hm-h-xl{
   height:40.5px;
 }
 
