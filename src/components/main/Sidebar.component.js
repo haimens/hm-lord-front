@@ -75,7 +75,7 @@ export default class Sidebar extends Component {
         </section>
         <section className="accordion">
           <NavItem
-            onToggle={() => this.props.parentProps.history.push("/order")}
+            onToggle={() => this.props.parentProps.history.push("/order/list")}
             image={`${process.env.PUBLIC_URL}/img/home.svg`}
             name="Order"
             path="order"
@@ -96,7 +96,7 @@ export default class Sidebar extends Component {
         </section>
         <section className="accordion">
           <NavItem
-            onToggle={() => this.props.parentProps.history.push("/trip")}
+            onToggle={() => this.props.parentProps.history.push("/trip/ongoing")}
             image={`${process.env.PUBLIC_URL}/img/home.svg`}
             name="Trip"
             path="trip"
@@ -127,7 +127,7 @@ export default class Sidebar extends Component {
         </section>
         <section className="accordion">
           <NavItem
-            onToggle={() => this.props.parentProps.history.push("/earning")}
+            onToggle={() => this.props.parentProps.history.push("/earning/wage")}
             image={`${process.env.PUBLIC_URL}/img/home.svg`}
             name="Driver Earning"
             path="earning"

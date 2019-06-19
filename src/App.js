@@ -6,6 +6,23 @@ import alertify from "alertifyjs";
 import { LoaderAlt } from "./components/shared";
 
 import Home from "./containers/home/Home.container";
+import Driver from "./containers/driver/Driver.container";
+import Vehicle from "./containers/vehicle/Vehicle.container";
+import Customer from "./containers/customer/Customer.container";
+
+import OrderList from "./containers/order/OrderList.container";
+import OrderCreation from "./containers/order/OrderCreation.container";
+
+import TripOngoing from "./containers/trip/TripOngoing.container";
+import TripUpcoming from "./containers/trip/TripUpcoming.container";
+import TripFinished from "./containers/trip/TripFinished.container";
+import TripFailed from "./containers/trip/TripFailed.container";
+
+import Wage from "./containers/earning/Wage.container";
+import Salary from "./containers/earning/Salary.container";
+
+import Notification from "./containers/notification/Notification.container";
+import Settings from "./containers/settings/Settings.container";
 
 const Login = React.lazy(() => import("./containers/login/Login.container"));
 const ResetPassword = React.lazy(() => import("./containers/resetPassword/ResetPassword.container"));
@@ -34,6 +51,23 @@ class App extends Component {
           <Route exact path="/" component={Login} />
           <Main>
             <Route exact path="/home" component={Home} />
+            <Route exact path="/driver" component={Driver} />
+            <Route exact path="/vehicle" component={Vehicle} />
+            <Route exact path="/customer" component={Customer} />
+
+            <Route exact path="/order/list" component={OrderList} />
+            <Route exact path="/order/creation" component={OrderCreation} />
+
+            <Route exact path="/trip/ongoing" component={TripOngoing} />
+            <Route exact path="/trip/upcoming" component={TripUpcoming} />
+            <Route exact path="/trip/finished" component={TripFinished} />
+            <Route exact path="/trip/failed" component={TripFailed} />
+
+            <Route exact path="/earning/wage" component={Wage} />
+            <Route exact path="/earning/salary" component={Salary} />
+
+            <Route exact path="/notification" component={Notification} />
+            <Route exact path="/settings" component={Settings} />
           </Main>
           <Route exact path="/reset" component={ResetPassword} />
           <Route exact path="/nomatch" component={Page404} />
