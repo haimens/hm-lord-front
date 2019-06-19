@@ -5,7 +5,7 @@ import alertify from "alertifyjs";
 //import ProtectedRoute from "./components/shared/ProtectedRouter";
 import { LoaderAlt } from "./components/shared";
 
-import Dashboard from "./containers/dashboard/dashboard.container";
+import Home from "./containers/home/Home.container";
 
 const Login = React.lazy(() => import("./containers/login/Login.container"));
 const ResetPassword = React.lazy(() => import("./containers/resetPassword/ResetPassword.container"));
@@ -33,7 +33,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Login} />
           <Main>
-            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/home" component={Home} />
           </Main>
           <Route exact path="/reset" component={ResetPassword} />
           <Route exact path="/nomatch" component={Page404} />

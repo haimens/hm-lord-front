@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import DisplayCard from "./dashboard.components/Display.card";
+import DisplayCard from "./home.components/Display.card";
 
-class Dashboard extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -46,4 +46,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   null
-)(withRouter(Dashboard));
+)(withRouter(Home));
