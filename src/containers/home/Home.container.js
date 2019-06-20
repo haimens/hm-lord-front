@@ -4,6 +4,8 @@ import { withRouter } from "react-router-dom";
 import DisplayCard from "./home.components/Display.card";
 import GMapWithMarker from "../../components/shared/GMapWithMarker";
 import DriversMap from "./home.components/DriversMap.component";
+import BigCalendar from "react-big-calendar";
+import moment from "moment";
 
 class Home extends Component {
   constructor(props) {
@@ -12,6 +14,7 @@ class Home extends Component {
   }
 
   render() {
+    const localizer = BigCalendar.momentLocalizer(moment);
     return (
       <main>
         <section>
@@ -60,11 +63,11 @@ class Home extends Component {
           </div>
         </section>
 
-        <section>
+        <section className="mb-4">
           <div className="mb-4">
             <h3>Drivers</h3>
           </div>
-          <div className="mb-4">
+          <div>
             <div className="shadow-sm mb-3" style={{ height: "300px" }}>
               <GMapWithMarker />
             </div>
@@ -72,6 +75,13 @@ class Home extends Component {
               <DriversMap />
             </div>
           </div>
+        </section>
+
+        <section className="mb-4">
+          <div className="mb-4">
+            <h3>Trips</h3>
+          </div>
+          <div>123</div>
         </section>
       </main>
     );
