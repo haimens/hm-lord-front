@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Card from "../../components/shared/Card";
 
 class Driver extends Component {
   render() {
@@ -11,6 +12,7 @@ class Driver extends Component {
                 <div>Driver #1000</div>
               </div>
             </div>
+    return (
           </div>
         </section>
       </main>
