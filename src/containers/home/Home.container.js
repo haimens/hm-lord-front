@@ -4,17 +4,22 @@ import { withRouter } from "react-router-dom";
 import DisplayCard from "./home.components/Display.card";
 import GMapWithMarker from "../../components/shared/GMapWithMarker";
 import DriversMap from "./home.components/DriversMap.component";
-import BigCalendar from "react-big-calendar";
+import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-
+import "./Home.container.css";
+import CalendarDailyList from "./home.components/CalendarDailyList.component";
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
+  handleCalendarBeenClicked = date => {
+    console.log(date);
+  };
+
   render() {
-    const localizer = BigCalendar.momentLocalizer(moment);
+    const localizer = momentLocalizer(moment);
     return (
       <main>
         <section>
@@ -81,7 +86,30 @@ class Home extends Component {
           <div className="mb-4">
             <h3>Trips</h3>
           </div>
-          <div>123</div>
+          <div className="bg-white p-3 shadow-sm mb-3">
+            <Calendar
+              localizer={localizer}
+              events={myEventsList}
+              style={{ minHeight: "397px" }}
+              views={["month"]}
+              startAccessor="start"
+              endAccessor="end"
+              onSelectEvent={this.handleCalendarBeenClicked}
+              showMultiDayTimes={true}
+            />
+          </div>
+          <div className="bg-white shadow-sm">
+            <CalendarDailyList
+              parentProps={{
+                time: "08:30 AM",
+                status: "customer on board",
+                driver: "Chris Yao",
+                customer: "Michael Dai",
+                from: "psadena",
+                to: "arcadia"
+              }}
+            />
+          </div>
         </section>
       </main>
     );
@@ -96,3 +124,13 @@ export default connect(
   mapStateToProps,
   null
 )(withRouter(Home));
+
+let myEventsList = [
+  {
+    id: 0,
+    title: "All Day Event very long title",
+    allDay: true,
+    start: new Date(),
+    end: new Date()
+  }
+];
