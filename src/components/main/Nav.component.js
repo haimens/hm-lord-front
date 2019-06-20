@@ -46,7 +46,7 @@ class Nav extends Component {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              欢迎, {localStorage.getItem("username")}
+              Welcome, {localStorage.getItem("username")}
             </button>
             <div className="dropdown-menu dropdown-menu">
               <div className="d-flex justify-content-between align-items-center">

@@ -36,7 +36,7 @@ export class Main extends Component {
           onStateChange={this.isMenuOpen}
           customBurgerIcon={false}
         >
-          <SideBar parentProps={parentProps} />
+          <SideBar parentProps={parentProps} handleSideBarBeenOpened={this.handleSideBarBeenOpened} />
         </Menu>
         <section id="page-wrap">
           <div>

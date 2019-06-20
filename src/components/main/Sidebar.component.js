@@ -7,6 +7,7 @@ export default class Sidebar extends Component {
   handleClick = new_path => {
     const { history } = this.props.parentProps;
     history.push(new_path);
+    this.props.handleSideBarBeenOpened();
   };
   handleClickLogo = e => {
     e.preventDefault();
@@ -26,7 +27,7 @@ export default class Sidebar extends Component {
     return (
       <main className="hm-bg-darkblue" style={styles.container} id="navbarSupportedContent">
         {/* LOGO Section */}
-        <section className="mb-5 p-4 d-flex flex-row justify-content-between">
+        <section className="mb-3 p-4 d-flex flex-row justify-content-between">
           <a href="/home" onClick={e => this.handleClickLogo(e)}>
             <img src={`${process.env.PUBLIC_URL}/img/op_logo.svg`} alt="logo" width={"100px"} />
           </a>
@@ -35,7 +36,7 @@ export default class Sidebar extends Component {
         {/* NAV ITEMS */}
         <section className="accordion">
           <NavItem
-            onToggle={() => this.props.parentProps.history.push("/home")}
+            onToggle={() => this.handleClick("/home")}
             image={`${process.env.PUBLIC_URL}/img/home.svg`}
             name="Home"
             path="home"
@@ -45,7 +46,7 @@ export default class Sidebar extends Component {
         </section>
         <section className="accordion">
           <NavItem
-            onToggle={() => this.props.parentProps.history.push("/driver")}
+            onToggle={() => this.handleClick("/driver")}
             image={`${process.env.PUBLIC_URL}/img/home.svg`}
             name="Driver"
             path="driver"
@@ -55,7 +56,7 @@ export default class Sidebar extends Component {
         </section>
         <section className="accordion">
           <NavItem
-            onToggle={() => this.props.parentProps.history.push("/vehicle")}
+            onToggle={() => this.handleClick("/vehicle")}
             image={`${process.env.PUBLIC_URL}/img/home.svg`}
             name="Vehicle"
             path="vehicle"
@@ -65,7 +66,7 @@ export default class Sidebar extends Component {
         </section>
         <section className="accordion">
           <NavItem
-            onToggle={() => this.props.parentProps.history.push("/customer")}
+            onToggle={() => this.handleClick("/customer")}
             image={`${process.env.PUBLIC_URL}/img/home.svg`}
             name="Customer"
             path="customer"
@@ -148,7 +149,7 @@ export default class Sidebar extends Component {
         </section>
         <section className="accordion">
           <NavItem
-            onToggle={() => this.props.parentProps.history.push("/notification")}
+            onToggle={() => this.handleClick("/notification")}
             image={`${process.env.PUBLIC_URL}/img/home.svg`}
             name="Notification"
             path="notification"
