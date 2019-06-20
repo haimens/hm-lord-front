@@ -8,7 +8,7 @@ export default class VehicleCard extends Component {
         <div className="col-12 p-3 shadow-sm bg-white ">
           <div className="d-flex justify-content-between">
             <div>
-              <div>{`Vehicle ${vehicleId}`}</div>
+              <div>{`Vehicle #${vehicleId}`}</div>
               <div className="my-2 font-weight-bold">{vehicleName}</div>
             </div>
             <img

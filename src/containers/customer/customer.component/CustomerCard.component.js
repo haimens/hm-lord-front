@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 
-export default class DriverCard extends Component {
+export default class CustomerCard extends Component {
   render() {
     const {
-      driverId,
-      driverName,
-      driverImage,
-      driverPhone,
-      driverEmail,
-      driverUsername,
+      customerId,
+      customerName,
+      customerImage,
+      customerPhone,
+      customerEmail,
+      customerUsername,
       isActive
     } = this.props.parentProps;
     return (
@@ -16,22 +16,22 @@ export default class DriverCard extends Component {
         <div className="col-12 p-3 shadow-sm bg-white ">
           <div className="d-flex justify-content-between">
             <div>
-              <div>{`Driver #${driverId}`}</div>
-              <div className="my-2 font-weight-bold">{driverName}</div>
+              <div>{`Customer #${customerId}`}</div>
+              <div className="my-2 font-weight-bold">{customerName}</div>
             </div>
             <img
-              src={`${process.env.PUBLIC_URL}/img/${driverImage}`}
+              src={`${process.env.PUBLIC_URL}/img/${customerImage}`}
               className="rounded-circle"
               style={{ height: "48px", width: "48px" }}
-              alt="Driver"
+              alt="Customer"
             />
           </div>
           <div className="text-muted">
-            <div>{driverPhone}</div>
-            <div>{driverEmail}</div>
+            <div>{customerPhone}</div>
+            <div>{customerEmail}</div>
           </div>
           <div className="d-flex justify-content-between">
-            <div className="text-muted">{driverUsername}</div>
+            <div className="text-muted">{customerUsername}</div>
             {isActive ? <div className="text-success">Active</div> : <div className="text-danger">Inactive</div>}
           </div>
         </div>
