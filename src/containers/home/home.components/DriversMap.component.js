@@ -1,13 +1,16 @@
 import React, { Component } from "react";
+import DriverMapItem from "./driverMap.component/DriverMap.item";
 
 class DriversMap extends Component {
   render() {
     return (
-      <div className="bg-white shadow-sm h-100">
-        <div>
-          <img className="rounded-circle" src={`${process.env.PUBLIC_URL}/img/unnamed.jpg`} style={{ height: "48px", width: "48px" }} alt="face" />
+        <div className="row">
+          <DriverMapItem
+            driverName={"Jeremy"}
+            driverPhone={"6266077322"}
+            driverImage={"/img/unnamed.jpg"}
+          />
         </div>
-      </div>
     );
   }
 }

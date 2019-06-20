@@ -64,7 +64,7 @@ class Home extends Component {
           <div className="shadow-sm mb-3" style={{ height: "300px" }}>
             <GMapWithMarker />
           </div>
-          <div className="shadow-sm" style={{ height: "300px" }}>
+          <div className="shadow-sm bg-white" style={{  minHeight: "300px" }}>
             <DriversMap />
           </div>
         </section>
