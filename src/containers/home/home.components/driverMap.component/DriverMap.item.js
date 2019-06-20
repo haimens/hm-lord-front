@@ -3,7 +3,7 @@ import React from "react";
 export default function DriverMapitem(props) {
   const { driverName, driverPhone, driverImage } = props;
   return (
-    <div className="col-lg-1 col-md-2 col-3 p-3">
+    <div className="col-lg-1 col-md-2 col-3 ">
       <div className="text-center">
         <img
           className="rounded-circle"

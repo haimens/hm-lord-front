@@ -4,7 +4,7 @@ import DriverMapItem from "./driverMap.component/DriverMap.item";
 class DriversMap extends Component {
   render() {
     return (
-      <div className="row">
+      <div className="row p-3">
         <DriverMapItem driverName={"Jeremy"} driverPhone={"6266077322"} driverImage={"/img/unnamed.jpg"} />
       </div>
     );
