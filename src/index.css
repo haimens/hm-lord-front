@@ -133,30 +133,6 @@ button{
   cursor: pointer;
 }
 
-.hm-button-purple{
-  border: 1px solid #9f7fd8;
-}
-
-.transition-button-color{
-  background-color: #5b7cfd !important;
-}
-
-.chartjs-render-monitor-change{
-  height: 50vh !important;
-  max-width: 778px;
-}
-.hm-purple-text{
-  color: #9f7fd8 !important;
-}
-
-.hm-break-word{
-  word-break: break-all;
-}
-
-.success-text-color{
-  color: #37b300;
-}
-
 .hm-pointer-cursor{
   cursor: pointer;
 }
@@ -171,14 +147,15 @@ button{
   text-overflow:ellipsis
 }
 
-.hm-h-lg{
-  height:31.5px !important;
+.font-size-12{
+  font-size: 12px;
 }
-
-.hm-h-xl{
-  height:40.5px;
+.font-size-14{
+  font-size: 14px;
 }
-
-.font-size-10{
-  font-size: 10px;
+.font-size-18{
+  font-size: 18px;
+}
+.font-size-20{
+  font-size: 20px;
 }

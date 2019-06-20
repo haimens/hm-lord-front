@@ -9,7 +9,7 @@ import "./Display.card.css";
 export function DisplayCardItem(props) {
   const { amount, title, icon } = props.data;
   return (
-    <main className="d-flex p-4 justify-content-between align-items-center bg-white border display-card-container">
+    <main className="d-flex p-4 justify-content-between align-items-center bg-white shadow-sm display-card-container">
       {/* show amount */}
       <section className="d-flex flex-column justify-content-center h-100">
         <div className="h6 mb-3">

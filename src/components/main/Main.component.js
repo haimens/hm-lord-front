@@ -42,8 +42,8 @@ export class Main extends Component {
           <div>
             <Nav handleSideBarBeenOpened={this.handleSideBarBeenOpened} parentProps={parentProps} />
           </div>
-          <div style={{ zIndex: 9 }}>
-            <div className={`container-fluid py-5`}>{this.props.children}</div>
+          <div>
+            <div className={`container-fluid py-4`}>{this.props.children}</div>
           </div>
         </section>
       </main>
