@@ -60,18 +60,18 @@ class Home extends Component {
           </div>
         </section>
 
-<section>
-        <div className="mb-4">
-          <h3>Drivers</h3>
-        </div>
-        <div className="mb-4">
-          <div className="shadow-sm mb-3" style={{ height: "300px" }}>
-            <GMapWithMarker />
+        <section>
+          <div className="mb-4">
+            <h3>Drivers</h3>
           </div>
-          <div className="shadow-sm bg-white" style={{  minHeight: "300px" }}>
-            <DriversMap />
+          <div className="mb-4">
+            <div className="shadow-sm mb-3" style={{ height: "300px" }}>
+              <GMapWithMarker />
+            </div>
+            <div className="shadow-sm bg-white" style={{ minHeight: "300px" }}>
+              <DriversMap />
+            </div>
           </div>
-        </div>
         </section>
       </main>
     );
