@@ -43,7 +43,7 @@ export class Main extends Component {
             <Nav handleSideBarBeenOpened={this.handleSideBarBeenOpened} parentProps={parentProps} />
           </div>
           <div>
-            <div className={`container-fluid py-4`}>{this.props.children}</div>
+            <div className={`container-fluid py-4 `}>{this.props.children}</div>
           </div>
         </section>
       </main>

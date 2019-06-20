@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import DisplayCard from "./home.components/Display.card";
+import GMapWithMarker from "../../components/shared/GMapWithMarker";
+import DriversMap from "./home.components/DriversMap.component";
 
 class Home extends Component {
   constructor(props) {
@@ -53,6 +55,17 @@ class Home extends Component {
                 }}
               />
             </div>
+          </div>
+        </section>
+        <section className="mb-4">
+          <h3>Drivers</h3>
+        </section>
+        <section className="mb-4">
+          <div className="shadow-sm mb-3" style={{ height: "300px" }}>
+            <GMapWithMarker />
+          </div>
+          <div className="shadow-sm" style={{ height: "300px" }}>
+            <DriversMap />
           </div>
         </section>
       </main>
