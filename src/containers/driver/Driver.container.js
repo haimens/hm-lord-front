@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import DriverCard from "./driver.component/DriverCard.component";
-
+import Pagination from "../../components/shared/Pagination";
 class Driver extends Component {
+  handlePageChange = start => {
+    console.log(start);
+  };
   render() {
     return (
       <main>
@@ -17,11 +20,13 @@ class Driver extends Component {
                 driverImage: "unnamed.jpg",
                 driverPhone: "6266266266",
                 driverEmail: "lebronjames@gmail.com",
-                driverUsername: "lebronjames123"
+                driverUsername: "lebronjames123",
+                isActive: true
               }}
             />
           </div>
         </section>
+        <Pagination onPageChange={this.handlePageChange} />
       </main>
     );
   }
