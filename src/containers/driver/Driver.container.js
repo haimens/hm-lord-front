@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Card from "../../components/shared/Card";
+import DriverCard from "./driver.component/DriverCard.component";
 
 class Driver extends Component {
   render() {
@@ -10,7 +10,16 @@ class Driver extends Component {
             <h3>Driver</h3>
           </div>
           <div className="row">
-            <Card />
+            <DriverCard
+              parentProps={{
+                driverId: "1000016",
+                driverName: "Lebron James",
+                driverImage: "unnamed.jpg",
+                driverPhone: "6266266266",
+                driverEmail: "lebronjames@gmail.com",
+                driverUsername: "lebronjames123"
+              }}
+            />
           </div>
         </section>
       </main>
