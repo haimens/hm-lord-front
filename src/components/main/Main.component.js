@@ -15,7 +15,6 @@ export class Main extends Component {
     await this.setState(states => ({ opened: !states.opened }));
   };
   isMenuOpen = state => {
-    console.log(state);
     if (this.state.opened !== state.isOpen) {
       this.setState({ opened: state.isOpen });
     }
