@@ -23,7 +23,7 @@ export default class OrderCard extends Component {
               <i className="fas fa-money-check mr-2" />
               Prepaid
             </div>
-            {isActive ? <div className="text-success">Active</div> : <div className="text-danger">Inactive</div>}
+            {isActive ? <div className="hm-text-green">Active</div> : <div className="text-danger">Inactive</div>}
           </div>
         </div>
       </div>

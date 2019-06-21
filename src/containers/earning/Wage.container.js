@@ -9,8 +9,14 @@ class Wage extends Component {
     return (
       <main>
         <section>
-          <div className="mb-4">
+          <div className="mb-4 d-flex justify-content-between">
             <h3 className="font-weight-bold">Wage</h3>
+            <button className="btn hm-bg-green text-white">
+              <span>
+                <i className="fas fa-plus mr-2" />
+              </span>
+              Wage
+            </button>
           </div>
           <div>
             <ListView

@@ -32,7 +32,7 @@ export default class DriverCard extends Component {
           </div>
           <div className="d-flex justify-content-between">
             <div className="text-muted">{driverUsername}</div>
-            {isActive ? <div className="text-success">Active</div> : <div className="text-danger">Inactive</div>}
+            {isActive ? <div className="hm-text-green">Active</div> : <div className="text-danger">Inactive</div>}
           </div>
         </div>
       </div>
