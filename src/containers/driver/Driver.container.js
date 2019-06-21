@@ -10,7 +10,7 @@ class Driver extends Component {
       <main>
         <section>
           <div className="mb-4">
-            <h3>Driver</h3>
+            <h3 className="font-weight-bold">Driver</h3>
           </div>
           <div className="row">
             <DriverCard

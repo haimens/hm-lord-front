@@ -10,7 +10,7 @@ class TripOngoing extends Component {
       <main>
         <section>
           <div className="mb-4">
-            <h3>Trip - Ongoing</h3>
+            <h3 className="font-weight-bold">Trip - Ongoing</h3>
           </div>
           <div className="row">
             <TripOngoingCard

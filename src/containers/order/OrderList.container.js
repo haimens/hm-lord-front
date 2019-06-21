@@ -10,7 +10,7 @@ class Order extends Component {
       <main>
         <section>
           <div className="mb-4">
-            <h3>Order</h3>
+            <h3 className="font-weight-bold">Order</h3>
           </div>
           <div className="row">
             <OrderCard

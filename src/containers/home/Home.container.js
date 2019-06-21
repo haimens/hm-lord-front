@@ -24,7 +24,7 @@ class Home extends Component {
       <main>
         <section>
           <div className="mb-4">
-            <h3>Home</h3>
+            <h3 className="font-weight-bold">Home</h3>
           </div>
           <div className="mb-4">
             <div className="row">
@@ -70,7 +70,7 @@ class Home extends Component {
 
         <section className="mb-4">
           <div className="mb-4">
-            <h3>Drivers</h3>
+            <h3 className="font-weight-bold">Drivers</h3>
           </div>
           <div>
             <div className="shadow-sm mb-3" style={{ height: "300px" }}>
@@ -84,7 +84,7 @@ class Home extends Component {
 
         <section className="mb-4">
           <div className="mb-4">
-            <h3>Trips</h3>
+            <h3 className="font-weight-bold">Trips</h3>
           </div>
           <div className="bg-white p-3 shadow-sm mb-3">
             <Calendar

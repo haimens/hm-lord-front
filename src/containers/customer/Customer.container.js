@@ -10,7 +10,7 @@ class Customer extends Component {
       <main>
         <section>
           <div className="mb-4">
-            <h3>Customer</h3>
+            <h3 className="font-weight-bold">Customer</h3>
           </div>
           <div className="row">
             <CustomerCard

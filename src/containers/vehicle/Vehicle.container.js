@@ -10,7 +10,7 @@ class Vehicle extends Component {
       <main>
         <section>
           <div className="mb-4">
-            <h3>Vehicle</h3>
+            <h3 className="font-weight-bold">Vehicle</h3>
           </div>
           <div className="row">
             <VehicleCard
