@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import VehicleCard from "./vehicle.component/VehicleCard.component";
+import VehicleCard from "../../components/shared/VehicleCard.component";
 import Pagination from "../../components/shared/Pagination";
 class Vehicle extends Component {
   handlePageChange = start => {

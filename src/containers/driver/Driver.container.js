@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DriverCard from "./driver.component/DriverCard.component";
+import DriverCard from "../../components/shared/DriverCard.component";
 import Pagination from "../../components/shared/Pagination";
 import DriverCreation from "./driver.component/DriverCreation.modal";
 class Driver extends Component {

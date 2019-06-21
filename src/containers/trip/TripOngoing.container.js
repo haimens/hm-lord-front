@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TripOngoingCard from "./tripOngoing.component/TripOngoingCard.component";
+import TripCard from "../../components/shared/TripCard.component";
 import Pagination from "../../components/shared/Pagination";
 class TripOngoing extends Component {
   handlePageChange = start => {
@@ -13,7 +13,7 @@ class TripOngoing extends Component {
             <h3 className="font-weight-bold">Trip - Ongoing</h3>
           </div>
           <div className="row">
-            <TripOngoingCard
+            <TripCard
               parentProps={{
                 tripId: "1000016",
                 tripDriver: "Lebron James",
