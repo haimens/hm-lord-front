@@ -48,9 +48,7 @@ export class Login extends React.Component {
 
   handleForgetPass = e => {
     e.preventDefault();
-    window.location.href = `${process.env.REACT_APP_HAVANA_FRONT}/forget/${
-      process.env.REACT_APP_APP_TOKEN
-    }`;
+    window.location.href = `${process.env.REACT_APP_HAVANA_FRONT}/forget/${process.env.REACT_APP_APP_TOKEN}`;
   };
 
   componentWillMount = () => {
@@ -60,12 +58,8 @@ export class Login extends React.Component {
   componentDidMount() {
     let newImage = new Image();
     newImage.onload = function(img) {
-      document
-        .getElementById("login-image")
-        .classList.remove("login-image-init");
-      document
-        .getElementById("login-image")
-        .classList.add("login-image-loaded");
+      document.getElementById("login-image").classList.remove("login-image-init");
+      document.getElementById("login-image").classList.add("login-image-loaded");
     };
     newImage.src = `${process.env.PUBLIC_URL}/img/hd.png`;
   }
@@ -111,26 +105,20 @@ export class Login extends React.Component {
                   className="form-control bg-light border-0 rounded p-2 mr-h-lg "
                   placeholder="输入验证码"
                   name="login" id="verify" value={this.state.verify} onChange={this.handleChange} />
-                <div class="input-group-append pl-2">
-                  <span class="input-group-text border-0 rounded p-0">
+                <div className="input-group-append pl-2">
+                  <span className="input-group-text border-0 rounded p-0">
                     <canvas id="canvas" width="100" height="31.5"></canvas>
                   </span>
                 </div>
               </div>
             </div> */}
             <div className="text-center">
-              <button
-                type="submit"
-                className="btn mr-bg-green text-white  pl-4 pr-4"
-              >
+              <button type="submit" className="btn mr-bg-green text-white  pl-4 pr-4">
                 登录
               </button>
             </div>
             <div>
-              <button
-                onClick={this.handleForgetPass}
-                className="btn btn-link p-0 btn-sm text-green "
-              >
+              <button onClick={this.handleForgetPass} className="btn btn-link p-0 btn-sm text-green ">
                 忘记密码?
               </button>
             </div>
