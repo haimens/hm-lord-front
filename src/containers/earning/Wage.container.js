@@ -2,8 +2,14 @@ import React, { Component } from "react";
 import ListView from "../../components/shared/ListView";
 import WageListItem from "./Wage.component/WageList.item";
 class Wage extends Component {
+  state = {
+    showAddWage: false
+  };
   handleWageSearch = keywords => {
     console.log(keywords);
+  };
+  handleAddingWage = () => {
+    this.setState(state => ({ showAddWage: !state.showAddWage }));
   };
   render() {
     return (
@@ -11,7 +17,7 @@ class Wage extends Component {
         <section>
           <div className="mb-4 d-flex justify-content-between">
             <h3 className="font-weight-bold">Wage</h3>
-            <button className="btn hm-bg-green text-white">
+            <button className="btn hm-bg-green text-white" onClick={this.handleAddingWage}>
               <span>
                 <i className="fas fa-plus mr-2" />
               </span>
