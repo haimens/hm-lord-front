@@ -54,7 +54,9 @@ code {
 .hm-text-green {
   color:#0CC1A8 !important;
 }
-
+.hm-border-green {
+  border: 1px solid #0CC1A8 !important;
+}
 .hm-bg-green{
   background-color:#0CC1A8 !important;
 }

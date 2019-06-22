@@ -21,10 +21,10 @@ class OrderCreation extends Component {
           <OrderCreationPagination position={position} />
         </section>
         <section>
-          {position === 0 && <CustomerInformation />}
-          {position === 1 && <CustomerInformation />}
-          {position === 2 && <TripDetail />}
-          {position === 3 && <CustomerInformation />}
+          <div>{position === 0 && <CustomerInformation />}</div>
+          <div>{position === 1 && <CustomerInformation />}</div>
+          <div>{position === 2 && <TripDetail handleChangePosition={this.handleChangePosition} />}</div>
+          <div>{position === 3 && <CustomerInformation />}</div>
         </section>
       </main>
     );

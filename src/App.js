@@ -37,7 +37,8 @@ class App extends Component {
       import("date-input-polyfill"),
       import("@fortawesome/fontawesome-free/css/all.css"),
       import("./alertify.css"),
-      import("react-big-calendar/lib/css/react-big-calendar.css")
+      import("react-big-calendar/lib/css/react-big-calendar.css"),
+      import("antd/dist/antd.css")
     ]);
   }
 
