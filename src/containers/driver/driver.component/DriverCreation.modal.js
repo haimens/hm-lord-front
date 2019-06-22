@@ -44,7 +44,7 @@ export default class DrvierCreation extends Component {
         onClose={this.handleClose}
         position="center"
         getWidth={"580px"}
-        getHeight={"535px"}
+        getHeight={"500px"}
         zIndex="1080"
       >
         {showImage && (

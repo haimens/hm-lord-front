@@ -89,14 +89,14 @@ export default class MonthlyLineAmountPanel extends Component {
             <div className="col-md-12 col-sm-12 d-flex flex-column flex-sm-row justify-content-between  ">
 
               <div>
-                <Button label="全部" className={this.state.activeOptionTab === 0 ? 'mr-bg-green text-white' : 'mr-button-purple mr-purple-text'} onClick={() => this.optionSwitch(0)} />
-                <Button label="微信支付" className={this.state.activeOptionTab === 1 ? 'mr-bg-green text-white' : 'mr-button-purple mr-purple-text'} onClick={() => this.optionSwitch(1)} />
-                <Button label="支付宝" className={this.state.activeOptionTab === 2 ? 'mr-bg-green text-white' : 'mr-button-purple mr-purple-text'} onClick={() => this.optionSwitch(2)} />
-                <Button label="QQ钱包" className={this.state.activeOptionTab === 3 ? 'mr-bg-green text-white' : 'mr-button-purple mr-purple-text'} onClick={() => this.optionSwitch(3)} />
+                <Button label="全部" className={this.state.activeOptionTab === 0 ? 'hm-bg-green text-white' : 'mr-button-purple mr-purple-text'} onClick={() => this.optionSwitch(0)} />
+                <Button label="微信支付" className={this.state.activeOptionTab === 1 ? 'hm-bg-green text-white' : 'mr-button-purple mr-purple-text'} onClick={() => this.optionSwitch(1)} />
+                <Button label="支付宝" className={this.state.activeOptionTab === 2 ? 'hm-bg-green text-white' : 'mr-button-purple mr-purple-text'} onClick={() => this.optionSwitch(2)} />
+                <Button label="QQ钱包" className={this.state.activeOptionTab === 3 ? 'hm-bg-green text-white' : 'mr-button-purple mr-purple-text'} onClick={() => this.optionSwitch(3)} />
               </div>
               <div>
-                <Button label="当月" className={this.state.activeTab === 0 ? 'mr-bg-green text-white' : 'mr-button-purple mr-purple-text'} onClick={() => this.monthSwitch(0)} />
-                <Button label="前30天" className={this.state.activeTab === 1 ? 'mr-bg-green text-white' : 'mr-button-purple mr-purple-text'} onClick={() => this.monthSwitch(1)} />
+                <Button label="当月" className={this.state.activeTab === 0 ? 'hm-bg-green text-white' : 'mr-button-purple mr-purple-text'} onClick={() => this.monthSwitch(0)} />
+                <Button label="前30天" className={this.state.activeTab === 1 ? 'hm-bg-green text-white' : 'mr-button-purple mr-purple-text'} onClick={() => this.monthSwitch(1)} />
               </div>
             </div>
           </section>

@@ -7,9 +7,7 @@ import ProtectedRoute from "./components/shared/ProtectedRouter";
 import { LoaderAlt } from "./components/shared";
 
 const Login = React.lazy(() => import("./containers/login/Login.container"));
-const ResetPassword = React.lazy(() =>
-  import("./containers/resetPassword/ResetPassword.container")
-);
+const ResetPassword = React.lazy(() => import("./containers/resetPassword/ResetPassword.container"));
 
 class App extends Component {
   componentDidMount() {
@@ -25,7 +23,7 @@ class App extends Component {
 
   render() {
     alertify.defaults.transition = "zoom";
-    alertify.defaults.theme.ok = "btn mr-bg-green text-white";
+    alertify.defaults.theme.ok = "btn hm-bg-green text-white";
     alertify.defaults.theme.cancel = "btn btn-danger";
     alertify.defaults.theme.input = "form-control";
     const NoMatch = () => <Redirect to="/nomatch" />;
@@ -49,27 +47,11 @@ class App extends Component {
 function Page404(props) {
   return (
     <main style={styles.container} className="text-center">
-      <img
-        style={styles.imageContainer}
-        src={`${process.env.PUBLIC_URL}/img/404/error404-head.png`}
-        alt="error404"
-      />
+      <img style={styles.imageContainer} src={`${process.env.PUBLIC_URL}/img/404/error404-head.png`} alt="error404" />
       <div className="d-flex mt-3">
-        <img
-          style={styles.imageContainerSub}
-          src={`${process.env.PUBLIC_URL}/img/404/4.png`}
-          alt="error404"
-        />
-        <img
-          style={styles.imageContainerSub}
-          src={`${process.env.PUBLIC_URL}/img/404/0.png`}
-          alt="error404"
-        />
-        <img
-          style={styles.imageContainerSub}
-          src={`${process.env.PUBLIC_URL}/img/404/4.png`}
-          alt="error404"
-        />
+        <img style={styles.imageContainerSub} src={`${process.env.PUBLIC_URL}/img/404/4.png`} alt="error404" />
+        <img style={styles.imageContainerSub} src={`${process.env.PUBLIC_URL}/img/404/0.png`} alt="error404" />
+        <img style={styles.imageContainerSub} src={`${process.env.PUBLIC_URL}/img/404/4.png`} alt="error404" />
       </div>
       <img
         style={styles.imageContainerText}
@@ -77,7 +59,7 @@ function Page404(props) {
         alt="error404"
         className="mt-4"
       />
-      <a className="btn mr-bg-darkblue text-white mt-4" href="/dashboard">
+      <a className="btn hm-bg-darkblue text-white mt-4" href="/dashboard">
         返回
       </a>
     </main>

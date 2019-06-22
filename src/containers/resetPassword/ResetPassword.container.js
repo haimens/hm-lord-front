@@ -39,10 +39,7 @@ export class Login extends React.Component {
                 />
               </div>
               <div className="text-center">
-                <button
-                  onClick={() => this.handleClick()}
-                  className="btn mr-bg-green text-white  pl-4 pr-4"
-                >
+                <button onClick={() => this.handleClick()} className="btn hm-bg-green text-white  pl-4 pr-4">
                   重置密码
                 </button>
               </div>

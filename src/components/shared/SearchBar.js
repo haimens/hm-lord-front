@@ -42,8 +42,8 @@ class IconInput extends React.Component {
     //=====================================================================================================
 
     return (
-      <form className="filter-item-container border" onSubmit={this.handleSubmit}>
-        <div id="filter-item-icon" className="d-flex align-items-center">
+      <form className="filter-item-container border " onSubmit={this.handleSubmit}>
+        <div id="filter-item-icon" className="d-flex align-items-center ">
           <ImageButton
             image={`${process.env.PUBLIC_URL}/img/search.png`}
             type="submit"

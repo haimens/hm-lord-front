@@ -11,6 +11,7 @@ import Vehicle from "./containers/vehicle/Vehicle.container";
 import Customer from "./containers/customer/Customer.container";
 
 import OrderList from "./containers/order/OrderList.container";
+import OrderDetail from "./containers/order/OrderDetail.container";
 import OrderCreation from "./containers/order/OrderCreation.container";
 
 import TripOngoing from "./containers/trip/TripOngoing.container";
@@ -42,7 +43,7 @@ class App extends Component {
 
   render() {
     alertify.defaults.transition = "zoom";
-    alertify.defaults.theme.ok = "btn mr-bg-green text-white";
+    alertify.defaults.theme.ok = "btn hm-bg-green text-white";
     alertify.defaults.theme.cancel = "btn btn-danger";
     alertify.defaults.theme.input = "form-control";
     const NoMatch = () => <Redirect to="/nomatch" />;
@@ -57,6 +58,7 @@ class App extends Component {
             <Route exact path="/customer" component={Customer} />
 
             <Route exact path="/order/list" component={OrderList} />
+            <Route exact path="/order/detail/:order_token" component={OrderDetail} />
             <Route exact path="/order/creation" component={OrderCreation} />
 
             <Route exact path="/trip/ongoing" component={TripOngoing} />
@@ -93,7 +95,7 @@ function Page404(props) {
         alt="error404"
         className="mt-4"
       />
-      <a className="btn mr-bg-darkblue text-white mt-4" href="/dashboard">
+      <a className="btn hm-bg-darkblue text-white mt-4" href="/dashboard">
         返回
       </a>
     </main>
