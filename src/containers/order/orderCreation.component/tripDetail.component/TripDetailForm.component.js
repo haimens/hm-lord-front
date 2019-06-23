@@ -3,7 +3,7 @@ import moment from "moment";
 import { DatePicker, TimePicker } from "antd";
 import GAutoComplete from "../../../../components/shared/GAutoComplete";
 import "./TripDetailForm.component.css";
-export default class OrderForm extends Component {
+export default class TripDetailForm extends Component {
   constructor(props) {
     super(props);
     this.state = {

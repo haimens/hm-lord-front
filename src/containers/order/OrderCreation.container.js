@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import OrderCreationPagination from "./orderCreation.component/OrderCreationPagination.component";
 import CustomerInformation from "./orderCreation.component/CustomerInformation.component";
 import TripDetail from "./orderCreation.component/TripDetail.component";
-
+import ReviewTrip from "./orderCreation.component/ReviewTrip.component";
 class OrderCreation extends Component {
   state = {
     position: 2
@@ -22,9 +22,8 @@ class OrderCreation extends Component {
         </section>
         <section>
           <div>{position === 0 && <CustomerInformation />}</div>
-          <div>{position === 1 && <CustomerInformation />}</div>
-          <div>{position === 2 && <TripDetail handleChangePosition={this.handleChangePosition} />}</div>
-          <div>{position === 3 && <CustomerInformation />}</div>
+          <div>{position === 1 && <TripDetail handleChangePosition={this.handleChangePosition} />}</div>
+          <div>{position === 2 && <ReviewTrip />}</div>
         </section>
       </main>
     );

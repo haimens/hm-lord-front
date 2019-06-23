@@ -1,14 +1,22 @@
 import React, { Component } from "react";
 import CustomerInformationItem from "./customerInformation.component/CustomerInformation.item";
 import { SearchBar } from "../../../components/shared";
+import CustomerCreationInOrderForm from "./customerInformation.component/CustomerCreationInOrderForm.component";
 
 export default class CustomerInformation extends Component {
+  state = {
+    showAddingCustomerForm: false
+  };
+  handleShowAddingCustomerForm = () => {
+    this.setState(state => ({ showAddingCustomerForm: !state.showAddingCustomerForm }));
+  };
   render() {
+    const { showAddingCustomerForm } = this.state;
     return (
       <div className="mb-4 bg-white shadow-sm p-3" style={{ minHeight: "542px" }}>
         <div className="d-flex justify-content-between ">
           <h5 className="font-weight-bold">Customer Information</h5>
-          <button className="btn hm-bg-green text-white" onClick={this.handleAddingDriver}>
+          <button className="btn hm-bg-green text-white" onClick={this.handleShowAddingCustomerForm}>
             <span>
               <i className="fas fa-plus mr-2" />
             </span>
@@ -26,6 +34,7 @@ export default class CustomerInformation extends Component {
               />
             </ul>
           </div>
+          {showAddingCustomerForm && <CustomerCreationInOrderForm />}
         </div>
       </div>
     );
