@@ -12,16 +12,14 @@ class Vehicle extends Component {
           <div className="mb-4">
             <h3 className="font-weight-bold">Vehicle</h3>
           </div>
-          <div className="row">
-            <VehicleCard
-              parentProps={{
-                vehicleId: "1000016",
-                vehicleName: "Lebron James",
-                vehicleImage: "unnamed.jpg",
-                vehiclePhone: "6266266266"
-              }}
-            />
-          </div>
+          <VehicleCard
+            parentProps={{
+              vehicleId: "1000016",
+              vehicleName: "Lebron James",
+              vehicleImage: "unnamed.jpg",
+              vehiclePhone: "6266266266"
+            }}
+          />
         </section>
         <Pagination onPageChange={this.handlePageChange} />
       </main>

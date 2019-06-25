@@ -43,8 +43,8 @@ export default class DrvierCreation extends Component {
         title="Add Company Admin"
         onClose={this.handleClose}
         position="center"
-        getWidth={"580px"}
-        getHeight={"500px"}
+        getWidth={"519px"}
+        getHeight={"482px"}
         zIndex="1080"
       >
         {showImage && (

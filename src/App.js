@@ -7,6 +7,8 @@ import { LoaderAlt } from "./components/shared";
 
 import Home from "./containers/home/Home.container";
 import Driver from "./containers/driver/Driver.container";
+import DriverDetail from "./containers/driver/DriverDetail.container";
+
 import Vehicle from "./containers/vehicle/Vehicle.container";
 import Customer from "./containers/customer/Customer.container";
 
@@ -55,6 +57,8 @@ class App extends Component {
           <Main>
             <Route exact path="/home" component={Home} />
             <Route exact path="/driver" component={Driver} />
+            <Route exact path="/driver/detail/:driver_token" component={DriverDetail} />
+
             <Route exact path="/vehicle" component={Vehicle} />
             <Route exact path="/customer" component={Customer} />
 

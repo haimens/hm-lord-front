@@ -12,18 +12,16 @@ class TripOngoing extends Component {
           <div className="mb-4">
             <h3 className="font-weight-bold">Trip - Ongoing</h3>
           </div>
-          <div className="row">
-            <TripCard
-              parentProps={{
-                tripId: "1000016",
-                tripDriver: "Lebron James",
-                tripCustomer: "Kevin Love",
-                tripPickUp: "06/16 16:30 PM",
-                tripFrom: "Pasadena",
-                tripTo: "Arcadia"
-              }}
-            />
-          </div>
+          <TripCard
+            parentProps={{
+              tripId: "1000016",
+              tripDriver: "Lebron James",
+              tripCustomer: "Kevin Love",
+              tripPickUp: "06/16 16:30 PM",
+              tripFrom: "Pasadena",
+              tripTo: "Arcadia"
+            }}
+          />
         </section>
         <Pagination onPageChange={this.handlePageChange} />
       </main>
