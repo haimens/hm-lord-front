@@ -13,6 +13,8 @@ import LoaderAlt from "./LoaderAlt";
 import ImageInModal from "./ImageInModal.component";
 import ImageLoaderModal from "./ImageLoader.modal";
 import PreviewImageModal from "./ImagePreview.modal";
+import TripCard from "./TripCard.component";
+import VehicleCard from "./VehicleCard.component";
 export {
   LoaderAlt,
   IconButton,
@@ -28,5 +30,7 @@ export {
   SuccessModal,
   ImageInModal,
   ImageLoaderModal,
-  PreviewImageModal
+  PreviewImageModal,
+  TripCard,
+  VehicleCard
 };
