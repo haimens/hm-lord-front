@@ -28,11 +28,8 @@ export default class CustomerInformation extends Component {
         <div className="row">
           <div className="col-9">
             <SearchBar className={"form-control"} />
-            <ul className="list-group">
-              <CustomerInformationItem
-                handleCustomerInformationItemClicked={this.handleCustomerInformationItemClicked}
-              />
-            </ul>
+
+            <CustomerInformationItem handleCustomerInformationItemClicked={this.handleCustomerInformationItemClicked} />
           </div>
           {showAddingCustomerForm && <CustomerCreationInOrderForm />}
         </div>

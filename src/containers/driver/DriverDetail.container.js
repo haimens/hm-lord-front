@@ -4,14 +4,37 @@ import GMapFlag from "../../components/shared/GMapFlag";
 import { VehicleCard, TripCard, ListView } from "../../components/shared";
 import WageListItem from "./driverDetail.component/WageList.item";
 import SalaryListItem from "./driverDetail.component/SalaryList.item";
-
+import AddingTripModal from "./driverDetail.component/AddingTrip.modal";
+import AddingVehicleModal from "./driverDetail.component/AddingVehicle.modal";
 class DriverDetail extends Component {
+  state = {
+    showAddingTripModal: false,
+    showAddingVehicleModal: false,
+    showAddingWageModal: false,
+    showAddingSalaryModal: false
+  };
+  handleShowAddingTripModal = () => {
+    this.setState(state => ({ showAddingTripModal: !state.showAddingTripModal }));
+  };
+  handleShowAddingVehicleModal = () => {
+    this.setState(state => ({ showAddingVehicleModal: !state.showAddingVehicleModal }));
+  };
+  handleShowAddingWageModal = () => {
+    this.setState(state => ({ showAddingWageModal: !state.showAddingWageModal }));
+  };
+  handleShowAddingSalaryModal = () => {
+    this.setState(state => ({ showAddingSalaryModal: !state.showAddingSalaryModal }));
+  };
   render() {
+    const { showAddingTripModal, showAddingVehicleModal, showAddingWageModal, showAddingSalaryModal } = this.state;
     return (
       <main>
+        {showAddingTripModal && <AddingTripModal onClose={this.handleShowAddingTripModal} />}
+        {showAddingVehicleModal && <AddingVehicleModal onClose={this.handleShowAddingVehicleModal} />}
+
         <section className="mb-4">
           <div className="mb-4">
-            <h3 className="font-weight-bold">Driver Detail</h3>
+            <h3 className="font-weight-bold mr-3">Driver Detail</h3>
           </div>
           <div>
             <DriverDetailCard />
@@ -26,10 +49,14 @@ class DriverDetail extends Component {
           </div>
         </section>
         <section className="mb-4">
-          <div className="mb-4">
-            <h3 className="font-weight-bold">Trip List</h3>
+          <div className="mb-4 d-flex">
+            <h3 className="font-weight-bold mr-3">Trip List</h3>
+            <i
+              className="fas fa-plus hm-bg-green rounded-circle text-white p-2 hm-pointer-cursor"
+              onClick={this.handleShowAddingTripModal}
+            />
           </div>
-          <div>
+          <div className="row">
             <TripCard
               parentProps={{
                 tripId: 100015,
@@ -43,10 +70,14 @@ class DriverDetail extends Component {
           </div>
         </section>
         <section className="mb-4">
-          <div className="mb-4">
-            <h3 className="font-weight-bold">Vehicle List</h3>
+          <div className="mb-4 d-flex">
+            <h3 className="font-weight-bold mr-3">Vehicle List</h3>
+            <i
+              className="fas fa-plus hm-bg-green rounded-circle text-white p-2 hm-pointer-cursor"
+              onClick={this.handleShowAddingVehicleModal}
+            />
           </div>
-          <div>
+          <div className="row">
             <VehicleCard
               parentProps={{
                 vehicleId: "1000016",
@@ -59,8 +90,12 @@ class DriverDetail extends Component {
           </div>
         </section>
         <section className="mb-4">
-          <div className="mb-4">
-            <h3 className="font-weight-bold">Wage List</h3>
+          <div className="mb-4 d-flex">
+            <h3 className="font-weight-bold mr-3">Salary List</h3>
+            <i
+              className="fas fa-plus hm-bg-green rounded-circle text-white p-2 hm-pointer-cursor"
+              onClick={this.handleShowAddingSalaryModal}
+            />
           </div>
           <div>
             <ListView
@@ -78,8 +113,9 @@ class DriverDetail extends Component {
         </section>
 
         <section className="mb-4">
-          <div className="mb-4">
-            <h3 className="font-weight-bold">Salary List</h3>
+          <div className="mb-4 d-flex">
+            <h3 className="font-weight-bold mr-3">Salary List</h3>
+            <i className="fas fa-plus hm-bg-green rounded-circle text-white p-2 hm-pointer-cursor" />
           </div>
           <div>
             <ListView

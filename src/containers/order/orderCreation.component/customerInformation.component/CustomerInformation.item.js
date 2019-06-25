@@ -5,14 +5,16 @@ export default function CustomerInformationItem(props) {
     props.handleCustomerInformationItemClicked(123);
   };
   return (
-    <li
-      className="list-group-item list-group-item-action  list-group-item-secondary hm-pointer-cursor"
-      onClick={handleCustomerInformationItemClicked}
-    >
-      <div className="d-flex justify-content-between ">
-        <div>asdf</div>
-        <div>asdf</div>
-      </div>
-    </li>
+    <ul className="list-group">
+      <li
+        className="list-group-item list-group-item-action  list-group-item-secondary hm-pointer-cursor"
+        onClick={handleCustomerInformationItemClicked}
+      >
+        <div className="d-flex justify-content-between ">
+          <div>asdf</div>
+          <div>asdf</div>
+        </div>
+      </li>
+    </ul>
   );
 }
