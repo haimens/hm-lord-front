@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ImageLoaderModal, PreviewImageModal, ImageInModal, Modal } from "../../../components/shared";
-export default class VehicleCreation extends Component {
+export default class CustomerCreation extends Component {
   state = {
     showImage: false,
     showPreview: false,
@@ -44,7 +44,7 @@ export default class VehicleCreation extends Component {
         onClose={this.handleClose}
         position="center"
         getWidth={"519px"}
-        getHeight={"390px"}
+        getHeight={"464px"}
         zIndex="1080"
       >
         {showImage && (
@@ -57,7 +57,7 @@ export default class VehicleCreation extends Component {
         {showPreview && <PreviewImageModal image={img_url} onClose={() => this.setState({ showPreview: false })} />}
         <div className="container my-3">
           <div className="form-group">
-            <label htmlFor="driver_name">Identifier</label>
+            <label htmlFor="driver_name">Name</label>
             <input
               className="form-control"
               name="driver_name"
@@ -68,7 +68,7 @@ export default class VehicleCreation extends Component {
           </div>
 
           <div className="form-group">
-            <label htmlFor="driver_cell">Plate Number</label>
+            <label htmlFor="driver_cell">Cell</label>
             <input
               type="email"
               className="form-control"
@@ -80,7 +80,19 @@ export default class VehicleCreation extends Component {
           </div>
 
           <div className="form-group">
-            <label htmlFor="driver_email">Description</label>
+            <label htmlFor="driver_email">Email</label>
+            <input
+              type="cell"
+              className="form-control"
+              name="driver_email"
+              id="driver_email"
+              value={driver_email}
+              onChange={this.handleInputChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="driver_email">Address</label>
             <input
               type="cell"
               className="form-control"
