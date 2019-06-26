@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ListView from "../../components/shared/ListView";
-import WageListItem from "./Wage.component/WageList.item";
-class Wage extends Component {
+import DriverPayableListItem from "./driverPayable.component/DriverPayableList.item";
+class DriverPayable extends Component {
   state = {
     showAddWage: false
   };
@@ -16,7 +16,7 @@ class Wage extends Component {
       <main>
         <section>
           <div className="mb-4 d-flex justify-content-between">
-            <h3 className="font-weight-bold">Wage</h3>
+            <h3 className="font-weight-bold">Driver Payable</h3>
             <button className="btn hm-bg-green text-white" onClick={this.handleAddingWage}>
               <span>
                 <i className="fas fa-plus mr-2" />
@@ -28,11 +28,11 @@ class Wage extends Component {
             <ListView
               totalCount={30}
               onSearch={this.handleWageSearch}
-              fieldNames={["Created On", "Driver Name", "Account", "Type", "Detail"]}
+              fieldNames={["Payment Due Date", "Driver Name", "Payment Amount", "Note"]}
               onPageChange={this.handlePageChange}
             >
               {/* {punch_list_in_puri.record_list.map((punch, index) => (
-              <WageListItem parentProps={punch} key={index} onClick={this.handlePunchItemClick} />
+              <DriverPayableListItem parentProps={punch} key={index} onClick={this.handlePunchItemClick} />
             ))} */}
             </ListView>
           </div>
@@ -41,4 +41,4 @@ class Wage extends Component {
     );
   }
 }
-export default Wage;
+export default DriverPayable;

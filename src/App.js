@@ -24,8 +24,7 @@ import TripUpcoming from "./containers/trip/TripUpcoming.container";
 import TripFinished from "./containers/trip/TripFinished.container";
 import TripFailed from "./containers/trip/TripFailed.container";
 
-import Wage from "./containers/earning/Wage.container";
-import Salary from "./containers/earning/Salary.container";
+import DriverPayable from "./containers/driverPayable/DriverPayable.container";
 
 import Notification from "./containers/notification/Notification.container";
 import Settings from "./containers/settings/Settings.container";
@@ -77,8 +76,7 @@ class App extends Component {
             <Route exact path="/trip/finished" component={TripFinished} />
             <Route exact path="/trip/failed" component={TripFailed} />
 
-            <Route exact path="/earning/wage" component={Wage} />
-            <Route exact path="/earning/salary" component={Salary} />
+            <Route exact path="/payable" component={DriverPayable} />
 
             <Route exact path="/notification" component={Notification} />
             <Route exact path="/settings" component={Settings} />
