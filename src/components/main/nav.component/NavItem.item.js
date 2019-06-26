@@ -76,7 +76,7 @@ export default class NavItem extends Component {
               src={this.props.image || `${process.env.PUBLIC_URL}/img/icon_xiafa.svg`}
               alt={"xiafa"}
             />
-            <span className="d-block text-white">{name}</span>
+            <span className="d-block text-white font-size-12">{name}</span>
           </div>
           {showArrow && <i className={this.state.arrowClassName} />}
         </button>

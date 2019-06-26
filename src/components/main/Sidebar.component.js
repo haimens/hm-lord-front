@@ -149,7 +149,7 @@ export default class Sidebar extends Component {
 
         <section className="accordion">
           <NavItem
-            onToggle={() => this.props.parentProps.history.push("/settings/fee")}
+            onToggle={() => this.props.parentProps.history.push("/settings/paymentResource")}
             image={`${process.env.PUBLIC_URL}/img/home.svg`}
             name="Settings"
             path="settings"
@@ -157,14 +157,34 @@ export default class Sidebar extends Component {
             showArrow={false}
           >
             <SubNavItem
-              onClick={() => this.handleClick("/settings/fee")}
-              name="Fee Rate"
-              is_target={parsedLocation[2] === "fee"}
+              onClick={() => this.handleClick("/settings/paymentResource")}
+              name="Payment Resource"
+              is_target={parsedLocation[2] === "paymentResource"}
             />
             <SubNavItem
-              onClick={() => this.handleClick("/settings/key")}
-              name="Key Value"
-              is_target={parsedLocation[2] === "key"}
+              onClick={() => this.handleClick("/settings/messageResource")}
+              name="Message Resource"
+              is_target={parsedLocation[2] === "messageResource"}
+            />
+            <SubNavItem
+              onClick={() => this.handleClick("/settings/emailResource")}
+              name="Email Resource"
+              is_target={parsedLocation[2] === "emailResource"}
+            />
+            <SubNavItem
+              onClick={() => this.handleClick("/settings/coupon")}
+              name="Coupon"
+              is_target={parsedLocation[2] === "coupon"}
+            />
+            <SubNavItem
+              onClick={() => this.handleClick("/settings/vehicleType")}
+              name="Vehicle Type"
+              is_target={parsedLocation[2] === "vehicleType"}
+            />
+            <SubNavItem
+              onClick={() => this.handleClick("/settings/keyAndValue")}
+              name="Key/Value"
+              is_target={parsedLocation[2] === "keyAndValue"}
             />
           </NavItem>
         </section>
@@ -175,10 +195,7 @@ export default class Sidebar extends Component {
 
 const styles = {
   container: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    height: "100%",
+    height: "100% !important",
     width: "230px",
     zIndex: "1031"
   }
