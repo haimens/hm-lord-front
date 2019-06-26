@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import OrderCard from "./order.component/OrderCard.component";
+import { OrderCard } from "../../components/shared";
 import Pagination from "../../components/shared/Pagination";
 class Order extends Component {
   handlePageChange = start => {

@@ -11,7 +11,9 @@ import DriverDetail from "./containers/driver/DriverDetail.container";
 
 import Vehicle from "./containers/vehicle/Vehicle.container";
 import VehicleDetail from "./containers/vehicle/VehicleDetail.container";
+
 import Customer from "./containers/customer/Customer.container";
+import CustomerDetail from "./containers/customer/CustomerDetail.container";
 
 import OrderList from "./containers/order/OrderList.container";
 import OrderDetail from "./containers/order/OrderDetail.container";
@@ -61,8 +63,10 @@ class App extends Component {
             <Route exact path="/driver/detail/:driver_token" component={DriverDetail} />
 
             <Route exact path="/vehicle" component={Vehicle} />
-            <Route exact path="/vehicle/detail/:driver_token" component={VehicleDetail} />
+            <Route exact path="/vehicle/detail/:vehicle_token" component={VehicleDetail} />
+
             <Route exact path="/customer" component={Customer} />
+            <Route exact path="/customer/detail/:customer_token" component={CustomerDetail} />
 
             <Route exact path="/order/list" component={OrderList} />
             <Route exact path="/order/detail/:order_token" component={OrderDetail} />
