@@ -6,6 +6,9 @@ import WageListItem from "./driverDetail.component/WageList.item";
 import SalaryListItem from "./driverDetail.component/SalaryList.item";
 import AddingTripModal from "./driverDetail.component/AddingTrip.modal";
 import AddingVehicleModal from "./driverDetail.component/AddingVehicle.modal";
+import AddingWageModal from "./driverDetail.component/AddingWage.modal";
+import AddingSalaryModal from "./driverDetail.component/AddingSalary.modal";
+
 class DriverDetail extends Component {
   state = {
     showAddingTripModal: false,
@@ -31,7 +34,8 @@ class DriverDetail extends Component {
       <main>
         {showAddingTripModal && <AddingTripModal onClose={this.handleShowAddingTripModal} />}
         {showAddingVehicleModal && <AddingVehicleModal onClose={this.handleShowAddingVehicleModal} />}
-
+        {showAddingWageModal && <AddingWageModal onClose={this.handleShowAddingWageModal} />}
+        {showAddingSalaryModal && <AddingSalaryModal onClose={this.handleShowAddingSalaryModal} />}
         <section className="mb-4">
           <div className="mb-4">
             <h3 className="font-weight-bold mr-3">Driver Detail</h3>
@@ -91,10 +95,10 @@ class DriverDetail extends Component {
         </section>
         <section className="mb-4">
           <div className="mb-4 d-flex">
-            <h3 className="font-weight-bold mr-3">Salary List</h3>
+            <h3 className="font-weight-bold mr-3">Wage List</h3>
             <i
               className="fas fa-plus hm-bg-green rounded-circle text-white p-2 hm-pointer-cursor"
-              onClick={this.handleShowAddingSalaryModal}
+              onClick={this.handleShowAddingWageModal}
             />
           </div>
           <div>
@@ -115,7 +119,10 @@ class DriverDetail extends Component {
         <section className="mb-4">
           <div className="mb-4 d-flex">
             <h3 className="font-weight-bold mr-3">Salary List</h3>
-            <i className="fas fa-plus hm-bg-green rounded-circle text-white p-2 hm-pointer-cursor" />
+            <i
+              className="fas fa-plus hm-bg-green rounded-circle text-white p-2 hm-pointer-cursor"
+              onClick={this.handleShowAddingSalaryModal}
+            />
           </div>
           <div>
             <ListView
