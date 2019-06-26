@@ -27,7 +27,13 @@ import TripFailed from "./containers/trip/TripFailed.container";
 import DriverPayable from "./containers/driverPayable/DriverPayable.container";
 
 import Notification from "./containers/notification/Notification.container";
-import Settings from "./containers/settings/Settings.container";
+
+import Coupon from "./containers/settings/Coupon.container";
+import EmailResource from "./containers/settings/EmailResource.container";
+import KeyAndValue from "./containers/settings/KeyAndValue.container";
+import MessageResource from "./containers/settings/MessageResource.container";
+import PaymentResource from "./containers/settings/PaymentResource.container";
+import VehicleType from "./containers/settings/VehicleType.container";
 
 const Login = React.lazy(() => import("./containers/login/Login.container"));
 const ResetPassword = React.lazy(() => import("./containers/resetPassword/ResetPassword.container"));
@@ -79,7 +85,13 @@ class App extends Component {
             <Route exact path="/payable" component={DriverPayable} />
 
             <Route exact path="/notification" component={Notification} />
-            <Route exact path="/settings" component={Settings} />
+
+            <Route exact path="/settings/paymentResource" component={PaymentResource} />
+            <Route exact path="/settings/messageResource" component={MessageResource} />
+            <Route exact path="/settings/emailResource" component={EmailResource} />
+            <Route exact path="/settings/coupon" component={Coupon} />
+            <Route exact path="/settings/vehicleType" component={VehicleType} />
+            <Route exact path="/settings/keyAndValue" component={KeyAndValue} />
           </Main>
           <Route exact path="/reset" component={ResetPassword} />
           <Route exact path="/nomatch" component={Page404} />
