@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import EmailResourceCard from "./emailResource.container/EmailResource.card";
 import { ListView } from "../../components/shared";
-import EmailResourceListItem from "./emailResource.container/EmailResourceList.item";
+import CouponListItem from "./coupon.container/CouponList.item";
 import AddingCouponModal from "./coupon.container/AddingCoupon.modal";
 class Coupon extends Component {
   state = {
@@ -34,7 +33,7 @@ class Coupon extends Component {
               onPageChange={this.handlePageChange}
             >
               {/* {punch_list_in_puri.record_list.map((punch, index) => (
-              <EmailResourceListItem parentProps={punch} key={index} onClick={this.handlePunchItemClick} />
+              <CouponListItemItem parentProps={punch} key={index} onClick={this.handlePunchItemClick} />
             ))} */}
             </ListView>
           </div>
