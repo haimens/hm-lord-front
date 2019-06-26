@@ -12,7 +12,7 @@ export default class DriverCard extends Component {
       isActive
     } = this.props.parentProps;
     return (
-      <div className="col-6 col-md-4 col-lg-3 mb-3">
+      <div className={this.props.fullWidth ? "col-6" : "col-6 col-md-4 col-lg-3 mb-3"}>
         <div className="col-12 p-3 shadow-sm bg-white ">
           <div className="d-flex justify-content-between">
             <div>

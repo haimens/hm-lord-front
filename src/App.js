@@ -10,6 +10,7 @@ import Driver from "./containers/driver/Driver.container";
 import DriverDetail from "./containers/driver/DriverDetail.container";
 
 import Vehicle from "./containers/vehicle/Vehicle.container";
+import VehicleDetail from "./containers/vehicle/VehicleDetail.container";
 import Customer from "./containers/customer/Customer.container";
 
 import OrderList from "./containers/order/OrderList.container";
@@ -60,6 +61,7 @@ class App extends Component {
             <Route exact path="/driver/detail/:driver_token" component={DriverDetail} />
 
             <Route exact path="/vehicle" component={Vehicle} />
+            <Route exact path="/vehicle/detail/:driver_token" component={VehicleDetail} />
             <Route exact path="/customer" component={Customer} />
 
             <Route exact path="/order/list" component={OrderList} />
