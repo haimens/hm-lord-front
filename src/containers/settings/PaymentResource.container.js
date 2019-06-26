@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PaymentResourceCard from "./paymentResource.container/PaymentResource.card";
 import { ListView } from "../../components/shared";
 import PaymentResourceListItem from "./paymentResource.container/PaymentResourceList.item";
-import AddPayMentResourceModal from "./paymentResource.container/AddPaymentResource.modal";
-class DriverDetail extends Component {
+import AddPaymentResourceModal from "./paymentResource.container/AddPaymentResource.modal";
+class PaymentResource extends Component {
   state = {
     showAddingPaymentResourceModal: false
   };
@@ -16,7 +16,7 @@ class DriverDetail extends Component {
     return (
       <main>
         {showAddingPaymentResourceModal && (
-          <AddPayMentResourceModal close={this.handleShowAddingPaymentResourceModal} />
+          <AddPaymentResourceModal close={this.handleShowAddingPaymentResourceModal} />
         )}
         <section className="mb-4">
           <div className="mb-4">
@@ -52,4 +52,4 @@ class DriverDetail extends Component {
     );
   }
 }
-export default DriverDetail;
+export default PaymentResource;
