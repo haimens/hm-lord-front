@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { DriverCard, VehicleCard, ListView } from "../../components/shared";
+import { DriverCard, VehicleCard, ListView, SearchBar } from "../../components/shared";
 
 import TripRecentUpcomingDetailCard from "./tripShare.component/TripDetail.card";
 import AlertInformation from "./tripShare.component/AlertInformation.component";
@@ -22,18 +22,26 @@ class TripRecentUpcomingDetail extends Component {
           <div className="mb-4">
             <h3 className="font-weight-bold">Driver Information</h3>
           </div>
-          <div className="row">
-            <DriverCard
-              parentProps={{
-                driverId: "1000016",
-                driverName: "Lebron James",
-                driverImage: "unnamed.jpg",
-                driverPhone: "6266266266",
-                driverEmail: "lebronjames@gmail.com",
-                driverUsername: "lebronjames123",
-                isActive: true
-              }}
-            />
+          <div className="bg-white p-3 shadow-sm">
+            <SearchBar className={"form-control"} />
+            <div className="row mt-3">
+              <DriverCard
+                parentProps={{
+                  driverId: "1000016",
+                  driverName: "Lebron James",
+                  driverImage: "unnamed.jpg",
+                  driverPhone: "6266266266",
+                  driverEmail: "lebronjames@gmail.com",
+                  driverUsername: "lebronjames123",
+                  isActive: true
+                }}
+              />
+            </div>
+            <div className="d-flex justify-content-end">
+              <button className="btn hm-bg-green text-white text-end" onClick={this.handleShowAddingCouponModal}>
+                Save
+              </button>
+            </div>
           </div>
         </section>
 
@@ -41,15 +49,24 @@ class TripRecentUpcomingDetail extends Component {
           <div className="mb-4">
             <h3 className="font-weight-bold">Vehicle Information</h3>
           </div>
-          <div className="row">
-            <VehicleCard
-              parentProps={{
-                vehicleId: "1000016",
-                vehicleName: "Lebron James",
-                vehicleImage: "unnamed.jpg",
-                vehiclePhone: "6266266266"
-              }}
-            />
+          <div className="bg-white p-3 shadow-sm">
+            <SearchBar className={"form-control"} />
+
+            <div className="row mt-3">
+              <VehicleCard
+                parentProps={{
+                  vehicleId: "1000016",
+                  vehicleName: "Lebron James",
+                  vehicleImage: "unnamed.jpg",
+                  vehiclePhone: "6266266266"
+                }}
+              />
+            </div>
+            <div className="d-flex justify-content-end">
+              <button className="btn hm-bg-green text-white text-end" onClick={this.handleShowAddingCouponModal}>
+                Save
+              </button>
+            </div>
           </div>
         </section>
 
