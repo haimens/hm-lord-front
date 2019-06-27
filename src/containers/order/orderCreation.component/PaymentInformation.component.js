@@ -10,7 +10,7 @@ export default class PaymentInformation extends Component {
       >
         <div className="row">
           <div className="col-12 d-flex justify-content-between ">
-            <h5 className="mb-4 font-weight-bold">Prepay Now</h5>
+            <h5 className="mb-4 font-weight-bold">Prepay Information</h5>
           </div>
           <div className="mb-4 col-12">
             <CreditCard />
