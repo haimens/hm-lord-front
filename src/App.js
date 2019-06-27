@@ -20,6 +20,8 @@ import OrderDetail from "./containers/order/OrderDetail.container";
 import OrderCreation from "./containers/order/OrderCreation.container";
 
 import TripOngoing from "./containers/trip/TripOngoing.container";
+import TripOngoingDetail from "./containers/trip/TripOngoingDetail.container";
+
 import TripUpcoming from "./containers/trip/TripUpcoming.container";
 import TripFinished from "./containers/trip/TripFinished.container";
 import TripFailed from "./containers/trip/TripFailed.container";
@@ -78,6 +80,8 @@ class App extends Component {
             <Route exact path="/order/creation" component={OrderCreation} />
 
             <Route exact path="/trip/ongoing" component={TripOngoing} />
+            <Route exact path="/trip/ongoing/detail/:trip_token" component={TripOngoingDetail} />
+
             <Route exact path="/trip/upcoming" component={TripUpcoming} />
             <Route exact path="/trip/finished" component={TripFinished} />
             <Route exact path="/trip/failed" component={TripFailed} />
