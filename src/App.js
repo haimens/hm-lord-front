@@ -23,6 +23,7 @@ import TripOngoing from "./containers/trip/TripOngoing.container";
 import TripOngoingDetail from "./containers/trip/TripOngoingDetail.container";
 
 import TripUpcoming from "./containers/trip/TripUpcoming.container";
+import TripRecentUpcomingDetail from "./containers/trip/TripUpcomingDetai.container";
 
 import TripRecentFinished from "./containers/trip/TripRecentFinished.container";
 import TripRecentFinishedDetail from "./containers/trip/TripRecentFinishedDetail.container";
@@ -86,6 +87,7 @@ class App extends Component {
             <Route exact path="/trip/ongoing/detail/:trip_token" component={TripOngoingDetail} />
 
             <Route exact path="/trip/upcoming" component={TripUpcoming} />
+            <Route exact path="/trip/upcoming/detail/:trip_token" component={TripRecentUpcomingDetail} />
 
             <Route exact path="/trip/finished" component={TripRecentFinished} />
             <Route exact path="/trip/finished/detail/:trip_token" component={TripRecentFinishedDetail} />

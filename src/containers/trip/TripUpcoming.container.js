@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import TripCard from "../../components/shared/TripCard.component";
 
 class TripUpcoming extends Component {
   render() {
