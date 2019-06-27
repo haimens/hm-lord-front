@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { DriverCard, VehicleCard, ListView } from "../../components/shared";
 
-import Pagination from "../../components/shared/Pagination";
-import TripOngoingDetailCard from "./tripShare.component/TripDetail.card";
+import TripRecentFinishedDetailCard from "./tripShare.component/TripDetail.card";
 import AlertInformation from "./tripShare.component/AlertInformation.component";
 import LogListItem from "./tripShare.component/LogList.item";
-class TripOngoingDetail extends Component {
+class TripRecentFinishedDetail extends Component {
   handlePageChange = start => {
     console.log(start);
   };
@@ -16,7 +15,7 @@ class TripOngoingDetail extends Component {
           <div className="mb-4">
             <h3 className="font-weight-bold">Trip Detail</h3>
           </div>
-          <TripOngoingDetailCard />
+          <TripRecentFinishedDetailCard />
         </section>
 
         <section className="mb-4">
@@ -81,4 +80,4 @@ class TripOngoingDetail extends Component {
     );
   }
 }
-export default TripOngoingDetail;
+export default TripRecentFinishedDetail;
