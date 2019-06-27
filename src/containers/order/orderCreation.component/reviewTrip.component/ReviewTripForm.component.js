@@ -209,7 +209,7 @@ export default class ReviewTripForm extends Component {
               Add Tip
             </label>
           </div>
-          <div className="col-3">
+          <div className="col-6">
             <div className="row">
               <div className="col-2">
                 <div>
@@ -265,6 +265,7 @@ export default class ReviewTripForm extends Component {
             </div>
           </div>
         </div>
+        <hr className="mt-4" />
       </div>
     );
   }

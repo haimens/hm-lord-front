@@ -65,7 +65,6 @@ export default class ReviewTrip extends Component {
           <div className="col-12 d-flex justify-content-between ">
             <h5 className="mb-4 font-weight-bold">Trip Detail</h5>
           </div>
-
           <div className="mb-4 col-12">
             <ReviewTripForm
               pickup={"PICKUP"}
@@ -78,7 +77,6 @@ export default class ReviewTrip extends Component {
             />
             {roundTrip && (
               <div>
-                <hr className="mt-4" />
                 <ReviewTripForm
                   pickup={"PICKUPAGAIN"}
                   dropoff={"DROPOFFAGAIN"}
@@ -90,6 +88,71 @@ export default class ReviewTrip extends Component {
                 />
               </div>
             )}
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-12 d-flex justify-content-between ">
+            <h5 className="mb-4 font-weight-bold">Passenger Information</h5>
+          </div>
+          <div className="mb-4 col-12">
+            <div className="row">
+              <div className="col-lg-4 col-12">
+                <label className="font-weight-bold" htmlFor="flight">
+                  Name
+                </label>
+                <div>
+                  <input type="text" id="flight" className="form-control" onChange={this.handleInputChange} />
+                </div>
+              </div>
+
+              <div className="col-lg-4 col-12">
+                <label className="font-weight-bold" htmlFor="flight">
+                  Cell
+                </label>
+                <div>
+                  <input type="text" id="flight" className="form-control" onChange={this.handleInputChange} />
+                </div>
+              </div>
+
+              <div className="col-lg-4 col-12">
+                <label className="font-weight-bold" htmlFor="flight">
+                  Email
+                </label>
+                <div>
+                  <input type="text" id="flight" className="form-control" onChange={this.handleInputChange} />
+                </div>
+              </div>
+
+              <div className="col-12 mt-3">
+                <label className="font-weight-bold" htmlFor="flight">
+                  Special Instruction
+                </label>
+                <div>
+                  <input type="text" id="flight" className="form-control" onChange={this.handleInputChange} />
+                </div>
+              </div>
+            </div>
+            <hr className="mt-4" />
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-12 d-flex justify-content-between ">
+            <h5 className="mb-4 font-weight-bold">Coupon</h5>
+          </div>
+          <div className="mb-4 col-12">
+            <div className="row">
+              <div className="col-lg-4 col-12">
+                <label className="font-weight-bold" htmlFor="flight">
+                  Coupon
+                </label>
+                <div>
+                  <input type="text" id="flight" className="form-control" onChange={this.handleInputChange} />
+                </div>
+              </div>
+            </div>
+            <hr className="mt-4" />
           </div>
         </div>
 
