@@ -1,6 +1,7 @@
 import moment from "moment";
 import { API_BASE_URL } from "../config";
 import { loadUserInfo } from "./localStorage.action";
+import constant from "../constants/constant";
 
 require("es6-promise").polyfill();
 require("isomorphic-fetch");
@@ -138,10 +139,7 @@ export function callApi(endpoint, method, data, query) {
 
 function normalizeResponseErrors(res) {
   if (!res.ok) {
-    if (
-      res.headers.has("content-type") &&
-      res.headers.get("content-type").startsWith("application/json")
-    ) {
+    if (res.headers.has("content-type") && res.headers.get("content-type").startsWith("application/json")) {
       return res.json().then(err => Promise.reject(err));
     }
     return Promise.reject({
@@ -151,3 +149,25 @@ function normalizeResponseErrors(res) {
   }
   return res;
 }
+export const startLoader = dispatch => {
+  dispatch({
+    type: constant.START_LOADING
+  });
+};
+
+export const stopLoader = dispatch => {
+  dispatch({
+    type: constant.STOP_LOADING
+  });
+};
+
+export const launchSuccess = async dispatch => {
+  await dispatch({
+    type: constant.START_SUCCESS
+  });
+  setTimeout(() => {
+    dispatch({
+      type: constant.STOP_SUCCESS
+    });
+  }, 1000);
+};
