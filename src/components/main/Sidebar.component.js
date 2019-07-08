@@ -33,7 +33,7 @@ export default class Sidebar extends Component {
             style={{ marginTop: "21px", marginBottom: "61px" }}
             onClick={e => this.handleClickLogo(e)}
           >
-            <img src={`${process.env.PUBLIC_URL}/img/logo.svg`} alt="logo" width={"142px"} height={"40px"} />
+            <img src={localStorage.getItem("logo_path")} alt="logo" width={"142px"} height={"142px"} />
           </a>
           {/* Handle Close */}
           {/* <ImageButton

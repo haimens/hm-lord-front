@@ -50,9 +50,8 @@ export const processLogin = (user_login_nfo, history) => async dispatch => {
   clearUserInfo();
   try {
     await startLoader(dispatch);
-    const payload = await callApi("login", "POST", user_login_nfo);
-    console.log(payload);
-    saveUserInfo({ ...payload });
+    const { payload, verify_info } = await callApi("login", "POST", user_login_nfo);
+    saveUserInfo({ ...payload, ...verify_info });
     await dispatch(loginSuccess());
     await stopLoader(dispatch);
     history.push("/dashboard");

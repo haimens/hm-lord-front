@@ -93,7 +93,7 @@ class Home extends Component {
                           </span>
                         </div>
                         <input
-                          className="form-control border-0 hm-text-14{"
+                          className="form-control border-0 hm-text-14"
                           style={{ height: "58px" }}
                           name="company_name"
                           id="company_name"
