@@ -127,33 +127,21 @@ class Home extends Component {
           </div>
         </section>
 
-        <section className="mb-4">
+        <section className="container-fluid">
           <div className="mb-4">
-            <h3 className="font-weight-bold">Trips</h3>
-          </div>
-          <div className="bg-white p-3 shadow-sm mb-3">
-            <Calendar
-              localizer={localizer}
-              events={myEventsList}
-              style={{ minHeight: "397px" }}
-              views={["month"]}
-              startAccessor="start"
-              endAccessor="end"
-              onSelectEvent={this.handleCalendarBeenClicked}
-              showMultiDayTimes={true}
-            />
-          </div>
-          <div className="bg-white shadow-sm">
-            <CalendarDailyList
-              parentProps={{
-                time: "08:30 AM",
-                status: "customer on board",
-                driver: "Chris Yao",
-                customer: "Michael Dai",
-                from: "psadena",
-                to: "arcadia"
-              }}
-            />
+            <ListHeader parentProps={{ title: "Trips" }} hideButton={true} />
+            <div className="bg-white p-3 border-top shadow-sm mb-3">
+              <Calendar
+                localizer={localizer}
+                events={myEventsList}
+                style={{ minHeight: "804px" }}
+                views={["month"]}
+                startAccessor="start"
+                endAccessor="end"
+                onSelectEvent={this.handleCalendarBeenClicked}
+                showMultiDayTimes={true}
+              />
+            </div>
           </div>
         </section>
       </main>
