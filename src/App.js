@@ -71,42 +71,44 @@ class App extends Component {
           <Route exact path="/reset" component={ResetPassword} />
           <Route exact path="/nomatch" component={Page404} />
           <Main>
-            <ProtectedRoute exact path="/dashboard" component={Dashboard} />
-            <ProtectedRoute exact path="/driver" component={Driver} />
-            <ProtectedRoute exact path="/driver/detail/:driver_token" component={DriverDetail} />
+            <Switch>
+              <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+              <ProtectedRoute exact path="/driver" component={Driver} />
+              <ProtectedRoute exact path="/driver/detail/:driver_token" component={DriverDetail} />
 
-            <ProtectedRoute exact path="/vehicle" component={Vehicle} />
-            <ProtectedRoute exact path="/vehicle/detail/:vehicle_token" component={VehicleDetail} />
+              <ProtectedRoute exact path="/vehicle" component={Vehicle} />
+              <ProtectedRoute exact path="/vehicle/detail/:vehicle_token" component={VehicleDetail} />
 
-            <ProtectedRoute exact path="/customer" component={Customer} />
-            <ProtectedRoute exact path="/customer/detail/:customer_token" component={CustomerDetail} />
+              <ProtectedRoute exact path="/customer" component={Customer} />
+              <ProtectedRoute exact path="/customer/detail/:customer_token" component={CustomerDetail} />
 
-            <ProtectedRoute exact path="/order/list" component={OrderList} />
-            <ProtectedRoute exact path="/order/detail/:order_token" component={OrderDetail} />
-            <ProtectedRoute exact path="/order/creation" component={OrderCreation} />
+              <ProtectedRoute exact path="/order/list" component={OrderList} />
+              <ProtectedRoute exact path="/order/detail/:order_token" component={OrderDetail} />
+              <ProtectedRoute exact path="/order/creation" component={OrderCreation} />
 
-            <ProtectedRoute exact path="/trip/ongoing" component={TripOngoing} />
-            <ProtectedRoute exact path="/trip/ongoing/detail/:trip_token" component={TripOngoingDetail} />
+              <ProtectedRoute exact path="/trip/ongoing" component={TripOngoing} />
+              <ProtectedRoute exact path="/trip/ongoing/detail/:trip_token" component={TripOngoingDetail} />
 
-            <ProtectedRoute exact path="/trip/upcoming" component={TripUpcoming} />
-            <ProtectedRoute exact path="/trip/upcoming/detail/:trip_token" component={TripRecentUpcomingDetail} />
+              <ProtectedRoute exact path="/trip/upcoming" component={TripUpcoming} />
+              <ProtectedRoute exact path="/trip/upcoming/detail/:trip_token" component={TripRecentUpcomingDetail} />
 
-            <ProtectedRoute exact path="/trip/finished" component={TripRecentFinished} />
-            <ProtectedRoute exact path="/trip/finished/detail/:trip_token" component={TripRecentFinishedDetail} />
+              <ProtectedRoute exact path="/trip/finished" component={TripRecentFinished} />
+              <ProtectedRoute exact path="/trip/finished/detail/:trip_token" component={TripRecentFinishedDetail} />
 
-            <ProtectedRoute exact path="/trip/failed" component={TripFailed} />
+              <ProtectedRoute exact path="/trip/failed" component={TripFailed} />
 
-            <ProtectedRoute exact path="/payable" component={DriverPayable} />
+              <ProtectedRoute exact path="/payable" component={DriverPayable} />
 
-            <ProtectedRoute exact path="/notification" component={Notification} />
+              <ProtectedRoute exact path="/notification" component={Notification} />
 
-            <ProtectedRoute exact path="/settings/paymentResource" component={PaymentResource} />
-            <ProtectedRoute exact path="/settings/messageResource" component={MessageResource} />
-            <ProtectedRoute exact path="/settings/emailResource" component={EmailResource} />
-            <ProtectedRoute exact path="/settings/coupon" component={Coupon} />
-            <ProtectedRoute exact path="/settings/vehicleType" component={VehicleType} />
-            <ProtectedRoute exact path="/settings/keyAndValue" component={KeyAndValue} />
-            <Route component={NoMatch} />
+              <ProtectedRoute exact path="/settings/paymentResource" component={PaymentResource} />
+              <ProtectedRoute exact path="/settings/messageResource" component={MessageResource} />
+              <ProtectedRoute exact path="/settings/emailResource" component={EmailResource} />
+              <ProtectedRoute exact path="/settings/coupon" component={Coupon} />
+              <ProtectedRoute exact path="/settings/vehicleType" component={VehicleType} />
+              <ProtectedRoute exact path="/settings/keyAndValue" component={KeyAndValue} />
+              <Route component={NoMatch} />
+            </Switch>
           </Main>
         </Switch>
       </Suspense>

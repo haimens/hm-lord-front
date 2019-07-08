@@ -15,11 +15,14 @@ export default function Header(props) {
           />
         )}
         {props.toLocation ? (
-          <h4 className="hm-header-size mr-3 hm-pointer-cursor" onClick={() => props.history.push(props.toLocation)}>
+          <h4
+            className="hm-header-size text-white mr-3 hm-pointer-cursor"
+            onClick={() => props.history.push(props.toLocation)}
+          >
             {props.title}
           </h4>
         ) : (
-          <h4 className="hm-header-size mr-3">{props.title}</h4>
+          <h4 className="hm-header-size text-white mr-3">{props.title}</h4>
         )}
         {props.subTitle &&
           (props.thirdTitle ? (

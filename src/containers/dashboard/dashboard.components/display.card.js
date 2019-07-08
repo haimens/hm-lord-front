@@ -8,7 +8,7 @@ import "./display.card.css";
 export function DisplayCardItem(props) {
   const { amount, title, icon } = props.data;
   return (
-    <main className="bg-white rounded-custom border shadow-sm display-card-container p-3 d-flex flex-column justify-content-between">
+    <main className="bg-white rounded-custom shadow-sm display-card-container p-3 d-flex flex-column justify-content-between">
       <section className="row">
         <div className="col">
           <div className="text-secondary-color font-weight-bold mb-1">{title}</div>

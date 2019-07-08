@@ -71,15 +71,57 @@ class Home extends Component {
         <section className="container-fluid">
           <div className="mb-4">
             <ListHeader
-              parentProps={{ title: "Invoice List", clickFunction: this.handleAddCompanyModal, clickTitle: "Refresh" }}
+              parentProps={{ title: "Driver Map", clickFunction: this.handleAddCompanyModal, clickTitle: "Refresh" }}
               buttonWidth={"88px"}
             />
-            <div>
-              <div className="shadow-sm mb-3" style={{ height: "300px" }}>
-                <GMapWithMarker />
-              </div>
-              <div className="shadow-sm bg-white" style={{ minHeight: "300px" }}>
-                <DriversMap />
+            <div className="px-3 pb-3 bg-white rounded-custom-bottom shadow-sm">
+              <div className="row">
+                <div className="col-7 " style={{ height: "512px" }}>
+                  <GMapWithMarker />
+                </div>
+                <div className="col-5">
+                  <div className="shadow-sm rounded-custom" style={{ height: "512px" }}>
+                    <div className="border-bottom-custom px-3 d-flex align-items-center" style={{ height: "59px" }}>
+                      <div className="hm-title-sub-size text-main-color font-weight-bold">Drivers</div>
+                    </div>
+
+                    <div className="border-bottom-custom " style={{ height: "60px" }}>
+                      <div className="input-group px-1">
+                        <div className="input-group-prepend col-1 p-0 d-flex justify-content-center">
+                          <span className="input-group-text border-0 bg-white">
+                            <i className="fas fa-search" />
+                          </span>
+                        </div>
+                        <input
+                          className="form-control border-0 hm-text-14{"
+                          style={{ height: "58px" }}
+                          name="company_name"
+                          id="company_name"
+                          placeholder={"Search"}
+                          onChange={this.handleInputChange}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="border-bottom-custom d-flex align-items-center" style={{ height: "94px" }}>
+                      <div className="container">
+                        <div className="row">
+                          <div className="col-3 d-flex justify-content-end">
+                            <img
+                              src={`${process.env.PUBLIC_URL}/img/hd.png`}
+                              alt="driver-avatar"
+                              className="avatar-md rounded-circle "
+                            />
+                          </div>
+                          <div className="col-9">
+                            <div>Chris Yao</div>
+                            <div>12431241414</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

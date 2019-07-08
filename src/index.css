@@ -250,6 +250,15 @@ width: 25px
   height: 36px;
   width: 36px;
 }
+.avatar-md{
+  height: 48px;
+  width: 48px;
+}
 .pending-text-color{
   color: #f5a623
+}
+
+.border-bottom-custom{
+    height: 1px;
+    border-bottom: solid 1px rgba(151, 151, 151, 0.15);
 }
