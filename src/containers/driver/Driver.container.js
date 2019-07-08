@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Header } from "../../components/shared";
 import DriverCard from "../../components/shared/DriverCard.component";
 import Pagination from "../../components/shared/Pagination";
 import DriverCreation from "./driver.component/DriverCreation.modal";
@@ -17,15 +18,9 @@ class Driver extends Component {
     return (
       <main>
         {showDriverCreationModal && <DriverCreation onClose={this.handleAddingDriver} />}
-        <section>
-          <div className="mb-4 d-flex justify-content-between">
-            <h3 className="font-weight-bold">Driver</h3>
-            <button className="btn hm-bg-green text-white" onClick={this.handleAddingDriver}>
-              <span>
-                <i className="fas fa-plus mr-2" />
-              </span>
-              Driver
-            </button>
+        <section className="container-fluid">
+          <div className="mb-4">
+            <Header title="Driver" tabicon={"tabicon_dashboard.svg"} showButton={true} clickFunction clickTitle={"Driver"} buttonWidth={"88px"} />
           </div>
           <div className="row">
             <DriverCard

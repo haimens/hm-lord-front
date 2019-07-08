@@ -57,20 +57,106 @@ export default class Sidebar extends Component {
         </section>
         <section className="accordion">
           <NavItem
-            onToggle={() => this.handleClick("/company")}
+            onToggle={() => this.handleClick("/driver")}
             image={`${process.env.PUBLIC_URL}/img/navicon_company.svg`}
-            name="Company"
-            path="company"
+            name="Driver"
+            path="driver"
             history={this.props.parentProps.history}
             showArrow={false}
           />
         </section>
         <section className="accordion">
           <NavItem
-            onToggle={() => this.handleClick("/invoice")}
-            image={`${process.env.PUBLIC_URL}/img/navicon_invoice.svg`}
-            name="Invoice"
-            path="invoice"
+            onToggle={() => this.handleClick("/vehicle")}
+            image={`${process.env.PUBLIC_URL}/img/navicon_company.svg`}
+            name="Vehicle"
+            path="vehicle"
+            history={this.props.parentProps.history}
+            showArrow={false}
+          />
+        </section>
+        <section className="accordion">
+          <NavItem
+            onToggle={() => this.handleClick("/customer")}
+            image={`${process.env.PUBLIC_URL}/img/navicon_company.svg`}
+            name="Customer"
+            path="customer"
+            history={this.props.parentProps.history}
+            showArrow={false}
+          />
+        </section>
+
+        <section className="accordion">
+          <NavItem
+            onToggle={() => this.handleClick("/order/fee")}
+            image={`${process.env.PUBLIC_URL}/img/navicon_settings.svg`}
+            name="Order"
+            path="order"
+            history={this.props.parentProps.history}
+            showArrow={true}
+          >
+            <SubNavItem
+              onClick={() => this.handleClick("/settings/fee")}
+              name="Fee Rate"
+              history={this.props.parentProps.history}
+              path="fee"
+              is_target={parsedLocation[3] === "fee"}
+            />
+            <SubNavItem
+              onClick={() => this.handleClick("/settings/general")}
+              name="General Setting"
+              history={this.props.parentProps.history}
+              path="general"
+              is_target={parsedLocation[3] === "general"}
+              className="mt-2"
+            />
+          </NavItem>
+        </section>
+
+        <section className="accordion">
+          <NavItem
+            onToggle={() => this.handleClick("/trip/fee")}
+            image={`${process.env.PUBLIC_URL}/img/navicon_settings.svg`}
+            name="Trip"
+            path="trip"
+            history={this.props.parentProps.history}
+            showArrow={true}
+          >
+            <SubNavItem
+              onClick={() => this.handleClick("/settings/fee")}
+              name="Fee Rate"
+              history={this.props.parentProps.history}
+              path="fee"
+              is_target={parsedLocation[3] === "fee"}
+            />
+            <SubNavItem
+              onClick={() => this.handleClick("/settings/general")}
+              name="General Setting"
+              history={this.props.parentProps.history}
+              path="general"
+              is_target={parsedLocation[3] === "general"}
+              className="mt-2"
+            />
+          </NavItem>
+        </section>
+
+        <section className="accordion">
+          <NavItem
+            onToggle={() => this.handleClick("/payable")}
+            image={`${process.env.PUBLIC_URL}/img/navicon_company.svg`}
+            name="Driver Payable"
+            path="payable"
+            history={this.props.parentProps.history}
+            showArrow={false}
+          />
+        </section>
+
+        <section className="accordion">
+          <NavItem
+            onToggle={() => this.handleClick("/notification")}
+            image={`${process.env.PUBLIC_URL}/img/navicon_company.svg`}
+            name="Notification"
+            path="notification"
             history={this.props.parentProps.history}
             showArrow={false}
           />
@@ -80,8 +166,8 @@ export default class Sidebar extends Component {
           <NavItem
             onToggle={() => this.handleClick("/settings/fee")}
             image={`${process.env.PUBLIC_URL}/img/navicon_settings.svg`}
-            name="Settings"
-            path="settings"
+            name="Trip"
+            path="trip"
             history={this.props.parentProps.history}
             showArrow={true}
           >
