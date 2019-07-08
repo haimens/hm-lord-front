@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import "./NavItem.item.css";
 /**
  * NavItem
  * @name required
@@ -14,7 +14,7 @@ export default class NavItem extends Component {
     this.state = {
       collapse: false,
       collapeClassName: "collapse",
-      arrowClassName: "d-block fas fa-angle-down text-white"
+      arrowClassName: "d-block fas fa-angle-down"
     };
   }
 
@@ -24,12 +24,12 @@ export default class NavItem extends Component {
     if (parsedLocation[1] === path) {
       this.setState({
         collapse: true,
-        arrowClassName: "d-block fas fa-angle-up text-white"
+        arrowClassName: "d-block fas fa-angle-down hm-text-14 text-purple"
       });
     } else {
       this.setState({
         collapse: false,
-        arrowClassName: "d-block fas fa-angle-down text-white"
+        arrowClassName: "d-block fas fa-angle-right hm-text-14 text-grey"
       });
     }
   }
@@ -40,12 +40,12 @@ export default class NavItem extends Component {
     if (parsedLocation[1] === path) {
       this.setState({
         collapse: true,
-        arrowClassName: "d-block fas fa-angle-up text-white"
+        arrowClassName: "d-block fas fa-angle-down hm-text-14 text-purple"
       });
     } else {
       this.setState({
         collapse: false,
-        arrowClassName: "d-block fas fa-angle-down text-white"
+        arrowClassName: "d-block fas fa-angle-right hm-text-14 text-grey"
       });
     }
   }
@@ -57,28 +57,21 @@ export default class NavItem extends Component {
   render() {
     const { name, path, history, showArrow = true } = this.props;
     const parsedLocation = history.location.pathname.split("/");
-
     return (
       <main>
         <button
           onClick={() => this.handleToggle()}
-          disabled={parsedLocation[1] === path}
-          className="btn btn-block d-flex align-items-center justify-content-between px-4 py-3"
+          className={`btn rounded-0 d-flex align-items-center justify-content-between px-4 py-3 w-100 ${parsedLocation[1] ===
+            path && "nav-selected"}`}
           type="button"
-          data-toggle="collapse"
-          data-target={`#${path}`}
-          aria-expanded="false"
-          aria-controls={`${path}`}
         >
           <div className="d-flex align-items-center">
-            <img
-              className="avatar-icon-xs mr-2"
-              src={this.props.image || `${process.env.PUBLIC_URL}/img/icon_xiafa.svg`}
-              alt={"xiafa"}
-            />
-            <span className="d-block text-white font-size-12">{name}</span>
+            <img className="ml-3 mr-4" src={this.props.image} alt={"icon"} style={{ width: "18px", height: "15px" }} />
+            <div className={`d-block hm-text-14 ${parsedLocation[1] === path ? "text-black" : "text-grey"}`}>
+              {name}
+            </div>
           </div>
-          {showArrow && <i className={this.state.arrowClassName} />}
+          <div>{showArrow && <i className={this.state.arrowClassName} />} </div>
         </button>
         <div>{this.state.collapse && this.props.children}</div>
       </main>

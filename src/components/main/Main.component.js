@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { toggleSideBar } from "../../actions/nav.action";
-import "./Main.component.css";
-import { resetPassword } from "../../actions/auth.action";
-import SideBar from "./Sidebar.component";
 import Nav from "./Nav.component";
+import Sidebar from "./Sidebar.component";
 import { push as Menu } from "react-burger-menu";
+
+import "./Main.component.css";
+
+import { resetPassword } from "../../actions/auth.action";
+
 export class Main extends Component {
   state = {
     opened: false
@@ -20,6 +23,7 @@ export class Main extends Component {
     }
     return;
   };
+
   render() {
     const parentProps = {
       toggleSideBar: this.props.toggleSideBar,
@@ -27,22 +31,18 @@ export class Main extends Component {
       resetPassword: this.props.resetPassword,
       location: this.props.location
     };
+    const { opened } = this.state;
     return (
       <main>
-        <Menu
-          pageWrapId={"page-wrap"}
-          isOpen={this.state.opened}
-          onStateChange={this.isMenuOpen}
-          customBurgerIcon={false}
-        >
-          <SideBar parentProps={parentProps} handleSideBarBeenOpened={this.handleSideBarBeenOpened} />
+        <Menu isOpen={opened} onStateChange={this.isMenuOpen} customBurgerIcon={false} customCrossIcon={false}>
+          <Sidebar parentProps={parentProps} handleSideBarBeenOpened={this.handleSideBarBeenOpened} />
         </Menu>
-        <section id="page-wrap">
-          <div>
+        <section>
+          <div className="background-linear" style={{ height: "230px" }}>
             <Nav handleSideBarBeenOpened={this.handleSideBarBeenOpened} parentProps={parentProps} />
           </div>
-          <div>
-            <div className={`container-fluid py-4 `}>{this.props.children}</div>
+          <div style={{ marginTop: "-145px" }}>
+            <div className={`container-fluid py-4`}>{this.props.children}</div>
           </div>
         </section>
       </main>

@@ -33,11 +33,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
   position: fixed;
   top: 0;
   height: 100%;
+  width: 250px !important;
 }
 
 /* General sidebar styles */
 .bm-menu {
-  background-color:#2d3e4e !important;
   font-size: 1.15em;
 }
 
@@ -48,8 +48,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* Wrapper for item list */
 .bm-item-list {
-  color: #b8b7ad;
-  padding: 0.8em;
+  color: black;
 }
 
 /* Individual item */
@@ -59,5 +58,14 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* Styling of overlay */
 .bm-overlay {
-  background: rgba(0, 0, 0, 0) !important;
+  background: rgba(0, 0, 0, 0.3);
+}
+.fixing-leftMargin-whenOpened{
+  width: calc(100% - 250px) !important;
+  margin-left: 0px !important;
+  transition: 0.5s ease !important;
+}
+
+.background-linear{
+  background: linear-gradient(87deg,#11cdef,#1171ef) !important;
 }

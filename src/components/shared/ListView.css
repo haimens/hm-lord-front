@@ -1,21 +1,21 @@
-.listView-list-athena-green {
+.listView-lihm-athena-green {
   background-color: green;
   color: #fff;
 }
-.listView-list-container {
+.listView-lihm-container {
   border-radius: 2px;
   overflow: hidden;
   background-color: #fff;
 }
 
-.listView-list-container ul {
-  list-style: none;
+.listView-lihm-container ul {
+  lihm-style: none;
 }
-.listView-list-container > ul > li {
+.listView-lihm-container > ul > li {
   display: block;
 }
 
-.listView-list-header {
+.listView-lihm-header {
   font-weight: 500;
 }
   
@@ -150,7 +150,7 @@ table th {
       border:0 !important;
   }
   
-  /* table td:last-child {
+  /* table td:lahm-child {
     border-bottom: 0;
   } */
 }
@@ -162,3 +162,8 @@ table th {
       overflow: scroll;
   }
 }
+
+.custom-text{
+  text-transform: none !important;
+}
+

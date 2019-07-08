@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { ImageButton } from "../shared";
 import alertify from "alertifyjs";
-
+import "./Nav.component.css";
 class Nav extends Component {
   handleClick = type => {
     if (type === "notification") alertify.alert("Bell", "click");
@@ -26,54 +25,73 @@ class Nav extends Component {
   render() {
     return (
       <nav
-        className="navbar navbar-expand-lg navbar-light bg-white d-flex 
-      justify-content-between shadow-sm  align-items-center"
-        style={{ height: "50px" }}
+        className="navbar navbar-expand-lg border-bottom  background-linear navbar-light d-flex 
+    justify-content-between align-items-center"
+        style={{ height: "77px" }}
       >
-        <div>
+        <div className="d-flex align-items-center">
           <i
-            className="fas fa-bars p-3 hm-pointer-cursor"
+            className="fas fa-bars p-3 hm-pointer-cursor text-white"
             style={{ fontSize: "18px" }}
             onClick={this.handleSideBarBeenOpened}
           />
         </div>
         <div className="d-flex flex-row align-items-center">
           <div className="btn-group mr-2">
+            <img
+              src={`${process.env.PUBLIC_URL}/img/haimenslogo.svg`}
+              style={{ height: "36px", width: "36px" }}
+              alt="error404"
+            />
             <button
               type="button"
-              className="btn  dropdown-toggle"
+              className="btn dropdown-toggle text-white"
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
             >
-              Welcome, {localStorage.getItem("username")}
+              {localStorage.getItem("username").toUpperCase()}
             </button>
-            <div className="dropdown-menu dropdown-menu">
-              <div className="d-flex justify-content-between align-items-center">
+
+            <div className="dropdown-menu shadow-sm p-3">
+              <div className="pb-2">Welcome!</div>
+              <div>
                 <button
-                  className="dropdown-item"
+                  className="dropdown-item px-0"
                   type="button"
                   onClick={() => {
                     this.handleChangePassword();
                   }}
                 >
                   <small>
-                    <i className="fas fa-key font-size-10 mr-3" />
+                    <i className="fas fa-cog mr-3" />
                   </small>
-                  修改密码
+                  Change Password
+                </button>
+              </div>
+              <div>
+                <hr />
+                <button
+                  className="dropdown-item p-0"
+                  type="button"
+                  onClick={() => {
+                    this.handleLogOut();
+                  }}
+                >
+                  <div className="d-flex align-items-center">
+                    <small>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/img/icon_logout.svg`}
+                        alt={`${process.env.PUBLIC_URL}/img/icon_logout.svg`}
+                        className="mr-3"
+                      />
+                    </small>
+                    Log Out
+                  </div>
                 </button>
               </div>
             </div>
           </div>
-
-          <ImageButton
-            image={`${process.env.PUBLIC_URL}/img/navicon_logout.svg`}
-            type="submit"
-            size={24}
-            onClick={() => {
-              this.handleLogOut();
-            }}
-          />
         </div>
       </nav>
     );

@@ -10,12 +10,18 @@ export default class SubNavItem extends Component {
     if (this.props.onClick) this.props.onClick();
   };
   render() {
-    const targetSubNavClassName = this.props.is_target
-      ? "btn w-100 st-bg-deepblue  text-white text-left pl-5 py-3 font-size-12"
-      : "btn w-100 st-bg-lessdeepblue text-white text-left pl-5 py-3 font-size-12";
+    const { name, path, history } = this.props;
+    const parsedLocation = history.location.pathname.split("/");
     return (
-      <button className={targetSubNavClassName} onClick={() => this.handleClick()}>
-        {this.props.name}
+      <button onClick={() => this.handleClick()} className={`btn d-flex align-items-center w-100 }`} type="button">
+        <div className="d-flex">
+          <div
+            className={`d-block hm-text-14 ${parsedLocation[2] === path ? "text-black" : "text-grey"}`}
+            style={{ marginLeft: "70px" }}
+          >
+            {name}
+          </div>
+        </div>
       </button>
     );
   }

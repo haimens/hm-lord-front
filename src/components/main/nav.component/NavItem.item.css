@@ -1,0 +1,10 @@
+.text-grey{
+  color: #979797;
+}
+
+.text-black{
+  color: #000000 !important;
+}
+.nav-selected{
+  border-left: 3px solid #5e72e4 !important;
+}
