@@ -46,7 +46,7 @@ const MapWithAMarker = compose(
   withGoogleMap
 )(props => {
   return (
-    <GoogleMap defaultZoom={8} defaultCenter={{ lat: 29.5, lng: -95 }} options={{ disableDefaultUI: true }}>
+    <GoogleMap defaultZoom={8} defaultCenter={{ lat: 29.5, lng: -95 }}>
       {props.markers.map(marker => {
         const onClick = props.onClick.bind(this, marker);
         return (

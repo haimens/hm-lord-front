@@ -3,9 +3,9 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Main from "./components/main/Main.component";
 import alertify from "alertifyjs";
 //import ProtectedRoute from "./components/shared/ProtectedRouter";
-import { LoaderAlt } from "./components/shared";
+import { LoaderAlt, ProtectedRoute } from "./components/shared";
 
-import Home from "./containers/home/Home.container";
+import Dashboard from "./containers/dashboard/dashboard.container";
 import Driver from "./containers/driver/Driver.container";
 import DriverDetail from "./containers/driver/DriverDetail.container";
 
@@ -60,53 +60,54 @@ class App extends Component {
 
   render() {
     alertify.defaults.transition = "zoom";
-    alertify.defaults.theme.ok = "btn hm-bg-green text-white";
-    alertify.defaults.theme.cancel = "btn btn-danger";
+    alertify.defaults.theme.ok = "btn btn-danger";
+    alertify.defaults.theme.cancel = "btn btn-outline-secondary";
     alertify.defaults.theme.input = "form-control";
     const NoMatch = () => <Redirect to="/nomatch" />;
     return (
       <Suspense fallback={<LoaderAlt />}>
         <Switch>
           <Route exact path="/" component={Login} />
-          <Main>
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/driver" component={Driver} />
-            <Route exact path="/driver/detail/:driver_token" component={DriverDetail} />
-
-            <Route exact path="/vehicle" component={Vehicle} />
-            <Route exact path="/vehicle/detail/:vehicle_token" component={VehicleDetail} />
-
-            <Route exact path="/customer" component={Customer} />
-            <Route exact path="/customer/detail/:customer_token" component={CustomerDetail} />
-
-            <Route exact path="/order/list" component={OrderList} />
-            <Route exact path="/order/detail/:order_token" component={OrderDetail} />
-            <Route exact path="/order/creation" component={OrderCreation} />
-
-            <Route exact path="/trip/ongoing" component={TripOngoing} />
-            <Route exact path="/trip/ongoing/detail/:trip_token" component={TripOngoingDetail} />
-
-            <Route exact path="/trip/upcoming" component={TripUpcoming} />
-            <Route exact path="/trip/upcoming/detail/:trip_token" component={TripRecentUpcomingDetail} />
-
-            <Route exact path="/trip/finished" component={TripRecentFinished} />
-            <Route exact path="/trip/finished/detail/:trip_token" component={TripRecentFinishedDetail} />
-
-            <Route exact path="/trip/failed" component={TripFailed} />
-
-            <Route exact path="/payable" component={DriverPayable} />
-
-            <Route exact path="/notification" component={Notification} />
-
-            <Route exact path="/settings/paymentResource" component={PaymentResource} />
-            <Route exact path="/settings/messageResource" component={MessageResource} />
-            <Route exact path="/settings/emailResource" component={EmailResource} />
-            <Route exact path="/settings/coupon" component={Coupon} />
-            <Route exact path="/settings/vehicleType" component={VehicleType} />
-            <Route exact path="/settings/keyAndValue" component={KeyAndValue} />
-          </Main>
           <Route exact path="/reset" component={ResetPassword} />
           <Route exact path="/nomatch" component={Page404} />
+          <Main>
+            <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+            <ProtectedRoute exact path="/driver" component={Driver} />
+            <ProtectedRoute exact path="/driver/detail/:driver_token" component={DriverDetail} />
+
+            <ProtectedRoute exact path="/vehicle" component={Vehicle} />
+            <ProtectedRoute exact path="/vehicle/detail/:vehicle_token" component={VehicleDetail} />
+
+            <ProtectedRoute exact path="/customer" component={Customer} />
+            <ProtectedRoute exact path="/customer/detail/:customer_token" component={CustomerDetail} />
+
+            <ProtectedRoute exact path="/order/list" component={OrderList} />
+            <ProtectedRoute exact path="/order/detail/:order_token" component={OrderDetail} />
+            <ProtectedRoute exact path="/order/creation" component={OrderCreation} />
+
+            <ProtectedRoute exact path="/trip/ongoing" component={TripOngoing} />
+            <ProtectedRoute exact path="/trip/ongoing/detail/:trip_token" component={TripOngoingDetail} />
+
+            <ProtectedRoute exact path="/trip/upcoming" component={TripUpcoming} />
+            <ProtectedRoute exact path="/trip/upcoming/detail/:trip_token" component={TripRecentUpcomingDetail} />
+
+            <ProtectedRoute exact path="/trip/finished" component={TripRecentFinished} />
+            <ProtectedRoute exact path="/trip/finished/detail/:trip_token" component={TripRecentFinishedDetail} />
+
+            <ProtectedRoute exact path="/trip/failed" component={TripFailed} />
+
+            <ProtectedRoute exact path="/payable" component={DriverPayable} />
+
+            <ProtectedRoute exact path="/notification" component={Notification} />
+
+            <ProtectedRoute exact path="/settings/paymentResource" component={PaymentResource} />
+            <ProtectedRoute exact path="/settings/messageResource" component={MessageResource} />
+            <ProtectedRoute exact path="/settings/emailResource" component={EmailResource} />
+            <ProtectedRoute exact path="/settings/coupon" component={Coupon} />
+            <ProtectedRoute exact path="/settings/vehicleType" component={VehicleType} />
+            <ProtectedRoute exact path="/settings/keyAndValue" component={KeyAndValue} />
+            <Route component={NoMatch} />
+          </Main>
         </Switch>
       </Suspense>
     );
@@ -128,7 +129,7 @@ function Page404(props) {
         alt="error404"
         className="mt-4"
       />
-      <a className="btn hm-bg-darkblue text-white mt-4" href="/dashboard">
+      <a className="btn hm-bg-darkblue text-white mt-4" href="/">
         返回
       </a>
     </main>

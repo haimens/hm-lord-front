@@ -17,6 +17,9 @@ import TripCard from "./TripCard.component";
 import VehicleCard from "./VehicleCard.component";
 import DriverCard from "./DriverCard.component";
 import OrderCard from "./OrderCard.component";
+import Header from "./Header";
+import GMapWithMarker from "./GMapWithMarker";
+import ListHeader from "./ListHeader";
 export {
   LoaderAlt,
   IconButton,
@@ -36,5 +39,8 @@ export {
   TripCard,
   VehicleCard,
   DriverCard,
-  OrderCard
+  OrderCard,
+  Header,
+  GMapWithMarker,
+  ListHeader
 };
