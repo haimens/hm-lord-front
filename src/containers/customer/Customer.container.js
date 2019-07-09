@@ -1,8 +1,12 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { Header } from "../../components/shared";
 import CustomerCard from "./customer.component/CustomerCard.component";
 import Pagination from "../../components/shared/Pagination";
 import CustomerAdding from "./customer.component/CustomerAdding.modal";
+
+import { findCustomerListInLord } from "../../actions/customer.action";
 
 class Customer extends Component {
   state = {
@@ -17,8 +21,12 @@ class Customer extends Component {
   handlePageChange = start => {
     console.log(start);
   };
+  componentDidMount() {
+    this.props.findCustomerListInLord();
+  }
   render() {
     const { showCustomerAdding } = this.state;
+    const { history, customer_list_in_lord } = this.props;
     return (
       <main>
         {showCustomerAdding && <CustomerAdding onClose={this.handleAddingCustomer} />}
@@ -34,22 +42,33 @@ class Customer extends Component {
             />
           </div>
           <div className="row">
-            <CustomerCard
-              parentProps={{
-                customerId: "1000016",
-                customerName: "Lebron James",
-                customerImage: "unnamed.jpg",
-                customerPhone: "6266266266",
-                customerEmail: "lebronjames@gmail.com",
-                customerUsername: "lebronjames123",
-                isActive: true
-              }}
-            />
+            {customer_list_in_lord.record_list.map((customer, index) => (
+              <CustomerCard
+                parentProps={{
+                  customerName: customer.name,
+                  customerImage: customer.img_path,
+                  customerPhone: customer.cell,
+                  customerEmail: customer.email,
+                  customerUsername: customer.username,
+                  customer_token: customer.customer_token
+                }}
+                history={history}
+              />
+            ))}
           </div>
         </section>
-        <Pagination onPageChange={this.handlePageChange} />
       </main>
     );
   }
 }
-export default Customer;
+const mapStateToProps = state => {
+  return {
+    customer_list_in_lord: state.customerReducer.customer_list_in_lord
+  };
+};
+const mapDispatchToProps = { findCustomerListInLord };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Customer));
