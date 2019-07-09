@@ -49,33 +49,25 @@ class Modal extends Component {
       maxWidth: this.props.getWidth,
       maxHeight: this.props.getHeight,
       minWidth: "320px",
-      minHeight: this.props.getHeight
+      minHeight: this.props.getHeight,
+      zIndex: this.props.zIndex + 1 || 2
     };
 
     return (
-      <main
-        className="modal-over-lay"
-        onClick={this.handleExit}
-        style={{ zIndex: `${this.props.zIndex || 9}` }}
-      >
+      <main>
         <section
-          className={`${curr} ${this.props.className} rounded`}
-          id="onlyScroll"
-          style={widthHeight}
-        >
+          className="modal-over-lay"
+          style={{ zIndex: `${this.props.zIndex || 1}` }}
+          onClick={this.handleClose}
+        />
+        <section className={`${curr} ${this.props.className} rounded`} id="onlyScroll" style={widthHeight}>
           <div
-            className={`sticky-top w-100 md-2 p-3 border-bottom shadow-sm ${
-              this.props.headerContainerClassName
-                ? this.props.headerContainerClassName
-                : "bg-white"
+            className={`sticky-top w-100 md-2 p-2 border-bottom ${
+              this.props.headerContainerClassName ? this.props.headerContainerClassName : "bg-white"
             }`}
           >
-            <header
-              className={`d-flex justify-content-between align-items-center`}
-            >
-              <h5 className={this.props.headerTitleClassName}>
-                {this.props.title}
-              </h5>
+            <header className={`d-flex justify-content-between   align-items-center px-4 `} style={{ height: "74px" }}>
+              <h5 className="text-modal-color font-weight-bold text-modal-title">{this.props.title}</h5>
               <ImageButton
                 // image={`${process.env.PUBLIC_URL}/img/forget-password@2x.png`}
                 icon={<i className="fas fa-times" />}
@@ -85,11 +77,7 @@ class Modal extends Component {
             </header>
             {this.props.showSearchBar && (
               <section className="mt-2 border">
-                <SearchButton
-                  onSubmit={this.handleSearch}
-                  name="search"
-                  placeholder="search for ..."
-                />
+                <SearchButton onSubmit={this.handleSearch} name="search" placeholder="search for ..." />
               </section>
             )}
           </div>

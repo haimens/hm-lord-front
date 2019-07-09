@@ -20,7 +20,7 @@ import OrderCard from "./OrderCard.component";
 import GMapWithMarker from "./GMapWithMarker";
 import ListHeader from "./ListHeader";
 import Header from "./Header";
-
+import AddingImage from "./AddingImage";
 export {
   LoaderAlt,
   IconButton,
@@ -43,5 +43,6 @@ export {
   OrderCard,
   Header,
   GMapWithMarker,
-  ListHeader
+  ListHeader,
+  AddingImage
 };

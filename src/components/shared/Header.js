@@ -47,7 +47,7 @@ export default function Header(props) {
         </div>
         {props.showButton && (
           <button
-            className="text-purple border-0 rounded shadow px-1 py-0 mr-lg-3 mr-0 d-flex align-items-center justify-content-center"
+            className="text-purple bg-white border-0 rounded shadow px-1 py-0 mr-lg-3 mr-0 d-flex align-items-center justify-content-center"
             onClick={props.clickFunction}
             style={{
               height: "28px",

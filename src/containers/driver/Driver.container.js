@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Header } from "../../components/shared";
 import DriverCard from "../../components/shared/DriverCard.component";
 import Pagination from "../../components/shared/Pagination";
-import DriverCreation from "./driver.component/DriverCreation.modal";
+import DriverAdding from "./driver.component/DriverAdding.modal";
 class Driver extends Component {
   state = {
     showDriverCreationModal: false
@@ -17,16 +17,16 @@ class Driver extends Component {
     const { showDriverCreationModal } = this.state;
     return (
       <main>
-        {showDriverCreationModal && <DriverCreation onClose={this.handleAddingDriver} />}
+        {showDriverCreationModal && <DriverAdding onClose={this.handleAddingDriver} />}
         <section className="container-fluid">
           <div className="mb-4">
             <Header
               title="Driver"
               tabicon={"tabicon_dashboard.svg"}
               showButton={true}
-              clickFunction
               clickTitle={"Driver"}
               buttonWidth={"88px"}
+              clickFunction={this.handleAddingDriver}
             />
           </div>
           <div className="row">
