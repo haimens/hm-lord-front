@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { DriverCard, Header, ListHeader } from "../../components/shared";
+import { DriverCard, Header, ListHeader, ListView } from "../../components/shared";
 import VehicleDetailCard from "./vehicleDetail.component/VehicleDetail.card";
 import AddingDriverModal from "./vehicleDetail.component/AddingDriver.modal";
 
@@ -21,7 +21,7 @@ class VehicleDetail extends Component {
         <section className="mb-4">
           <div className="mb-4">
             <Header
-              title="Driver"
+              title="Vehicle"
               subTitle="Vehicle Detail"
               toLocation={"/vehicle"}
               tabicon={"tabicon_dashboard.svg"}
@@ -56,6 +56,28 @@ class VehicleDetail extends Component {
               history={history}
             />
           </div>
+        </section>
+        <section className="mb-4">
+          <ListHeader
+            parentProps={{
+              title: "Log History",
+              clickFunction: this.handleShowAddingVehicleModal,
+              clickTitle: "Vehicle"
+            }}
+            hideButton={true}
+            buttonWidth={"88px"}
+          />
+          <ListView
+            totalCount={30}
+            title="Log History"
+            fieldNames={["Date", "Admin", "Log Note"]}
+            hideHeader={true}
+            onPageChange={this.handlePageChange}
+          >
+            {/* {punch_list_in_puri.record_list.map((punch, index) => (
+              <LogListItem parentProps={punch} key={index} onClick={this.handlePunchItemClick} />
+            ))} */}
+          </ListView>
         </section>
       </main>
     );

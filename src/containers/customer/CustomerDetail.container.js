@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { OrderCard, ListView } from "../../components/shared";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { OrderCard, ListView, ListHeader, Header } from "../../components/shared";
 
 import CustomerDetailCard from "./customerDetail.component/CustomerDetail.card";
 import LogListItem from "./customerDetail.component/LogList.item";
 import AddingOrderModal from "./customerDetail.component/AddingOrder.modal";
 
-export default class VehicleDetail extends Component {
+class VehicleDetail extends Component {
   state = {
     showAddingOrderModal: false
   };
@@ -14,26 +16,36 @@ export default class VehicleDetail extends Component {
   };
   render() {
     const { showAddingOrderModal } = this.state;
+    const { history } = this.props;
     return (
       <main>
         {showAddingOrderModal && <AddingOrderModal />}
         <section className="mb-4">
           <div className="mb-4">
-            <h3 className="font-weight-bold mr-3">Customer Detail</h3>
+            <Header
+              title="Customer"
+              subTitle="Cusomter Detail"
+              toLocation={"/customer"}
+              tabicon={"tabicon_dashboard.svg"}
+              buttonWidth={"88px"}
+              history={history}
+            />
           </div>
           <div>
             <CustomerDetailCard />
           </div>
         </section>
-        <section className="mb-4">
-          <div className="mb-4 d-flex">
-            <h3 className="font-weight-bold mr-3">Order List</h3>
-            <i
-              className="fas fa-plus hm-bg-green rounded-circle text-white p-2 hm-pointer-cursor"
-              onClick={this.handleShowAddingOrderModal}
-            />
-          </div>
-          <div className="row">
+        <section className="mb-4 bg-white rounded-custom shadow-sm">
+          <ListHeader
+            parentProps={{
+              title: "Related Order List",
+              clickFunction: this.handleShowAddingVehicleModal,
+              clickTitle: "Vehicle"
+            }}
+            hideShadow={true}
+            buttonWidth={"88px"}
+          />
+          <div className="row p-3">
             <OrderCard
               parentProps={{
                 orderId: "1000016",
@@ -47,12 +59,18 @@ export default class VehicleDetail extends Component {
         </section>
 
         <section className="mb-4">
-          <div className="mb-4 d-flex">
-            <h3 className="font-weight-bold mr-3">Log</h3>
-          </div>
+          <ListHeader
+            parentProps={{
+              title: "Log History",
+              clickFunction: this.handleShowAddingVehicleModal,
+              clickTitle: "Vehicle"
+            }}
+            hideButton={true}
+            buttonWidth={"88px"}
+          />
           <ListView
             totalCount={30}
-            title="Wage List"
+            title="Log History"
             fieldNames={["Date", "Admin", "Log Note"]}
             hideHeader={true}
             onPageChange={this.handlePageChange}
@@ -66,3 +84,13 @@ export default class VehicleDetail extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {};
+};
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(VehicleDetail));
