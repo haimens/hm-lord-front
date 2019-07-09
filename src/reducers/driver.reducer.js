@@ -16,7 +16,16 @@ const initialState = {
     count: 0,
     end: 0
   },
-  driver_detail_in_lord: {}
+  driver_detail_in_lord: {
+    basic_info: {
+      name: "",
+      cell: "",
+      email: "",
+      username: "",
+      img_path: "",
+      status: ""
+    }
+  }
 };
 
 export default (state = initialState, action) => {

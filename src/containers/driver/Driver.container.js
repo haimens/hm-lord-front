@@ -48,6 +48,7 @@ class Driver extends Component {
                   driver_token: driver.driver_token,
                   isActive: driver.status
                 }}
+                key={index}
                 history={history}
               />
             ))}

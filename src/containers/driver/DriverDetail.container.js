@@ -31,14 +31,15 @@ class DriverDetail extends Component {
   handleShowAddingSalaryModal = () => {
     this.setState(state => ({ showAddingSalaryModal: !state.showAddingSalaryModal }));
   };
-  componentDidMount() {
+  async componentDidMount() {
     const { match, findDriverDetailInLord } = this.props;
     const { driver_token } = match.params;
-    findDriverDetailInLord(driver_token);
+    await findDriverDetailInLord(driver_token);
   }
   render() {
     const { showAddingTripModal, showAddingVehicleModal, showAddingWageModal, showAddingSalaryModal } = this.state;
-    const { history } = this.props;
+    const { history, driver_detail_in_lord } = this.props;
+    console.log(this.props);
     return (
       <main>
         {showAddingTripModal && <AddingTripModal onClose={this.handleShowAddingTripModal} />}
@@ -58,7 +59,7 @@ class DriverDetail extends Component {
             />
           </div>
           <div>
-            <DriverDetailCard />
+            <DriverDetailCard driver_detail_in_lord={driver_detail_in_lord} />
           </div>
         </section>
 
