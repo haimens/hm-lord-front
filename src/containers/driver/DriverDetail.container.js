@@ -88,49 +88,47 @@ class DriverDetail extends Component {
           </div>
         </section>
         <section className="mb-4">
-          <div className="mb-4 d-flex">
-            <h3 className="font-weight-bold mr-3">Wage List</h3>
-            <i
-              className="fas fa-plus hm-bg-green rounded-circle text-white p-2 hm-pointer-cursor"
-              onClick={this.handleShowAddingWageModal}
-            />
-          </div>
-          <div>
-            <ListView
-              totalCount={30}
-              title="Wage List"
-              fieldNames={["Created On", "Amount", "Type", "Note"]}
-              hideHeader={true}
-              onPageChange={this.handlePageChange}
-            >
-              {/* {punch_list_in_puri.record_list.map((punch, index) => (
+          <ListHeader
+            parentProps={{
+              title: "Wage List",
+              clickFunction: this.handleAddCompanyModal,
+              clickTitle: "Wage"
+            }}
+            buttonWidth={"88px"}
+          />
+          <ListView
+            totalCount={30}
+            title="Wage List"
+            fieldNames={["Created On", "Amount", "Type", "Note"]}
+            hideHeader={true}
+            onPageChange={this.handlePageChange}
+          >
+            {/* {punch_list_in_puri.record_list.map((punch, index) => (
               <WageListItem parentProps={punch} key={index} onClick={this.handlePunchItemClick} />
             ))} */}
-            </ListView>
-          </div>
+          </ListView>
         </section>
 
         <section className="mb-4">
-          <div className="mb-4 d-flex">
-            <h3 className="font-weight-bold mr-3">Salary List</h3>
-            <i
-              className="fas fa-plus hm-bg-green rounded-circle text-white p-2 hm-pointer-cursor"
-              onClick={this.handleShowAddingSalaryModal}
-            />
-          </div>
-          <div>
-            <ListView
-              totalCount={30}
-              title="Salary List"
-              fieldNames={["Created On", "Amount", "Note"]}
-              hideHeader={true}
-              onPageChange={this.handlePageChange}
-            >
-              {/* {punch_list_in_puri.record_list.map((punch, index) => (
+          <ListHeader
+            parentProps={{
+              title: "Salary List",
+              clickFunction: this.handleAddCompanyModal,
+              clickTitle: "Salary"
+            }}
+            buttonWidth={"88px"}
+          />
+          <ListView
+            totalCount={30}
+            title="Salary List"
+            fieldNames={["Created On", "Amount", "Note"]}
+            hideHeader={true}
+            onPageChange={this.handlePageChange}
+          >
+            {/* {punch_list_in_puri.record_list.map((punch, index) => (
               <SalaryListItem parentProps={punch} key={index} onClick={this.handlePunchItemClick} />
             ))} */}
-            </ListView>
-          </div>
+          </ListView>
         </section>
       </main>
     );
