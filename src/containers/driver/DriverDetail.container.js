@@ -11,6 +11,7 @@ import AddingVehicleModal from "./driverDetail.component/AddingVehicle.modal";
 import AddingWageModal from "./driverDetail.component/AddingWage.modal";
 import AddingSalaryModal from "./driverDetail.component/AddingSalary.modal";
 
+import { findDriverDetailInLord } from "../../actions/driver.action";
 class DriverDetail extends Component {
   state = {
     showAddingTripModal: false,
@@ -30,6 +31,11 @@ class DriverDetail extends Component {
   handleShowAddingSalaryModal = () => {
     this.setState(state => ({ showAddingSalaryModal: !state.showAddingSalaryModal }));
   };
+  componentDidMount() {
+    const { match, findDriverDetailInLord } = this.props;
+    const { driver_token } = match.params;
+    findDriverDetailInLord(driver_token);
+  }
   render() {
     const { showAddingTripModal, showAddingVehicleModal, showAddingWageModal, showAddingSalaryModal } = this.state;
     const { history } = this.props;
@@ -146,9 +152,11 @@ class DriverDetail extends Component {
   }
 }
 const mapStateToProps = state => {
-  return {};
+  return {
+    driver_detail_in_lord: state.driverReducer.driver_detail_in_lord
+  };
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = { findDriverDetailInLord };
 
 export default connect(
   mapStateToProps,

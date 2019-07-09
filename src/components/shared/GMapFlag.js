@@ -2,7 +2,6 @@ import React from "react";
 
 class GMapFlag extends React.Component {
   render() {
-    console.log("here");
     return (
       <MapWithAMarkerWithLabel
         googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${

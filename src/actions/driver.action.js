@@ -105,3 +105,18 @@ export const updateACarForADriver = (driver_car_token, body = {}) => async dispa
     dispatch(processLogout(err));
   }
 };
+
+export const findDriverDetailInLord = driver_token => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`driver/detail/${driver_token}`, "GET");
+    await dispatch({
+      type: constant.DRIVER_DETAIL_IN_LORD,
+      payload
+    });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
