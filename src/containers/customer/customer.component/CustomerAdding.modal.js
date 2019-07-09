@@ -10,7 +10,8 @@ export default class VehicleAdding extends Component {
     name: "",
     area: "+1",
     cell: "",
-    img_path: ""
+    img_path: "",
+    address: ""
   };
 
   handleInputChange = e => {
@@ -34,7 +35,7 @@ export default class VehicleAdding extends Component {
   };
 
   saveToAddress = address => {
-    this.setState({ company_address: address });
+    this.setState({ address });
   };
 
   handleCreatingCompany = () => {
