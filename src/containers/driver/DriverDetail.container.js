@@ -64,15 +64,17 @@ class DriverDetail extends Component {
             />
           </div>
         </section>
-        <section className="mb-4">
-          <div className="mb-4 d-flex">
-            <h3 className="font-weight-bold mr-3">Vehicle List</h3>
-            <i
-              className="fas fa-plus hm-bg-green rounded-circle text-white p-2 hm-pointer-cursor"
-              onClick={this.handleShowAddingVehicleModal}
-            />
-          </div>
-          <div className="row">
+        <section className="mb-4 bg-white rounded-custom shadow-sm">
+          <ListHeader
+            parentProps={{
+              title: "Related Vehicle List",
+              clickFunction: this.handleAddCompanyModal,
+              clickTitle: "Vehicle"
+            }}
+            hideShadow={true}
+            buttonWidth={"88px"}
+          />
+          <div className="row p-3">
             <VehicleCard
               parentProps={{
                 vehicleId: "1000016",
@@ -80,6 +82,7 @@ class DriverDetail extends Component {
                 vehicleImage: "unnamed.jpg",
                 vehiclePhone: "6266266266"
               }}
+              showButton={true}
               deleteButton={true}
             />
           </div>

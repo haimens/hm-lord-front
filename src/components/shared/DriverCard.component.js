@@ -12,7 +12,7 @@ export default class DriverCard extends Component {
       isActive
     } = this.props.parentProps;
     return (
-      <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-3 mb-4 hm-pointer-cursor"}>
+      <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-4 mb-4 hm-pointer-cursor"}>
         <div className="col-12 rounded-custom shadow-sm bg-white " style={{ height: "140px" }}>
           <div className="row h-100 align-items-center">
             <div className="col-5 d-flex justify-content-center">

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 export default class VehicleCard extends Component {
   render() {
+    const { showButton } = this.props;
     const { vehicleId, vehicleName, vehicleImage, isActive } = this.props.parentProps;
     return (
       <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-4 mb-4"}>
@@ -20,21 +21,31 @@ export default class VehicleCard extends Component {
               <div className="text-muted">
                 <div>{vehicleId}</div>
               </div>
-              {isActive ? (
-                <section className="hm-text-14 my-2">
-                  <div className=" d-flex align-items-center">
-                    <i className="fas fa-circle success-text-color mr-3" style={{ fontSize: "6px" }} />
-                    <div className="font-weight-500">Active</div>
-                  </div>
-                </section>
-              ) : (
-                <section className="hm-text-14 my-2">
-                  <div className=" d-flex align-items-center">
-                    <i className="fas fa-circle text-danger mr-3" style={{ fontSize: "6px" }} />
-                    <div className="font-weight-500">Inactive</div>
-                  </div>
+              {showButton && (
+                <section className="d-flex justify-content-end font-weight-500 text-main-color hm-text-14">
+                  <img
+                    src={`${process.env.PUBLIC_URL}/img/icon_delete.svg`}
+                    className="hm-pointer-cursor"
+                    alt="delete"
+                  />
                 </section>
               )}
+              {!showButton &&
+                (isActive ? (
+                  <section className="hm-text-14 my-2">
+                    <div className=" d-flex align-items-center">
+                      <i className="fas fa-circle success-text-color mr-3" style={{ fontSize: "6px" }} />
+                      <div className="font-weight-500">Active</div>
+                    </div>
+                  </section>
+                ) : (
+                  <section className="hm-text-14 my-2">
+                    <div className=" d-flex align-items-center">
+                      <i className="fas fa-circle text-danger mr-3" style={{ fontSize: "6px" }} />
+                      <div className="font-weight-500">Inactive</div>
+                    </div>
+                  </section>
+                ))}
             </div>
           </div>
         </div>
