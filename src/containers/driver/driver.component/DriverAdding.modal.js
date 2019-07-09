@@ -35,25 +35,17 @@ export default class DriverAdding extends Component {
     this.props.onClose();
   };
 
-  handleCreatingCompany = () => {
-    const { img_path, icon_path, company_name, company_address, company_title, fee_rate } = this.state;
-    if (
-      img_path !== "" &&
-      icon_path !== "" &&
-      company_name !== "" &&
-      company_address !== "" &&
-      company_title !== "" &&
-      fee_rate !== ""
-    ) {
-      this.props.parentProps.createACompany({
+  handleCreateADriverInLord = () => {
+    const { driver_name, cell, email, username, img_path, area } = this.state;
+    if (driver_name !== "" && cell !== "" && email !== "" && username !== "" && area !== "") {
+      this.props.parentProps.createADriverInLord({
         realm_info: {
-          company_name,
+          driver_name,
           img_path,
-          icon_path,
-          company_title
-        },
-        address_str: company_address[0].formatted_address,
-        tribute_rate_token: fee_rate
+          cell: `${area} ${cell}`,
+          email,
+          username
+        }
       });
       this.handleClose();
     } else {
@@ -80,7 +72,7 @@ export default class DriverAdding extends Component {
         )}
         {showPreview && <PreviewImageModal image={img_path} onClose={() => this.setState({ showPreview: false })} />}
 
-        <Modal title="Add Driver" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"554px"}>
+        <Modal title="Add Driver" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"540px"}>
           <div className="container">
             <div className="p-3">
               <div className="form-group mb-4">

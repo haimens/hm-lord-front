@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import DriverDetailCard from "./driverDetail.component/DriverDetail.card";
 import GMapFlag from "../../components/shared/GMapFlag";
-import { VehicleCard, TripCard, ListView, ListHeader } from "../../components/shared";
+import { VehicleCard, TripCard, ListView, ListHeader, Header } from "../../components/shared";
 import WageListItem from "./driverDetail.component/WageList.item";
 import SalaryListItem from "./driverDetail.component/SalaryList.item";
 import AddingTripModal from "./driverDetail.component/AddingTrip.modal";
@@ -30,6 +32,7 @@ class DriverDetail extends Component {
   };
   render() {
     const { showAddingTripModal, showAddingVehicleModal, showAddingWageModal, showAddingSalaryModal } = this.state;
+    const { history } = this.props;
     return (
       <main>
         {showAddingTripModal && <AddingTripModal onClose={this.handleShowAddingTripModal} />}
@@ -38,7 +41,15 @@ class DriverDetail extends Component {
         {showAddingSalaryModal && <AddingSalaryModal onClose={this.handleShowAddingSalaryModal} />}
         <section className="mb-4">
           <div className="mb-4">
-            <h3 className="font-weight-bold mr-3">Driver Detail</h3>
+            <Header
+              title="Driver"
+              subTitle="Driver Detail"
+              toLocation={"/driver"}
+              tabicon={"tabicon_dashboard.svg"}
+              clickTitle={"Driver"}
+              history={history}
+              buttonWidth={"88px"}
+            />
           </div>
           <div>
             <DriverDetailCard />
@@ -134,4 +145,12 @@ class DriverDetail extends Component {
     );
   }
 }
-export default DriverDetail;
+const mapStateToProps = state => {
+  return {};
+};
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(DriverDetail));

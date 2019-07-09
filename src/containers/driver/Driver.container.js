@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Header } from "../../components/shared";
-import DriverCard from "../../components/shared/DriverCard.component";
-import Pagination from "../../components/shared/Pagination";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { Header, DriverCard, Pagination } from "../../components/shared";
 import DriverAdding from "./driver.component/DriverAdding.modal";
+import { findDriverListInLord, createADriverInLord } from "../../actions/driver.action";
 class Driver extends Component {
   state = {
     showDriverCreationModal: false
@@ -13,11 +14,18 @@ class Driver extends Component {
   handleAddingDriver = () => {
     this.setState(state => ({ showDriverCreationModal: !state.showDriverCreationModal }));
   };
+  componentDidMount() {
+    const { findDriverListInLord } = this.props;
+    findDriverListInLord();
+  }
   render() {
     const { showDriverCreationModal } = this.state;
+    const { history, driver_list_in_lord, createADriverInLord } = this.props;
     return (
       <main>
-        {showDriverCreationModal && <DriverAdding onClose={this.handleAddingDriver} />}
+        {showDriverCreationModal && (
+          <DriverAdding createADriverInLord={createADriverInLord} onClose={this.handleAddingDriver} />
+        )}
         <section className="container-fluid">
           <div className="mb-4">
             <Header
@@ -30,22 +38,36 @@ class Driver extends Component {
             />
           </div>
           <div className="row">
-            <DriverCard
-              parentProps={{
-                driverId: "1000016",
-                driverName: "Lebron James",
-                driverImage: "unnamed.jpg",
-                driverPhone: "6266266266",
-                driverEmail: "lebronjames@gmail.com",
-                driverUsername: "lebronjames123",
-                isActive: true
-              }}
-            />
+            {driver_list_in_lord.record_list.map((driver, index) => (
+              <DriverCard
+                parentProps={{
+                  driverName: driver.name,
+                  driverImage: driver.img_path,
+                  driverPhone: driver.cell,
+                  driverUsername: driver.username,
+                  isActive: true
+                }}
+                history={history}
+              />
+            ))}
           </div>
         </section>
-        <Pagination onPageChange={this.handlePageChange} />
+        <Pagination count={driver_list_in_lord.count} onPageChange={this.handlePageChange} />
       </main>
     );
   }
 }
-export default Driver;
+const mapStateToProps = state => {
+  return {
+    driver_list_in_lord: state.driverReducer.driver_list_in_lord
+  };
+};
+const mapDispatchToProps = {
+  findDriverListInLord,
+  createADriverInLord
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Driver));
