@@ -45,7 +45,8 @@ class Driver extends Component {
                   driverImage: driver.img_path,
                   driverPhone: driver.cell,
                   driverUsername: driver.username,
-                  isActive: true
+                  driver_token: driver.driver_token,
+                  isActive: driver.status
                 }}
                 history={history}
               />

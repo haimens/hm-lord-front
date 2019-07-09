@@ -57,7 +57,8 @@ class Vehicle extends Component {
                   vehicleId: vehicle.plate_num,
                   vehicleName: vehicle.identifier,
                   vehicleImage: vehicle.img_path,
-                  vehicleToken: vehicle.car_token
+                  vehicleToken: vehicle.car_token,
+                  isActive: vehicle.status
                 }}
                 key={index}
                 history={history}
