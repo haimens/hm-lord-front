@@ -7,7 +7,7 @@ import Pagination from "../../components/shared/Pagination";
 import CustomerAdding from "./customer.component/CustomerAdding.modal";
 
 import { findCustomerListInLord, createACustomerInLord } from "../../actions/customer.action";
-
+import { createNewAddressInstance } from "../../actions/address.action";
 class Customer extends Component {
   state = {
     showCustomerAdding: false
@@ -26,11 +26,15 @@ class Customer extends Component {
   }
   render() {
     const { showCustomerAdding } = this.state;
-    const { history, customer_list_in_lord, createACustomerInLord } = this.props;
+    const { history, customer_list_in_lord, createACustomerInLord, createNewAddressInstance } = this.props;
     return (
       <main>
         {showCustomerAdding && (
-          <CustomerAdding createACustomerInLord={createACustomerInLord} onClose={this.handleAddingCustomer} />
+          <CustomerAdding
+            createACustomerInLord={createACustomerInLord}
+            createNewAddressInstance={createNewAddressInstance}
+            onClose={this.handleAddingCustomer}
+          />
         )}
         <section className="container-fluid">
           <div className="mb-4">
@@ -54,6 +58,7 @@ class Customer extends Component {
                   customerUsername: customer.username,
                   customer_token: customer.customer_token
                 }}
+                key={index}
                 history={history}
               />
             ))}
@@ -68,7 +73,7 @@ const mapStateToProps = state => {
     customer_list_in_lord: state.customerReducer.customer_list_in_lord
   };
 };
-const mapDispatchToProps = { findCustomerListInLord, createACustomerInLord };
+const mapDispatchToProps = { findCustomerListInLord, createACustomerInLord, createNewAddressInstance };
 
 export default connect(
   mapStateToProps,

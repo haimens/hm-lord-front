@@ -9,9 +9,10 @@ export default class VehicleAdding extends Component {
     showPreview: false,
     name: "",
     area: "+1",
+    email: "",
     cell: "",
     img_path: "",
-    address: ""
+    address_str: ""
   };
 
   handleInputChange = e => {
@@ -35,29 +36,31 @@ export default class VehicleAdding extends Component {
   };
 
   saveToAddress = address => {
-    this.setState({ address });
+    this.setState({ address_str: address[0].formatted_address });
   };
 
-  handleCreatingCompany = () => {
-    const { name, cell, area, email, img_path } = this.state;
+  handleCreatingCompany = async () => {
+    const { name, cell, area, email, img_path, address_str } = this.state;
+    const { createACustomerInLord, createNewAddressInstance } = this.props;
     if (name !== "" && cell !== "" && area !== "" && email !== "") {
-      this.props.createACustomerInLord({
-        name,
-        img_path,
-        cell: `${area} ${cell}`,
-        email
+      console.log(name);
+      const payload = await createNewAddressInstance({ address_str });
+      createACustomerInLord({
+        customer_info: {
+          name,
+          img_path,
+          cell: `${area} ${cell}`,
+          email
+        },
+        address_info: {
+          address_token: payload.address_token
+        }
       });
       this.handleClose();
     } else {
       alertify.alert("Error!", "Please Finish The Form!");
     }
   };
-
-  saveToAddress = address => {
-    this.setState({ company_address: address });
-  };
-
-  async componentDidMount() {}
 
   render() {
     const { img_path, showImage, showPreview, name, cell, area, email } = this.state;
@@ -108,8 +111,7 @@ export default class VehicleAdding extends Component {
 
               <div className="form-group mb-4">
                 <input
-                  type="email"
-                  className="form-control hm-input-height "
+                  className="form-control hm-input-height mt-3"
                   name="email"
                   id="email"
                   placeholder={"Email"}
