@@ -68,7 +68,7 @@ class DriverDetail extends Component {
           <ListHeader
             parentProps={{
               title: "Related Vehicle List",
-              clickFunction: this.handleAddCompanyModal,
+              clickFunction: this.handleShowAddingVehicleModal,
               clickTitle: "Vehicle"
             }}
             hideShadow={true}
@@ -91,7 +91,7 @@ class DriverDetail extends Component {
           <ListHeader
             parentProps={{
               title: "Wage List",
-              clickFunction: this.handleAddCompanyModal,
+              clickFunction: this.handleShowAddingWageModal,
               clickTitle: "Wage"
             }}
             buttonWidth={"88px"}
@@ -113,7 +113,7 @@ class DriverDetail extends Component {
           <ListHeader
             parentProps={{
               title: "Salary List",
-              clickFunction: this.handleAddCompanyModal,
+              clickFunction: this.handleShowAddingSalaryModal,
               clickTitle: "Salary"
             }}
             buttonWidth={"88px"}
