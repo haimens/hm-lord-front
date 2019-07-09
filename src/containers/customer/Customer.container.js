@@ -2,32 +2,33 @@ import React, { Component } from "react";
 import { Header } from "../../components/shared";
 import CustomerCard from "./customer.component/CustomerCard.component";
 import Pagination from "../../components/shared/Pagination";
-import CustomerCreation from "./customer.component/CustomerCreation.modal";
+import CustomerAdding from "./customer.component/CustomerAdding.modal";
+
 class Customer extends Component {
   state = {
-    showCustomerCreationModal: false
+    showCustomerAdding: false
   };
   handlePageChange = start => {
     console.log(start);
   };
-  handleCustomerCreation = () => {
-    this.setState(state => ({ showCustomerCreationModal: !state.showCustomerCreationModal }));
+  handleAddingCustomer = () => {
+    this.setState(state => ({ showCustomerAdding: !state.showCustomerAdding }));
   };
   handlePageChange = start => {
     console.log(start);
   };
   render() {
-    const { showCustomerCreationModal } = this.state;
+    const { showCustomerAdding } = this.state;
     return (
       <main>
-        {showCustomerCreationModal && <CustomerCreation onClose={this.handleCustomerCreation} />}
+        {showCustomerAdding && <CustomerAdding onClose={this.handleAddingCustomer} />}
         <section className="container-fluid">
           <div className="mb-4">
             <Header
               title="Customer"
               tabicon={"tabicon_dashboard.svg"}
               showButton={true}
-              clickFunction
+              clickFunction={this.handleAddingCustomer}
               clickTitle={"Customer"}
               buttonWidth={"88px"}
             />

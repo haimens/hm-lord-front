@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { savePickUp, saveDropOff, savePickUpAgain, saveDropOffAgain } from "../../actions/location.action";
 import "./GAutoComplete.css";
 class GAutoComplete extends Component {
   constructor(props) {
@@ -11,37 +10,21 @@ class GAutoComplete extends Component {
   }
 
   _getAddress = address => {
-    if (this.props.placeholder === "PICKUP") {
-      this.props.savePickUp(address);
-    }
-    if (this.props.placeholder === "DROPOFF") {
-      this.props.saveDropOff(address);
-    }
-    if (this.props.placeholder === "PICKUPAGAIN") {
-      this.props.savePickUpAgain(address);
-    }
-    if (this.props.placeholder === "DROPOFFAGAIN") {
-      this.props.saveDropOffAgain(address);
-    }
+    this.props.getGoogleAddress(address);
   };
 
   render() {
     return (
       <PlacesWithStandaloneSearchBox
         _getAddress={this._getAddress}
-        inputClass={this.props.inputClass}
-        placeholder={this.props.placeholder}
-        disablePlaceHolder={this.props.disablePlaceHolder}
         defaultValue={this.props.defaultValue}
+        inputClass={this.props.inputClass}
       />
     );
   }
 }
 
-export default connect(
-  null,
-  { savePickUp, saveDropOff, savePickUpAgain, saveDropOffAgain }
-)(GAutoComplete);
+export default connect(null)(GAutoComplete);
 
 const { compose, withProps, lifecycle } = require("recompose");
 const { withScriptjs } = require("react-google-maps");
@@ -66,7 +49,6 @@ const PlacesWithStandaloneSearchBox = compose(
         },
         onPlacesChanged: () => {
           const places = refs.searchBox.getPlaces();
-
           this.setState({
             places
           });
@@ -79,11 +61,11 @@ const PlacesWithStandaloneSearchBox = compose(
   <>
     {props.places[0] && props._getAddress(props.places)}
     <StandaloneSearchBox ref={props.onSearchBoxMounted} bounds={props.bounds} onPlacesChanged={props.onPlacesChanged}>
-      <div className="input-group mb-3 ">
+      <div className="input-group ">
         <input
-          className={`form-control font-weight-bold${props.inputClass}`}
+          className={`form-control  ${props.inputClass} hm-input-height `}
           type="text"
-          placeholder={props.disablePlaceHolder ? "" : props.placeholder}
+          placeholder={"Company Address"}
           defaultValue={props.defaultValue}
         />
       </div>

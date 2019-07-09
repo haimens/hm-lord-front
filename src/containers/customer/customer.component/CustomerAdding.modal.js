@@ -1,18 +1,16 @@
 import React, { Component } from "react";
-import { Modal, ImageLoaderModal, PreviewImageModal, AddingImage } from "../../../components/shared";
+import { Modal, ImageLoaderModal, PreviewImageModal, AddingImage, GAutoComplete } from "../../../components/shared";
 import { parseRate } from "../../../actions/utilities.action";
 import alertify from "alertifyjs";
 
-export default class DriverAdding extends Component {
+export default class VehicleAdding extends Component {
   state = {
     showImage: false,
     showPreview: false,
-    driver_name: "",
+    customer_name: "",
+    area: "+1",
     cell: "",
-    email: "",
-    username: "",
-    img_path: "",
-    area: "+1"
+    img_path: ""
   };
 
   handleInputChange = e => {
@@ -33,6 +31,10 @@ export default class DriverAdding extends Component {
 
   handleClose = () => {
     this.props.onClose();
+  };
+
+  saveToAddress = address => {
+    this.setState({ company_address: address });
   };
 
   handleCreatingCompany = () => {
@@ -68,7 +70,7 @@ export default class DriverAdding extends Component {
   async componentDidMount() {}
 
   render() {
-    const { img_path, showImage, showPreview, driver_name, cell, email, username, area } = this.state;
+    const { img_path, showImage, showPreview, customer_name, area, cell, email, address } = this.state;
     return (
       <div>
         {showImage && (
@@ -80,16 +82,16 @@ export default class DriverAdding extends Component {
         )}
         {showPreview && <PreviewImageModal image={img_path} onClose={() => this.setState({ showPreview: false })} />}
 
-        <Modal title="Add Driver" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"554px"}>
+        <Modal title="Add Customer" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"525px"}>
           <div className="container">
             <div className="p-3">
               <div className="form-group mb-4">
                 <input
                   className="form-control hm-input-height mt-3"
-                  name="driver_name"
-                  id="driver_name"
+                  name="customer_name"
+                  id="customer_name"
                   placeholder={"Name"}
-                  value={driver_name}
+                  value={customer_name}
                   onChange={this.handleInputChange}
                 />
               </div>
@@ -126,16 +128,8 @@ export default class DriverAdding extends Component {
                 />
               </div>
 
-              <div className="form-group mb-4">
-                <input
-                  type="cell"
-                  className="form-control hm-input-height "
-                  name="username"
-                  id="username"
-                  placeholder={"Username"}
-                  value={username}
-                  onChange={this.handleInputChange}
-                />
+              <div className="form-group">
+                <GAutoComplete getGoogleAddress={this.saveToAddress} />
               </div>
 
               <AddingImage

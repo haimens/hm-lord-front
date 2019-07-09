@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Header } from "../../components/shared";
 import VehicleCard from "../../components/shared/VehicleCard.component";
 import Pagination from "../../components/shared/Pagination";
-import VehicleCreation from "./vehicle.component/VehicleCreation.modal";
+import VehicleAdding from "./vehicle.component/VehicleAdding.modal";
 class Vehicle extends Component {
   state = {
     showVehicleCreationModal: false
@@ -10,21 +10,21 @@ class Vehicle extends Component {
   handlePageChange = start => {
     console.log(start);
   };
-  handleVehicleCreation = () => {
+  handleAddingVehicle = () => {
     this.setState(state => ({ showVehicleCreationModal: !state.showVehicleCreationModal }));
   };
   render() {
     const { showVehicleCreationModal } = this.state;
     return (
       <main>
-        {showVehicleCreationModal && <VehicleCreation onClose={this.handleVehicleCreation} />}
+        {showVehicleCreationModal && <VehicleAdding onClose={this.handleAddingVehicle} />}
         <section className="container-fluid">
           <div className="mb-4">
             <Header
               title="Vehicle"
               tabicon={"tabicon_dashboard.svg"}
               showButton={true}
-              clickFunction
+              clickFunction={this.handleAddingVehicle}
               clickTitle={"Vehicle"}
               buttonWidth={"88px"}
             />

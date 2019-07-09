@@ -21,6 +21,7 @@ import GMapWithMarker from "./GMapWithMarker";
 import ListHeader from "./ListHeader";
 import Header from "./Header";
 import AddingImage from "./AddingImage";
+import GAutoComplete from "./GAutoComplete";
 export {
   LoaderAlt,
   IconButton,
@@ -44,5 +45,6 @@ export {
   Header,
   GMapWithMarker,
   ListHeader,
-  AddingImage
+  AddingImage,
+  GAutoComplete
 };

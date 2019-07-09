@@ -3,14 +3,13 @@ import { Modal, ImageLoaderModal, PreviewImageModal, AddingImage } from "../../.
 import { parseRate } from "../../../actions/utilities.action";
 import alertify from "alertifyjs";
 
-export default class DriverAdding extends Component {
+export default class VehicleAdding extends Component {
   state = {
     showImage: false,
     showPreview: false,
-    driver_name: "",
-    cell: "",
-    email: "",
-    username: "",
+    identifier: "",
+    plate: "",
+    description: "",
     img_path: "",
     area: "+1"
   };
@@ -68,7 +67,7 @@ export default class DriverAdding extends Component {
   async componentDidMount() {}
 
   render() {
-    const { img_path, showImage, showPreview, driver_name, cell, email, username, area } = this.state;
+    const { img_path, showImage, showPreview, identifier, plate, description } = this.state;
     return (
       <div>
         {showImage && (
@@ -80,16 +79,17 @@ export default class DriverAdding extends Component {
         )}
         {showPreview && <PreviewImageModal image={img_path} onClose={() => this.setState({ showPreview: false })} />}
 
-        <Modal title="Add Driver" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"554px"}>
+        <Modal title="Add Vehicle" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"449px"}>
           <div className="container">
             <div className="p-3">
               <div className="form-group mb-4">
                 <input
+                  type="text"
                   className="form-control hm-input-height mt-3"
-                  name="driver_name"
-                  id="driver_name"
-                  placeholder={"Name"}
-                  value={driver_name}
+                  name="identifier"
+                  id="identifier"
+                  placeholder={"Identifier"}
+                  value={identifier}
                   onChange={this.handleInputChange}
                 />
               </div>
@@ -97,43 +97,22 @@ export default class DriverAdding extends Component {
               <div className="form-group input-group mb-4 d-flex">
                 <input
                   type="text"
-                  className="form-control hm-input-height col-2"
-                  id="area"
-                  placeholder="Area"
-                  value={area}
+                  className="form-control hm-input-height "
+                  id="plate"
+                  placeholder="Plate"
+                  value={plate}
                   onChange={this.handleInputChange}
                 />
+              </div>
 
+              <div className="form-group mb-4">
                 <input
                   type="text"
                   className="form-control hm-input-height "
-                  id="cell"
-                  placeholder="Cell"
-                  value={cell}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-
-              <div className="form-group mb-4">
-                <input
-                  type="email"
-                  className="form-control hm-input-height "
-                  name="email"
-                  id="email"
-                  placeholder={"Email"}
-                  value={email}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-
-              <div className="form-group mb-4">
-                <input
-                  type="cell"
-                  className="form-control hm-input-height "
-                  name="username"
-                  id="username"
-                  placeholder={"Username"}
-                  value={username}
+                  name="description"
+                  id="description"
+                  placeholder={"Description"}
+                  value={description}
                   onChange={this.handleInputChange}
                 />
               </div>
