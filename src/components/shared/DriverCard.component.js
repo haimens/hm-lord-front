@@ -12,13 +12,10 @@ export default class DriverCard extends Component {
       isActive
     } = this.props.parentProps;
     return (
-      <div className={this.props.fullWidth ? "col-6" : "col-6 col-md-4 col-lg-3 mb-3"}>
-        <div
-          className="col-12 p-3 rounded-custom shadow-sm bg-white d-flex align-items-center"
-          style={{ height: "140px" }}
-        >
-          <div className="row ">
-            <div className="col-4 d-flex align-items-center">
+      <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 mb-4"}>
+        <div className="col-12 rounded-custom shadow-sm bg-white " style={{ height: "140px" }}>
+          <div className="row h-100 align-items-center">
+            <div className="col-6 d-flex justify-content-center">
               <img
                 src={`${process.env.PUBLIC_URL}/img/${driverImage}`}
                 className="rounded-circle"
@@ -26,7 +23,7 @@ export default class DriverCard extends Component {
                 alt="Driver"
               />
             </div>
-            <div className="col-8">
+            <div className="col-6">
               <div className="font-weight-bold my-2">{driverName}</div>
               <div className="text-muted">
                 <div>{driverPhone}</div>

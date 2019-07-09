@@ -20,7 +20,14 @@ class Driver extends Component {
         {showDriverCreationModal && <DriverCreation onClose={this.handleAddingDriver} />}
         <section className="container-fluid">
           <div className="mb-4">
-            <Header title="Driver" tabicon={"tabicon_dashboard.svg"} showButton={true} clickFunction clickTitle={"Driver"} buttonWidth={"88px"} />
+            <Header
+              title="Driver"
+              tabicon={"tabicon_dashboard.svg"}
+              showButton={true}
+              clickFunction
+              clickTitle={"Driver"}
+              buttonWidth={"88px"}
+            />
           </div>
           <div className="row">
             <DriverCard

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Header } from "../../components/shared";
 import CustomerCard from "./customer.component/CustomerCard.component";
 import Pagination from "../../components/shared/Pagination";
 import CustomerCreation from "./customer.component/CustomerCreation.modal";
@@ -20,15 +21,16 @@ class Customer extends Component {
     return (
       <main>
         {showCustomerCreationModal && <CustomerCreation onClose={this.handleCustomerCreation} />}
-        <section>
-          <div className="mb-4 d-flex justify-content-between">
-            <h3 className="font-weight-bold">Customer</h3>
-            <button className="btn hm-bg-green text-white" onClick={this.handleCustomerCreation}>
-              <span>
-                <i className="fas fa-plus mr-2" />
-              </span>
-              Customer
-            </button>
+        <section className="container-fluid">
+          <div className="mb-4">
+            <Header
+              title="Customer"
+              tabicon={"tabicon_dashboard.svg"}
+              showButton={true}
+              clickFunction
+              clickTitle={"Customer"}
+              buttonWidth={"88px"}
+            />
           </div>
           <div className="row">
             <CustomerCard
