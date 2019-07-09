@@ -65,7 +65,7 @@ export const findDriverLocationListInLord = (realm_token, query = {}) => async d
   }
 };
 
-export const findACarToADriverInLord = (driver_token, body) => async dispatch => {
+export const createDriverToACarInLord = (driver_token, body) => async dispatch => {
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`driver/car/${driver_token}`, "POST", null, body);

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Header } from "../../components/shared";
-import VehicleCard from "../../components/shared/VehicleCard.component";
-import Pagination from "../../components/shared/Pagination";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { Header, VehicleCard, Pagination } from "../../components/shared";
 import VehicleAdding from "./vehicle.component/VehicleAdding.modal";
+import { findVehicleListInLord } from "../../actions/vehicle.action";
 class Vehicle extends Component {
   state = {
     showVehicleCreationModal: false
@@ -13,8 +14,28 @@ class Vehicle extends Component {
   handleAddingVehicle = () => {
     this.setState(state => ({ showVehicleCreationModal: !state.showVehicleCreationModal }));
   };
+  componentDidMount() {
+    document.addEventListener("scroll", this.trackScrolling);
+    this.props.findVehicleListInLord();
+  }
+  isBottom(el) {
+    return el.getBoundingClientRect().bottom <= window.innerHeight;
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("scroll", this.trackScrolling);
+  }
+
+  trackScrolling = () => {
+    const wrappedElement = document.getElementById("header");
+    if (this.isBottom(wrappedElement)) {
+      console.log("header bottom reached");
+      document.removeEventListener("scroll", this.trackScrolling);
+    }
+  };
   render() {
     const { showVehicleCreationModal } = this.state;
+    const { history, vehicle_list_in_lord } = this.props;
     return (
       <main>
         {showVehicleCreationModal && <VehicleAdding onClose={this.handleAddingVehicle} />}
@@ -30,19 +51,32 @@ class Vehicle extends Component {
             />
           </div>
           <div className="row">
-            <VehicleCard
-              parentProps={{
-                vehicleId: "1000016",
-                vehicleName: "Lebron James",
-                vehicleImage: "unnamed.jpg",
-                vehiclePhone: "6266266266"
-              }}
-            />
+            {vehicle_list_in_lord.record_list.map((vehicle, index) => (
+              <VehicleCard
+                parentProps={{
+                  vehicleId: vehicle.plate_num,
+                  vehicleName: vehicle.identifier,
+                  vehicleImage: vehicle.img_path,
+                  vehicleToken: vehicle.car_token
+                }}
+                key={index}
+                history={history}
+              />
+            ))}
           </div>
         </section>
-        <Pagination onPageChange={this.handlePageChange} />
       </main>
     );
   }
 }
-export default Vehicle;
+const mapStateToProps = state => {
+  return {
+    vehicle_list_in_lord: state.vehicleReducer.vehicle_list_in_lord
+  };
+};
+const mapDispatchToProps = { findVehicleListInLord };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Vehicle));

@@ -52,7 +52,6 @@ class Driver extends Component {
             ))}
           </div>
         </section>
-        <Pagination count={driver_list_in_lord.count} onPageChange={this.handlePageChange} />
       </main>
     );
   }
