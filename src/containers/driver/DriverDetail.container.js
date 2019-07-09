@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DriverDetailCard from "./driverDetail.component/DriverDetail.card";
 import GMapFlag from "../../components/shared/GMapFlag";
-import { VehicleCard, TripCard, ListView } from "../../components/shared";
+import { VehicleCard, TripCard, ListView, ListHeader } from "../../components/shared";
 import WageListItem from "./driverDetail.component/WageList.item";
 import SalaryListItem from "./driverDetail.component/SalaryList.item";
 import AddingTripModal from "./driverDetail.component/AddingTrip.modal";
@@ -44,23 +44,14 @@ class DriverDetail extends Component {
             <DriverDetailCard />
           </div>
         </section>
-        <section className="mb-4">
-          <div className="mb-4">
-            <h3 className="font-weight-bold">Last Location Map</h3>
-          </div>
-          <div style={{ height: "248px" }}>
-            <GMapFlag />
-          </div>
-        </section>
-        <section className="mb-4">
-          <div className="mb-4 d-flex">
-            <h3 className="font-weight-bold mr-3">Trip List</h3>
-            <i
-              className="fas fa-plus hm-bg-green rounded-circle text-white p-2 hm-pointer-cursor"
-              onClick={this.handleShowAddingTripModal}
-            />
-          </div>
-          <div className="row">
+
+        <section className="mb-4 bg-white rounded-custom shadow-sm">
+          <ListHeader
+            parentProps={{ title: "Driver Map", clickFunction: this.handleAddCompanyModal, clickTitle: "Refresh" }}
+            hideShadow={true}
+            hideButton={true}
+          />
+          <div className="row p-3">
             <TripCard
               parentProps={{
                 tripId: 100015,

@@ -7,7 +7,7 @@ class DriverDetailCard extends Component {
   };
   render() {
     return (
-      <div className="bg-white rounded-custom shadow-sm border">
+      <div className="bg-white rounded-custom shadow-sm">
         <div className="row" style={{ padding: "40px" }}>
           <div className="col-lg-2 col-12 mb-4 d-flex justify-content-center">
             <img className="rounded-circle" style={{ height: "90px", width: "90px" }} src={"sadf"} alt="avatar" />
