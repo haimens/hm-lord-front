@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Header, VehicleCard, Pagination } from "../../components/shared";
 import VehicleAdding from "./vehicle.component/VehicleAdding.modal";
-import { findVehicleListInLord } from "../../actions/vehicle.action";
+import { findVehicleListInLord, createAVehicleInLord } from "../../actions/vehicle.action";
 class Vehicle extends Component {
   state = {
     showVehicleCreationModal: false
@@ -35,10 +35,12 @@ class Vehicle extends Component {
   };
   render() {
     const { showVehicleCreationModal } = this.state;
-    const { history, vehicle_list_in_lord } = this.props;
+    const { history, vehicle_list_in_lord, createAVehicleInLord } = this.props;
     return (
       <main>
-        {showVehicleCreationModal && <VehicleAdding onClose={this.handleAddingVehicle} />}
+        {showVehicleCreationModal && (
+          <VehicleAdding createAVehicleInLord={createAVehicleInLord} onClose={this.handleAddingVehicle} />
+        )}
         <section className="container-fluid">
           <div className="mb-4">
             <Header
@@ -75,7 +77,7 @@ const mapStateToProps = state => {
     vehicle_list_in_lord: state.vehicleReducer.vehicle_list_in_lord
   };
 };
-const mapDispatchToProps = { findVehicleListInLord };
+const mapDispatchToProps = { findVehicleListInLord, createAVehicleInLord };
 
 export default connect(
   mapStateToProps,

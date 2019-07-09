@@ -8,10 +8,9 @@ export default class VehicleAdding extends Component {
     showImage: false,
     showPreview: false,
     identifier: "",
-    plate: "",
+    plate_num: "",
     description: "",
-    img_path: "",
-    area: "+1"
+    img_path: ""
   };
 
   handleInputChange = e => {
@@ -34,26 +33,10 @@ export default class VehicleAdding extends Component {
     this.props.onClose();
   };
 
-  handleCreatingCompany = () => {
-    const { img_path, icon_path, company_name, company_address, company_title, fee_rate } = this.state;
-    if (
-      img_path !== "" &&
-      icon_path !== "" &&
-      company_name !== "" &&
-      company_address !== "" &&
-      company_title !== "" &&
-      fee_rate !== ""
-    ) {
-      this.props.parentProps.createACompany({
-        realm_info: {
-          company_name,
-          img_path,
-          icon_path,
-          company_title
-        },
-        address_str: company_address[0].formatted_address,
-        tribute_rate_token: fee_rate
-      });
+  handleCreateAVehicleInLord = () => {
+    const { identifier, plate_num, description, img_path } = this.state;
+    if (img_path !== "" && identifier !== "" && plate_num !== "" && description !== "") {
+      this.props.createAVehicleInLord({ identifier, plate_num, description, img_path });
       this.handleClose();
     } else {
       alertify.alert("Error!", "Please Finish The Form!");
@@ -67,7 +50,7 @@ export default class VehicleAdding extends Component {
   async componentDidMount() {}
 
   render() {
-    const { img_path, showImage, showPreview, identifier, plate, description } = this.state;
+    const { img_path, showImage, showPreview, identifier, plate_num, description } = this.state;
     return (
       <div>
         {showImage && (
@@ -98,9 +81,9 @@ export default class VehicleAdding extends Component {
                 <input
                   type="text"
                   className="form-control hm-input-height "
-                  id="plate"
-                  placeholder="Plate"
-                  value={plate}
+                  id="plate_num"
+                  placeholder="Plate Number"
+                  value={plate_num}
                   onChange={this.handleInputChange}
                 />
               </div>
@@ -126,7 +109,7 @@ export default class VehicleAdding extends Component {
               <div className="form-group text-right pt-3">
                 <button
                   className="button-main-background btn button-main-size px-4 text-white mr-3"
-                  onClick={this.handleCreatingCompany}
+                  onClick={this.handleCreateAVehicleInLord}
                 >
                   Add
                 </button>

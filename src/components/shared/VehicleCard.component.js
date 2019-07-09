@@ -16,7 +16,7 @@ export default class VehicleCard extends Component {
           <div className="row h-100 align-items-center">
             <div className="col-5 d-flex justify-content-center">
               <img
-                src={`${process.env.PUBLIC_URL}/img/${vehicleImage}`}
+                src={vehicleImage}
                 className="rounded-circle"
                 style={{ height: "74px", width: "74px" }}
                 alt="Driver"
