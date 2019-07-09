@@ -21,7 +21,7 @@ export const findCustomerListInLord = (query = {}) => async dispatch => {
   }
 };
 
-export const createADriverInLord = (body = {}) => async dispatch => {
+export const createACustomerInLord = (body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`customer/detail`, "POST", body);
@@ -34,7 +34,7 @@ export const createADriverInLord = (body = {}) => async dispatch => {
   }
 };
 
-export const updateADriverInLord = (customer_token, body = {}) => async dispatch => {
+export const updateACustomerInLord = (customer_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`customer/detail/${customer_token}`, "PATCH", body);

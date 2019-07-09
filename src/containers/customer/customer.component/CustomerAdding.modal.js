@@ -7,7 +7,7 @@ export default class VehicleAdding extends Component {
   state = {
     showImage: false,
     showPreview: false,
-    customer_name: "",
+    name: "",
     area: "+1",
     cell: "",
     img_path: ""
@@ -38,24 +38,13 @@ export default class VehicleAdding extends Component {
   };
 
   handleCreatingCompany = () => {
-    const { img_path, icon_path, company_name, company_address, company_title, fee_rate } = this.state;
-    if (
-      img_path !== "" &&
-      icon_path !== "" &&
-      company_name !== "" &&
-      company_address !== "" &&
-      company_title !== "" &&
-      fee_rate !== ""
-    ) {
-      this.props.parentProps.createACompany({
-        realm_info: {
-          company_name,
-          img_path,
-          icon_path,
-          company_title
-        },
-        address_str: company_address[0].formatted_address,
-        tribute_rate_token: fee_rate
+    const { name, cell, area, email, img_path } = this.state;
+    if (name !== "" && cell !== "" && area !== "" && email !== "") {
+      this.props.createACustomerInLord({
+        name,
+        img_path,
+        cell: `${area} ${cell}`,
+        email
       });
       this.handleClose();
     } else {
@@ -70,7 +59,7 @@ export default class VehicleAdding extends Component {
   async componentDidMount() {}
 
   render() {
-    const { img_path, showImage, showPreview, customer_name, area, cell, email, address } = this.state;
+    const { img_path, showImage, showPreview, name, cell, area, email } = this.state;
     return (
       <div>
         {showImage && (
@@ -88,10 +77,10 @@ export default class VehicleAdding extends Component {
               <div className="form-group mb-4">
                 <input
                   className="form-control hm-input-height mt-3"
-                  name="customer_name"
-                  id="customer_name"
+                  name="name"
+                  id="name"
                   placeholder={"Name"}
-                  value={customer_name}
+                  value={name}
                   onChange={this.handleInputChange}
                 />
               </div>
