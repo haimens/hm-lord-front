@@ -1,17 +1,21 @@
 import React from "react";
 
 export default function CustomerInfo(props) {
+  const { showButton } = props;
+
   return (
     <div>
       <div className="purple-border p-3">
         <div className="d-flex justify-content-between align-items-center  ">
           <div className="hm-text-16 font-weight-bold text-modal-color">Driver Information</div>
-          <button
-            className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
-            onClick={() => this.handleDetailButtonClicked("basic")}
-          >
-            <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
-          </button>
+          {showButton && (
+            <button
+              className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
+              onClick={() => this.handleDetailButtonClicked("basic")}
+            >
+              <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
+            </button>
+          )}
         </div>
         <img
           src={`${process.env.PUBLIC_URL}/img/hd.png`}

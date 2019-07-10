@@ -10,25 +10,50 @@ import AlertInfo from "./TripDetail.component/AlertInfo.container";
 import TimeStaps from "./TripDetail.component/TimeStaps.contianer";
 
 class TripDetailContainer extends Component {
-  state = {};
+  state = {
+    basic_info: false,
+    customer_info: false,
+    driver_info: false,
+    vehicle_info: false,
+    alert_info: false,
+    time_stamps: false,
+    currentPosition: "",
+    title: ""
+  };
 
-  async componentDidMount() {}
-  render() {
-    const { history, match } = this.props;
+  async componentDidMount() {
+    const { match } = this.props;
     const currentPosition = match.path.split("/")[2];
-    let title = "";
     if (currentPosition === "ongoing") {
-      title = "Ongoing";
+      this.setState({ currentPosition, title: "Ongoing", customer_info: true });
     }
     if (currentPosition === "upcoming") {
-      title = "Upcoming";
+      this.setState({
+        currentPosition,
+        title: "Upcoming",
+        basic_info: true,
+        customer_info: true,
+        driver_info: true,
+        vehicle_info: true,
+        alert_info: true
+      });
     }
     if (currentPosition === "finished") {
-      title = "Recent Finished";
+      this.setState({ currentPosition, title: "Recent Finished", customer_info: true });
     }
-    if (currentPosition === "abnormal") {
-      title = "Abnormal";
-    }
+  }
+  render() {
+    const { history } = this.props;
+    const {
+      currentPosition,
+      title,
+      basic_info,
+      customer_info,
+      driver_info,
+      vehicle_info,
+      alert_info,
+      time_stamps
+    } = this.state;
     return (
       <main>
         <section className="mb-4">
@@ -45,26 +70,26 @@ class TripDetailContainer extends Component {
             />
           </div>
         </section>
-        <section className="container-fluid">
+        <section className="container-fluid mb-4">
           <div className="bg-white rounded-custom shadow-sm">
             <div className="row" style={{ padding: "40px" }}>
               <div className="col-lg-6 col-12 mb-4">
-                <BasicInfo />
+                <BasicInfo showButton={basic_info} />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <CustomerInfo />
+                <CustomerInfo showButton={customer_info} />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <DriverInfo />
+                <DriverInfo showButton={driver_info} />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <VehicleInfo />
+                <VehicleInfo showButton={vehicle_info} />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <AlertInfo />
+                <AlertInfo showButton={alert_info} />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <TimeStaps />
+                <TimeStaps showButton={time_stamps} />
               </div>
             </div>
           </div>
