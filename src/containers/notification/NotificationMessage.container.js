@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { ListView, Header, ListHeader } from "../../components/shared";
-import DriverPayableListItem from "./driverPayable.component/DriverPayableList.item";
-class DriverPayable extends Component {
+import NotificationMessageListItem from "./notificationMessage.component/NotificationMessageList.item";
+class NotificationMessage extends Component {
   state = {
     showAddWage: false
   };
@@ -18,18 +18,12 @@ class DriverPayable extends Component {
     return (
       <main className="container-fluid">
         <section className="mb-4">
-          <Header
-            title="Driver"
-            subTitle="Driver Payable"
-            tabicon={"tabicon_dashboard.svg"}
-            clickTitle={"Driver"}
-            buttonWidth={"88px"}
-          />
+          <Header title="Notification" subTitle="Message Center" tabicon={"tabicon_dashboard.svg"} />
         </section>
         <section className="mb-4">
           <ListHeader
             parentProps={{
-              title: "Driver Payable",
+              title: "Message Center",
               clickFunction: this.handleShowAddingWageModal,
               clickTitle: "Wage"
             }}
@@ -37,7 +31,7 @@ class DriverPayable extends Component {
           />
           <ListView
             totalCount={30}
-            title="Wage List"
+            title="Message Center"
             fieldNames={["Created On", "Amount", "Type", "Note"]}
             hideHeader={true}
             onPageChange={this.handlePageChange}
@@ -59,4 +53,4 @@ const mapDispatchToProps = {};
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(DriverPayable));
+)(withRouter(NotificationMessage));

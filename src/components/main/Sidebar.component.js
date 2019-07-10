@@ -165,13 +165,28 @@ export default class Sidebar extends Component {
 
         <section className="accordion">
           <NavItem
-            onToggle={() => this.handleClick("/notification")}
+            onToggle={() => this.handleClick("/notification/alert")}
             image={`${process.env.PUBLIC_URL}/img/navicon_company.svg`}
             name="Notification"
             path="notification"
             history={this.props.parentProps.history}
-            showArrow={false}
-          />
+            showArrow={true}
+          >
+            <SubNavItem
+              onClick={() => this.handleClick("/notification/alert")}
+              name="Trip Alert"
+              history={this.props.parentProps.history}
+              path="alert"
+              is_target={parsedLocation[3] === "alert"}
+            />
+            <SubNavItem
+              onClick={() => this.handleClick("/notification/message")}
+              name="Message Center"
+              history={this.props.parentProps.history}
+              path="message"
+              is_target={parsedLocation[3] === "message"}
+            />
+          </NavItem>
         </section>
       </main>
     );

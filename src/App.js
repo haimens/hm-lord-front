@@ -24,7 +24,8 @@ import TripDetailContainer from "./containers/trip/trip.share/TripDetail.contain
 
 import DriverPayable from "./containers/driverPayable/DriverPayable.container";
 
-import Notification from "./containers/notification/Notification.container";
+import NotificationAlert from "./containers/notification/NotificationAlert.container";
+import NotificationMessage from "./containers/notification/NotificationMessage.container";
 
 import Coupon from "./containers/settings/Coupon.container";
 import EmailResource from "./containers/settings/EmailResource.container";
@@ -91,7 +92,8 @@ class App extends Component {
 
               <ProtectedRoute exact path="/payable" component={DriverPayable} />
 
-              <ProtectedRoute exact path="/notification" component={Notification} />
+              <ProtectedRoute exact path="/notification/alert" component={NotificationAlert} />
+              <ProtectedRoute exact path="/notification/message" component={NotificationMessage} />
 
               <ProtectedRoute exact path="/settings/paymentResource" component={PaymentResource} />
               <ProtectedRoute exact path="/settings/messageResource" component={MessageResource} />
