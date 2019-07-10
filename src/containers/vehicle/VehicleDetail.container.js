@@ -19,7 +19,7 @@ class VehicleDetail extends Component {
   }
   render() {
     const { showAddingDriverModal } = this.state;
-    const { history } = this.props;
+    const { history, vehicle_detail_in_lord } = this.props;
     return (
       <main>
         {showAddingDriverModal && <AddingDriverModal onClose={this.handleShowAddingDriverModal} />}
@@ -35,7 +35,7 @@ class VehicleDetail extends Component {
             />
           </div>
           <div>
-            <VehicleDetailCard />
+            <VehicleDetailCard vehicle_detail_in_lord={vehicle_detail_in_lord} />
           </div>
         </section>
         <section className="mb-4 bg-white rounded-custom shadow-sm">
@@ -89,7 +89,9 @@ class VehicleDetail extends Component {
   }
 }
 const mapStateToProps = state => {
-  return {};
+  return {
+    vehicle_detail_in_lord: state.vehicleReducer.vehicle_detail_in_lord
+  };
 };
 const mapDispatchToProps = { findCarDetailInLord };
 

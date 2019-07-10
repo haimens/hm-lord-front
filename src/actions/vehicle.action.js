@@ -53,7 +53,7 @@ export const findCarDetailInLord = car_token => async dispatch => {
     await startLoader(dispatch);
     const { payload } = await callApi(`car/detail/${car_token}`, "GET");
     await dispatch({
-      type: constant.CAR_DETAIL_IN_LORD,
+      type: constant.VEHICLE_DETAIL_IN_LORD,
       payload
     });
     await stopLoader(dispatch);

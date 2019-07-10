@@ -6,11 +6,14 @@ class VehicleDetailCard extends Component {
     this.props.handleDetailButtonClicked(type);
   };
   render() {
+    const { basic_info } = this.props.vehicle_detail_in_lord;
+    console.log(basic_info);
+    const { identifier, img_path, plate_num, description, status } = basic_info;
     return (
       <div className="bg-white rounded-custom shadow-sm">
         <div className="row" style={{ padding: "40px" }}>
           <div className="col-lg-2 col-12 mb-4 d-flex justify-content-center">
-            <img className="rounded-circle" style={{ height: "90px", width: "90px" }} src={"sadf"} alt="avatar" />
+            <img className="rounded-circle" style={{ height: "90px", width: "90px" }} src={img_path} alt="avatar" />
           </div>
           <div className="col-lg-10 col-12">
             <div className="row text-modal-color">
@@ -25,29 +28,21 @@ class VehicleDetailCard extends Component {
                   </button>
                 </div>
                 <div className="mb-4 px-3">
-                  <div className="text-secondary-color font-weight-500 hm-text-14">Company Name</div>
-                  <div className="hm-text-14 font-weight-bold">{123}</div>
+                  <div className="text-secondary-color font-weight-500 hm-text-14">Identifier</div>
+                  <div className="hm-text-14 font-weight-bold">{identifier}</div>
                 </div>
                 <div className="mb-4 px-3">
-                  <div className="text-secondary-color font-weight-500 hm-text-14">Company Address</div>
-                  <div className="hm-text-14 font-weight-bold">{123}</div>
+                  <div className="text-secondary-color font-weight-500 hm-text-14">Plate Number</div>
+                  <div className="hm-text-14 font-weight-bold">{plate_num}</div>
                 </div>
                 <div className="mb-4 px-3">
-                  <div className="text-secondary-color font-weight-500 hm-text-14">Company Title</div>
-                  <div className="hm-text-14 font-weight-bold">{123}</div>
-                </div>
-                <div className="mb-4 px-3">
-                  <div className="text-secondary-color font-weight-500 hm-text-14">Available Balance</div>
-                  <div className="hm-text-14 font-weight-bold">{123}</div>
-                </div>
-                <div className="mb-4 px-3">
-                  <div className="text-secondary-color font-weight-500 hm-text-14">Fee Rate</div>
-                  <div className="hm-text-14 font-weight-bold">{123}</div>
+                  <div className="text-secondary-color font-weight-500 hm-text-14">Description</div>
+                  <div className="hm-text-14 font-weight-bold">{description}</div>
                 </div>
                 <div className="mb-4 px-3">
                   <div className="text-secondary-color font-weight-500 hm-text-14">Status</div>
                   <div className="hm-text-14 font-weight-bold">
-                    {true === 2 ? (
+                    {status === 1 ? (
                       <div className="d-flex align-items-center ">
                         <i className="fas fa-circle success-text-color mr-3 pl-0" style={{ fontSize: "6px" }} />
                         <div>Active</div>

@@ -22,7 +22,7 @@ class VehicleDetail extends Component {
   }
   render() {
     const { showAddingOrderModal } = this.state;
-    const { history } = this.props;
+    const { history, customer_Detail_in_lord } = this.props;
     return (
       <main>
         {showAddingOrderModal && <AddingOrderModal />}
@@ -38,7 +38,7 @@ class VehicleDetail extends Component {
             />
           </div>
           <div>
-            <CustomerDetailCard />
+            <CustomerDetailCard customer_Detail_in_lord={customer_Detail_in_lord} />
           </div>
         </section>
         <section className="mb-4 bg-white rounded-custom shadow-sm">
@@ -92,7 +92,9 @@ class VehicleDetail extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    customer_Detail_in_lord: state.customerReducer.customer_Detail_in_lord
+  };
 };
 const mapDispatchToProps = { findCustomerDetailInLord };
 
