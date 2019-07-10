@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { DriverCard, Header, ListHeader, ListView } from "../../components/shared";
 import VehicleDetailCard from "./vehicleDetail.component/VehicleDetail.card";
 import AddingDriverModal from "./vehicleDetail.component/AddingDriver.modal";
-
+import { findCarDetailInLord } from "../../actions/vehicle.action";
 class VehicleDetail extends Component {
   state = {
     showAddingDriverModal: false
@@ -12,6 +12,11 @@ class VehicleDetail extends Component {
   handleShowAddingVehicleModal = () => {
     this.setState(state => ({ showAddingDriverModal: !state.showAddingDriverModal }));
   };
+  componentDidMount() {
+    const { match, findCarDetailInLord } = this.props;
+    const { car_token } = match.params;
+    Promise.all([findCarDetailInLord(car_token)]);
+  }
   render() {
     const { showAddingDriverModal } = this.state;
     const { history } = this.props;
@@ -86,7 +91,7 @@ class VehicleDetail extends Component {
 const mapStateToProps = state => {
   return {};
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = { findCarDetailInLord };
 
 export default connect(
   mapStateToProps,

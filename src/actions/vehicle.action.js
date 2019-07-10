@@ -47,6 +47,22 @@ export const updateACarInLord = (car_token, body = {}) => async dispatch => {
   }
 };
 
+export const findCarDetailInLord = car_token => async dispatch => {
+  console.log(car_token);
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`car/detail/${car_token}`, "GET");
+    await dispatch({
+      type: constant.CAR_DETAIL_IN_LORD,
+      payload
+    });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
 export const findDriverListForACar = (car_token, query = {}) => async dispatch => {
   try {
     await startLoader(dispatch);

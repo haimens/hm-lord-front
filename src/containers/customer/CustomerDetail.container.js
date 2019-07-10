@@ -7,6 +7,7 @@ import CustomerDetailCard from "./customerDetail.component/CustomerDetail.card";
 import LogListItem from "./customerDetail.component/LogList.item";
 import AddingOrderModal from "./customerDetail.component/AddingOrder.modal";
 
+import { findCustomerDetailInLord } from "../../actions/customer.action";
 class VehicleDetail extends Component {
   state = {
     showAddingOrderModal: false
@@ -14,6 +15,11 @@ class VehicleDetail extends Component {
   handleShowAddingOrderModal = () => {
     this.setState(state => ({ showAddingOrderModal: !state.showAddingOrderModal }));
   };
+  componentDidMount() {
+    const { match, findCustomerDetailInLord } = this.props;
+    const { customer_token } = match.params;
+    Promise.all([findCustomerDetailInLord(customer_token)]);
+  }
   render() {
     const { showAddingOrderModal } = this.state;
     const { history } = this.props;
@@ -88,7 +94,7 @@ class VehicleDetail extends Component {
 const mapStateToProps = state => {
   return {};
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = { findCustomerDetailInLord };
 
 export default connect(
   mapStateToProps,

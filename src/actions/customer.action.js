@@ -46,6 +46,21 @@ export const updateACustomerInLord = (customer_token, body = {}) => async dispat
   }
 };
 
+export const findCustomerDetailInLord = customer_token => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`customer/detail/${customer_token}`, "GET");
+    await dispatch({
+      type: constant.CUSTOMER_DETAIL_IN_LORD,
+      payload
+    });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
 export const updateACustomerDetailInLord = (customer_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);

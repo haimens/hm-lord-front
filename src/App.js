@@ -77,7 +77,7 @@ class App extends Component {
               <ProtectedRoute exact path="/driver/detail/:driver_token" component={DriverDetail} />
 
               <ProtectedRoute exact path="/vehicle" component={Vehicle} />
-              <ProtectedRoute exact path="/vehicle/detail/:vehicle_token" component={VehicleDetail} />
+              <ProtectedRoute exact path="/vehicle/detail/:car_token" component={VehicleDetail} />
 
               <ProtectedRoute exact path="/customer" component={Customer} />
               <ProtectedRoute exact path="/customer/detail/:customer_token" component={CustomerDetail} />
