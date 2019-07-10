@@ -17,19 +17,19 @@ export default function VehicleInfoCard(props) {
             </button>
           )}
         </div>
-        <img src={img_path} alt="Customer" className="rounded-circle my-3" style={{ height: "74px", width: "74px" }} />
+        {img_path && <img src={img_path} alt="Customer" className="rounded-circle my-3" style={{ height: "74px", width: "74px" }} />}
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Identifier</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">{identifier}</div>
+        <div className="hm-text-14 font-weight-bold text-modal-color">{identifier ? identifier : "N/A"}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Plate Number</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">{plate_num}</div>
+        <div className="hm-text-14 font-weight-bold text-modal-color">{plate_num ? plate_num : "N/A"}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Description</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">{description}</div>
+        <div className="hm-text-14 font-weight-bold text-modal-color">{description ? description : "N/A"}</div>
       </div>
     </div>
   );
