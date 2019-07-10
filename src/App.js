@@ -19,16 +19,8 @@ import OrderList from "./containers/order/OrderList.container";
 import OrderDetail from "./containers/order/OrderDetail.container";
 import OrderCreation from "./containers/order/OrderCreation.container";
 
-import TripOngoing from "./containers/trip/TripOngoing.container";
-import TripOngoingDetail from "./containers/trip/TripOngoingDetail.container";
-
-import TripUpcoming from "./containers/trip/TripUpcoming.container";
-import TripRecentUpcomingDetail from "./containers/trip/TripUpcomingDetai.container";
-
-import TripRecentFinished from "./containers/trip/TripRecentFinished.container";
-import TripRecentFinishedDetail from "./containers/trip/TripRecentFinishedDetail.container";
-
-import TripFailed from "./containers/trip/TripFailed.container";
+import TripContainer from "./containers/trip/trip.share/Trip.conatiner";
+import TripDetailContainer from "./containers/trip/trip.share/TripDetail.container";
 
 import DriverPayable from "./containers/driverPayable/DriverPayable.container";
 
@@ -86,16 +78,16 @@ class App extends Component {
               <ProtectedRoute exact path="/order/detail/:order_token" component={OrderDetail} />
               <ProtectedRoute exact path="/order/creation" component={OrderCreation} />
 
-              <ProtectedRoute exact path="/trip/ongoing" component={TripOngoing} />
-              <ProtectedRoute exact path="/trip/ongoing/detail/:trip_token" component={TripOngoingDetail} />
+              <ProtectedRoute exact path="/trip/ongoing" component={TripContainer} />
+              <ProtectedRoute exact path="/trip/ongoing/detail/:trip_token" component={TripDetailContainer} />
 
-              <ProtectedRoute exact path="/trip/upcoming" component={TripUpcoming} />
-              <ProtectedRoute exact path="/trip/upcoming/detail/:trip_token" component={TripRecentUpcomingDetail} />
+              <ProtectedRoute exact path="/trip/upcoming" component={TripContainer} />
+              <ProtectedRoute exact path="/trip/upcoming/detail/:trip_token" component={TripDetailContainer} />
 
-              <ProtectedRoute exact path="/trip/finished" component={TripRecentFinished} />
-              <ProtectedRoute exact path="/trip/finished/detail/:trip_token" component={TripRecentFinishedDetail} />
+              <ProtectedRoute exact path="/trip/finished" component={TripContainer} />
+              <ProtectedRoute exact path="/trip/finished/detail/:trip_token" component={TripDetailContainer} />
 
-              <ProtectedRoute exact path="/trip/failed" component={TripFailed} />
+              <ProtectedRoute exact path="/trip/abnormal" component={TripContainer} />
 
               <ProtectedRoute exact path="/payable" component={DriverPayable} />
 

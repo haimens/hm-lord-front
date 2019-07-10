@@ -23,7 +23,6 @@ export default class Sidebar extends Component {
   render() {
     const { pathname } = this.props.parentProps.history.location;
     const parsedLocation = pathname.split("/");
-
     return (
       <main className="bg-white" style={styles.container} id="navbarSupportedContent">
         {/* LOGO Section */}
@@ -115,7 +114,7 @@ export default class Sidebar extends Component {
 
         <section className="accordion">
           <NavItem
-            onToggle={() => this.handleClick("/trip/fee")}
+            onToggle={() => this.handleClick("/trip/ongoing")}
             image={`${process.env.PUBLIC_URL}/img/navicon_settings.svg`}
             name="Trip"
             path="trip"
@@ -123,19 +122,32 @@ export default class Sidebar extends Component {
             showArrow={true}
           >
             <SubNavItem
-              onClick={() => this.handleClick("/settings/fee")}
-              name="Fee Rate"
+              onClick={() => this.handleClick("/trip/ongoing")}
+              name="Ongoing"
               history={this.props.parentProps.history}
-              path="fee"
-              is_target={parsedLocation[3] === "fee"}
+              path="ongoing"
+              is_target={parsedLocation[3] === "ongoing"}
             />
             <SubNavItem
-              onClick={() => this.handleClick("/settings/general")}
-              name="General Setting"
+              onClick={() => this.handleClick("/trip/upcoming")}
+              name="Upcoming"
               history={this.props.parentProps.history}
-              path="general"
-              is_target={parsedLocation[3] === "general"}
-              className="mt-2"
+              path="upcoming"
+              is_target={parsedLocation[3] === "upcoming"}
+            />
+            <SubNavItem
+              onClick={() => this.handleClick("/trip/finished")}
+              name="Recent Finished"
+              history={this.props.parentProps.history}
+              path="finished"
+              is_target={parsedLocation[3] === "finished"}
+            />
+            <SubNavItem
+              onClick={() => this.handleClick("/trip/abnormal")}
+              name="Abnormal"
+              history={this.props.parentProps.history}
+              path="abnormal"
+              is_target={parsedLocation[3] === "abnormal"}
             />
           </NavItem>
         </section>

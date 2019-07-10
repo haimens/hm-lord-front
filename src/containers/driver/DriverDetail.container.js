@@ -59,6 +59,7 @@ class DriverDetail extends Component {
       findDriverListInLord
     } = this.props;
     const { driver_token } = match.params;
+    console.log(driver_token);
     Promise.all([
       findDriverDetailInLord(driver_token),
       findCarListForADriver(driver_token),
