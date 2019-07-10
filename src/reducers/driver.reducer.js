@@ -24,6 +24,12 @@ const initialState = {
       username: "",
       img_path: "",
       status: ""
+    },
+    location_info: {
+      lat: 0,
+      lng: 0,
+      cdate: "",
+      udate: ""
     }
   }
 };

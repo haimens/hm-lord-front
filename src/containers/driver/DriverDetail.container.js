@@ -10,14 +10,19 @@ import AddingTripModal from "./driverDetail.component/AddingTrip.modal";
 import AddingVehicleModal from "./driverDetail.component/AddingVehicle.modal";
 import AddingWageModal from "./driverDetail.component/AddingWage.modal";
 import AddingSalaryModal from "./driverDetail.component/AddingSalary.modal";
-
-import { findDriverDetailInLord } from "../../actions/driver.action";
+import UpdatingDriverModal from "./driverDetail.component/UpdatingDriverInfo.modal";
+import {
+  findDriverDetailInLord,
+  findDriverLocationListInLord,
+  findCarListForADriver
+} from "../../actions/driver.action";
 class DriverDetail extends Component {
   state = {
     showAddingTripModal: false,
     showAddingVehicleModal: false,
     showAddingWageModal: false,
-    showAddingSalaryModal: false
+    showAddingSalaryModal: false,
+    showUpdatingDriverModal: false
   };
   handleShowAddingTripModal = () => {
     this.setState(state => ({ showAddingTripModal: !state.showAddingTripModal }));
@@ -31,17 +36,31 @@ class DriverDetail extends Component {
   handleShowAddingSalaryModal = () => {
     this.setState(state => ({ showAddingSalaryModal: !state.showAddingSalaryModal }));
   };
+  handleShowUpdatingDriverModal = () => {
+    this.setState(state => ({ showUpdatingDriverModal: !state.showUpdatingDriverModal }));
+  };
+  handleDetailButtonClicked = type => {
+    if (type === "basic") {
+      this.handleShowUpdatingDriverModal();
+    }
+  };
   async componentDidMount() {
-    const { match, findDriverDetailInLord } = this.props;
+    const { match, findDriverDetailInLord, findDriverLocationListInLord, findCarListForADriver } = this.props;
     const { driver_token } = match.params;
-    await findDriverDetailInLord(driver_token);
+    Promise.all([findDriverDetailInLord(driver_token), findCarListForADriver(driver_token)]);
   }
   render() {
-    const { showAddingTripModal, showAddingVehicleModal, showAddingWageModal, showAddingSalaryModal } = this.state;
+    const {
+      showAddingTripModal,
+      showAddingVehicleModal,
+      showAddingWageModal,
+      showAddingSalaryModal,
+      showUpdatingDriverModal
+    } = this.state;
     const { history, driver_detail_in_lord } = this.props;
-    console.log(this.props);
     return (
       <main>
+        {showUpdatingDriverModal && <UpdatingDriverModal onClose={this.handleShowAddingTripModal} />}
         {showAddingTripModal && <AddingTripModal onClose={this.handleShowAddingTripModal} />}
         {showAddingVehicleModal && <AddingVehicleModal onClose={this.handleShowAddingVehicleModal} />}
         {showAddingWageModal && <AddingWageModal onClose={this.handleShowAddingWageModal} />}
@@ -65,7 +84,11 @@ class DriverDetail extends Component {
 
         <section className="mb-4 bg-white rounded-custom shadow-sm">
           <ListHeader
-            parentProps={{ title: "Driver Map", clickFunction: this.handleAddCompanyModal, clickTitle: "Refresh" }}
+            parentProps={{
+              title: "Related Trip List",
+              clickFunction: this.handleAddCompanyModal,
+              clickTitle: "Refresh"
+            }}
             hideShadow={true}
             hideButton={true}
           />
@@ -157,7 +180,7 @@ const mapStateToProps = state => {
     driver_detail_in_lord: state.driverReducer.driver_detail_in_lord
   };
 };
-const mapDispatchToProps = { findDriverDetailInLord };
+const mapDispatchToProps = { findDriverDetailInLord, findDriverLocationListInLord, findCarListForADriver };
 
 export default connect(
   mapStateToProps,

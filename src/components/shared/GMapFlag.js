@@ -1,6 +1,20 @@
 import React from "react";
 
 class GMapFlag extends React.Component {
+  state = {
+    lat: "",
+    lng: ""
+  };
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.location_info.lat !== state.lat || props.location_info.lng !== state.lng) {
+      return {
+        lat: props.location_info.lat,
+        lng: props.location_info.lng
+      };
+    }
+    return null;
+  }
   render() {
     return (
       <MapWithAMarkerWithLabel
@@ -10,6 +24,8 @@ class GMapFlag extends React.Component {
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `100%` }} />}
         mapElement={<div style={{ height: `100%` }} />}
+        lat={this.state.lat}
+        lng={this.state.lng}
       />
     );
   }
@@ -26,7 +42,7 @@ const MapWithAMarkerWithLabel = compose(
 )(props => (
   <GoogleMap
     defaultZoom={14}
-    defaultCenter={{ lat: 34.1080263, lng: -117.742504 }}
+    defaultCenter={{ lat: props.lat, lng: props.lng }}
     defaultOptions={{
       styles: [
         {
@@ -110,6 +126,7 @@ const MapWithAMarkerWithLabel = compose(
       ]
     }}
   >
-    <Marker position={{ lat: 34.1080263, lng: -117.742504 }} />
+    {console.log(props)}
+    <Marker position={{ lat: props.lat, lng: props.lng }} />
   </GoogleMap>
 ));

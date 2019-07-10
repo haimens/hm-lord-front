@@ -6,8 +6,8 @@ class DriverDetailCard extends Component {
     this.props.handleDetailButtonClicked(type);
   };
   render() {
-    console.log(this.props);
-    const { name, cell, email, username, img_path, status } = this.props.driver_detail_in_lord.basic_info;
+    const { basic_info, location_info } = this.props.driver_detail_in_lord;
+    const { name, cell, email, username, img_path, status } = basic_info;
     return (
       <div className="bg-white rounded-custom shadow-sm">
         <div className="row" style={{ padding: "40px" }}>
@@ -73,7 +73,7 @@ class DriverDetailCard extends Component {
                   </div>
                 </div>
                 <div className="p-3" style={{ height: "307px" }}>
-                  <GMapFlag />
+                  <GMapFlag location_info={location_info} />
                 </div>
               </div>
             </div>
