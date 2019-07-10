@@ -24,9 +24,24 @@ export const findDriverListInLord = (query = {}) => async dispatch => {
 export const createADriverInLord = (body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`driver/detail`, "POST", body);
+    await callApi(`driver/detail`, "POST", body);
     await dispatch(findDriverListInLord());
     await launchSuccess(dispatch);
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
+export const findDriverDetailInLord = driver_token => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`driver/detail/${driver_token}`, "GET");
+    await dispatch({
+      type: constant.DRIVER_DETAIL_IN_LORD,
+      payload
+    });
     await stopLoader(dispatch);
   } catch (err) {
     await stopLoader(dispatch);
@@ -37,7 +52,8 @@ export const createADriverInLord = (body = {}) => async dispatch => {
 export const updateADriverInLord = (driver_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`driver/detail/${driver_token}`, "PATCH", body);
+    await callApi(`driver/detail/${driver_token}`, "PATCH", body);
+    await dispatch(findDriverDetailInLord(driver_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
   } catch (err) {
@@ -100,21 +116,6 @@ export const updateACarForADriver = (driver_car_token, body = {}) => async dispa
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`driver/car/${driver_car_token}`, "PATCH", body);
-    await stopLoader(dispatch);
-  } catch (err) {
-    await stopLoader(dispatch);
-    dispatch(processLogout(err));
-  }
-};
-
-export const findDriverDetailInLord = driver_token => async dispatch => {
-  try {
-    await startLoader(dispatch);
-    const { payload } = await callApi(`driver/detail/${driver_token}`, "GET");
-    await dispatch({
-      type: constant.DRIVER_DETAIL_IN_LORD,
-      payload
-    });
     await stopLoader(dispatch);
   } catch (err) {
     await stopLoader(dispatch);

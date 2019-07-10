@@ -126,7 +126,6 @@ const MapWithAMarkerWithLabel = compose(
       ]
     }}
   >
-    {console.log(props)}
     <Marker position={{ lat: props.lat, lng: props.lng }} />
   </GoogleMap>
 ));

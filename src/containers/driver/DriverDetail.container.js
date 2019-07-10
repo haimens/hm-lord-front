@@ -14,7 +14,8 @@ import UpdatingDriverModal from "./driverDetail.component/UpdatingDriverInfo.mod
 import {
   findDriverDetailInLord,
   findDriverLocationListInLord,
-  findCarListForADriver
+  findCarListForADriver,
+  updateADriverInLord
 } from "../../actions/driver.action";
 class DriverDetail extends Component {
   state = {
@@ -57,10 +58,24 @@ class DriverDetail extends Component {
       showAddingSalaryModal,
       showUpdatingDriverModal
     } = this.state;
-    const { history, driver_detail_in_lord } = this.props;
+    const {
+      history,
+      match: {
+        params: { driver_token }
+      },
+      driver_detail_in_lord,
+      updateADriverInLord
+    } = this.props;
     return (
       <main>
-        {showUpdatingDriverModal && <UpdatingDriverModal onClose={this.handleShowAddingTripModal} />}
+        {showUpdatingDriverModal && (
+          <UpdatingDriverModal
+            driver_token={driver_token}
+            updateADriverInLord={updateADriverInLord}
+            driver_detail={driver_detail_in_lord.basic_info}
+            onClose={this.handleShowUpdatingDriverModal}
+          />
+        )}
         {showAddingTripModal && <AddingTripModal onClose={this.handleShowAddingTripModal} />}
         {showAddingVehicleModal && <AddingVehicleModal onClose={this.handleShowAddingVehicleModal} />}
         {showAddingWageModal && <AddingWageModal onClose={this.handleShowAddingWageModal} />}
@@ -78,7 +93,10 @@ class DriverDetail extends Component {
             />
           </div>
           <div>
-            <DriverDetailCard driver_detail_in_lord={driver_detail_in_lord} />
+            <DriverDetailCard
+              handleDetailButtonClicked={this.handleDetailButtonClicked}
+              driver_detail_in_lord={driver_detail_in_lord}
+            />
           </div>
         </section>
 
@@ -180,7 +198,12 @@ const mapStateToProps = state => {
     driver_detail_in_lord: state.driverReducer.driver_detail_in_lord
   };
 };
-const mapDispatchToProps = { findDriverDetailInLord, findDriverLocationListInLord, findCarListForADriver };
+const mapDispatchToProps = {
+  findDriverDetailInLord,
+  findDriverLocationListInLord,
+  findCarListForADriver,
+  updateADriverInLord
+};
 
 export default connect(
   mapStateToProps,

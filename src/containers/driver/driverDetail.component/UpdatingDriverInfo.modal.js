@@ -10,11 +10,11 @@ export default class UpdatingDriverInfo extends Component {
     name: "",
     cell: "",
     email: "",
-    username: "",
     img_path: "",
     license_num: "",
     identifier: "",
-    area: "+1"
+    area: "+1",
+    status: ""
   };
 
   handleInputChange = e => {
@@ -37,25 +37,26 @@ export default class UpdatingDriverInfo extends Component {
     this.props.onClose();
   };
 
-  handleCreateADriverInLord = () => {
-    const { name, cell, email, username, img_path, area, license_num, identifier } = this.state;
-    if (
-      name !== "" &&
-      cell !== "" &&
-      email !== "" &&
-      username !== "" &&
-      area !== "" &&
-      license_num !== "" &&
-      identifier !== ""
-    ) {
-      this.props.createADriverInLord({
+  handleStatusChange = () => {
+    const { status } = this.state;
+    if (status === 2) {
+      this.setState({ status: 3 });
+    } else if (status === 3) {
+      this.setState({ status: 2 });
+    }
+  };
+
+  handleUpdateADriverInLord = () => {
+    const { name, cell, email, img_path, area, license_num, identifier, status } = this.state;
+    if (name !== "" && cell !== "" && email !== "" && area !== "" && license_num !== "" && identifier !== "") {
+      this.props.updateADriverInLord(this.props.driver_token, {
         name,
         img_path,
         cell: `${area} ${cell}`,
         email,
-        username,
         license_num,
-        identifier
+        identifier,
+        status
       });
       this.handleClose();
     } else {
@@ -67,10 +68,23 @@ export default class UpdatingDriverInfo extends Component {
     this.setState({ company_address: address });
   };
 
-  async componentDidMount() {}
+  async componentDidMount() {
+    const { name, cell, email, identifier, license_num, img_path, status } = this.props.driver_detail;
+    console.log(this.props);
+    this.setState({
+      name,
+      cell: cell.split(" ")[1],
+      area: cell.split(" ")[0],
+      email,
+      identifier,
+      license_num,
+      img_path,
+      status
+    });
+  }
 
   render() {
-    const { img_path, showImage, showPreview, name, cell, email, username, area, license_num, identifier } = this.state;
+    const { img_path, showImage, showPreview, name, cell, email, area, license_num, identifier, status } = this.state;
     return (
       <div>
         {showImage && (
@@ -152,30 +166,45 @@ export default class UpdatingDriverInfo extends Component {
                 />
               </div>
 
-              <div className="form-group mb-4">
-                <input
-                  type="cell"
-                  className="form-control hm-input-height "
-                  name="username"
-                  id="username"
-                  placeholder={"Username"}
-                  value={username}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-
               <AddingImage
                 title={"Logo:"}
                 parentProps={{ img_url: img_path, handleShowPreview: this.handleShowPreview }}
                 handleShowImage={this.handleShowImage}
               />
 
+              <div className="bg-white align-items-center pt-3" style={{ height: "48px" }}>
+                <div className="row">
+                  <div className="col-2">
+                    <label htmlFor="logo">Status</label>
+                  </div>
+
+                  <div className="col-2">
+                    <button
+                      type="button"
+                      className={`btn btn-sm p-0 d-flex align-items-center align-middle ${
+                        status === 2 ? "hm-bg-green-border" : "btn-outline-secondary "
+                      }`}
+                      onClick={this.handleStatusChange}
+                      style={{ borderRadius: "20px", width: "88px", height: "24px" }}
+                    >
+                      <i className={`fas ${status === 2 && "hm-text-green"} fa-circle ml-1 pl-0`} />
+
+                      {status === 2 ? (
+                        <div className="d-flex ml-2 align-items-center align-middle h-100 hm-text-green ">Active</div>
+                      ) : (
+                        <div className="d-flex ml-2 align-items-center align-middle h-100">Inactive</div>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
               <div className="form-group text-right pt-3">
                 <button
                   className="button-main-background btn button-main-size px-4 text-white mr-3"
-                  onClick={this.handleCreateADriverInLord}
+                  onClick={this.handleUpdateADriverInLord}
                 >
-                  Add
+                  Update
                 </button>
                 <button onClick={this.handleClose} className="btn button-main-size btn-outline-secondary px-4">
                   Cancel
