@@ -64,15 +64,9 @@ class TripDetailContainer extends Component {
   };
 
   async componentDidMount() {
-    const { match, findTripDetailInLord, findVehicleListInLord, trip_detail_in_lord } = this.props;
-    console.log(trip_detail_in_lord);
-    if (trip_detail_in_lord.driver_info) {
-      if (trip_detail_in_lord.driver_info.driver_token !== "") {
-        //this.props.findCarListForADriver(trip_detail_in_lord.driver_info.driver_token);
-      }
-    }
+    const { match, findTripDetailInLord, findVehicleListInLord, findCarListForADriver } = this.props;
     const { trip_token } = match.params;
-    Promise.all([findTripDetailInLord(trip_token), findVehicleListInLord()]);
+    await Promise.all([findTripDetailInLord(trip_token), findVehicleListInLord()]);
     const currentPosition = match.path.split("/")[2];
     if (currentPosition === "ongoing") {
       this.setState({ currentPosition, title: "Ongoing", customer_info: true });
@@ -91,6 +85,9 @@ class TripDetailContainer extends Component {
     if (currentPosition === "finished") {
       this.setState({ currentPosition, title: "Recent Finished", customer_info: true });
     }
+    if (this.props.trip_detail_in_lord.driver_info.driver_token !== "") {
+      findCarListForADriver(this.props.trip_detail_in_lord.driver_info.driver_token);
+    }
   }
   render() {
     const {
@@ -99,7 +96,7 @@ class TripDetailContainer extends Component {
       trip_detail_in_lord,
       createAnAlertForATrip,
       vehicle_list_in_lord,
-      driver_list_in_lord
+      car_list_for_a_driver
     } = this.props;
     const { trip_token } = match.params;
 
@@ -118,6 +115,7 @@ class TripDetailContainer extends Component {
       showVehicleInfoModal,
       showAlertInfoModal
     } = this.state;
+    console.log(trip_detail_in_lord.driver_info.driver_token);
     return (
       <main className="container-fluid">
         {showBasicInfoModal && basic_info && <BasicInfoModal onClose={() => this.handleInfoModal("basic")} />}
@@ -129,6 +127,7 @@ class TripDetailContainer extends Component {
           <AddingVehicleModal
             handleCarBeenClicked={this.handleUpdatingVehicle}
             vehicle_list_in_lord={vehicle_list_in_lord}
+            car_list_for_a_driver={car_list_for_a_driver}
             onClose={() => this.handleInfoModal("vehicle")}
           />
         )}
@@ -229,7 +228,8 @@ const mapStateToProps = state => {
   return {
     trip_detail_in_lord: state.tripReducer.trip_detail_in_lord,
     driver_list_in_lord: state.driverReducer.driver_list_in_lord,
-    vehicle_list_in_lord: state.vehicleReducer.vehicle_list_in_lord
+    vehicle_list_in_lord: state.vehicleReducer.vehicle_list_in_lord,
+    car_list_for_a_driver: state.driverReducer.car_list_for_a_driver
   };
 };
 const mapDispatchToProps = {

@@ -19,7 +19,7 @@ export default class AddingVehicleModal extends Component {
 
   render() {
     console.log(this.props);
-    const { vehicle_list_in_lord } = this.props;
+    const { vehicle_list_in_lord, car_list_for_a_driver } = this.props;
     return (
       <Modal title="Vehicle" onClose={this.handleClose} position="center" getWidth={"400px"} getHeight={"550px"}>
         <div className="rounded-custom">
@@ -41,6 +41,30 @@ export default class AddingVehicleModal extends Component {
             </div>
           </div>
           <div className="container">
+            {car_list_for_a_driver.record_list.length > 0 &&
+              car_list_for_a_driver.record_list.map((vehicle, index) => (
+                <div className="col-12 border-bottom d-flex align-items-center" key={index} style={{ height: "92px" }}>
+                  <div className="col-3">
+                    <img src={vehicle.img_path} alt="driver-avatar" className="avatar-md rounded-circle " />
+                  </div>
+                  <div className="col-9">
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div>
+                        <div className="font-weight-bold hm-text-16 text-modal-color">{vehicle.identifier}</div>
+                        <div className=" hm-text-14 text-modal-color">{vehicle.plate_num}</div>
+                      </div>
+                      <div>
+                        <button
+                          className="btn button-main-background text-dark shadow-sm"
+                          onClick={() => this.handleCarBeenClicked(vehicle.car_token)}
+                        >
+                          Add
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             {vehicle_list_in_lord.record_list.map((vehicle, index) => (
               <div className="col-12 border-bottom d-flex align-items-center" key={index} style={{ height: "92px" }}>
                 <div className="col-3">

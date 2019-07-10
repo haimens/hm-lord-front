@@ -24,7 +24,6 @@ class TripContainer extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log(props);
     const { match, findTripListInLord } = props;
     const currentPositionNow = match.path.split("/")[2];
     if (state.currentPosition !== currentPositionNow) {
