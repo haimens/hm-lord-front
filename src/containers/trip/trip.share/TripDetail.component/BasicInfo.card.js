@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function BasicInfo(props) {
-  const { showButton } = props;
+  const { showButton, handleDetailButtonClicked } = props;
   return (
     <div>
       <div className="purple-border p-3">
@@ -10,7 +10,7 @@ export default function BasicInfo(props) {
           {showButton && (
             <button
               className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
-              onClick={() => this.handleDetailButtonClicked("basic")}
+              onClick={() => handleDetailButtonClicked("basic")}
             >
               <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
             </button>

@@ -2,12 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { ListHeader, ListView, Header } from "../../../components/shared";
-import BasicInfo from "./TripDetail.component/BasicInfo.container";
-import CustomerInfo from "./TripDetail.component/CustomerInfo.container";
-import DriverInfo from "./TripDetail.component/DriverInfo.container";
-import VehicleInfo from "./TripDetail.component/VehicleInfo.container";
-import AlertInfo from "./TripDetail.component/AlertInfo.container";
-import TimeStaps from "./TripDetail.component/TimeStaps.contianer";
+import {
+  BasicInfo,
+  CustomerInfo,
+  DriverInfo,
+  VehicleInfo,
+  AlertInfo,
+  TimeStaps,
+  BasicInfoModal,
+  AlertInfoModal,
+  CustomerInfoModal,
+  DriverInfoModal,
+  VehicleInfoModal
+} from "./TripDetail.component";
 
 class TripDetailContainer extends Component {
   state = {
@@ -18,7 +25,30 @@ class TripDetailContainer extends Component {
     alert_info: false,
     time_stamps: false,
     currentPosition: "",
-    title: ""
+    title: "",
+    showBasicInfoModal: false,
+    showCustomerInfoModal: false,
+    showDriverInfoModal: false,
+    showVehicleInfoModal: false,
+    showAlertInfoModal: false
+  };
+
+  handleInfoModal = type => {
+    if (type === "basic") {
+      this.setState(state => ({ showBasicInfoModal: !state.showBasicInfoModal }));
+    }
+    if (type === "customer") {
+      this.setState(state => ({ showCustomerInfoModal: !state.showCustomerInfoModal }));
+    }
+    if (type === "driver") {
+      this.setState(state => ({ showDriverInfoModal: !state.showDriverInfoModal }));
+    }
+    if (type === "vehicle") {
+      this.setState(state => ({ showVehicleInfoModal: !state.showVehicleInfoModal }));
+    }
+    if (type === "alert") {
+      this.setState(state => ({ showAlertInfoModal: !state.showAlertInfoModal }));
+    }
   };
 
   async componentDidMount() {
@@ -52,10 +82,23 @@ class TripDetailContainer extends Component {
       driver_info,
       vehicle_info,
       alert_info,
-      time_stamps
+      time_stamps,
+      showBasicInfoModal,
+      showCustomerInfoModal,
+      showDriverInfoModal,
+      showVehicleInfoModal,
+      showAlertInfoModal
     } = this.state;
     return (
-      <main>
+      <main className="container-fluid">
+        {showBasicInfoModal && basic_info && <BasicInfoModal onClose={() => this.handleInfoModal("basic")} />}
+        {showCustomerInfoModal && customer_info && (
+          <CustomerInfoModal onClose={() => this.handleInfoModal("customer")} />
+        )}
+        {showDriverInfoModal && driver_info && <DriverInfoModal onClose={() => this.handleInfoModal("driver")} />}
+        {showVehicleInfoModal && vehicle_info && <VehicleInfoModal onClose={() => this.handleInfoModal("vehicle")} />}
+        {showAlertInfoModal && alert_info && <AlertInfoModal onClose={() => this.handleInfoModal("alert")} />}
+
         <section className="mb-4">
           <div>
             <Header
@@ -70,23 +113,23 @@ class TripDetailContainer extends Component {
             />
           </div>
         </section>
-        <section className="container-fluid mb-4">
+        <section className="mb-4">
           <div className="bg-white rounded-custom shadow-sm">
             <div className="row" style={{ padding: "40px" }}>
               <div className="col-lg-6 col-12 mb-4">
-                <BasicInfo showButton={basic_info} />
+                <BasicInfo handleDetailButtonClicked={this.handleInfoModal} showButton={basic_info} />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <CustomerInfo showButton={customer_info} />
+                <CustomerInfo handleDetailButtonClicked={this.handleInfoModal} showButton={customer_info} />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <DriverInfo showButton={driver_info} />
+                <DriverInfo handleDetailButtonClicked={this.handleInfoModal} showButton={driver_info} />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <VehicleInfo showButton={vehicle_info} />
+                <VehicleInfo handleDetailButtonClicked={this.handleInfoModal} showButton={vehicle_info} />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <AlertInfo showButton={alert_info} />
+                <AlertInfo handleDetailButtonClicked={this.handleInfoModal} showButton={alert_info} />
               </div>
               <div className="col-lg-6 col-12 mb-4">
                 <TimeStaps showButton={time_stamps} />

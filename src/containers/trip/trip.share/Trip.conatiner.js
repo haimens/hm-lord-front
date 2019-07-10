@@ -24,7 +24,7 @@ class TripContainer extends Component {
       title = "Abnormal";
     }
     return (
-      <main>
+      <main className="container-fluid">
         <section className="mb-4">
           <div>
             <Header
@@ -38,7 +38,7 @@ class TripContainer extends Component {
           </div>
         </section>
 
-        <section className="row p-3">
+        <section className="row">
           <TripCard
             parentProps={{
               tripId: 100015,
