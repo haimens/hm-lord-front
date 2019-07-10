@@ -90,8 +90,7 @@ class TripContainer extends Component {
               }}
               key={index}
               currentPosition={currentPosition}
-              dotColor={"success-text-color"}
-              tripStatus={"Active"}
+              dotColor={"text-purple"}
               hideDriver={true}
               history={history}
             />
