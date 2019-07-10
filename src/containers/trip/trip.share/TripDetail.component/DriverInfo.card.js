@@ -1,14 +1,14 @@
 import React from "react";
 
-export default function CustomerInfo(props) {
-  const { showButton, handleDetailButtonClicked, trip_detail_in_lord } = props;
+export default function DriverInfoCard(props) {
+  const { showEditButton, handleDetailButtonClicked, trip_detail_in_lord } = props;
   const { driver_info } = trip_detail_in_lord;
   return (
     <div>
       <div className="purple-border p-3">
         <div className="d-flex justify-content-between align-items-center  ">
           <div className="hm-text-16 font-weight-bold text-modal-color">Driver Information</div>
-          {showButton && (
+          {showEditButton && (
             <button
               className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
               onClick={() => handleDetailButtonClicked("driver")}

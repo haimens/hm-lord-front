@@ -18,12 +18,7 @@ import { findTripDetailInLord, createAnAlertForATrip, updateTripOperationInfo } 
 import { findCarListForADriver, findDriverListInLord } from "../../../actions/driver.action";
 class TripDetailContainer extends Component {
   state = {
-    basic_info: false,
-    customer_info: false,
-    driver_info: false,
-    vehicle_info: false,
-    alert_info: false,
-    time_stamps: false,
+    showEditButton: false,
     currentPosition: "",
     title: "",
     showBasicInfoModal: false,
@@ -83,21 +78,17 @@ class TripDetailContainer extends Component {
     await Promise.all([findTripDetailInLord(trip_token), findVehicleListInLord(), findDriverListInLord()]);
     const currentPosition = match.path.split("/")[2];
     if (currentPosition === "ongoing") {
-      this.setState({ currentPosition, title: "Ongoing", customer_info: true });
+      this.setState({ currentPosition, title: "Ongoing", showEditButton: true });
     }
     if (currentPosition === "upcoming") {
       this.setState({
         currentPosition,
         title: "Upcoming",
-        basic_info: true,
-        customer_info: true,
-        driver_info: true,
-        vehicle_info: true,
-        alert_info: true
+        showEditButton: true
       });
     }
     if (currentPosition === "finished") {
-      this.setState({ currentPosition, title: "Recent Finished", customer_info: true });
+      this.setState({ currentPosition, title: "Recent Finished" });
     }
     if (this.props.trip_detail_in_lord.driver_info.driver_token !== "") {
       findCarListForADriver(this.props.trip_detail_in_lord.driver_info.driver_token);
@@ -118,11 +109,7 @@ class TripDetailContainer extends Component {
     const {
       currentPosition,
       title,
-      basic_info,
-      customer_info,
-      driver_info,
-      vehicle_info,
-      alert_info,
+      showEditButton,
       time_stamps,
       showBasicInfoModal,
       showCustomerInfoModal,
@@ -133,18 +120,16 @@ class TripDetailContainer extends Component {
     console.log(trip_detail_in_lord.driver_info.driver_token);
     return (
       <main className="container-fluid">
-        {showBasicInfoModal && basic_info && <BasicInfoModal onClose={() => this.handleInfoModal("basic")} />}
-        {showCustomerInfoModal && customer_info && (
-          <CustomerInfoModal onClose={() => this.handleInfoModal("customer")} />
-        )}
-        {showDriverInfoModal && driver_info && (
+        {showBasicInfoModal && <BasicInfoModal onClose={() => this.handleInfoModal("basic")} />}
+        {showCustomerInfoModal && <CustomerInfoModal onClose={() => this.handleInfoModal("customer")} />}
+        {showDriverInfoModal && (
           <AddingDriverModal
             handleDriverBeenClicked={this.handleUpdatingDriver}
             driver_list_in_lord={driver_list_in_lord}
             onClose={() => this.handleInfoModal("driver")}
           />
         )}
-        {showVehicleInfoModal && vehicle_info && (
+        {showVehicleInfoModal && (
           <AddingVehicleModal
             handleCarBeenClicked={this.handleUpdatingVehicle}
             vehicle_list_in_lord={vehicle_list_in_lord}
@@ -152,7 +137,7 @@ class TripDetailContainer extends Component {
             onClose={() => this.handleInfoModal("vehicle")}
           />
         )}
-        {showAlertInfoModal && alert_info && (
+        {showAlertInfoModal && (
           <AlertInfoModal
             trip_token={trip_token}
             createAnAlertForATrip={createAnAlertForATrip}
@@ -181,39 +166,43 @@ class TripDetailContainer extends Component {
                 <BasicInfo
                   trip_detail_in_lord={trip_detail_in_lord}
                   handleDetailButtonClicked={this.handleInfoModal}
-                  showButton={basic_info}
+                  showEditButton={showEditButton}
                 />
               </div>
               <div className="col-lg-6 col-12 mb-4">
                 <CustomerInfo
                   trip_detail_in_lord={trip_detail_in_lord}
                   handleDetailButtonClicked={this.handleInfoModal}
-                  showButton={customer_info}
+                  showEditButton={showEditButton}
                 />
               </div>
               <div className="col-lg-6 col-12 mb-4">
                 <DriverInfo
                   trip_detail_in_lord={trip_detail_in_lord}
                   handleDetailButtonClicked={this.handleInfoModal}
-                  showButton={driver_info}
+                  showEditButton={showEditButton}
                 />
               </div>
               <div className="col-lg-6 col-12 mb-4">
                 <VehicleInfo
                   trip_detail_in_lord={trip_detail_in_lord}
                   handleDetailButtonClicked={this.handleInfoModal}
-                  showButton={vehicle_info}
+                  showEditButton={showEditButton}
                 />
               </div>
               <div className="col-lg-6 col-12 mb-4">
                 <AlertInfo
                   trip_detail_in_lord={trip_detail_in_lord}
                   handleDetailButtonClicked={this.handleInfoModal}
-                  showButton={alert_info}
+                  showEditButton={showEditButton}
                 />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <TimeStaps trip_detail_in_lord={trip_detail_in_lord} showButton={time_stamps} />
+                <TimeStaps
+                  showEditButton={showEditButton}
+                  trip_detail_in_lord={trip_detail_in_lord}
+                  showButton={time_stamps}
+                />
               </div>
             </div>
           </div>

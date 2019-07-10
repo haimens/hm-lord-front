@@ -58,7 +58,25 @@ export const findTripListInLord = (query = {}) => async dispatch => {
     dispatch(processLogout(err));
   }
 };
-
+export const findTripActiveListInLord = (query = {}) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`trip/all/active/realm`, "GET", null, {
+      order_key: "udate",
+      order_direction: "DESC",
+      ...query
+    });
+    console.log(payload);
+    await dispatch({
+      type: constant.TRIP_ACTIVE_LIST_IN_LORD,
+      payload
+    });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
 export const findTripDetailInLord = trip_token => async dispatch => {
   try {
     await startLoader(dispatch);
