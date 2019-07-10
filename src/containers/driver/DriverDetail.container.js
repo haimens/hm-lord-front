@@ -27,7 +27,8 @@ class DriverDetail extends Component {
     showAddingVehicleModal: false,
     showAddingWageModal: false,
     showAddingSalaryModal: false,
-    showUpdatingDriverModal: false
+    showUpdatingDriverModal: false,
+    showMap: false
   };
   handleShowAddingTripModal = () => {
     this.setState(state => ({ showAddingTripModal: !state.showAddingTripModal }));
@@ -59,13 +60,18 @@ class DriverDetail extends Component {
       findDriverListInLord
     } = this.props;
     const { driver_token } = match.params;
-    console.log(driver_token);
-    Promise.all([
+    await Promise.all([
       findDriverDetailInLord(driver_token),
       findCarListForADriver(driver_token),
       findVehicleListInLord(),
       findDriverListInLord(driver_token)
     ]);
+    if (
+      this.props.driver_detail_in_lord.location_info.lat !== 0 ||
+      this.props.driver_detail_in_lord.location_info.lng !== 0
+    ) {
+      await this.setState({ showMap: true });
+    }
   }
   render() {
     const {
@@ -73,7 +79,8 @@ class DriverDetail extends Component {
       showAddingVehicleModal,
       showAddingWageModal,
       showAddingSalaryModal,
-      showUpdatingDriverModal
+      showUpdatingDriverModal,
+      showMap
     } = this.state;
     const {
       history,
@@ -124,6 +131,7 @@ class DriverDetail extends Component {
             <DriverDetailCard
               handleDetailButtonClicked={this.handleDetailButtonClicked}
               driver_detail_in_lord={driver_detail_in_lord}
+              showMap={showMap}
             />
           </div>
         </section>

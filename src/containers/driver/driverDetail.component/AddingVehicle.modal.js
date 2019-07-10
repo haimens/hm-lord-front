@@ -11,6 +11,7 @@ export default class AddingVehicleModal extends Component {
   addVehicleToDriver = car_token => {
     const { driver_token, createDriverToACarInLord } = this.props;
     createDriverToACarInLord(driver_token, { car_token });
+    this.handleClose();
   };
 
   handleClose = () => {
@@ -41,35 +42,29 @@ export default class AddingVehicleModal extends Component {
             </div>
           </div>
           <div className="container">
-            <div className="d-flex align-items-center border-bottom" style={{ height: "94px" }}>
-              <div className="container">
-                <div className="row">
-                  {vehicle_list_in_lord.record_list.map((vehicle, index) => (
-                    <div className="col-12" key={index}>
-                      <div className="row">
-                        <div className="col-3 d-flex justify-content-end">
-                          <img src={vehicle.img_path} alt="driver-avatar" className="avatar-md rounded-circle " />
-                        </div>
-                        <div className="col-9 d-flex justify-content-between align-items-center">
-                          <div>
-                            <div className="font-weight-bold hm-text-16 text-modal-color">{vehicle.identifier}</div>
-                            <div className=" hm-text-14 text-modal-color">{vehicle.plate_num}</div>
-                          </div>
-                          <div>
-                            <button
-                              className="btn button-main-background text-white shadow-sm"
-                              onClick={() => this.addVehicleToDriver(vehicle.car_token)}
-                            >
-                              Add
-                            </button>
-                          </div>
-                        </div>
-                      </div>
+            {vehicle_list_in_lord.record_list.map((vehicle, index) => (
+              <div className="col-12 border-bottom d-flex align-items-center" key={index} style={{ height: "92px" }}>
+                <div className="col-3">
+                  <img src={vehicle.img_path} alt="driver-avatar" className="avatar-md rounded-circle " />
+                </div>
+                <div className="col-9">
+                  <div className="d-flex justify-content-between align-items-center">
+                    <div>
+                      <div className="font-weight-bold hm-text-16 text-modal-color">{vehicle.identifier}</div>
+                      <div className=" hm-text-14 text-modal-color">{vehicle.plate_num}</div>
                     </div>
-                  ))}
+                    <div>
+                      <button
+                        className="btn button-main-background text-white shadow-sm"
+                        onClick={() => this.addVehicleToDriver(vehicle.car_token)}
+                      >
+                        Add
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </Modal>
