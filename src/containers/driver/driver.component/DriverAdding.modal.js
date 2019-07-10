@@ -14,6 +14,7 @@ export default class DriverAdding extends Component {
     img_path: "",
     license_num: "",
     identifier: "",
+    rate: 70,
     area: "+1"
   };
 
@@ -38,7 +39,7 @@ export default class DriverAdding extends Component {
   };
 
   handleCreateADriverInLord = () => {
-    const { name, cell, email, username, img_path, area, license_num, identifier } = this.state;
+    const { name, cell, email, username, img_path, area, license_num, identifier, rate } = this.state;
     if (
       name !== "" &&
       cell !== "" &&
@@ -46,7 +47,8 @@ export default class DriverAdding extends Component {
       username !== "" &&
       area !== "" &&
       license_num !== "" &&
-      identifier !== ""
+      identifier !== "" &&
+      rate !== ""
     ) {
       this.props.createADriverInLord({
         name,
@@ -55,7 +57,8 @@ export default class DriverAdding extends Component {
         email,
         username,
         license_num,
-        identifier
+        identifier,
+        rate: rate * 10
       });
       this.handleClose();
     } else {
@@ -70,7 +73,19 @@ export default class DriverAdding extends Component {
   async componentDidMount() {}
 
   render() {
-    const { img_path, showImage, showPreview, name, cell, email, username, area, license_num, identifier } = this.state;
+    const {
+      img_path,
+      showImage,
+      showPreview,
+      name,
+      cell,
+      email,
+      username,
+      area,
+      license_num,
+      identifier,
+      rate
+    } = this.state;
     return (
       <div>
         {showImage && (
@@ -82,7 +97,7 @@ export default class DriverAdding extends Component {
         )}
         {showPreview && <PreviewImageModal image={img_path} onClose={() => this.setState({ showPreview: false })} />}
 
-        <Modal title="Add Driver" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"660px"}>
+        <Modal title="Add Driver" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"720px"}>
           <div className="container">
             <div className="p-3">
               <div className="form-group mb-4">
@@ -142,7 +157,7 @@ export default class DriverAdding extends Component {
 
               <div className="form-group mb-4">
                 <input
-                  type="cell"
+                  type="text"
                   className="form-control hm-input-height "
                   name="identifier"
                   id="identifier"
@@ -154,7 +169,7 @@ export default class DriverAdding extends Component {
 
               <div className="form-group mb-4">
                 <input
-                  type="cell"
+                  type="text"
                   className="form-control hm-input-height "
                   name="username"
                   id="username"
@@ -162,6 +177,21 @@ export default class DriverAdding extends Component {
                   value={username}
                   onChange={this.handleInputChange}
                 />
+              </div>
+
+              <div className="form-group input-group  mb-4">
+                <input
+                  type="text"
+                  className="form-control hm-input-height border-right-0"
+                  name="rate"
+                  id="rate"
+                  placeholder={"Rate"}
+                  value={rate}
+                  onChange={this.handleInputChange}
+                />
+                <div className="input-group-append bg-white border-left-0">
+                  <span className="input-group-text bg-white border-left-0 ">%</span>
+                </div>
               </div>
 
               <AddingImage

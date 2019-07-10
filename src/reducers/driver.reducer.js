@@ -28,8 +28,8 @@ const initialState = {
     location_info: {
       lat: 0,
       lng: 0,
-      cdate: "",
-      udate: ""
+      cdate: 0,
+      udate: 0
     }
   }
 };

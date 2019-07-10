@@ -67,22 +67,24 @@ class DriverDetailCard extends Component {
                 </div>
               </div>
 
-              <div className="col-lg-6 col-12">
-                <div className="purple-border p-3">
-                  <div>
-                    <div className="hm-text-16 font-weight-bold">Last Location Map</div>
-                  </div>
-                  <div className="mt-3 ">
-                    <div className="text-secondary-color font-weight-500 hm-text-14">Last Updated Time</div>
-                    <div className="hm-text-14 font-weight-bold">
-                      {convertUTCtoLocal(location_info.udate, "YYYY-MM-DD HH:mm")}
+              {location_info && (
+                <div className="col-lg-6 col-12">
+                  <div className="purple-border p-3">
+                    <div>
+                      <div className="hm-text-16 font-weight-bold">Last Location Map</div>
+                    </div>
+                    <div className="mt-3 ">
+                      <div className="text-secondary-color font-weight-500 hm-text-14">Last Updated Time</div>
+                      <div className="hm-text-14 font-weight-bold">
+                        {convertUTCtoLocal(location_info.udate, "YYYY-MM-DD HH:mm")}
+                      </div>
                     </div>
                   </div>
+                  <div className="p-3" style={{ height: "307px" }}>
+                    {this.props.showMap && <GMapFlag location_info={location_info} />}
+                  </div>
                 </div>
-                <div className="p-3" style={{ height: "307px" }}>
-                  {this.props.showMap && <GMapFlag location_info={location_info} />}
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>

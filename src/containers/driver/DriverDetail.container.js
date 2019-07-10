@@ -73,11 +73,13 @@ class DriverDetail extends Component {
       findTripListInDriver(driver_token),
       findActiveTripListInDriver(driver_token)
     ]);
-    if (
-      this.props.driver_detail_in_lord.location_info.lat !== 0 ||
-      this.props.driver_detail_in_lord.location_info.lng !== 0
-    ) {
-      await this.setState({ showMap: true });
+    if (this.props.driver_detail_in_lord.location_info) {
+      if (
+        this.props.driver_detail_in_lord.location_info.lat !== 0 ||
+        this.props.driver_detail_in_lord.location_info.lng !== 0
+      ) {
+        await this.setState({ showMap: true });
+      }
     }
   }
   render() {
