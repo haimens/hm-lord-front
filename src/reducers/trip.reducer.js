@@ -78,7 +78,7 @@ export default (state = initialState, action) => {
     case constant.TRIP_ACTIVE_LIST_IN_DRIVER:
       return { ...state, trip_active_list_in_driver: action.payload };
     case constant.TRIP_ACTIVE_LIST_IN_LORD:
-      return { ...state, trip_active_list_in_lord: action.payload };
+      return { ...state, trip_list_in_lord: action.payload };
     case constant.TRIP_LIST_IN_LORD:
       return { ...state, trip_list_in_lord: action.payload };
     case constant.TRIP_DETAIL_IN_LORD:

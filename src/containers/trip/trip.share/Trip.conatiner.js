@@ -13,7 +13,6 @@ class TripContainer extends Component {
     const currentPositionNow = match.path.split("/")[2];
     if (state.currentPosition !== currentPositionNow) {
       if (currentPositionNow === "ongoing") {
-        console.log("here");
         findTripActiveListInLord();
       }
       if (currentPositionNow === "upcoming") {
