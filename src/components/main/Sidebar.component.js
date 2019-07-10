@@ -173,33 +173,6 @@ export default class Sidebar extends Component {
             showArrow={false}
           />
         </section>
-
-        <section className="accordion">
-          <NavItem
-            onToggle={() => this.handleClick("/settings/fee")}
-            image={`${process.env.PUBLIC_URL}/img/navicon_settings.svg`}
-            name="Trip"
-            path="trip"
-            history={this.props.parentProps.history}
-            showArrow={true}
-          >
-            <SubNavItem
-              onClick={() => this.handleClick("/settings/fee")}
-              name="Fee Rate"
-              history={this.props.parentProps.history}
-              path="fee"
-              is_target={parsedLocation[3] === "fee"}
-            />
-            <SubNavItem
-              onClick={() => this.handleClick("/settings/general")}
-              name="General Setting"
-              history={this.props.parentProps.history}
-              path="general"
-              is_target={parsedLocation[3] === "general"}
-              className="mt-2"
-            />
-          </NavItem>
-        </section>
       </main>
     );
   }
