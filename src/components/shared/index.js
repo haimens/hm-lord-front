@@ -24,6 +24,7 @@ import AddingImage from "./AddingImage";
 import GAutoComplete from "./GAutoComplete";
 import GMapFlag from "./GMapFlag";
 import AddingVehicleModal from "./AddingVehicle.modal";
+import AddingDriverModal from "./AddingDriver.modal";
 export {
   LoaderAlt,
   IconButton,
@@ -50,5 +51,6 @@ export {
   AddingImage,
   GAutoComplete,
   GMapFlag,
-  AddingVehicleModal
+  AddingVehicleModal,
+  AddingDriverModal
 };
