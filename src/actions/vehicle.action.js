@@ -39,6 +39,7 @@ export const updateACarInLord = (car_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`car/detail/${car_token}`, "PATCH", body);
+    await dispatch(findCarDetailInLord(car_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
   } catch (err) {

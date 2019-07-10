@@ -3,11 +3,10 @@ import { GMapFlag } from "../../../components/shared";
 import { parseRate, parseAmount } from "../../../actions/utilities.action";
 class VehicleDetailCard extends Component {
   handleDetailButtonClicked = type => {
-    this.props.handleDetailButtonClicked(type);
+    this.props.handleDetailButtonClicked();
   };
   render() {
     const { basic_info } = this.props.vehicle_detail_in_lord;
-    console.log(basic_info);
     const { identifier, img_path, plate_num, description, status } = basic_info;
     return (
       <div className="bg-white rounded-custom shadow-sm">
@@ -22,7 +21,7 @@ class VehicleDetailCard extends Component {
                   <div className="hm-text-16 font-weight-bold">Basic Information</div>
                   <button
                     className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
-                    onClick={() => this.handleDetailButtonClicked("basic")}
+                    onClick={() => this.handleDetailButtonClicked()}
                   >
                     <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
                   </button>

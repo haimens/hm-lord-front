@@ -60,7 +60,7 @@ class VehicleDetail extends Component {
             parentProps={{
               title: "Related Order List",
               clickFunction: this.handleShowAddingVehicleModal,
-              clickTitle: "Vehicle"
+              clickTitle: "Order"
             }}
             hideShadow={true}
             buttonWidth={"88px"}

@@ -38,7 +38,7 @@ export const updateACustomerInLord = (customer_token, body = {}) => async dispat
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`customer/detail/${customer_token}`, "PATCH", body);
-    await findCustomerDetailInLord(customer_token);
+    await dispatch(findCustomerDetailInLord(customer_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
   } catch (err) {

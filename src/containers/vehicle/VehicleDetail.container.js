@@ -4,14 +4,24 @@ import { withRouter } from "react-router-dom";
 import { DriverCard, Header, ListHeader, ListView } from "../../components/shared";
 import VehicleDetailCard from "./vehicleDetail.component/VehicleDetail.card";
 import AddingDriverModal from "./vehicleDetail.component/AddingDriver.modal";
-import { findCarDetailInLord, findDriverListForACar, createCarToADriverInLord } from "../../actions/vehicle.action";
+import {
+  findCarDetailInLord,
+  findDriverListForACar,
+  createCarToADriverInLord,
+  updateACarInLord
+} from "../../actions/vehicle.action";
 import { findDriverListInLord } from "../../actions/driver.action";
+import EditVehicle from "./vehicleDetail.component/EditVehicle.modal";
 class VehicleDetail extends Component {
   state = {
-    showAddingDriverModal: false
+    showAddingDriverModal: false,
+    showEditVehicleModal: false
   };
   handleShowAddingDriverModal = () => {
     this.setState(state => ({ showAddingDriverModal: !state.showAddingDriverModal }));
+  };
+  handleShowEditingDriverModal = () => {
+    this.setState(state => ({ showEditVehicleModal: !state.showEditVehicleModal }));
   };
   componentDidMount() {
     const { match, findCarDetailInLord, findDriverListForACar, findDriverListInLord } = this.props;
@@ -19,7 +29,7 @@ class VehicleDetail extends Component {
     Promise.all([findCarDetailInLord(car_token), findDriverListForACar(car_token), findDriverListInLord()]);
   }
   render() {
-    const { showAddingDriverModal } = this.state;
+    const { showAddingDriverModal, showEditVehicleModal } = this.state;
     const {
       history,
       vehicle_detail_in_lord,
@@ -27,7 +37,8 @@ class VehicleDetail extends Component {
         params: { car_token }
       },
       createCarToADriverInLord,
-      driver_list_in_lord
+      driver_list_in_lord,
+      updateACarInLord
     } = this.props;
     return (
       <main className="container-fluid">
@@ -37,6 +48,14 @@ class VehicleDetail extends Component {
             createCarToADriverInLord={createCarToADriverInLord}
             driver_list_in_lord={driver_list_in_lord}
             onClose={this.handleShowAddingDriverModal}
+          />
+        )}
+        {showEditVehicleModal && (
+          <EditVehicle
+            car_token={car_token}
+            updateACarInLord={updateACarInLord}
+            vehicle_detail_in_lord={vehicle_detail_in_lord}
+            onClose={this.handleShowEditingDriverModal}
           />
         )}
         <section className="mb-4">
@@ -51,7 +70,10 @@ class VehicleDetail extends Component {
             />
           </div>
           <div>
-            <VehicleDetailCard vehicle_detail_in_lord={vehicle_detail_in_lord} />
+            <VehicleDetailCard
+              handleDetailButtonClicked={this.handleShowEditingDriverModal}
+              vehicle_detail_in_lord={vehicle_detail_in_lord}
+            />
           </div>
         </section>
         <section className="mb-4 bg-white rounded-custom shadow-sm">
@@ -114,7 +136,8 @@ const mapDispatchToProps = {
   findCarDetailInLord,
   findDriverListForACar,
   findDriverListInLord,
-  createCarToADriverInLord
+  createCarToADriverInLord,
+  updateACarInLord
 };
 
 export default connect(
