@@ -15,7 +15,7 @@ import {
   DriverInfoModal,
   VehicleInfoModal
 } from "./TripDetail.component";
-
+import { findTripDetailInLord } from "../../../actions/trip.action";
 class TripDetailContainer extends Component {
   state = {
     basic_info: false,
@@ -52,7 +52,10 @@ class TripDetailContainer extends Component {
   };
 
   async componentDidMount() {
-    const { match } = this.props;
+    const { match, findTripDetailInLord } = this.props;
+    const { trip_token } = match.params;
+    findTripDetailInLord(trip_token);
+    console.log(match);
     const currentPosition = match.path.split("/")[2];
     if (currentPosition === "ongoing") {
       this.setState({ currentPosition, title: "Ongoing", customer_info: true });
@@ -167,7 +170,7 @@ class TripDetailContainer extends Component {
 const mapStateToProps = state => {
   return {};
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = { findTripDetailInLord };
 
 export default connect(
   mapStateToProps,

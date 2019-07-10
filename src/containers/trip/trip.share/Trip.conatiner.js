@@ -4,12 +4,15 @@ import { withRouter } from "react-router-dom";
 import { TripCard, ListHeader, Header } from "../../../components/shared";
 import { findTripListInLord } from "../../../actions/trip.action";
 class TripContainer extends Component {
-  state = {};
+  state = {
+    currentPosition: ""
+  };
 
   async componentDidMount() {
     const { match, findTripListInLord } = this.props;
     const currentPosition = match.path.split("/")[2];
     if (currentPosition === "ongoing") {
+      console.log("here");
     }
     if (currentPosition === "upcoming") {
       findTripListInLord({ status: 2 });
@@ -19,8 +22,31 @@ class TripContainer extends Component {
     if (currentPosition === "abnormal") {
     }
   }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log(props);
+    const { match, findTripListInLord } = props;
+    const currentPositionNow = match.path.split("/")[2];
+    if (state.currentPosition !== currentPositionNow) {
+      if (currentPositionNow === "ongoing") {
+        console.log("here");
+      }
+      if (currentPositionNow === "upcoming") {
+        findTripListInLord({ status: 2 });
+      }
+      if (currentPositionNow === "finished") {
+      }
+      if (currentPositionNow === "abnormal") {
+      }
+      return {
+        currentPosition: currentPositionNow
+      };
+    }
+    return null;
+  }
+
   render() {
-    const { history, match, findTripListInLord } = this.props;
+    const { history, match, trip_list_in_lord } = this.props;
     const currentPosition = match.path.split("/")[2];
     let title = "";
     if (currentPosition === "ongoing") {
@@ -51,26 +77,34 @@ class TripContainer extends Component {
         </section>
 
         <section className="row">
-          <TripCard
-            parentProps={{
-              tripId: 100015,
-              tripDriver: "Kobe",
-              tripCustomer: "Lebron",
-              tripPickUp: "16/26 23",
-              tripFrom: "321 s",
-              tripTo: "123 s"
-            }}
-            currentPosition={currentPosition}
-            dotColor={"success-text-color"}
-            tripStatus={"Active"}
-          />
+          {trip_list_in_lord.record_list.map((trip, index) => (
+            <TripCard
+              parentProps={{
+                tripDriver: "Kobe",
+                tripCustomer: trip.customer_name,
+                tripPickUp: trip.pickup_time,
+                tripFrom: trip.from_addr_str,
+                tripTo: trip.to_addr_str,
+                trip_token: trip.trip_token,
+                tripStatus: trip.status_str
+              }}
+              key={index}
+              currentPosition={currentPosition}
+              dotColor={"success-text-color"}
+              tripStatus={"Active"}
+              hideDriver={true}
+              history={history}
+            />
+          ))}
         </section>
       </main>
     );
   }
 }
 const mapStateToProps = state => {
-  return {};
+  return {
+    trip_list_in_lord: state.tripReducer.trip_list_in_lord
+  };
 };
 const mapDispatchToProps = {
   findTripListInLord

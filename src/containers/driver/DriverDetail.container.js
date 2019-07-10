@@ -19,7 +19,7 @@ import {
   createDriverToACarInLord,
   updateACarForADriver
 } from "../../actions/driver.action";
-import { findDriverListInLord } from "../../actions/trip.action";
+import { findTripListInDriver, findActiveTripListInDriver } from "../../actions/trip.action";
 import { findVehicleListInLord } from "../../actions/vehicle.action";
 class DriverDetail extends Component {
   state = {
@@ -57,14 +57,16 @@ class DriverDetail extends Component {
       findDriverLocationListInLord,
       findCarListForADriver,
       findVehicleListInLord,
-      findDriverListInLord
+      findTripListInDriver,
+      findActiveTripListInDriver
     } = this.props;
     const { driver_token } = match.params;
     await Promise.all([
       findDriverDetailInLord(driver_token),
       findCarListForADriver(driver_token),
       findVehicleListInLord(),
-      findDriverListInLord(driver_token)
+      findTripListInDriver(driver_token),
+      findActiveTripListInDriver(driver_token)
     ]);
     if (
       this.props.driver_detail_in_lord.location_info.lat !== 0 ||
@@ -249,7 +251,8 @@ const mapDispatchToProps = {
   findVehicleListInLord,
   createDriverToACarInLord,
   updateACarForADriver,
-  findDriverListInLord
+  findTripListInDriver,
+  findActiveTripListInDriver
 };
 
 export default connect(
