@@ -3,7 +3,6 @@ import React from "react";
 export default function CustomerInfo(props) {
   const { showButton, handleDetailButtonClicked, trip_detail_in_lord } = props;
   const { alert_list } = trip_detail_in_lord;
-  console.log(alert_list);
   return (
     <div>
       <div className="purple-border p-3">

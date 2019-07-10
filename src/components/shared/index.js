@@ -23,7 +23,7 @@ import Header from "./Header";
 import AddingImage from "./AddingImage";
 import GAutoComplete from "./GAutoComplete";
 import GMapFlag from "./GMapFlag";
-
+import AddingVehicleModal from "./AddingVehicle.modal";
 export {
   LoaderAlt,
   IconButton,
@@ -49,5 +49,6 @@ export {
   ListHeader,
   AddingImage,
   GAutoComplete,
-  GMapFlag
+  GMapFlag,
+  AddingVehicleModal
 };

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { ListHeader, ListView, Header } from "../../../components/shared";
+import { ListHeader, ListView, Header, AddingVehicleModal } from "../../../components/shared";
 import {
   BasicInfo,
   CustomerInfo,
@@ -15,7 +15,9 @@ import {
   DriverInfoModal,
   VehicleInfoModal
 } from "./TripDetail.component";
-import { findTripDetailInLord, createAnAlertForATrip } from "../../../actions/trip.action";
+import { findVehicleListInLord } from "../../../actions/vehicle.action";
+import { findTripDetailInLord, createAnAlertForATrip, updateTripOperationInfo } from "../../../actions/trip.action";
+import { findCarListForADriver } from "../../../actions/driver.action";
 class TripDetailContainer extends Component {
   state = {
     basic_info: false,
@@ -50,12 +52,27 @@ class TripDetailContainer extends Component {
       this.setState(state => ({ showAlertInfoModal: !state.showAlertInfoModal }));
     }
   };
+  handleUpdatingVehicle = car_token => {
+    console.log(car_token);
+    const {
+      match: {
+        params: { trip_token }
+      },
+      updateTripOperationInfo
+    } = this.props;
+    updateTripOperationInfo(trip_token, { car_token });
+  };
 
   async componentDidMount() {
-    const { match, findTripDetailInLord } = this.props;
+    const { match, findTripDetailInLord, findVehicleListInLord, trip_detail_in_lord } = this.props;
+    console.log(trip_detail_in_lord);
+    if (trip_detail_in_lord.driver_info) {
+      if (trip_detail_in_lord.driver_info.driver_token !== "") {
+        //this.props.findCarListForADriver(trip_detail_in_lord.driver_info.driver_token);
+      }
+    }
     const { trip_token } = match.params;
-    findTripDetailInLord(trip_token);
-    console.log(match);
+    Promise.all([findTripDetailInLord(trip_token), findVehicleListInLord()]);
     const currentPosition = match.path.split("/")[2];
     if (currentPosition === "ongoing") {
       this.setState({ currentPosition, title: "Ongoing", customer_info: true });
@@ -76,7 +93,14 @@ class TripDetailContainer extends Component {
     }
   }
   render() {
-    const { match, history, trip_detail_in_lord, createAnAlertForATrip } = this.props;
+    const {
+      match,
+      history,
+      trip_detail_in_lord,
+      createAnAlertForATrip,
+      vehicle_list_in_lord,
+      driver_list_in_lord
+    } = this.props;
     const { trip_token } = match.params;
 
     const {
@@ -101,7 +125,13 @@ class TripDetailContainer extends Component {
           <CustomerInfoModal onClose={() => this.handleInfoModal("customer")} />
         )}
         {showDriverInfoModal && driver_info && <DriverInfoModal onClose={() => this.handleInfoModal("driver")} />}
-        {showVehicleInfoModal && vehicle_info && <VehicleInfoModal onClose={() => this.handleInfoModal("vehicle")} />}
+        {showVehicleInfoModal && vehicle_info && (
+          <AddingVehicleModal
+            handleCarBeenClicked={this.handleUpdatingVehicle}
+            vehicle_list_in_lord={vehicle_list_in_lord}
+            onClose={() => this.handleInfoModal("vehicle")}
+          />
+        )}
         {showAlertInfoModal && alert_info && (
           <AlertInfoModal
             trip_token={trip_token}
@@ -197,10 +227,18 @@ class TripDetailContainer extends Component {
 }
 const mapStateToProps = state => {
   return {
-    trip_detail_in_lord: state.tripReducer.trip_detail_in_lord
+    trip_detail_in_lord: state.tripReducer.trip_detail_in_lord,
+    driver_list_in_lord: state.driverReducer.driver_list_in_lord,
+    vehicle_list_in_lord: state.vehicleReducer.vehicle_list_in_lord
   };
 };
-const mapDispatchToProps = { findTripDetailInLord, createAnAlertForATrip };
+const mapDispatchToProps = {
+  findVehicleListInLord,
+  findTripDetailInLord,
+  createAnAlertForATrip,
+  findCarListForADriver,
+  updateTripOperationInfo
+};
 
 export default connect(
   mapStateToProps,

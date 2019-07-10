@@ -6,7 +6,7 @@ export default class TripCard extends Component {
     const { tripDriver, tripCustomer, tripPickUp, tripFrom, tripTo, trip_token, tripStatus } = parentProps;
     return (
       <div
-        className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-4 mb-4 hm-pointer-cursor"}
+        className={this.props.fullWidth ? "col-6" : "col-12 col-md-6  mb-4 hm-pointer-cursor"}
         onClick={() => {
           history.push(`/trip/upcoming/detail/${trip_token}`);
         }}

@@ -61,10 +61,8 @@ export const findTripListInLord = (query = {}) => async dispatch => {
 
 export const findTripDetailInLord = trip_token => async dispatch => {
   try {
-    console.log(trip_token);
     await startLoader(dispatch);
     const { payload } = await callApi(`trip/detail/${trip_token}`, "GET");
-    console.log(payload);
     await dispatch({
       type: constant.TRIP_DETAIL_IN_LORD,
       payload
@@ -78,9 +76,21 @@ export const findTripDetailInLord = trip_token => async dispatch => {
 
 export const createAnAlertForATrip = (trip_token, body = {}) => async dispatch => {
   try {
-    console.log(trip_token);
     await startLoader(dispatch);
     const { payload } = await callApi(`trip/alerts/${trip_token}`, "POST", body);
+    await dispatch(findTripDetailInLord(trip_token));
+    await launchSuccess(dispatch);
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
+export const updateTripOperationInfo = (trip_token, body = {}) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`trip/operation/${trip_token}`, "PATCH", body);
     await dispatch(findTripDetailInLord(trip_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
