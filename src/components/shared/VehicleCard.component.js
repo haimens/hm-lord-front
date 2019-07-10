@@ -1,17 +1,23 @@
 import React, { Component } from "react";
 
 export default class VehicleCard extends Component {
+  handleButtonClick = vehicleToken => {
+    if (!this.props.deleteButton) {
+      this.props.history.push(`/vehicle/detail/${vehicleToken}`);
+    }
+  };
+  handleDeleteACar = driver_car_token => {
+    this.props.updateACarForADriver(this.props.driver_token, driver_car_token, { status: 0 });
+  };
   render() {
-    const { showButton } = this.props;
-    const { vehicleId, vehicleName, vehicleImage, vehicleToken, isActive } = this.props.parentProps;
+    const { showButton, deleteButton } = this.props;
+    const { vehicleId, vehicleName, vehicleImage, vehicleToken, isActive, driver_car_token } = this.props.parentProps;
     return (
       <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-4 mb-4"}>
         <div
-          className="col-12 rounded-custom shadow-sm bg-white hm-pointer-cursor "
+          className={`col-12 rounded-custom shadow-sm bg-white ${!deleteButton && "hm-pointer-cursor"}`}
           style={{ height: "140px" }}
-          onClick={() => {
-            this.props.history.push(`/vehicle/detail/${vehicleToken}`);
-          }}
+          onClick={() => this.handleButtonClick(vehicleToken)}
         >
           <div className="row h-100 align-items-center">
             <div className="col-5 d-flex justify-content-center">
@@ -32,6 +38,7 @@ export default class VehicleCard extends Component {
                   <img
                     src={`${process.env.PUBLIC_URL}/img/icon_delete.svg`}
                     className="hm-pointer-cursor"
+                    onClick={() => this.handleDeleteACar(driver_car_token)}
                     alt="delete"
                   />
                 </section>

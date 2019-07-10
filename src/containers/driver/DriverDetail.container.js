@@ -15,8 +15,11 @@ import {
   findDriverDetailInLord,
   findDriverLocationListInLord,
   findCarListForADriver,
-  updateADriverInLord
+  updateADriverInLord,
+  createDriverToACarInLord,
+  updateACarForADriver
 } from "../../actions/driver.action";
+import { findVehicleListInLord } from "../../actions/vehicle.action";
 class DriverDetail extends Component {
   state = {
     showAddingTripModal: false,
@@ -46,9 +49,15 @@ class DriverDetail extends Component {
     }
   };
   async componentDidMount() {
-    const { match, findDriverDetailInLord, findDriverLocationListInLord, findCarListForADriver } = this.props;
+    const {
+      match,
+      findDriverDetailInLord,
+      findDriverLocationListInLord,
+      findCarListForADriver,
+      findVehicleListInLord
+    } = this.props;
     const { driver_token } = match.params;
-    Promise.all([findDriverDetailInLord(driver_token), findCarListForADriver(driver_token)]);
+    Promise.all([findDriverDetailInLord(driver_token), findCarListForADriver(driver_token), findVehicleListInLord()]);
   }
   render() {
     const {
@@ -64,7 +73,11 @@ class DriverDetail extends Component {
         params: { driver_token }
       },
       driver_detail_in_lord,
-      updateADriverInLord
+      updateADriverInLord,
+      vehicle_list_in_lord,
+      createDriverToACarInLord,
+      car_list_for_a_driver,
+      updateACarForADriver
     } = this.props;
     return (
       <main>
@@ -77,7 +90,14 @@ class DriverDetail extends Component {
           />
         )}
         {showAddingTripModal && <AddingTripModal onClose={this.handleShowAddingTripModal} />}
-        {showAddingVehicleModal && <AddingVehicleModal onClose={this.handleShowAddingVehicleModal} />}
+        {showAddingVehicleModal && (
+          <AddingVehicleModal
+            driver_token={driver_token}
+            createDriverToACarInLord={createDriverToACarInLord}
+            vehicle_list_in_lord={vehicle_list_in_lord}
+            onClose={this.handleShowAddingVehicleModal}
+          />
+        )}
         {showAddingWageModal && <AddingWageModal onClose={this.handleShowAddingWageModal} />}
         {showAddingSalaryModal && <AddingSalaryModal onClose={this.handleShowAddingSalaryModal} />}
         <section className="mb-4">
@@ -134,16 +154,21 @@ class DriverDetail extends Component {
             buttonWidth={"88px"}
           />
           <div className="row p-3">
-            <VehicleCard
-              parentProps={{
-                vehicleId: "1000016",
-                vehicleName: "Lebron James",
-                vehicleImage: "unnamed.jpg",
-                vehiclePhone: "6266266266"
-              }}
-              showButton={true}
-              deleteButton={true}
-            />
+            {car_list_for_a_driver.record_list.map((car, index) => (
+              <VehicleCard
+                parentProps={{
+                  vehicleId: car.plate_num,
+                  vehicleName: car.identifier,
+                  vehicleImage: car.img_path,
+                  driver_car_token: car.driver_car_token
+                }}
+                driver_token={driver_token}
+                updateACarForADriver={updateACarForADriver}
+                key={index}
+                showButton={true}
+                deleteButton={true}
+              />
+            ))}
           </div>
         </section>
         <section className="mb-4">
@@ -195,14 +220,19 @@ class DriverDetail extends Component {
 }
 const mapStateToProps = state => {
   return {
-    driver_detail_in_lord: state.driverReducer.driver_detail_in_lord
+    driver_detail_in_lord: state.driverReducer.driver_detail_in_lord,
+    vehicle_list_in_lord: state.vehicleReducer.vehicle_list_in_lord,
+    car_list_for_a_driver: state.driverReducer.car_list_for_a_driver
   };
 };
 const mapDispatchToProps = {
   findDriverDetailInLord,
   findDriverLocationListInLord,
   findCarListForADriver,
-  updateADriverInLord
+  updateADriverInLord,
+  findVehicleListInLord,
+  createDriverToACarInLord,
+  updateACarForADriver
 };
 
 export default connect(

@@ -8,11 +8,18 @@ export default class AddingVehicleModal extends Component {
     this.setState({ [name]: value });
   };
 
+  addVehicleToDriver = car_token => {
+    const { driver_token, createDriverToACarInLord } = this.props;
+    createDriverToACarInLord(driver_token, { car_token });
+  };
+
   handleClose = () => {
     this.props.onClose();
   };
 
   render() {
+    console.log(this.props);
+    const { vehicle_list_in_lord } = this.props;
     return (
       <Modal title="Vehicle" onClose={this.handleClose} position="center" getWidth={"400px"} getHeight={"550px"}>
         <div className="rounded-custom">
@@ -37,22 +44,29 @@ export default class AddingVehicleModal extends Component {
             <div className="d-flex align-items-center border-bottom" style={{ height: "94px" }}>
               <div className="container">
                 <div className="row">
-                  <div className="col-3 d-flex justify-content-end">
-                    <img
-                      src={`${process.env.PUBLIC_URL}/img/hd.png`}
-                      alt="driver-avatar"
-                      className="avatar-md rounded-circle "
-                    />
-                  </div>
-                  <div className="col-9 d-flex justify-content-between align-items-center">
-                    <div>
-                      <div className="font-weight-bold hm-text-16 text-modal-color">Chris Yao</div>
-                      <div className=" hm-text-14 text-modal-color">12431241414</div>
+                  {vehicle_list_in_lord.record_list.map((vehicle, index) => (
+                    <div className="col-12" key={index}>
+                      <div className="row">
+                        <div className="col-3 d-flex justify-content-end">
+                          <img src={vehicle.img_path} alt="driver-avatar" className="avatar-md rounded-circle " />
+                        </div>
+                        <div className="col-9 d-flex justify-content-between align-items-center">
+                          <div>
+                            <div className="font-weight-bold hm-text-16 text-modal-color">{vehicle.identifier}</div>
+                            <div className=" hm-text-14 text-modal-color">{vehicle.plate_num}</div>
+                          </div>
+                          <div>
+                            <button
+                              className="btn button-main-background text-white shadow-sm"
+                              onClick={() => this.addVehicleToDriver(vehicle.car_token)}
+                            >
+                              Add
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <button className="btn button-main-background text-white shadow-sm">Add</button>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>

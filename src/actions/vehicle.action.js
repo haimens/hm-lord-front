@@ -3,6 +3,7 @@ import { callApi, startLoader, stopLoader, launchSuccess } from "./utilities.act
 import { processLogout } from "./auth.action";
 
 export const findVehicleListInLord = (query = {}) => async dispatch => {
+  console.log("here");
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`car/all/detail/realm`, "GET", null, {

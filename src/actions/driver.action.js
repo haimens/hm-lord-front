@@ -84,7 +84,9 @@ export const findDriverLocationListInLord = (realm_token, query = {}) => async d
 export const createDriverToACarInLord = (driver_token, body) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`driver/car/${driver_token}`, "POST", null, body);
+    const { payload } = await callApi(`driver/car/${driver_token}`, "POST", body);
+    await dispatch(findCarListForADriver(driver_token));
+    await launchSuccess(dispatch);
     await stopLoader(dispatch);
   } catch (err) {
     await stopLoader(dispatch);
@@ -112,10 +114,12 @@ export const findCarListForADriver = (driver_token, query = {}) => async dispatc
   }
 };
 
-export const updateACarForADriver = (driver_car_token, body = {}) => async dispatch => {
+export const updateACarForADriver = (driver_token, driver_car_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`driver/car/${driver_car_token}`, "PATCH", body);
+    const { payload } = await callApi(`driver/car/${driver_car_token}`, "PATCH", { ...body });
+    await dispatch(findCarListForADriver(driver_token));
+    await launchSuccess(dispatch);
     await stopLoader(dispatch);
   } catch (err) {
     await stopLoader(dispatch);
