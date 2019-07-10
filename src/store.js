@@ -11,9 +11,8 @@ import customerReducer from "./reducers/customer.reducer";
 import driverPayableReducer from "./reducers/driverPayable.reducer";
 import orderReducer from "./reducers/order.reducer";
 import settingsReducer from "./reducers/settings.reducer";
-import tipReducer from "./reducers/tip.reducer";
 import vehicleReducer from "./reducers/vehicle.reducer";
-
+import tripReducer from "./reducers/trip.reducer";
 const store = createStore(
   combineReducers({
     authReducer,
@@ -26,8 +25,8 @@ const store = createStore(
     driverPayableReducer,
     orderReducer,
     settingsReducer,
-    tipReducer,
-    vehicleReducer
+    vehicleReducer,
+    tripReducer
   }),
   composeWithDevTools(applyMiddleware(thunk))
 );
