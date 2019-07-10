@@ -1,7 +1,8 @@
 import React from "react";
 
 export default function CustomerInfo(props) {
-  const { showButton, handleDetailButtonClicked } = props;
+  const { showButton, handleDetailButtonClicked, trip_detail_in_lord } = props;
+  const { customer_info } = trip_detail_in_lord;
   return (
     <div>
       <div className="purple-border p-3">
@@ -25,24 +26,24 @@ export default function CustomerInfo(props) {
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Customer Name</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">{123}</div>
+        <div className="hm-text-14 font-weight-bold text-modal-color">{customer_info.name}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Cell</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">{123}</div>
+        <div className="hm-text-14 font-weight-bold text-modal-color">{customer_info.cell}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Email</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">{123}</div>
+        <div className="hm-text-14 font-weight-bold text-modal-color">{customer_info.email}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Address</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">{123}</div>
+        <div className="hm-text-14 font-weight-bold text-modal-color">{"N/A"}</div>
       </div>
-      <div className="mb-4 px-3">
+      {/* <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Order ID</div>
         <div className="hm-text-14 font-weight-bold text-modal-color">{123}</div>
-      </div>
+      </div> */}
     </div>
   );
 }

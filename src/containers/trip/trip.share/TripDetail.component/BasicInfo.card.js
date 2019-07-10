@@ -1,7 +1,9 @@
 import React from "react";
-
+import { convertUTCtoLocal, parseAmount } from "../../../../actions/utilities.action";
 export default function BasicInfo(props) {
-  const { showButton, handleDetailButtonClicked } = props;
+  const { showButton, handleDetailButtonClicked, trip_detail_in_lord } = props;
+  const { basic_info, from_address_info, to_address_info, flight_info } = trip_detail_in_lord;
+  console.log(trip_detail_in_lord);
   return (
     <div>
       <div className="purple-border p-3">
@@ -19,36 +21,38 @@ export default function BasicInfo(props) {
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Pickup Time</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">
+          {convertUTCtoLocal(basic_info.pickup_time, "YYY-MM-DD HH:mm")}
+        </div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">From</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">{from_address_info.addr_str}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">To</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">{to_address_info.addr_str}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Flight Information</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">{"N/A"}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Vehicle Type</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">{basic_info.vehicle_type}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Trip Amount</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">{parseAmount(basic_info.amount)}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Note</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">{basic_info.note || "N/A"}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Status</div>
         <div className="hm-text-14 text-modal-color font-weight-bold">
-          {true === 2 ? (
+          {basic_info.status === 2 ? (
             <div className="d-flex align-items-center ">
               <i className="fas fa-circle success-text-color mr-3 pl-0" style={{ fontSize: "6px" }} />
               <div className="text-modal-color font-weight-500">Active</div>

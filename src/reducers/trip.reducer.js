@@ -16,7 +16,48 @@ const initialState = {
     count: 0,
     end: 0
   },
-  trip_detail_in_lord: {}
+  trip_detail_in_lord: {
+    basic_info: {
+      amount: "",
+      arrive_time: "",
+      cad_time: "",
+      cdate: "",
+      cob_time: "",
+      contact_cell: "",
+      contact_name: "",
+      eta_time: "",
+      flight_str: "",
+      is_paid: 0,
+      note: "",
+      order_token: "",
+      pickup_time: "",
+      pickup_time_local: "",
+      start_time: "",
+      status: "",
+      status_str: "",
+      trip_token: "",
+      type: "",
+      udate: "",
+      vehicle_type: ""
+    },
+    from_address_info: {
+      addr_str: ""
+    },
+    to_address_info: {
+      addr_str: ""
+    },
+    customer_info: {
+      name: "",
+      cell: "",
+      email: ""
+    },
+    driver_info: {
+      name: "",
+      cell: "",
+      email: "",
+      img_path: ""
+    }
+  }
 };
 
 export default (state = initialState, action) => {

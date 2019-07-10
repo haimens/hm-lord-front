@@ -76,7 +76,7 @@ class TripDetailContainer extends Component {
     }
   }
   render() {
-    const { history } = this.props;
+    const { history, trip_detail_in_lord } = this.props;
     const {
       currentPosition,
       title,
@@ -120,22 +120,42 @@ class TripDetailContainer extends Component {
           <div className="bg-white rounded-custom shadow-sm">
             <div className="row" style={{ padding: "40px" }}>
               <div className="col-lg-6 col-12 mb-4">
-                <BasicInfo handleDetailButtonClicked={this.handleInfoModal} showButton={basic_info} />
+                <BasicInfo
+                  trip_detail_in_lord={trip_detail_in_lord}
+                  handleDetailButtonClicked={this.handleInfoModal}
+                  showButton={basic_info}
+                />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <CustomerInfo handleDetailButtonClicked={this.handleInfoModal} showButton={customer_info} />
+                <CustomerInfo
+                  trip_detail_in_lord={trip_detail_in_lord}
+                  handleDetailButtonClicked={this.handleInfoModal}
+                  showButton={customer_info}
+                />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <DriverInfo handleDetailButtonClicked={this.handleInfoModal} showButton={driver_info} />
+                <DriverInfo
+                  trip_detail_in_lord={trip_detail_in_lord}
+                  handleDetailButtonClicked={this.handleInfoModal}
+                  showButton={driver_info}
+                />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <VehicleInfo handleDetailButtonClicked={this.handleInfoModal} showButton={vehicle_info} />
+                <VehicleInfo
+                  trip_detail_in_lord={trip_detail_in_lord}
+                  handleDetailButtonClicked={this.handleInfoModal}
+                  showButton={vehicle_info}
+                />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <AlertInfo handleDetailButtonClicked={this.handleInfoModal} showButton={alert_info} />
+                <AlertInfo
+                  trip_detail_in_lord={trip_detail_in_lord}
+                  handleDetailButtonClicked={this.handleInfoModal}
+                  showButton={alert_info}
+                />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <TimeStaps showButton={time_stamps} />
+                <TimeStaps trip_detail_in_lord={trip_detail_in_lord} showButton={time_stamps} />
               </div>
             </div>
           </div>
@@ -168,7 +188,9 @@ class TripDetailContainer extends Component {
   }
 }
 const mapStateToProps = state => {
-  return {};
+  return {
+    trip_detail_in_lord: state.tripReducer.trip_detail_in_lord
+  };
 };
 const mapDispatchToProps = { findTripDetailInLord };
 

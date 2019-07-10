@@ -1,7 +1,8 @@
 import React from "react";
 
 export default function CustomerInfo(props) {
-  const { showButton, handleDetailButtonClicked } = props;
+  const { showButton, handleDetailButtonClicked, trip_detail_in_lord } = props;
+  const { driver_info } = trip_detail_in_lord;
   return (
     <div>
       <div className="purple-border p-3">
@@ -17,7 +18,7 @@ export default function CustomerInfo(props) {
           )}
         </div>
         <img
-          src={`${process.env.PUBLIC_URL}/img/hd.png`}
+          src={driver_info.img_path}
           alt="Driver"
           className="rounded-circle my-3"
           style={{ height: "74px", width: "74px" }}
@@ -25,15 +26,15 @@ export default function CustomerInfo(props) {
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Driver Name</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">{123}</div>
+        <div className="hm-text-14 font-weight-bold text-modal-color">{driver_info.name}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Cell</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">{123}</div>
+        <div className="hm-text-14 font-weight-bold text-modal-color">{driver_info.cell}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Email</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">{123}</div>
+        <div className="hm-text-14 font-weight-bold text-modal-color">{driver_info.email}</div>
       </div>
     </div>
   );
