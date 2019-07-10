@@ -24,7 +24,7 @@ class VehicleDetail extends Component {
     const { showAddingOrderModal } = this.state;
     const { history, customer_Detail_in_lord } = this.props;
     return (
-      <main>
+      <main className="container-fluid">
         {showAddingOrderModal && <AddingOrderModal />}
         <section className="mb-4">
           <div className="mb-4">

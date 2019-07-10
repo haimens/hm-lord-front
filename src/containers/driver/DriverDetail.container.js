@@ -88,7 +88,7 @@ class DriverDetail extends Component {
       updateACarForADriver
     } = this.props;
     return (
-      <main>
+      <main className="container-fluid">
         {showUpdatingDriverModal && (
           <UpdatingDriverModal
             driver_token={driver_token}

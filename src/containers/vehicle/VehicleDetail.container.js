@@ -21,7 +21,7 @@ class VehicleDetail extends Component {
     const { showAddingDriverModal } = this.state;
     const { history, vehicle_detail_in_lord } = this.props;
     return (
-      <main>
+      <main className="container-fluid">
         {showAddingDriverModal && <AddingDriverModal onClose={this.handleShowAddingDriverModal} />}
         <section className="mb-4">
           <div className="mb-4">
