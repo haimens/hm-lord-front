@@ -1,60 +1,37 @@
 import React, { Component } from "react";
-import { Modal, ImageLoaderModal, PreviewImageModal, AddingImage, GAutoComplete } from "../../../../components/shared";
-import { parseRate } from "../../../../actions/utilities.action";
+import { Modal } from "../../../../components/shared";
+import { convertLocalToUTC } from "../../../../actions/utilities.action";
 import alertify from "alertifyjs";
-
-export default class BasicInfo extends Component {
+import { TimePicker } from "antd";
+import "./AlertInfoModal.css";
+export default class AlertInfo extends Component {
   state = {
-    showImage: false,
-    showPreview: false,
-    name: "",
-    area: "+1",
-    email: "",
-    cell: "",
-    img_path: "",
-    address_str: ""
+    eta: "",
+    arrival: "",
+    cob: ""
   };
 
-  handleInputChange = e => {
-    const { id, value } = e.target;
-    this.setState({ [id]: value });
+  handleETAAlert = time => {
+    console.log(time);
+    this.setState({ eta: time._d });
+  };
+  handleArrivalAlert = time => {
+    this.setState({ arrival: time._d });
+  };
+  handleCOBAlert = time => {
+    this.setState({ cob: time._d });
   };
 
-  handleShowImage = () => {
-    this.setState(states => ({ showImage: !states.showImage }));
-  };
-  handleShowPreview = () => {
-    this.setState(states => ({ showPreview: !states.showPreview }));
-  };
-
-  handleImageUpload = img_path => {
-    this.setState({ img_path: img_path });
-  };
-
-  handleClose = () => {
-    this.props.onClose();
-  };
-
-  saveToAddress = address => {
-    this.setState({ address_str: address[0].formatted_address });
-  };
-
-  handleCreatingCompany = async () => {
-    const { name, cell, area, email, img_path, address_str } = this.state;
-    const { createACustomerInLord, createNewAddressInstance } = this.props;
-    if (name !== "" && cell !== "" && area !== "" && email !== "") {
-      console.log(name);
-      const payload = await createNewAddressInstance({ address_str });
-      createACustomerInLord({
-        customer_info: {
-          name,
-          img_path,
-          cell: `${area} ${cell}`,
-          email
-        },
-        address_info: {
-          address_token: payload.address_token
-        }
+  handleCreateAlerts = async () => {
+    const { eta, arrival, cob } = this.state;
+    const { createAnAlertForATrip, trip_token } = this.props;
+    if (eta !== "" && arrival !== "" && cob !== "") {
+      createAnAlertForATrip(trip_token, {
+        alert_list: [
+          { type: 1, record_time: convertLocalToUTC(eta) },
+          { type: 2, record_time: convertLocalToUTC(arrival) },
+          { type: 3, record_time: convertLocalToUTC(cob) }
+        ]
       });
       this.handleClose();
     } else {
@@ -62,78 +39,32 @@ export default class BasicInfo extends Component {
     }
   };
 
+  handleClose = () => {
+    this.props.onClose();
+  };
+
   render() {
-    const { img_path, showImage, showPreview, name, cell, area, email } = this.state;
     return (
       <div>
-        {showImage && (
-          <ImageLoaderModal
-            onClose={() => this.setState({ showImage: false })}
-            onImageUpload={this.handleImageUpload}
-            title="Upload Image"
-          />
-        )}
-        {showPreview && <PreviewImageModal image={img_path} onClose={() => this.setState({ showPreview: false })} />}
-
-        <Modal title="Add Customer" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"525px"}>
+        <Modal title="Add Customer" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"420px"}>
           <div className="container">
             <div className="p-3">
-              <div className="form-group mb-4">
-                <input
-                  className="form-control hm-input-height mt-3"
-                  name="name"
-                  id="name"
-                  placeholder={"Name"}
-                  value={name}
-                  onChange={this.handleInputChange}
-                />
+              <div className="form-group my-4">
+                <TimePicker onChange={this.handleETAAlert} />
               </div>
 
-              <div className="form-group input-group mb-4 d-flex">
-                <input
-                  type="text"
-                  className="form-control hm-input-height col-2"
-                  id="area"
-                  placeholder="Area"
-                  value={area}
-                  onChange={this.handleInputChange}
-                />
-
-                <input
-                  type="text"
-                  className="form-control hm-input-height "
-                  id="cell"
-                  placeholder="Cell"
-                  value={cell}
-                  onChange={this.handleInputChange}
-                />
+              <div className="form-group input-group mb-4">
+                <TimePicker onChange={this.handleArrivalAlert} />
               </div>
 
-              <div className="form-group mb-4">
-                <input
-                  className="form-control hm-input-height mt-3"
-                  name="email"
-                  id="email"
-                  placeholder={"Email"}
-                  value={email}
-                  onChange={this.handleInputChange}
-                />
+              <div className="form-group input-group mb-4">
+                <TimePicker onChange={this.handleCOBAlert} />
               </div>
-
-              <div className="form-group">
-                <GAutoComplete getGoogleAddress={this.saveToAddress} />
-              </div>
-
-              <AddingImage
-                title={"Logo:"}
-                parentProps={{ img_url: img_path, handleShowPreview: this.handleShowPreview }}
-                handleShowImage={this.handleShowImage}
-              />
 
               <div className="form-group text-right pt-3">
                 <button
                   className="button-main-background btn button-main-size px-4 text-white mr-3"
-                  onClick={this.handleCreatingCompany}
+                  onClick={this.handleCreateAlerts}
                 >
                   Add
                 </button>

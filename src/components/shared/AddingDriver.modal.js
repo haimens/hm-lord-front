@@ -1,26 +1,22 @@
 import React, { Component } from "react";
-import { Modal, SearchBar, VehicleCard } from "../../../components/shared";
-import AddingVehicleItem from "./AddingVehicleModal.component/AddingVehicle.item";
+import Modal from "./Modal";
 
-export default class AddingVehicleModal extends Component {
+export default class AddingDriverModal extends Component {
   handleInputChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
 
-  addVehicleToDriver = car_token => {
-    const { driver_token, createDriverToACarInLord } = this.props;
-    createDriverToACarInLord(driver_token, { car_token });
+  handleDriverBeenClicked = driver_token => {
+    this.props.handleDriverBeenClicked(driver_token);
     this.handleClose();
   };
 
   handleClose = () => {
     this.props.onClose();
   };
-
   render() {
-    console.log(this.props);
-    const { vehicle_list_in_lord } = this.props;
+    const { driver_list_in_lord } = this.props;
     return (
       <Modal title="Vehicle" onClose={this.handleClose} position="center" getWidth={"400px"} getHeight={"550px"}>
         <div className="rounded-custom">
@@ -42,21 +38,21 @@ export default class AddingVehicleModal extends Component {
             </div>
           </div>
           <div className="container">
-            {vehicle_list_in_lord.record_list.map((vehicle, index) => (
+            {driver_list_in_lord.record_list.map((driver, index) => (
               <div className="col-12 border-bottom d-flex align-items-center" key={index} style={{ height: "92px" }}>
                 <div className="col-3">
-                  <img src={vehicle.img_path} alt="driver-avatar" className="avatar-md rounded-circle " />
+                  <img src={driver.img_path} alt="driver-avatar" className="avatar-md rounded-circle " />
                 </div>
                 <div className="col-9">
                   <div className="d-flex justify-content-between align-items-center">
                     <div>
-                      <div className="font-weight-bold hm-text-16 text-modal-color">{vehicle.identifier}</div>
-                      <div className=" hm-text-14 text-modal-color">{vehicle.plate_num}</div>
+                      <div className="font-weight-bold hm-text-16 text-modal-color">{driver.name}</div>
+                      <div className=" hm-text-14 text-modal-color">{driver.plate_num}</div>
                     </div>
                     <div>
                       <button
                         className="btn button-main-background text-white shadow-sm"
-                        onClick={() => this.addVehicleToDriver(vehicle.car_token)}
+                        onClick={() => this.handleDriverBeenClicked(driver.driver_token)}
                       >
                         Add
                       </button>

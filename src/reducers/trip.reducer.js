@@ -56,7 +56,13 @@ const initialState = {
       cell: "",
       email: "",
       img_path: ""
-    }
+    },
+    car_info: {
+      identifier: "",
+      plate: "",
+      description: ""
+    },
+    alert_list: [{ type: "", record_time: "" }, { type: "", record_time: "" }, { type: "", record_time: "" }]
   }
 };
 

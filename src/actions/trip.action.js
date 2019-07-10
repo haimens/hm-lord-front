@@ -75,3 +75,17 @@ export const findTripDetailInLord = trip_token => async dispatch => {
     dispatch(processLogout(err));
   }
 };
+
+export const createAnAlertForATrip = (trip_token, body = {}) => async dispatch => {
+  try {
+    console.log(trip_token);
+    await startLoader(dispatch);
+    const { payload } = await callApi(`trip/alerts/${trip_token}`, "POST", body);
+    await dispatch(findTripDetailInLord(trip_token));
+    await launchSuccess(dispatch);
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};

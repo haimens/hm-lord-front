@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { DriverCard, Header, ListHeader, ListView } from "../../components/shared";
 import VehicleDetailCard from "./vehicleDetail.component/VehicleDetail.card";
-import AddingDriverModal from "./vehicleDetail.component/AddingDriver.modal";
+import AddingDriverModal from "../../components/shared/AddingDriver.modal";
 import {
   findCarDetailInLord,
   findDriverListForACar,
@@ -23,6 +23,15 @@ class VehicleDetail extends Component {
   handleShowEditingDriverModal = () => {
     this.setState(state => ({ showEditVehicleModal: !state.showEditVehicleModal }));
   };
+  handleCreateCarToADriverInLord = driver_token => {
+    const {
+      match: {
+        params: { car_token }
+      },
+      createCarToADriverInLord
+    } = this.props;
+    createCarToADriverInLord(car_token, { driver_token });
+  };
   componentDidMount() {
     const { match, findCarDetailInLord, findDriverListForACar, findDriverListInLord } = this.props;
     const { car_token } = match.params;
@@ -36,7 +45,6 @@ class VehicleDetail extends Component {
       match: {
         params: { car_token }
       },
-      createCarToADriverInLord,
       driver_list_in_lord,
       updateACarInLord,
       driver_list_for_a_car
@@ -46,7 +54,7 @@ class VehicleDetail extends Component {
         {showAddingDriverModal && (
           <AddingDriverModal
             car_token={car_token}
-            createCarToADriverInLord={createCarToADriverInLord}
+            handleDriverBeenClicked={this.handleCreateCarToADriverInLord}
             driver_list_in_lord={driver_list_in_lord}
             onClose={this.handleShowAddingDriverModal}
           />

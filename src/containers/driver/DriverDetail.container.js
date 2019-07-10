@@ -7,7 +7,7 @@ import { VehicleCard, TripCard, ListView, ListHeader, Header } from "../../compo
 import WageListItem from "./driverDetail.component/WageList.item";
 import SalaryListItem from "./driverDetail.component/SalaryList.item";
 import AddingTripModal from "./driverDetail.component/AddingTrip.modal";
-import AddingVehicleModal from "./driverDetail.component/AddingVehicle.modal";
+import AddingVehicleModal from "../../components/shared/AddingVehicle.modal";
 import AddingWageModal from "./driverDetail.component/AddingWage.modal";
 import AddingSalaryModal from "./driverDetail.component/AddingSalary.modal";
 import UpdatingDriverModal from "./driverDetail.component/UpdatingDriverInfo.modal";
@@ -49,6 +49,11 @@ class DriverDetail extends Component {
     if (type === "basic") {
       this.handleShowUpdatingDriverModal();
     }
+  };
+  handleCreateDriverToACarInLord = car_token => {
+    const { match, createDriverToACarInLord } = this.props;
+    const { driver_token } = match.params;
+    createDriverToACarInLord(driver_token, { car_token });
   };
   async componentDidMount() {
     const {
@@ -92,7 +97,6 @@ class DriverDetail extends Component {
       driver_detail_in_lord,
       updateADriverInLord,
       vehicle_list_in_lord,
-      createDriverToACarInLord,
       car_list_for_a_driver,
       updateACarForADriver
     } = this.props;
@@ -110,7 +114,7 @@ class DriverDetail extends Component {
         {showAddingVehicleModal && (
           <AddingVehicleModal
             driver_token={driver_token}
-            createDriverToACarInLord={createDriverToACarInLord}
+            handleCarBeenClicked={this.handleCreateDriverToACarInLord}
             vehicle_list_in_lord={vehicle_list_in_lord}
             onClose={this.handleShowAddingVehicleModal}
           />

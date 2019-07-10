@@ -15,7 +15,7 @@ import {
   DriverInfoModal,
   VehicleInfoModal
 } from "./TripDetail.component";
-import { findTripDetailInLord } from "../../../actions/trip.action";
+import { findTripDetailInLord, createAnAlertForATrip } from "../../../actions/trip.action";
 class TripDetailContainer extends Component {
   state = {
     basic_info: false,
@@ -76,7 +76,9 @@ class TripDetailContainer extends Component {
     }
   }
   render() {
-    const { history, trip_detail_in_lord } = this.props;
+    const { match, history, trip_detail_in_lord, createAnAlertForATrip } = this.props;
+    const { trip_token } = match.params;
+
     const {
       currentPosition,
       title,
@@ -100,7 +102,13 @@ class TripDetailContainer extends Component {
         )}
         {showDriverInfoModal && driver_info && <DriverInfoModal onClose={() => this.handleInfoModal("driver")} />}
         {showVehicleInfoModal && vehicle_info && <VehicleInfoModal onClose={() => this.handleInfoModal("vehicle")} />}
-        {showAlertInfoModal && alert_info && <AlertInfoModal onClose={() => this.handleInfoModal("alert")} />}
+        {showAlertInfoModal && alert_info && (
+          <AlertInfoModal
+            trip_token={trip_token}
+            createAnAlertForATrip={createAnAlertForATrip}
+            onClose={() => this.handleInfoModal("alert")}
+          />
+        )}
 
         <section className="mb-4">
           <div>
@@ -192,7 +200,7 @@ const mapStateToProps = state => {
     trip_detail_in_lord: state.tripReducer.trip_detail_in_lord
   };
 };
-const mapDispatchToProps = { findTripDetailInLord };
+const mapDispatchToProps = { findTripDetailInLord, createAnAlertForATrip };
 
 export default connect(
   mapStateToProps,
