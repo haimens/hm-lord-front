@@ -7,7 +7,11 @@ import CustomerDetailCard from "./customerDetail.component/CustomerDetail.card";
 import LogListItem from "./customerDetail.component/LogList.item";
 import EditCustomerModal from "./customerDetail.component/EditCustomer.modal";
 
-import { findCustomerDetailInLord, updateACustomerInLord } from "../../actions/customer.action";
+import {
+  findCustomerDetailInLord,
+  updateACustomerInLord,
+  updateACustomerAddressInLord
+} from "../../actions/customer.action";
 import { createNewAddressInstance } from "../../actions/address.action";
 class VehicleDetail extends Component {
   state = {
@@ -23,7 +27,14 @@ class VehicleDetail extends Component {
   }
   render() {
     const { showEditingCustomerInfo } = this.state;
-    const { history, match, customer_detail_in_lord, updateACustomerInLord } = this.props;
+    const {
+      history,
+      match,
+      customer_detail_in_lord,
+      updateACustomerInLord,
+      updateACustomerAddressInLord,
+      createNewAddressInstance
+    } = this.props;
     const { customer_token } = match.params;
 
     return (
@@ -33,6 +44,7 @@ class VehicleDetail extends Component {
             customer_token={customer_token}
             customer_detail_in_lord={customer_detail_in_lord}
             createNewAddressInstance={createNewAddressInstance}
+            updateACustomerAddressInLord={updateACustomerAddressInLord}
             updateACustomerInLord={updateACustomerInLord}
             onClose={this.handleEditingCustomerInformation}
           />
@@ -110,7 +122,12 @@ const mapStateToProps = state => {
     customer_detail_in_lord: state.customerReducer.customer_detail_in_lord
   };
 };
-const mapDispatchToProps = { findCustomerDetailInLord, updateACustomerInLord, createNewAddressInstance };
+const mapDispatchToProps = {
+  findCustomerDetailInLord,
+  updateACustomerInLord,
+  createNewAddressInstance,
+  updateACustomerAddressInLord
+};
 
 export default connect(
   mapStateToProps,

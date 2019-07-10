@@ -15,24 +15,9 @@ class Vehicle extends Component {
     this.setState(state => ({ showVehicleCreationModal: !state.showVehicleCreationModal }));
   };
   componentDidMount() {
-    document.addEventListener("scroll", this.trackScrolling);
     this.props.findVehicleListInLord();
   }
-  isBottom(el) {
-    return el.getBoundingClientRect().bottom <= window.innerHeight;
-  }
 
-  componentWillUnmount() {
-    document.removeEventListener("scroll", this.trackScrolling);
-  }
-
-  trackScrolling = () => {
-    const wrappedElement = document.getElementById("header");
-    if (this.isBottom(wrappedElement)) {
-      console.log("header bottom reached");
-      document.removeEventListener("scroll", this.trackScrolling);
-    }
-  };
   render() {
     const { showVehicleCreationModal } = this.state;
     const { history, vehicle_list_in_lord, createAVehicleInLord } = this.props;

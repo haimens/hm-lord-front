@@ -20,3 +20,23 @@ export const findDriverListInLord = (driver_token, query = {}) => async dispatch
     dispatch(processLogout(err));
   }
 };
+
+export const findTripListInLord = (query = {}) => async dispatch => {
+  console.log(query);
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`trip/all/detail/realm`, "GET", null, {
+      order_key: "udate",
+      order_direction: "DESC",
+      ...query
+    });
+    await dispatch({
+      type: constant.TRIP_LIST_IN_LORD,
+      payload
+    });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};

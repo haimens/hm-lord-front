@@ -87,7 +87,7 @@ export const findDriverListForACar = (car_token, query = {}) => async dispatch =
 export const createCarToADriverInLord = (car_token, body) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`car/driver/${car_token}`, "POST", null, body);
+    const { payload } = await callApi(`car/driver/${car_token}`, "POST", body);
     await stopLoader(dispatch);
   } catch (err) {
     await stopLoader(dispatch);

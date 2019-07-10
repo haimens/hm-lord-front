@@ -38,7 +38,8 @@ class VehicleDetail extends Component {
       },
       createCarToADriverInLord,
       driver_list_in_lord,
-      updateACarInLord
+      updateACarInLord,
+      driver_list_for_a_car
     } = this.props;
     return (
       <main className="container-fluid">
@@ -87,17 +88,17 @@ class VehicleDetail extends Component {
             buttonWidth={"88px"}
           />
           <div className="row p-3">
-            <DriverCard
-              parentProps={{
-                driverName: 123,
-                driverImage: 123,
-                driverPhone: 123,
-                driverUsername: 123,
-                driver_token: 123,
-                isActive: 1
-              }}
-              history={history}
-            />
+            {driver_list_for_a_car.record_list.map((driver, index) => (
+              <DriverCard
+                parentProps={{
+                  driverName: driver.name,
+                  driverImage: driver.driver_img_path,
+                  driverPhone: driver.cell,
+                  driver_token: driver.token
+                }}
+                history={history}
+              />
+            ))}
           </div>
         </section>
         <section className="mb-4">
@@ -129,7 +130,8 @@ class VehicleDetail extends Component {
 const mapStateToProps = state => {
   return {
     vehicle_detail_in_lord: state.vehicleReducer.vehicle_detail_in_lord,
-    driver_list_in_lord: state.driverReducer.driver_list_in_lord
+    driver_list_in_lord: state.driverReducer.driver_list_in_lord,
+    driver_list_for_a_car: state.vehicleReducer.driver_list_for_a_car
   };
 };
 const mapDispatchToProps = {

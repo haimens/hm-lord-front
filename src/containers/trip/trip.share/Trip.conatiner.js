@@ -2,13 +2,25 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { TripCard, ListHeader, Header } from "../../../components/shared";
-
+import { findTripListInLord } from "../../../actions/trip.action";
 class TripContainer extends Component {
   state = {};
 
-  async componentDidMount() {}
+  async componentDidMount() {
+    const { match, findTripListInLord } = this.props;
+    const currentPosition = match.path.split("/")[2];
+    if (currentPosition === "ongoing") {
+    }
+    if (currentPosition === "upcoming") {
+      findTripListInLord({ status: 2 });
+    }
+    if (currentPosition === "finished") {
+    }
+    if (currentPosition === "abnormal") {
+    }
+  }
   render() {
-    const { history, match } = this.props;
+    const { history, match, findTripListInLord } = this.props;
     const currentPosition = match.path.split("/")[2];
     let title = "";
     if (currentPosition === "ongoing") {
@@ -60,7 +72,9 @@ class TripContainer extends Component {
 const mapStateToProps = state => {
   return {};
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  findTripListInLord
+};
 
 export default connect(
   mapStateToProps,

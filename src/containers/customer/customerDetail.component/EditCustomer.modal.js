@@ -41,15 +41,27 @@ export default class CustomerEditing extends Component {
 
   handleCreatingCompany = async () => {
     const { name, cell, area, email, img_path, address_str } = this.state;
-    const { updateACustomerInLord, createNewAddressInstance, customer_token } = this.props;
+    const {
+      updateACustomerInLord,
+      createNewAddressInstance,
+      updateACustomerAddressInLord,
+      customer_token
+    } = this.props;
     if (name !== "" && cell !== "" && area !== "" && email !== "") {
       const payload = await createNewAddressInstance({ address_str });
-      updateACustomerInLord(customer_token, {
-        name,
-        img_path,
-        cell: `${area} ${cell}`,
-        email
-      });
+      console.log(address_str);
+      console.log(JSON.stringify(payload));
+      Promise.all([
+        updateACustomerInLord(customer_token, {
+          name,
+          img_path,
+          cell: `${area} ${cell}`,
+          email
+        }),
+        updateACustomerAddressInLord(customer_token, {
+          address_token: payload.address_token
+        })
+      ]);
       this.handleClose();
     } else {
       alertify.alert("Error!", "Please Finish The Form!");
