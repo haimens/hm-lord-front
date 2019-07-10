@@ -7,8 +7,6 @@ import VehicleInfo from "./VehicleInfo.card";
 import BasicInfoModal from "./BasicInfo.modal";
 import AlertInfoModal from "./AlertInfo.modal";
 import CustomerInfoModal from "./CustomerInfo.modal";
-import DriverInfoModal from "./DriverInfo.modal";
-import VehicleInfoModal from "./VehicleInfo.modal";
 
 export {
   AlertInfo,
@@ -19,7 +17,5 @@ export {
   VehicleInfo,
   BasicInfoModal,
   AlertInfoModal,
-  CustomerInfoModal,
-  DriverInfoModal,
-  VehicleInfoModal
+  CustomerInfoModal
 };

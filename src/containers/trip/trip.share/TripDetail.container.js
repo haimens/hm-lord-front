@@ -11,9 +11,7 @@ import {
   TimeStaps,
   BasicInfoModal,
   AlertInfoModal,
-  CustomerInfoModal,
-  DriverInfoModal,
-  VehicleInfoModal
+  CustomerInfoModal
 } from "./TripDetail.component";
 import { findVehicleListInLord } from "../../../actions/vehicle.action";
 import { findTripDetailInLord, createAnAlertForATrip, updateTripOperationInfo } from "../../../actions/trip.action";
