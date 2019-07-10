@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { TripCard, Header } from "../../../components/shared";
+import { ListHeader, ListView, Header } from "../../../components/shared";
 import BasicInfo from "./TripDetail.component/BasicInfo.container";
 import CustomerInfo from "./TripDetail.component/CustomerInfo.container";
 import DriverInfo from "./TripDetail.component/DriverInfo.container";
@@ -93,6 +93,29 @@ class TripDetailContainer extends Component {
               </div>
             </div>
           </div>
+        </section>
+
+        <section className="mb-4">
+          <ListHeader
+            parentProps={{
+              title: "Log History",
+              clickFunction: this.handleShowAddingVehicleModal,
+              clickTitle: "Vehicle"
+            }}
+            hideButton={true}
+            buttonWidth={"88px"}
+          />
+          <ListView
+            totalCount={30}
+            title="Log History"
+            fieldNames={["Date", "Admin", "Log Note"]}
+            hideHeader={true}
+            onPageChange={this.handlePageChange}
+          >
+            {/* {punch_list_in_puri.record_list.map((punch, index) => (
+              <LogListItem parentProps={punch} key={index} onClick={this.handlePunchItemClick} />
+            ))} */}
+          </ListView>
         </section>
       </main>
     );
