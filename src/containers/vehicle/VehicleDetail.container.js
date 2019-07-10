@@ -4,25 +4,41 @@ import { withRouter } from "react-router-dom";
 import { DriverCard, Header, ListHeader, ListView } from "../../components/shared";
 import VehicleDetailCard from "./vehicleDetail.component/VehicleDetail.card";
 import AddingDriverModal from "./vehicleDetail.component/AddingDriver.modal";
-import { findCarDetailInLord } from "../../actions/vehicle.action";
+import { findCarDetailInLord, findDriverListForACar, createCarToADriverInLord } from "../../actions/vehicle.action";
+import { findDriverListInLord } from "../../actions/driver.action";
 class VehicleDetail extends Component {
   state = {
     showAddingDriverModal: false
   };
-  handleShowAddingVehicleModal = () => {
+  handleShowAddingDriverModal = () => {
     this.setState(state => ({ showAddingDriverModal: !state.showAddingDriverModal }));
   };
   componentDidMount() {
-    const { match, findCarDetailInLord } = this.props;
+    const { match, findCarDetailInLord, findDriverListForACar, findDriverListInLord } = this.props;
     const { car_token } = match.params;
-    Promise.all([findCarDetailInLord(car_token)]);
+    Promise.all([findCarDetailInLord(car_token), findDriverListForACar(car_token), findDriverListInLord()]);
   }
   render() {
     const { showAddingDriverModal } = this.state;
-    const { history, vehicle_detail_in_lord } = this.props;
+    const {
+      history,
+      vehicle_detail_in_lord,
+      match: {
+        params: { car_token }
+      },
+      createCarToADriverInLord,
+      driver_list_in_lord
+    } = this.props;
     return (
       <main className="container-fluid">
-        {showAddingDriverModal && <AddingDriverModal onClose={this.handleShowAddingDriverModal} />}
+        {showAddingDriverModal && (
+          <AddingDriverModal
+            car_token={car_token}
+            createCarToADriverInLord={createCarToADriverInLord}
+            driver_list_in_lord={driver_list_in_lord}
+            onClose={this.handleShowAddingDriverModal}
+          />
+        )}
         <section className="mb-4">
           <div className="mb-4">
             <Header
@@ -42,8 +58,8 @@ class VehicleDetail extends Component {
           <ListHeader
             parentProps={{
               title: "Related Driver List",
-              clickFunction: this.handleShowAddingVehicleModal,
-              clickTitle: "Vehicle"
+              clickFunction: this.handleShowAddingDriverModal,
+              clickTitle: "Driver"
             }}
             hideShadow={true}
             buttonWidth={"88px"}
@@ -90,10 +106,16 @@ class VehicleDetail extends Component {
 }
 const mapStateToProps = state => {
   return {
-    vehicle_detail_in_lord: state.vehicleReducer.vehicle_detail_in_lord
+    vehicle_detail_in_lord: state.vehicleReducer.vehicle_detail_in_lord,
+    driver_list_in_lord: state.driverReducer.driver_list_in_lord
   };
 };
-const mapDispatchToProps = { findCarDetailInLord };
+const mapDispatchToProps = {
+  findCarDetailInLord,
+  findDriverListForACar,
+  findDriverListInLord,
+  createCarToADriverInLord
+};
 
 export default connect(
   mapStateToProps,

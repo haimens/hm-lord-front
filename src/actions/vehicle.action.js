@@ -64,6 +64,7 @@ export const findCarDetailInLord = car_token => async dispatch => {
 };
 
 export const findDriverListForACar = (car_token, query = {}) => async dispatch => {
+  console.log(car_token);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`car/all/driver/${car_token}`, "GET", null, {
