@@ -3,7 +3,7 @@ import { Modal, ImageLoaderModal, PreviewImageModal, AddingImage, GAutoComplete 
 import { parseRate } from "../../../actions/utilities.action";
 import alertify from "alertifyjs";
 
-export default class CustomerAdding extends Component {
+export default class CustomerEditing extends Component {
   state = {
     showImage: false,
     showPreview: false,
@@ -41,20 +41,14 @@ export default class CustomerAdding extends Component {
 
   handleCreatingCompany = async () => {
     const { name, cell, area, email, img_path, address_str } = this.state;
-    const { createACustomerInLord, createNewAddressInstance } = this.props;
+    const { updateACustomerInLord, createNewAddressInstance, customer_token } = this.props;
     if (name !== "" && cell !== "" && area !== "" && email !== "") {
-      console.log(name);
       const payload = await createNewAddressInstance({ address_str });
-      createACustomerInLord({
-        customer_info: {
-          name,
-          img_path,
-          cell: `${area} ${cell}`,
-          email
-        },
-        address_info: {
-          address_token: payload.address_token
-        }
+      updateACustomerInLord(customer_token, {
+        name,
+        img_path,
+        cell: `${area} ${cell}`,
+        email
       });
       this.handleClose();
     } else {
@@ -62,8 +56,14 @@ export default class CustomerAdding extends Component {
     }
   };
 
+  componentDidMount() {
+    const { customer_detail_in_lord } = this.props;
+    const { name, cell, email, addr_str, img_path } = customer_detail_in_lord;
+    this.setState({ name, cell: cell.split(" ")[1], area: cell.split(" ")[0], email, addr_str, img_path });
+  }
+
   render() {
-    const { img_path, showImage, showPreview, name, cell, area, email } = this.state;
+    const { img_path, showImage, showPreview, name, cell, area, email, address_str } = this.state;
     return (
       <div>
         {showImage && (
@@ -121,7 +121,7 @@ export default class CustomerAdding extends Component {
               </div>
 
               <div className="form-group">
-                <GAutoComplete getGoogleAddress={this.saveToAddress} />
+                <GAutoComplete getGoogleAddress={this.saveToAddress} defaultValue={address_str} />
               </div>
 
               <AddingImage
@@ -135,7 +135,7 @@ export default class CustomerAdding extends Component {
                   className="button-main-background btn button-main-size px-4 text-white mr-3"
                   onClick={this.handleCreatingCompany}
                 >
-                  Add
+                  Update
                 </button>
                 <button onClick={this.handleClose} className="btn button-main-size btn-outline-secondary px-4">
                   Cancel

@@ -5,15 +5,16 @@ import { OrderCard, ListView, ListHeader, Header } from "../../components/shared
 
 import CustomerDetailCard from "./customerDetail.component/CustomerDetail.card";
 import LogListItem from "./customerDetail.component/LogList.item";
-import AddingOrderModal from "./customerDetail.component/AddingOrder.modal";
+import EditCustomerModal from "./customerDetail.component/EditCustomer.modal";
 
-import { findCustomerDetailInLord } from "../../actions/customer.action";
+import { findCustomerDetailInLord, updateACustomerInLord } from "../../actions/customer.action";
+import { createNewAddressInstance } from "../../actions/address.action";
 class VehicleDetail extends Component {
   state = {
     showAddingOrderModal: false
   };
-  handleShowAddingOrderModal = () => {
-    this.setState(state => ({ showAddingOrderModal: !state.showAddingOrderModal }));
+  handleEditingCustomerInformation = () => {
+    this.setState(state => ({ showEditingCustomerInfo: !state.showEditingCustomerInfo }));
   };
   componentDidMount() {
     const { match, findCustomerDetailInLord } = this.props;
@@ -21,11 +22,21 @@ class VehicleDetail extends Component {
     Promise.all([findCustomerDetailInLord(customer_token)]);
   }
   render() {
-    const { showAddingOrderModal } = this.state;
-    const { history, customer_Detail_in_lord } = this.props;
+    const { showEditingCustomerInfo } = this.state;
+    const { history, match, customer_detail_in_lord, updateACustomerInLord } = this.props;
+    const { customer_token } = match.params;
+
     return (
       <main className="container-fluid">
-        {showAddingOrderModal && <AddingOrderModal />}
+        {showEditingCustomerInfo && (
+          <EditCustomerModal
+            customer_token={customer_token}
+            customer_detail_in_lord={customer_detail_in_lord}
+            createNewAddressInstance={createNewAddressInstance}
+            updateACustomerInLord={updateACustomerInLord}
+            onClose={this.handleEditingCustomerInformation}
+          />
+        )}
         <section className="mb-4">
           <div className="mb-4">
             <Header
@@ -38,7 +49,10 @@ class VehicleDetail extends Component {
             />
           </div>
           <div>
-            <CustomerDetailCard customer_Detail_in_lord={customer_Detail_in_lord} />
+            <CustomerDetailCard
+              handleDetailButtonClicked={this.handleEditingCustomerInformation}
+              customer_detail_in_lord={customer_detail_in_lord}
+            />
           </div>
         </section>
         <section className="mb-4 bg-white rounded-custom shadow-sm">
@@ -93,10 +107,10 @@ class VehicleDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    customer_Detail_in_lord: state.customerReducer.customer_Detail_in_lord
+    customer_detail_in_lord: state.customerReducer.customer_detail_in_lord
   };
 };
-const mapDispatchToProps = { findCustomerDetailInLord };
+const mapDispatchToProps = { findCustomerDetailInLord, updateACustomerInLord, createNewAddressInstance };
 
 export default connect(
   mapStateToProps,
