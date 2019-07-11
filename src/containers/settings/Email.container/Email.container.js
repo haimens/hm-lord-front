@@ -27,8 +27,7 @@ class Email extends Component {
   };
 
   async componentDidMount() {
-    const { findAllEmailResourceList, match } = this.props;
-    const { realm_token } = match.params;
+    const { match } = this.props;
     Promise.all([]);
   }
   handlePageChange = start => {
@@ -57,14 +56,7 @@ class Email extends Component {
         )} */}
         <section className="container-fluid">
           <div className="mb-4">
-            <Header
-              title=""
-              history={history}
-              tabicon={"tabicon_.svg"}
-              subTitle={" Detail"}
-              thirdTitle={"Primary Email"}
-              toLocation={"/"}
-            />
+            <Header title="Settings" history={history} tabicon={"tabicon_.svg"} subTitle={"Email Resource"} />
           </div>
           <div className="mb-4 ">
             <SourceDetail
