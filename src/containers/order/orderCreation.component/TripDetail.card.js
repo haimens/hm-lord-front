@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { GAutoComplete } from "../../../components/shared";
+import { GAutoComplete,GMapLocation } from "../../../components/shared";
 import { TimePicker, DatePicker } from "antd";
 class TripDetail extends Component {
   state = {
@@ -87,6 +87,27 @@ class TripDetail extends Component {
                 Select Vehicle Type
               </h6>
             </div>
+            <div className="p-3">
+              <div  style={{height:"161px"}}>
+              <GMapLocation
+                position={{
+                  center: {
+                    lat: 0,
+                    lng: 0
+                  },
+                  origin: {
+                    lat: 0,
+                    lng: 0
+                  },
+                  destination: {
+                    lat: 0,
+                    lng: 0
+                  }
+                }}
+              />
+</div>
+</div>
+
           </div>
         </div>
       </div>

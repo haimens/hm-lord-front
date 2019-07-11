@@ -23,6 +23,7 @@ import Header from "./Header";
 import AddingImage from "./AddingImage";
 import GAutoComplete from "./GAutoComplete";
 import GMapFlag from "./GMapFlag";
+import GMapLocation from "./GMapLocation"
 import AddingVehicleModal from "./AddingVehicle.modal";
 import AddingDriverModal from "./AddingDriver.modal";
 export {
@@ -51,6 +52,7 @@ export {
   AddingImage,
   GAutoComplete,
   GMapFlag,
+  GMapLocation,
   AddingVehicleModal,
   AddingDriverModal
 };
