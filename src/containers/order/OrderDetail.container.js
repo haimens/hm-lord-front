@@ -7,10 +7,15 @@ import CustomerInfo from "./orderDetail.component/CustomerInfo.card";
 import CouponCard from "./orderDetail.component/Coupon.card";
 import BasicInfoModal from "./orderDetail.component/BasicInfo.modal";
 import CustomerInfoModal from "./orderDetail.component/CustomerInfo.modal";
+import CouponModal from "./orderDetail.component/Coupon.modal";
+import LogModal from "./orderDetail.component/Log.modal";
+
 class OrderDetail extends Component {
   state = {
     showUpdateBasicInfoModal: false,
-    showUpdateCustomerInfoModal: false
+    showUpdateCustomerInfoModal: false,
+    showCouponModal: false,
+    showLogModal: false
   };
   handleUpdateBasicInfo = () => {
     this.setState(state => ({ showUpdateBasicInfoModal: !state.showUpdateBasicInfoModal }));
@@ -18,13 +23,21 @@ class OrderDetail extends Component {
   handleUpdateCustomerInfo = () => {
     this.setState(state => ({ showUpdateCustomerInfoModal: !state.showUpdateCustomerInfoModal }));
   };
+  handleShowCouponModal = () => {
+    this.setState(state => ({ showCouponModal: !state.showCouponModal }));
+  };
+  handleShowLogModal = () => {
+    this.setState(state => ({ showLogModal: !state.showLogModal }));
+  };
   render() {
-    const { showUpdateBasicInfoModal, showUpdateCustomerInfoModal } = this.state;
+    const { showUpdateBasicInfoModal, showUpdateCustomerInfoModal, showCouponModal, showLogModal } = this.state;
     const { history } = this.props;
     return (
       <main className="container-fluid">
         {showUpdateBasicInfoModal && <BasicInfoModal onClose={this.handleUpdateBasicInfo} />}
         {showUpdateCustomerInfoModal && <CustomerInfoModal onClose={this.handleUpdateCustomerInfo} />}
+        {showCouponModal && <CouponModal onClose={this.handleShowCouponModal} />}
+        {showLogModal && <LogModal onClose={this.handleShowLogModal} />}
 
         <section>
           <div className="mb-4">
@@ -59,7 +72,7 @@ class OrderDetail extends Component {
           <ListHeader
             parentProps={{
               title: "Coupon List",
-              clickFunction: this.handleAddCompanyModal,
+              clickFunction: this.handleShowCouponModal,
               clickTitle: "Coupon"
             }}
             hideShadow={true}
@@ -74,7 +87,7 @@ class OrderDetail extends Component {
           <ListHeader
             parentProps={{
               title: "Trip List",
-              clickFunction: this.handleAddCompanyModal,
+              clickFunction: this.handleShowLogModal,
               clickTitle: "Refresh"
             }}
             hideShadow={true}
@@ -99,7 +112,7 @@ class OrderDetail extends Component {
           <ListHeader
             parentProps={{
               title: "Log History",
-              clickFunction: this.handleShowAddingVehicleModal,
+              clickFunction: this.handleShowLogModal,
               clickTitle: "Log"
             }}
             buttonWidth={"70px"}
