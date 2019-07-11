@@ -26,7 +26,7 @@ class Home extends Component {
           <div className="mb-4">
             <Header title="Dashboard" tabicon={"tabicon_dashboard.svg"} />
           </div>
-          <div className="row">
+          <div className="row pt-2">
             <div className="col-12 col-md-6 h-100 mb-4">
               <DisplayCard
                 data={{

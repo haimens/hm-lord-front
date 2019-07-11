@@ -98,14 +98,14 @@ export default class Sidebar extends Component {
               onClick={() => this.handleClick("/order/list")}
               name="Order List"
               history={this.props.parentProps.history}
-              path="order"
+              path="list"
               is_target={parsedLocation[3] === "list"}
             />
             <SubNavItem
               onClick={() => this.handleClick("/order/creation")}
               name="Add Order"
               history={this.props.parentProps.history}
-              path="order"
+              path="creation"
               is_target={parsedLocation[3] === "creation"}
               className="mt-2"
             />

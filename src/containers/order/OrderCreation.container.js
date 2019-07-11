@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import OrderCreationPagination from "./orderCreation.component/OrderCreationPagination.component";
-import CustomerInformation from "./orderCreation.component/CustomerInformation.component";
-import TripDetail from "./orderCreation.component/TripDetail.component";
-import ReviewTrip from "./orderCreation.component/ReviewTrip.component";
-import PaymentInformation from "./orderCreation.component/PaymentInformation.component";
+import { OrderHeader, CustomerInformationCard } from "./orderCreation.component";
+
 class OrderCreation extends Component {
   state = {
-    position: 3
+    position: 2
   };
   handleChangePosition = position => {
     this.setState(states => ({ position: states.position + position }));
@@ -17,16 +14,13 @@ class OrderCreation extends Component {
   render() {
     const { position } = this.state;
     return (
-      <main>
-        <section className="mb-4">
-          <OrderCreationPagination position={position} />
-        </section>
+      <main className="container-fluid">
         <section>
-          <div>{position === 0 && <CustomerInformation />}</div>
-          <div>{position === 1 && <TripDetail handleChangePosition={this.handleChangePosition} />}</div>
-          <div>{position === 2 && <ReviewTrip />}</div>
-          <div>{position === 3 && <PaymentInformation />}</div>
+          <div className="mb-4">
+            <OrderHeader titles={["Add Order", "Customer Information", "Trip Detail"]} position={position} />
+          </div>
         </section>
+        <section>{position === 2 && <CustomerInformationCard />}</section>
       </main>
     );
   }
