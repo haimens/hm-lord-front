@@ -8,17 +8,17 @@ import { convertUTCtoLocal, parseAmount } from "../../../actions/utilities.actio
 export default function SalaryListItem(props) {
   const { cdate, udate, amount } = props.parentProps;
   return (
-    <tr>
-      <td data-label="Created On" className="st-text-ellipsis">
+    <tr className="border-bottom">
+      <td data-label="Created On" className="items-height align-middle">
         <section className="text-center align-middle ">{convertUTCtoLocal(cdate, "YYYY-MM-DD HH:mm")}</section>
       </td>
-      <td data-label="Updated On" className="st-text-ellipsis">
+      <td data-label="Updated On" className="items-height align-middle">
         <section className="text-center align-middle  hm-text-14 text-main-color font-weight-bold">
           {convertUTCtoLocal(udate, "YYYY-MM-DD HH:mm")}
         </section>
       </td>
 
-      <td data-label="Amount" className="st-text-ellipsis text-center">
+      <td data-label="Amount" className="items-height align-middle text-center">
         <section className="text-center align-middle hm-text-14 text-main-color font-weight-bold">
           {parseAmount(amount)}
         </section>

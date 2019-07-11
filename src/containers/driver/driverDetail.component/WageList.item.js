@@ -10,16 +10,16 @@ import alertify from "alertifyjs";
 export default function WageListItem(props) {
   const { cdate, amount, type, note } = props.parentProps;
   return (
-    <tr>
-      <td data-label="Created On" className="st-text-ellipsis">
+    <tr className="border-bottom">
+      <td data-label="Created On" className="items-height align-middle">
         <section className="text-center align-middle ">{convertUTCtoLocal(cdate, "YYYY-MM-DD HH:mm")}</section>
       </td>
-      <td data-label="Amount" className="st-text-ellipsis">
+      <td data-label="Amount" className="items-height align-middle">
         <section className="text-center align-middle  hm-text-14 text-main-color font-weight-bold">
           {parseAmount(amount)}
         </section>
       </td>
-      <td data-label="Type" className="st-text-ellipsis">
+      <td data-label="Type" className="items-height align-middle">
         <div className="hm-text-14 text-modal-color font-weight-bold">
           {type === 1 ? (
             <div className="d-flex align-items-center justify-content-center ">
@@ -34,7 +34,7 @@ export default function WageListItem(props) {
           )}
         </div>
       </td>
-      <td data-label="Note" className="st-text-ellipsis text-center">
+      <td data-label="Note" className="items-height align-middle text-center">
         <section className="text-center align-middle hm-text-14 text-main-color font-weight-bold">{note}</section>
       </td>
     </tr>
