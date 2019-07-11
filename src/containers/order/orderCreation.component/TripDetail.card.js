@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { GAutoComplete,GMapLocation } from "../../../components/shared";
+import { GAutoComplete, GMapLocation } from "../../../components/shared";
 import { TimePicker, DatePicker } from "antd";
 class TripDetail extends Component {
   state = {
@@ -60,14 +60,17 @@ class TripDetail extends Component {
                     value={name}
                     onChange={this.handleInputChange}
                   />
-                  <i className="fas fa-search d-flex justify-content-center align-items-center button-main-background text-white hm-pointer-cursor" 
-                  style={{ height: "46px", width: "46px" }} />
+                  <i
+                    className="fas fa-search d-flex justify-content-center align-items-center button-main-background text-white hm-pointer-cursor"
+                    style={{ height: "46px", width: "46px" }}
+                  />
                 </div>
               </div>
 
               <div className="form-group text-right py-3">
                 <button
-                  className="button-main-background btn button-main-size text-white" style={{width:"119px"}}
+                  className="button-main-background btn button-main-size text-white"
+                  style={{ width: "119px" }}
                   onClick={this.handleCreatingCompany}
                 >
                   Get price
@@ -88,26 +91,25 @@ class TripDetail extends Component {
               </h6>
             </div>
             <div className="p-3">
-              <div  style={{height:"161px"}}>
-              <GMapLocation
-                position={{
-                  center: {
-                    lat: 0,
-                    lng: 0
-                  },
-                  origin: {
-                    lat: 0,
-                    lng: 0
-                  },
-                  destination: {
-                    lat: 0,
-                    lng: 0
-                  }
-                }}
-              />
-</div>
-</div>
-
+              <div style={{ height: "161px" }}>
+                <GMapLocation
+                  position={{
+                    center: {
+                      lat: 0,
+                      lng: 0
+                    },
+                    origin: {
+                      lat: 0,
+                      lng: 0
+                    },
+                    destination: {
+                      lat: 0,
+                      lng: 0
+                    }
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
