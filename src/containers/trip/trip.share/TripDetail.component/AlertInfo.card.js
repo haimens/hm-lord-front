@@ -8,7 +8,7 @@ export default function AlertInfoCard(props) {
       <div className="purple-border p-3">
         <div className="d-flex justify-content-between align-items-center  ">
           <div className="hm-text-16 font-weight-bold text-modal-color">Alert Information</div>
-          {showEditButton && (
+          {showEditButton && alert_list.length === 0 && (
             <button
               className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
               onClick={() => handleDetailButtonClicked("alert")}

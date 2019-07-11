@@ -190,7 +190,7 @@ class TripDetailContainer extends Component {
                 <CustomerInfo
                   trip_detail_in_lord={trip_detail_in_lord}
                   handleDetailButtonClicked={this.handleInfoModal}
-                  showEditButton={showEditButton}
+                  showEditButton={false}
                 />
               </div>
               <div className="col-lg-6 col-12 mb-4">
