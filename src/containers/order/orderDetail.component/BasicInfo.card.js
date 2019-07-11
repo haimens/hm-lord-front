@@ -7,29 +7,32 @@ export default function BasicInfo(props) {
         <div className="d-flex justify-content-between align-items-center  ">
           <div className="hm-text-16 font-weight-bold text-modal-color">Basic Information</div>
 
-          <button className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center">
+          <button
+            className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
+            onClick={() => props.handleUpdateBasicInfo()}
+          >
             <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
           </button>
         </div>
       </div>
       <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Pickup Time</div>
+        <div className="text-secondary-color font-weight-500 hm-text-14">Order ID</div>
         <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
       </div>
       <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">From</div>
+        <div className="text-secondary-color font-weight-500 hm-text-14">Type</div>
         <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
       </div>
       <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">To</div>
+        <div className="text-secondary-color font-weight-500 hm-text-14">Order Placed Time</div>
         <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
       </div>
       <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Flight Information</div>
+        <div className="text-secondary-color font-weight-500 hm-text-14">Order Total Amount</div>
         <div className="hm-text-14 text-modal-color font-weight-bold">{"N/A"}</div>
       </div>
       <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Vehicle Type</div>
+        <div className="text-secondary-color font-weight-500 hm-text-14">Note</div>
         <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
       </div>
       <div className="mb-4 px-3">

@@ -3,10 +3,26 @@ import { Header, ListHeader, ListView } from "../../components/shared";
 import BasicInfo from "./orderDetail.component/BasicInfo.card";
 import CustomerInfo from "./orderDetail.component/CustomerInfo.card";
 import CouponCard from "./orderDetail.component/Coupon.card";
+import BasicInfoModal from "./orderDetail.component/BasicInfo.modal";
+import CustomerInfoModal from "./orderDetail.component/CustomerInfo.modal";
 class OrderDetail extends Component {
+  state = {
+    showUpdateBasicInfoModal: false,
+    showUpdateCustomerInfoModal: false
+  };
+  handleUpdateBasicInfo = () => {
+    this.setState(state => ({ showUpdateBasicInfoModal: !state.showUpdateBasicInfoModal }));
+  };
+  handleUpdateCustomerInfo = () => {
+    this.setState(state => ({ showUpdateCustomerInfoModal: !state.showUpdateCustomerInfoModal }));
+  };
   render() {
+    const { showUpdateBasicInfoModal, showUpdateCustomerInfoModal } = this.state;
     return (
       <main className="container-fluid">
+        {showUpdateBasicInfoModal && <BasicInfoModal onClose={this.handleUpdateBasicInfo} />}
+        {showUpdateCustomerInfoModal && <CustomerInfoModal onClose={this.handleUpdateCustomerInfo} />}
+
         <section>
           <div className="mb-4">
             <Header
@@ -24,10 +40,10 @@ class OrderDetail extends Component {
           <div className="bg-white rounded-custom shadow-sm">
             <div className="row" style={{ padding: "40px" }}>
               <div className="col-lg-6 col-12 mb-4">
-                <BasicInfo />
+                <BasicInfo handleUpdateBasicInfo={this.handleUpdateBasicInfo} />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <CustomerInfo />
+                <CustomerInfo handleUpdateCustomerInfo={this.handleUpdateCustomerInfo} />
               </div>
             </div>
           </div>
