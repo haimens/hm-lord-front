@@ -89,10 +89,7 @@ class CustomerInformation extends Component {
                   className="button-main-background btn button-main-size px-4 text-white mr-3"
                   onClick={this.handleCreatingCompany}
                 >
-                  Add
-                </button>
-                <button onClick={this.handleClose} className="btn button-main-size btn-outline-secondary px-4">
-                  Cancel
+                  Create
                 </button>
               </div>
             </div>
@@ -100,7 +97,7 @@ class CustomerInformation extends Component {
         </div>
 
         <div className="col-4">
-          <div className="rounded-custom-top bg-white shadow-sm">
+          <div className="rounded-custom bg-white shadow-sm">
             <div
               className="d-flex justify-content-between align-items-center p-3 border-bottom-custom"
               style={{ height: "65px" }}
@@ -129,7 +126,7 @@ class CustomerInformation extends Component {
               </div>
             </div>
 
-            <div className="p-3" style={{ height: "470px", overflow: "auto" }}>
+            <div className="p-3" style={{ height: "466px", overflow: "auto" }}>
               {customer_list_in_lord.record_list.map((customer, index) => (
                 <div
                   className="col-12 border-bottom-custom d-flex align-items-center"
