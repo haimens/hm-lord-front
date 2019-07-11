@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { GAutoComplete, GMapLocation } from "../../../components/shared";
 import { TimePicker, DatePicker } from "antd";
+import "./TripDetail.card.css";
 class TripDetail extends Component {
   state = {
     name: "",
@@ -24,29 +25,26 @@ class TripDetail extends Component {
       <div className="row pt-2">
         <div className="col-8">
           <div className="rounded-custom bg-white shadow-sm">
-            <div
-              className="d-flex justify-content-between align-items-center p-3 border-bottom-custom"
-              style={{ height: "65px" }}
-            >
+            <div className="d-flex justify-content-between align-items-center p-3 border-bottom-custom h-100">
               <h6 className="d-block d-flex align-items-center hm-title-sub-size text-main-color font-weight-bold">
                 Trip Detail
               </h6>
             </div>
             <div className="p-3">
               <div className="form-group mb-4 ">
-                <label className="text-main-color hm-text-14 font-weight-bold mb-2">Pickup Location</label>
+                <label className="text-main-color hm-text-14 font-weight-bold my-4">Pickup Location</label>
                 <GAutoComplete getGoogleAddress={this.saveToAddress} />
               </div>
               <div className="form-group mb-4">
-                <label className="text-main-color hm-text-14 font-weight-bold mb-2">Dropoff Location</label>
+                <label className="text-main-color hm-text-14 font-weight-bold mb-4">Dropoff Location</label>
                 <GAutoComplete getGoogleAddress={this.saveToAddress} />
               </div>
               <div className="form-group input-group mb-4">
-                <label className="text-main-color hm-text-14 font-weight-bold mb-2">Date</label>
+                <label className="text-main-color hm-text-14 font-weight-bold mb-4">Date</label>
                 <DatePicker onChange={this.handleCADTime} />
               </div>
               <div className="form-group input-group mb-4">
-                <label className="text-main-color hm-text-14 font-weight-bold mb-2">Time</label>
+                <label className="text-main-color hm-text-14 font-weight-bold mb-4">Time</label>
                 <TimePicker onChange={this.handleCADTime} />
               </div>
               <div className="form-group my-4 ">
@@ -81,7 +79,7 @@ class TripDetail extends Component {
         </div>
 
         <div className="col-4">
-          <div className="rounded-custom bg-white shadow-sm">
+          <div className="rounded-custom bg-white shadow-sm h-100">
             <div
               className="d-flex justify-content-between align-items-center p-3 border-bottom-custom"
               style={{ height: "65px" }}
@@ -90,7 +88,7 @@ class TripDetail extends Component {
                 Select Vehicle Type
               </h6>
             </div>
-            <div className="p-3">
+            <div className="px-3 py-4">
               <div style={{ height: "161px" }}>
                 <GMapLocation
                   position={{
@@ -108,6 +106,36 @@ class TripDetail extends Component {
                     }
                   }}
                 />
+              </div>
+            </div>
+
+            <div className="px-3 py-4">
+              <div className="px-4 py-3 shadow-sm rounded-custom text-white d-flex justify-content-between align-items-center blue-background">
+                <div className="d-flex align-items-center">
+                  <img
+                    src={`${process.env.PUBLIC_URL}/img/hd.png`}
+                    style={{ width: "48px", height: "48px" }}
+                    alt="company"
+                    className="rounded-circle"
+                  />
+                  <div className="ml-3 hm-text-15 font-weight-bold">Sedan</div>
+                </div>
+                <div className="ml-3 hm-text-15 font-weight-bold">0.00</div>
+              </div>
+            </div>
+
+            <div className="px-3 pb-4">
+              <div className="px-4 py-3 shadow-sm rounded-custom text-white d-flex justify-content-between align-items-center red-background">
+                <div className="d-flex align-items-center">
+                  <img
+                    src={`${process.env.PUBLIC_URL}/img/hd.png`}
+                    style={{ width: "48px", height: "48px" }}
+                    alt="company"
+                    className="rounded-circle"
+                  />
+                  <div className="ml-3 hm-text-15 font-weight-bold">Sedan</div>
+                </div>
+                <div className="ml-3 hm-text-15 font-weight-bold">0.00</div>
               </div>
             </div>
           </div>
