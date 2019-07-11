@@ -11,10 +11,16 @@ import {
   TimeStaps,
   BasicInfoModal,
   AlertInfoModal,
-  CustomerInfoModal
+  CustomerInfoModal,
+  TimeStampsModal
 } from "./TripDetail.component";
 import { findVehicleListInLord } from "../../../actions/vehicle.action";
-import { findTripDetailInLord, createAnAlertForATrip, updateTripOperationInfo } from "../../../actions/trip.action";
+import {
+  findTripDetailInLord,
+  createAnAlertForATrip,
+  updateTripOperationInfo,
+  updateTripBasicInfo
+} from "../../../actions/trip.action";
 import { findCarListForADriver, findDriverListInLord } from "../../../actions/driver.action";
 class TripDetailContainer extends Component {
   state = {
@@ -25,7 +31,8 @@ class TripDetailContainer extends Component {
     showCustomerInfoModal: false,
     showDriverInfoModal: false,
     showVehicleInfoModal: false,
-    showAlertInfoModal: false
+    showAlertInfoModal: false,
+    showTimeStampInfoModal: false
   };
 
   handleInfoModal = type => {
@@ -44,9 +51,11 @@ class TripDetailContainer extends Component {
     if (type === "alert") {
       this.setState(state => ({ showAlertInfoModal: !state.showAlertInfoModal }));
     }
+    if (type === "stamps") {
+      this.setState(state => ({ showTimeStampInfoModal: !state.showTimeStampInfoModal }));
+    }
   };
   handleUpdatingVehicle = car_token => {
-    console.log(car_token);
     const {
       match: {
         params: { trip_token }
@@ -102,7 +111,8 @@ class TripDetailContainer extends Component {
       createAnAlertForATrip,
       vehicle_list_in_lord,
       car_list_for_a_driver,
-      driver_list_in_lord
+      driver_list_in_lord,
+      updateTripBasicInfo
     } = this.props;
     const { trip_token } = match.params;
 
@@ -115,7 +125,8 @@ class TripDetailContainer extends Component {
       showCustomerInfoModal,
       showDriverInfoModal,
       showVehicleInfoModal,
-      showAlertInfoModal
+      showAlertInfoModal,
+      showTimeStampInfoModal
     } = this.state;
     return (
       <main className="container-fluid">
@@ -143,7 +154,13 @@ class TripDetailContainer extends Component {
             onClose={() => this.handleInfoModal("alert")}
           />
         )}
-
+        {showTimeStampInfoModal && (
+          <TimeStampsModal
+            trip_token={trip_token}
+            updateTripBasicInfo={updateTripBasicInfo}
+            onClose={() => this.handleInfoModal("stamps")}
+          />
+        )}
         <section className="mb-4">
           <div>
             <Header
@@ -198,9 +215,9 @@ class TripDetailContainer extends Component {
               </div>
               <div className="col-lg-6 col-12 mb-4">
                 <TimeStaps
-                  showEditButton={showEditButton}
+                  handleDetailButtonClicked={this.handleInfoModal}
                   trip_detail_in_lord={trip_detail_in_lord}
-                  showButton={time_stamps}
+                  showEditButton={showEditButton}
                 />
               </div>
             </div>
@@ -247,7 +264,8 @@ const mapDispatchToProps = {
   createAnAlertForATrip,
   findCarListForADriver,
   updateTripOperationInfo,
-  findDriverListInLord
+  findDriverListInLord,
+  updateTripBasicInfo
 };
 
 export default connect(

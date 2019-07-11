@@ -117,3 +117,16 @@ export const updateTripOperationInfo = (trip_token, body = {}) => async dispatch
     dispatch(processLogout(err));
   }
 };
+
+export const updateTripBasicInfo = (trip_token, body = {}) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`trip/detail/${trip_token}`, "PATCH", body);
+    await dispatch(findTripDetailInLord(trip_token));
+    await launchSuccess(dispatch);
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
