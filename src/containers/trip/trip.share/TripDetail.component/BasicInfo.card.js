@@ -21,7 +21,7 @@ export default function BasicInfoCard(props) {
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Pickup Time</div>
         <div className="hm-text-14 text-modal-color font-weight-bold">
-          {convertUTCtoLocal(basic_info.pickup_time, "YYY-MM-DD HH:mm")}
+          {convertUTCtoLocal(basic_info.pickup_time, "YYYY-MM-DD HH:mm")}
         </div>
       </div>
       <div className="mb-4 px-3">
@@ -49,17 +49,26 @@ export default function BasicInfoCard(props) {
         <div className="hm-text-14 text-modal-color font-weight-bold">{basic_info.note || "N/A"}</div>
       </div>
       <div className="mb-4 px-3">
+        <div className="text-secondary-color font-weight-500 hm-text-14">Type</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">{basic_info.type_str || "N/A"}</div>
+      </div>
+      <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Status</div>
         <div className="hm-text-14 text-modal-color font-weight-bold">
-          {basic_info.status === 2 ? (
+          {basic_info.status_str === "DISPATCHED" ? (
             <div className="d-flex align-items-center ">
               <i className="fas fa-circle success-text-color mr-3 pl-0" style={{ fontSize: "6px" }} />
-              <div className="text-modal-color font-weight-500">Active</div>
+              <div className="text-modal-color hm-text-14  font-weight-500">DISPATCHED</div>
+            </div>
+          ) : basic_info.status_str === "ON-THE-WAY" ? (
+            <div className="d-flex align-items-center ">
+              <i className="fas fa-circle pending-text-color mr-3 pl-0" style={{ fontSize: "6px" }} />
+              <div className="text-modal-color hm-text-14  font-weight-500">ON-THE-WAY</div>
             </div>
           ) : (
-            <div className="d-flex align-items-center">
-              <i className="fas fa-circle text-danger mr-3" style={{ fontSize: "6px" }} />
-              <div className="text-modal-color font-weight-500">Inactive</div>
+            <div className="d-flex align-items-center ">
+              <i className="fas fa-circle text-purple mr-3 pl-0" style={{ fontSize: "6px" }} />
+              <div className="text-modal-color hm-text-14  font-weight-500">{basic_info.status_str}</div>
             </div>
           )}
         </div>

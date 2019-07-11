@@ -117,7 +117,6 @@ class TripDetailContainer extends Component {
       showVehicleInfoModal,
       showAlertInfoModal
     } = this.state;
-    console.log(trip_detail_in_lord.driver_info.driver_token);
     return (
       <main className="container-fluid">
         {showBasicInfoModal && <BasicInfoModal onClose={() => this.handleInfoModal("basic")} />}
