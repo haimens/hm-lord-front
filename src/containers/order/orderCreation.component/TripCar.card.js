@@ -2,15 +2,11 @@ import React, { Component } from "react";
 import { parseAmount } from "../../../actions/utilities.action";
 
 export default class TripCar extends Component {
-  state = {
-    showPriceDetail: false
-  };
-
   handleShowPriceDetail = () => {
-    this.setState(state => ({ showPriceDetail: !state.showPriceDetail }));
+    this.props.handleShowPriceDetail();
   };
   render() {
-    const { showPriceDetail } = this.state;
+    const { showPriceDetail } = this.props;
     return (
       <div
         className={`hm-pointer-cursor shadow-sm rounded-custom text-white ${this.props.backgroundColor}`}

@@ -8,10 +8,19 @@ export default class TripInfo extends Component {
     cell: "",
     area: "",
     email: "",
-    customer: ""
+    customer: "",
+    blueCardBeenClicked: false,
+    redCardBeenClicked: false
+  };
+  handleBlueCardBeenClicked = () => {
+    this.setState(state => ({ blueCardBeenClicked: !state.blueCardBeenClicked, redCardBeenClicked: false }));
+  };
+
+  handleRedCardBeenClicked = () => {
+    this.setState(state => ({ redCardBeenClicked: !state.redCardBeenClicked, blueCardBeenClicked: false }));
   };
   render() {
-    const { name, cell, area, email, customer } = this.state;
+    const { name, blueCardBeenClicked, redCardBeenClicked } = this.state;
 
     return (
       <div className="row pt-2 mb-4">
@@ -103,10 +112,18 @@ export default class TripInfo extends Component {
 
             <div className="px-3 py-4">
               <div className="mb-4">
-                <TripCard backgroundColor={`blue-background`} />
+                <TripCard
+                  showPriceDetail={blueCardBeenClicked}
+                  handleShowPriceDetail={this.handleBlueCardBeenClicked}
+                  backgroundColor={`blue-background`}
+                />
               </div>
               <div>
-                <TripCard backgroundColor={`red-background`} />
+                <TripCard
+                  showPriceDetail={redCardBeenClicked}
+                  handleShowPriceDetail={this.handleRedCardBeenClicked}
+                  backgroundColor={`red-background`}
+                />
               </div>
             </div>
           </div>
