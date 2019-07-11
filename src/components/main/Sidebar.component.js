@@ -189,7 +189,7 @@ export default class Sidebar extends Component {
           </NavItem>
         </section>
 
-        <section className="accordion">
+        <section className="accordion  pb-4">
           <NavItem
             onToggle={() => this.handleClick("/settings/payment")}
             image={`${process.env.PUBLIC_URL}/img/navicon_company.svg`}
