@@ -2,28 +2,38 @@ import React, { Component } from "react";
 
 export default class OrderCard extends Component {
   render() {
-    const { orderId, orderDate, orderName, orderPhone, isActive } = this.props.parentProps;
+    const { order_token, order_img, cdate, orderPhone, method, isActive } = this.props.parentProps;
     return (
-      <div className="col-6 col-md-4 col-lg-3 mb-3">
-        <div className="col-12 p-3 shadow-sm bg-white ">
-          <div className="d-flex justify-content-between">
-            <div>
-              <div>{`Order #${orderId}`}</div>
+      <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-3 mb-4 hm-pointer-cursor"}>
+        <div
+          className="col-12 rounded-custom shadow-sm bg-white "
+          style={{ height: "140px" }}
+          onClick={() => this.props.history.push(`/driver/detail/${order_token}`)}
+        >
+          <div className="row h-100 align-items-center">
+            <div className="col-5 d-flex justify-content-center">
+              <img src={order_img} className="rounded-circle" style={{ height: "74px", width: "74px" }} alt="Driver" />
             </div>
-            <div>
-              <div>{orderDate}</div>
+            <div className="col-7">
+              <div className="font-weight-bold text-modal-color hm-text-15 my-2">{cdate}</div>
+              <div className="text-secondary-color hm-text-12">{orderPhone}</div>
+              <div className="text-secondary-color hm-text-12">{method}</div>
+              {isActive === 2 ? (
+                <section className="hm-text-14 my-2">
+                  <div className=" d-flex align-items-center">
+                    <i className="fas fa-circle success-text-color mr-3" style={{ fontSize: "6px" }} />
+                    <div className="font-weight-500 text-main-color hm-text-12">Active</div>
+                  </div>
+                </section>
+              ) : (
+                <section className="hm-text-14 my-2">
+                  <div className=" d-flex align-items-center">
+                    <i className="fas fa-circle text-danger mr-3" style={{ fontSize: "6px" }} />
+                    <div className="font-weight-500 text-main-color hm-text-12">Inactive</div>
+                  </div>
+                </section>
+              )}
             </div>
-          </div>
-          <div className="my-3">
-            <div className="font-weight-bold">{orderName}</div>
-            <div>{orderPhone}</div>
-          </div>
-          <div className="d-flex justify-content-between">
-            <div>
-              <i className="fas fa-money-check mr-2" />
-              Prepaid
-            </div>
-            {isActive ? <div className="hm-text-green">Active</div> : <div className="text-danger">Inactive</div>}
           </div>
         </div>
       </div>
