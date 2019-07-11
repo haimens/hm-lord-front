@@ -19,7 +19,7 @@ class Coupon extends Component {
     const { showAddCouponModal } = this.state;
     return (
       <main className="container-fluid">
-        {showAddCouponModal && <CouponAdding />}
+        {showAddCouponModal && <CouponAdding onClose={this.handleShowAddingCouponModal} />}
         <section className="mb-4">
           <Header
             title="Settings"

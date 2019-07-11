@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { ListView, Header, ListHeader } from "../../../components/shared";
 import VehicleListItem from "./Vehicle.component/VehicleList.item";
+import VehicleAdding from "./Vehicle.component/VehicleAdding.modal";
 class Vehicle extends Component {
   state = {
     showAddWage: false
@@ -10,13 +11,15 @@ class Vehicle extends Component {
   handleWageSearch = keywords => {
     console.log(keywords);
   };
-  handleAddingWage = () => {
-    this.setState(state => ({ showAddWage: !state.showAddWage }));
+  handleAddingVehicle = () => {
+    this.setState(state => ({ showAddVehicle: !state.showAddVehicle }));
   };
   render() {
     const { history } = this.props;
+    const { showAddVehicle } = this.state;
     return (
       <main className="container-fluid">
+        {showAddVehicle && <VehicleAdding onClose={this.handleAddingVehicle} />}
         <section className="mb-4">
           <Header
             title="Settings"
@@ -30,7 +33,7 @@ class Vehicle extends Component {
           <ListHeader
             parentProps={{
               title: "Vehicle",
-              clickFunction: this.handleShowAddingWageModal,
+              clickFunction: this.handleAddingVehicle,
               clickTitle: "Vehicle Type"
             }}
             buttonWidth={"110px"}

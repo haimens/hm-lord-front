@@ -2,21 +2,24 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { ListView, Header, ListHeader } from "../../../components/shared";
+import GeneralAdding from "./General.component/GeneralAdding.modal";
 import GeneralListItem from "./General.component/GeneralList.item";
 class General extends Component {
   state = {
-    showAddWage: false
+    showAddGeneral: false
   };
-  handleWageSearch = keywords => {
+  handleGeneralSearch = keywords => {
     console.log(keywords);
   };
-  handleAddingWage = () => {
-    this.setState(state => ({ showAddWage: !state.showAddWage }));
+  handleShowGeneralModal = () => {
+    this.setState(state => ({ showAddGeneral: !state.showAddGeneral }));
   };
   render() {
     const { history } = this.props;
+    const { showAddGeneral } = this.state;
     return (
       <main className="container-fluid">
+        {showAddGeneral && <GeneralAdding onClose={this.handleShowGeneralModal} />}
         <section className="mb-4">
           <Header
             title="Settings"
@@ -30,7 +33,7 @@ class General extends Component {
           <ListHeader
             parentProps={{
               title: "General Setting",
-              clickFunction: this.handleShowAddingWageModal,
+              clickFunction: this.handleShowGeneralModal,
               clickTitle: "Key Value"
             }}
             buttonWidth={"110px"}
