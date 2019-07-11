@@ -23,9 +23,10 @@ import Header from "./Header";
 import AddingImage from "./AddingImage";
 import GAutoComplete from "./GAutoComplete";
 import GMapFlag from "./GMapFlag";
-import GMapLocation from "./GMapLocation"
+import GMapLocation from "./GMapLocation";
 import AddingVehicleModal from "./AddingVehicle.modal";
 import AddingDriverModal from "./AddingDriver.modal";
+import EditButton from "./EditButton";
 export {
   LoaderAlt,
   IconButton,
@@ -54,5 +55,6 @@ export {
   GMapFlag,
   GMapLocation,
   AddingVehicleModal,
-  AddingDriverModal
+  AddingDriverModal,
+  EditButton
 };

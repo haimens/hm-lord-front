@@ -188,6 +188,60 @@ export default class Sidebar extends Component {
             />
           </NavItem>
         </section>
+
+        <section className="accordion">
+          <NavItem
+            onToggle={() => this.handleClick("/settings/payment")}
+            image={`${process.env.PUBLIC_URL}/img/navicon_company.svg`}
+            name="Settings"
+            path="settings"
+            history={this.props.parentProps.history}
+            showArrow={true}
+          >
+            <SubNavItem
+              onClick={() => this.handleClick("/settings/payment")}
+              name="Payment Resource"
+              history={this.props.parentProps.history}
+              path="payment"
+              is_target={parsedLocation[3] === "payment"}
+            />
+            <SubNavItem
+              onClick={() => this.handleClick("/settings/message")}
+              name="Message Resource"
+              history={this.props.parentProps.history}
+              path="message"
+              is_target={parsedLocation[3] === "message"}
+            />
+            <SubNavItem
+              onClick={() => this.handleClick("/settings/email")}
+              name="Email Resource"
+              history={this.props.parentProps.history}
+              path="email"
+              is_target={parsedLocation[3] === "email"}
+            />
+            <SubNavItem
+              onClick={() => this.handleClick("/settings/coupon")}
+              name="Coupon"
+              history={this.props.parentProps.history}
+              path="coupon"
+              is_target={parsedLocation[3] === "coupon"}
+            />
+            <SubNavItem
+              onClick={() => this.handleClick("/settings/vehicle")}
+              name="Vehicle Type"
+              history={this.props.parentProps.history}
+              path="vehicle"
+              is_target={parsedLocation[3] === "vehicle"}
+            />
+            <SubNavItem
+              onClick={() => this.handleClick("/settings/general")}
+              name="General Setting"
+              history={this.props.parentProps.history}
+              path="general"
+              is_target={parsedLocation[3] === "general"}
+            />
+          </NavItem>
+        </section>
       </main>
     );
   }

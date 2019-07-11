@@ -27,12 +27,8 @@ import DriverPayable from "./containers/driverPayable/DriverPayable.container";
 import NotificationAlert from "./containers/notification/NotificationAlert.container";
 import NotificationMessage from "./containers/notification/NotificationMessage.container";
 
-import Coupon from "./containers/settings/Coupon.container";
-import EmailResource from "./containers/settings/EmailResource.container";
-import KeyAndValue from "./containers/settings/KeyAndValue.container";
-import MessageResource from "./containers/settings/MessageResource.container";
-import PaymentResource from "./containers/settings/PaymentResource.container";
-import VehicleType from "./containers/settings/VehicleType.container";
+import PaymentResource from "./containers/settings/Payment.container/Payment.container";
+import MessageResource from "./containers/settings/Message.container/Message.container";
 
 const Login = React.lazy(() => import("./containers/login/Login.container"));
 const ResetPassword = React.lazy(() => import("./containers/resetPassword/ResetPassword.container"));
@@ -95,12 +91,12 @@ class App extends Component {
               <ProtectedRoute exact path="/notification/alert" component={NotificationAlert} />
               <ProtectedRoute exact path="/notification/message" component={NotificationMessage} />
 
-              <ProtectedRoute exact path="/settings/paymentResource" component={PaymentResource} />
-              <ProtectedRoute exact path="/settings/messageResource" component={MessageResource} />
-              <ProtectedRoute exact path="/settings/emailResource" component={EmailResource} />
+              <ProtectedRoute exact path="/settings/payment" component={PaymentResource} />
+              <ProtectedRoute exact path="/settings/message" component={MessageResource} />
+              {/*<ProtectedRoute exact path="/settings/email" component={EmailResource} />
               <ProtectedRoute exact path="/settings/coupon" component={Coupon} />
-              <ProtectedRoute exact path="/settings/vehicleType" component={VehicleType} />
-              <ProtectedRoute exact path="/settings/keyAndValue" component={KeyAndValue} />
+              <ProtectedRoute exact path="/settings/vehicle" component={VehicleType} />
+              <ProtectedRoute exact path="/settings/general" component={KeyAndValue} /> */}
               <Route component={NoMatch} />
             </Switch>
           </Main>
