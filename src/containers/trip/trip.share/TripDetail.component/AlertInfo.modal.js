@@ -6,12 +6,6 @@ import { TimePicker } from "antd";
 import "./AlertInfoModal.css";
 import moment from "moment";
 export default class AlertInfo extends Component {
-  state = {
-    eta: "",
-    arrival: "",
-    cob: ""
-  };
-
   handleETAAlert = time => {
     console.log(time);
     this.setState({ eta: time._d });
@@ -25,7 +19,7 @@ export default class AlertInfo extends Component {
 
   handleCreateAlerts = async () => {
     const { eta, arrival, cob } = this.state;
-    const { createAnAlertForATrip, trip_token } = this.props;
+    const { createAnAlertForATrip, trip_token, pickup_time } = this.props;
 
     if (eta !== "" && arrival !== "" && cob !== "") {
       createAnAlertForATrip(trip_token, {
@@ -33,7 +27,7 @@ export default class AlertInfo extends Component {
           {
             type: 1,
             record_time: convertLocalToUTC(
-              moment(eta)
+              moment(pickup_time)
                 .subtract(1, "hour")
                 .format("YYYY-MM-DD HH:mm")
             )
@@ -41,7 +35,7 @@ export default class AlertInfo extends Component {
           {
             type: 2,
             record_time: convertLocalToUTC(
-              moment(arrival)
+              moment(pickup_time)
                 .subtract(5, "minute")
                 .format("YYYY-MM-DD HH:mm")
             )
@@ -49,7 +43,7 @@ export default class AlertInfo extends Component {
           {
             type: 3,
             record_time: convertLocalToUTC(
-              moment(cob)
+              moment(pickup_time)
                 .add(5, "minute")
                 .format("YYYY-MM-DD HH:mm")
             )
@@ -67,21 +61,50 @@ export default class AlertInfo extends Component {
   };
 
   render() {
+    const { pickup_time } = this.props;
+
     return (
       <div>
-        <Modal title="Add Customer" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"420px"}>
+        <Modal
+          title="Create Alert Information"
+          onClose={this.handleClose}
+          position="center"
+          getWidth={"467px"}
+          getHeight={"420px"}
+        >
           <div className="container">
             <div className="p-3">
               <div className="form-group my-4">
-                <TimePicker onChange={this.handleETAAlert} />
+                <label htmlFor="eta">ETA Alert Setting</label>
+                <div>
+                  {convertLocalToUTC(
+                    moment(pickup_time)
+                      .subtract(1, "hour")
+                      .format("YYYY-MM-DD HH:mm")
+                  )}
+                </div>
               </div>
 
-              <div className="form-group input-group mb-4">
-                <TimePicker onChange={this.handleArrivalAlert} />
+              <div className="form-group mb-4">
+                <label htmlFor="eta">Arrival Alert Setting</label>
+                <div>
+                  {convertLocalToUTC(
+                    moment(pickup_time)
+                      .subtract(5, "minute")
+                      .format("YYYY-MM-DD HH:mm")
+                  )}
+                </div>
               </div>
 
-              <div className="form-group input-group mb-4">
-                <TimePicker onChange={this.handleCOBAlert} />
+              <div className="form-group mb-4">
+                <label htmlFor="eta">COB Alert Setting</label>
+                <div>
+                  {convertLocalToUTC(
+                    moment(pickup_time)
+                      .add(5, "minute")
+                      .format("YYYY-MM-DD HH:mm")
+                  )}
+                </div>
               </div>
 
               <div className="form-group text-right pt-3">
@@ -89,7 +112,7 @@ export default class AlertInfo extends Component {
                   className="button-main-background btn button-main-size px-4 text-white mr-3"
                   onClick={this.handleCreateAlerts}
                 >
-                  Update
+                  Create
                 </button>
                 <button onClick={this.handleClose} className="btn button-main-size btn-outline-secondary px-4">
                   Cancel

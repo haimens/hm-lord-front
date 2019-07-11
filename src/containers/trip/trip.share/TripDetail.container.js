@@ -150,6 +150,7 @@ class TripDetailContainer extends Component {
         {showAlertInfoModal && (
           <AlertInfoModal
             trip_token={trip_token}
+            pickup_time={trip_detail_in_lord.basic_info.pickup_time}
             createAnAlertForATrip={createAnAlertForATrip}
             onClose={() => this.handleInfoModal("alert")}
           />

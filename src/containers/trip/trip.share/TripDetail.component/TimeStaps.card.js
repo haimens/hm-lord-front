@@ -22,25 +22,25 @@ export default function TimeStapsCard(props) {
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Start Time</div>
         <div className="hm-text-14 font-weight-bold text-modal-color">
-          {convertUTCtoLocal(start_time, "YYYY-MM-DD HH:mm")}
+          {start_time ? convertUTCtoLocal(start_time, "YYYY-MM-DD HH:mm") : "N/A"}
         </div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Arrive Time</div>
         <div className="hm-text-14 font-weight-bold text-modal-color">
-          {convertUTCtoLocal(arrive_time, "YYYY-MM-DD HH:mm")}
+          {arrive_time ? convertUTCtoLocal(arrive_time, "YYYY-MM-DD HH:mm") : "N/A"}
         </div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">COB Time</div>
         <div className="hm-text-14 font-weight-bold text-modal-color">
-          {convertUTCtoLocal(cob_time, "YYYY-MM-DD HH:mm")}
+          {cob_time ? convertUTCtoLocal(cob_time, "YYYY-MM-DD HH:mm") : "N/A"}
         </div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">CAD Time</div>
         <div className="hm-text-14 font-weight-bold text-modal-color">
-          {convertUTCtoLocal(cad_time, "YYYY-MM-DD HH:mm")}
+          {cad_time ? convertUTCtoLocal(cad_time, "YYYY-MM-DD HH:mm") : "N/A"}
         </div>
       </div>
     </div>
