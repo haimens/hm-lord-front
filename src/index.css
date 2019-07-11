@@ -227,24 +227,17 @@ border-radius: 6px;
  width: 25px
 }
 
-.company-detail-button-sub{
- border:1px solid #5e72e4; 
- height:25px;
-width: 25px
-}
 .primary-set-button{
-    border:1px solid #5e72e4; 
-    height:28px;
-   width: 100px;
+   border:1px solid #5e72e4 !important; 
    background-color: white;
    color:#5e72e4; 
-   border-radius: 5px;
 }
-.primary-set-button:hover{
- background-color:#5e72e4; 
- color: white;
- transition: 0.3s ease;
+
+.input-addon-width{
+  width: 46px;
+
 }
+
 .font-weight-500{
   font-weight: 500 !important;
 }

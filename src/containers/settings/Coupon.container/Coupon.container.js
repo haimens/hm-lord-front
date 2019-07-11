@@ -3,20 +3,23 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { ListView, Header, ListHeader } from "../../../components/shared";
 import CouponListItem from "./Coupon.component/CouponList.item";
+import CouponAdding from "./Coupon.component/CouponAdding.modal";
 class Coupon extends Component {
   state = {
-    showAddWage: false
+    showAddCouponModal: false
   };
   handleWageSearch = keywords => {
     console.log(keywords);
   };
-  handleAddingWage = () => {
-    this.setState(state => ({ showAddWage: !state.showAddWage }));
+  handleShowAddingCouponModal = () => {
+    this.setState(state => ({ showAddCouponModal: !state.showAddCouponModal }));
   };
   render() {
     const { history } = this.props;
+    const { showAddCouponModal } = this.state;
     return (
       <main className="container-fluid">
+        {showAddCouponModal && <CouponAdding />}
         <section className="mb-4">
           <Header
             title="Settings"
@@ -30,7 +33,7 @@ class Coupon extends Component {
           <ListHeader
             parentProps={{
               title: "Coupon",
-              clickFunction: this.handleShowAddingWageModal,
+              clickFunction: this.handleShowAddingCouponModal,
               clickTitle: "Coupon"
             }}
             buttonWidth={"88px"}
