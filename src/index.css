@@ -267,3 +267,22 @@ width: 25px
 .purple-border{
   border-top: 1px solid  #32325d;
 }
+
+.ant-time-picker{
+  height: 46px !important;
+  width: 100% !important;
+}
+.ant-time-picker-input{
+  height: 46px !important;
+  width: 100% !important;
+}
+
+.ant-calendar-picker{
+  height: 46px !important;
+  width: 100% !important;
+}
+
+.ant-calendar-picker-input{
+  height: 46px !important;
+  width: 100% !important;
+}

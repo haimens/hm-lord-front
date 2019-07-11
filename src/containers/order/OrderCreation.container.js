@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { OrderHeader, CustomerInformationCard } from "./orderCreation.component";
+import TripDetailCard from "./orderCreation.component/TripDetail.card";
 
 class OrderCreation extends Component {
   state = {
-    position: 2
+    position: 3
   };
   handleChangePosition = position => {
     this.setState(states => ({ position: states.position + position }));
@@ -21,6 +22,7 @@ class OrderCreation extends Component {
           </div>
         </section>
         <section>{position === 2 && <CustomerInformationCard />}</section>
+        <section>{position === 3 && <TripDetailCard />}</section>
       </main>
     );
   }
