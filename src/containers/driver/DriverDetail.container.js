@@ -21,8 +21,8 @@ import {
 } from "../../actions/driver.action";
 import { findTripListInDriver, findActiveTripListInDriver } from "../../actions/trip.action";
 import { findVehicleListInLord } from "../../actions/vehicle.action";
-import { findWageListInDriver, createWageInDriver, findSumInDriver } from "../../actions/wage.action";
-import { findSalaryListInDriver, createSalaryInDriver } from "../../actions/salary.action";
+import { findWageListInDriver, createWageInDriver, findSumWageInDriver } from "../../actions/wage.action";
+import { findSalaryListInDriver, createSalaryInDriver, findSumSalaryInDriver } from "../../actions/salary.action";
 
 import "./DriverDetail.container.css";
 class DriverDetail extends Component {
@@ -68,7 +68,8 @@ class DriverDetail extends Component {
       findTripListInDriver,
       findActiveTripListInDriver,
       findWageListInDriver,
-      findSalaryListInDriver
+      findSalaryListInDriver,
+      findSumSalaryInDriver
     } = this.props;
     const { driver_token } = match.params;
     await Promise.all([
@@ -79,7 +80,8 @@ class DriverDetail extends Component {
       findActiveTripListInDriver(driver_token),
       findWageListInDriver(driver_token),
       findSalaryListInDriver(driver_token),
-      findSumInDriver(driver_token)
+      findSumWageInDriver(driver_token),
+      findSumSalaryInDriver(driver_token)
     ]);
     if (this.props.driver_detail_in_lord.location_info) {
       if (
@@ -257,13 +259,13 @@ class DriverDetail extends Component {
           <ListView
             totalCount={30}
             title="Salary List"
-            fieldNames={["Created On", "Amount", "Note"]}
+            fieldNames={["Created On", "Updated On", "Amount"]}
             hideHeader={true}
             onPageChange={this.handlePageChange}
           >
-            {/* {punch_list_in_puri.record_list.map((punch, index) => (
-              <SalaryListItem parentProps={punch} key={index} onClick={this.handlePunchItemClick} />
-            ))} */}
+            {salary_list_in_driver.record_list.map((salary, index) => (
+              <SalaryListItem parentProps={salary} key={index} />
+            ))}
           </ListView>
         </section>
       </main>
@@ -295,7 +297,8 @@ const mapDispatchToProps = {
   findSalaryListInDriver,
   createWageInDriver,
   createSalaryInDriver,
-  findSumInDriver
+  findSumWageInDriver,
+  findSumSalaryInDriver
 };
 
 export default connect(

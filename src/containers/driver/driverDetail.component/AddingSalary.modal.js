@@ -11,10 +11,10 @@ export default class AddingSalaryModal extends Component {
     this.setState({ [id]: value });
   };
   handleCreatingWage = () => {
-    const { createSalaryInDriver } = this.props;
+    const { createSalaryInDriver, driver_token } = this.props;
     const { amount } = this.state;
     if (amount !== "") {
-      createSalaryInDriver({
+      createSalaryInDriver(driver_token, {
         amount: amount * 100
       });
       this.handleClose();
@@ -46,15 +46,21 @@ export default class AddingSalaryModal extends Component {
               <div className="text-modal-color font-weight-bold hm-text-14">Chris Yao</div>
             </div>
 
-            <div className="form-group mb-4">
+            <div className="form-group input-group mb-4">
+              <div className="input-group-prepend">
+                <span className="input-group-text bg-white border-right-0">$</span>
+              </div>
               <input
                 type="text"
-                className="form-control hm-input-height "
+                className="form-control hm-input-height border-right-0 border-left-0"
                 id="amount"
-                placeholder={"Salary Amount"}
+                placeholder="Salary Amount"
                 value={amount}
                 onChange={this.handleInputChange}
               />
+              <div className="input-group-append">
+                <span className="input-group-text bg-white border-left-0">.00</span>
+              </div>
             </div>
 
             <div className="form-group text-right pt-3">

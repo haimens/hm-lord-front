@@ -36,7 +36,7 @@ export const createWageInDriver = (driver_token, body = {}) => async dispatch =>
   }
 };
 
-export const findSumInDriver = driver_token => async dispatch => {
+export const findSumWageInDriver = driver_token => async dispatch => {
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`wage/sum/driver/${driver_token}`, "GET");

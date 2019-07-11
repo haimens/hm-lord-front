@@ -22,11 +22,28 @@ export const findSalaryListInDriver = (driver_token, query = {}) => async dispat
 };
 
 export const createSalaryInDriver = (driver_token, body = {}) => async dispatch => {
+  console.log(driver_token);
+  console.log(body);
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`salary/detail/driver/${driver_token}`, "POST", body);
+    const { payload } = await callApi(`salary/detail/${driver_token}`, "POST", body);
     dispatch(findSalaryListInDriver(driver_token));
     await launchSuccess(dispatch);
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
+export const findSumSalaryInDriver = driver_token => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`salary/sum/driver/${driver_token}`, "GET");
+    await dispatch({
+      type: constant.SALARY_SUM_LIST_IN_DRIVER,
+      payload
+    });
     await stopLoader(dispatch);
   } catch (err) {
     await stopLoader(dispatch);
