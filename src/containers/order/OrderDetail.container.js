@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { Header, ListHeader, ListView } from "../../components/shared";
 import BasicInfo from "./orderDetail.component/BasicInfo.card";
 import CustomerInfo from "./orderDetail.component/CustomerInfo.card";
@@ -18,6 +20,7 @@ class OrderDetail extends Component {
   };
   render() {
     const { showUpdateBasicInfoModal, showUpdateCustomerInfoModal } = this.state;
+    const { history } = this.props;
     return (
       <main className="container-fluid">
         {showUpdateBasicInfoModal && <BasicInfoModal onClose={this.handleUpdateBasicInfo} />}
@@ -26,9 +29,13 @@ class OrderDetail extends Component {
         <section>
           <div className="mb-4">
             <Header
-              title="Order List"
+              title="Order"
               tabicon={"tabicon_dashboard.svg"}
+              subTitle={"Order List"}
+              thirdTitle={"Order Detail"}
+              toSubLocation={"/order/list"}
               showButton={true}
+              history={history}
               clickTitle={"Order"}
               buttonWidth={"88px"}
               clickFunction={() => this.props.history.push("/order/creation")}
@@ -113,4 +120,12 @@ class OrderDetail extends Component {
     );
   }
 }
-export default OrderDetail;
+const mapStateToProps = state => {
+  return {};
+};
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(OrderDetail));
