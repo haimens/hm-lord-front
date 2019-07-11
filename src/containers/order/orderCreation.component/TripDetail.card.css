@@ -1,11 +1,11 @@
 
 .blue-background{
-  height: 90px;
+  min-height: 90px;
   background: linear-gradient(105deg, #4776e6, #8e54e9) !important;
 }
 
 .red-background{
-  height: 90px;
+  min-height: 90px;
   background:linear-gradient(to right, #f5385b, #ef5e36) !important;
 }
 

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { GAutoComplete, GMapLocation } from "../../../components/shared";
 import { TimePicker, DatePicker } from "antd";
+import TripCard from "./TripCar.card";
 export default class TripInfo extends Component {
   state = {
     name: "",
@@ -101,32 +102,11 @@ export default class TripInfo extends Component {
             </div>
 
             <div className="px-3 py-4">
-              <div className="px-4 py-3 shadow-sm rounded-custom text-white d-flex justify-content-between align-items-center blue-background">
-                <div className="d-flex align-items-center">
-                  <img
-                    src={`${process.env.PUBLIC_URL}/img/hd.png`}
-                    style={{ width: "48px", height: "48px" }}
-                    alt="company"
-                    className="rounded-circle"
-                  />
-                  <div className="ml-3 hm-text-15 font-weight-bold">Sedan</div>
-                </div>
-                <div className="ml-3 hm-text-15 font-weight-bold">0.00</div>
+              <div className="mb-4">
+                <TripCard backgroundColor={`blue-background`} />
               </div>
-            </div>
-
-            <div className="px-3 pb-4">
-              <div className="px-4 py-3 shadow-sm rounded-custom text-white d-flex justify-content-between align-items-center red-background">
-                <div className="d-flex align-items-center">
-                  <img
-                    src={`${process.env.PUBLIC_URL}/img/hd.png`}
-                    style={{ width: "48px", height: "48px" }}
-                    alt="company"
-                    className="rounded-circle"
-                  />
-                  <div className="ml-3 hm-text-15 font-weight-bold">Sedan</div>
-                </div>
-                <div className="ml-3 hm-text-15 font-weight-bold">0.00</div>
+              <div>
+                <TripCard backgroundColor={`red-background`} />
               </div>
             </div>
           </div>
