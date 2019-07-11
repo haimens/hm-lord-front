@@ -21,6 +21,9 @@ import {
 } from "../../actions/driver.action";
 import { findTripListInDriver, findActiveTripListInDriver } from "../../actions/trip.action";
 import { findVehicleListInLord } from "../../actions/vehicle.action";
+import { findWageListInDriver, createWageInDriver, findSumInDriver } from "../../actions/wage.action";
+import { findSalaryListInDriver, createSalaryInDriver } from "../../actions/salary.action";
+
 import "./DriverDetail.container.css";
 class DriverDetail extends Component {
   state = {
@@ -60,11 +63,12 @@ class DriverDetail extends Component {
     const {
       match,
       findDriverDetailInLord,
-      findDriverLocationListInLord,
       findCarListForADriver,
       findVehicleListInLord,
       findTripListInDriver,
-      findActiveTripListInDriver
+      findActiveTripListInDriver,
+      findWageListInDriver,
+      findSalaryListInDriver
     } = this.props;
     const { driver_token } = match.params;
     await Promise.all([
@@ -72,7 +76,10 @@ class DriverDetail extends Component {
       findCarListForADriver(driver_token),
       findVehicleListInLord(),
       findTripListInDriver(driver_token),
-      findActiveTripListInDriver(driver_token)
+      findActiveTripListInDriver(driver_token),
+      findWageListInDriver(driver_token),
+      findSalaryListInDriver(driver_token),
+      findSumInDriver(driver_token)
     ]);
     if (this.props.driver_detail_in_lord.location_info) {
       if (
@@ -102,7 +109,11 @@ class DriverDetail extends Component {
       vehicle_list_in_lord,
       car_list_for_a_driver,
       updateACarForADriver,
-      trip_list_in_driver
+      trip_list_in_driver,
+      wage_list_in_driver,
+      salary_list_in_driver,
+      createWageInDriver,
+      createSalaryInDriver
     } = this.props;
     return (
       <main className="container-fluid">
@@ -123,8 +134,20 @@ class DriverDetail extends Component {
             onClose={this.handleShowAddingVehicleModal}
           />
         )}
-        {showAddingWageModal && <AddingWageModal onClose={this.handleShowAddingWageModal} />}
-        {showAddingSalaryModal && <AddingSalaryModal onClose={this.handleShowAddingSalaryModal} />}
+        {showAddingWageModal && (
+          <AddingWageModal
+            driver_token={driver_token}
+            createWageInDriver={createWageInDriver}
+            onClose={this.handleShowAddingWageModal}
+          />
+        )}
+        {showAddingSalaryModal && (
+          <AddingSalaryModal
+            driver_token={driver_token}
+            createSalaryInDriver={createSalaryInDriver}
+            onClose={this.handleShowAddingSalaryModal}
+          />
+        )}
         <section className="mb-4">
           <div className="mb-4">
             <Header
@@ -166,6 +189,7 @@ class DriverDetail extends Component {
                   tripTo: trip.to_addr_str,
                   tripStatus: trip.status_str
                 }}
+                key={index}
                 hideDriver={true}
               />
             ))}
@@ -215,9 +239,9 @@ class DriverDetail extends Component {
             hideHeader={true}
             onPageChange={this.handlePageChange}
           >
-            {/* {punch_list_in_puri.record_list.map((punch, index) => (
-              <WageListItem parentProps={punch} key={index} onClick={this.handlePunchItemClick} />
-            ))} */}
+            {wage_list_in_driver.record_list.map((wage, index) => (
+              <WageListItem parentProps={wage} key={index} />
+            ))}
           </ListView>
         </section>
 
@@ -251,7 +275,10 @@ const mapStateToProps = state => {
     driver_detail_in_lord: state.driverReducer.driver_detail_in_lord,
     vehicle_list_in_lord: state.vehicleReducer.vehicle_list_in_lord,
     car_list_for_a_driver: state.driverReducer.car_list_for_a_driver,
-    trip_list_in_driver: state.tripReducer.trip_list_in_driver
+    trip_list_in_driver: state.tripReducer.trip_list_in_driver,
+    wage_list_in_driver: state.wageReducer.wage_list_in_driver,
+    wage_sum_list_in_driver: state.wageReducer.wage_sum_list_in_driver,
+    salary_list_in_driver: state.salaryReducer.salary_list_in_driver
   };
 };
 const mapDispatchToProps = {
@@ -263,7 +290,12 @@ const mapDispatchToProps = {
   createDriverToACarInLord,
   updateACarForADriver,
   findTripListInDriver,
-  findActiveTripListInDriver
+  findActiveTripListInDriver,
+  findWageListInDriver,
+  findSalaryListInDriver,
+  createWageInDriver,
+  createSalaryInDriver,
+  findSumInDriver
 };
 
 export default connect(

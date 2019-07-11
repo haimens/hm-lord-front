@@ -1,17 +1,30 @@
 import React, { Component } from "react";
 import { Modal } from "../../../components/shared";
-
+import alertify from "alertifyjs";
 export default class AddingWageModal extends Component {
   state = {
     amount: "",
-    type: "",
+    type: 1,
     note: ""
   };
   handleInputChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
+    const { id, value } = e.target;
+    this.setState({ [id]: value });
   };
-
+  handleCreatingWage = () => {
+    const { createWageInDriver, driver_token } = this.props;
+    const { amount, type, note } = this.state;
+    if (amount !== "" && type !== "" && note !== "") {
+      createWageInDriver(driver_token, {
+        amount: amount * 100,
+        type,
+        note
+      });
+      this.handleClose();
+    } else {
+      alertify.alert("Error!", "Please Finish The Form!");
+    }
+  };
   handleClose = () => {
     this.props.onClose();
   };
@@ -28,27 +41,33 @@ export default class AddingWageModal extends Component {
               <div className="text-modal-color font-weight-bold hm-text-14">Chris Yao</div>
             </div>
 
-            <div className="form-group mb-4">
+            <div className="form-group input-group mb-4">
+              <div className="input-group-prepend">
+                <span className="input-group-text bg-white border-right-0">$</span>
+              </div>
               <input
-                className="form-control hm-input-height mt-3"
-                name="amount"
+                type="text"
+                className="form-control hm-input-height border-right-0 border-left-0"
                 id="amount"
-                placeholder={"Amount"}
+                placeholder="Amount"
                 value={amount}
                 onChange={this.handleInputChange}
               />
+              <div className="input-group-append">
+                <span className="input-group-text bg-white border-left-0">.00</span>
+              </div>
             </div>
 
-            <div className="form-group mb-4">
-              <input
-                type="text"
-                className="form-control hm-input-height "
-                name="type"
-                id="type"
-                placeholder={"Type"}
+            <div className="form-group  mb-4">
+              <select
                 value={type}
+                id="type"
+                className="custom-select hm-input-height"
                 onChange={this.handleInputChange}
-              />
+              >
+                <option value="1">Income</option>
+                <option value="2">Fine</option>
+              </select>
             </div>
 
             <div className="form-group mb-4">
@@ -66,7 +85,7 @@ export default class AddingWageModal extends Component {
             <div className="form-group text-right pt-3">
               <button
                 className="button-main-background btn button-main-size px-4 text-white mr-3"
-                onClick={this.handleCreatingCompany}
+                onClick={this.handleCreatingWage}
               >
                 Add
               </button>

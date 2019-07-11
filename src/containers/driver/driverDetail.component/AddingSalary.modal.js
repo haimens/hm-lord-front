@@ -1,13 +1,26 @@
 import React, { Component } from "react";
 import { Modal } from "../../../components/shared";
+import alertify from "alertifyjs";
 
 export default class AddingSalaryModal extends Component {
   state = {
     amount: ""
   };
   handleInputChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
+    const { id, value } = e.target;
+    this.setState({ [id]: value });
+  };
+  handleCreatingWage = () => {
+    const { createSalaryInDriver } = this.props;
+    const { amount } = this.state;
+    if (amount !== "") {
+      createSalaryInDriver({
+        amount: amount * 100
+      });
+      this.handleClose();
+    } else {
+      alertify.alert("Error!", "Please Finish The Form!");
+    }
   };
 
   handleClose = () => {
@@ -37,7 +50,6 @@ export default class AddingSalaryModal extends Component {
               <input
                 type="text"
                 className="form-control hm-input-height "
-                name="amount"
                 id="amount"
                 placeholder={"Salary Amount"}
                 value={amount}
@@ -48,7 +60,7 @@ export default class AddingSalaryModal extends Component {
             <div className="form-group text-right pt-3">
               <button
                 className="button-main-background btn button-main-size px-4 text-white mr-3"
-                onClick={this.handleCreatingCompany}
+                onClick={this.handleCreatingWage}
               >
                 Add
               </button>
