@@ -8,3 +8,8 @@
   height: 90px;
   background:linear-gradient(to right, #f5385b, #ef5e36) !important;
 }
+
+.trip-button-width{
+  width: 310px;
+  height: 43px;
+}
