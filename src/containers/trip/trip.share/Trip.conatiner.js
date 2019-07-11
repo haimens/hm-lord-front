@@ -19,10 +19,10 @@ class TripContainer extends Component {
         findTripListInLord({ status: 2 });
       }
       if (currentPositionNow === "finished") {
-        findTripListInLord({ status: 8 });
+        findTripListInLord({ status: 7 });
       }
       if (currentPositionNow === "abnormal") {
-        findTripListInLord({ status: 9 });
+        findTripListInLord({ status: 8 });
       }
       return {
         currentPosition: currentPositionNow
