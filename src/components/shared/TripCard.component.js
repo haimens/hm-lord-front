@@ -11,7 +11,7 @@ export default class TripCard extends Component {
           history.push(`/trip/upcoming/detail/${trip_token}`);
         }}
       >
-        <div className="px-4 py-3 shadow-sm rounded-custom bg-white">
+        <div className="px-4 py-3 shadow-sm rounded-custom bg-white border">
           <div className="row">
             <div className="col-12">
               <div className="row mb-3">

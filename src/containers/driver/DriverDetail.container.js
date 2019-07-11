@@ -21,6 +21,7 @@ import {
 } from "../../actions/driver.action";
 import { findTripListInDriver, findActiveTripListInDriver } from "../../actions/trip.action";
 import { findVehicleListInLord } from "../../actions/vehicle.action";
+import "./DriverDetail.container.css";
 class DriverDetail extends Component {
   state = {
     showAddingTripModal: false,
@@ -100,7 +101,8 @@ class DriverDetail extends Component {
       updateADriverInLord,
       vehicle_list_in_lord,
       car_list_for_a_driver,
-      updateACarForADriver
+      updateACarForADriver,
+      trip_list_in_driver
     } = this.props;
     return (
       <main className="container-fluid">
@@ -154,17 +156,19 @@ class DriverDetail extends Component {
             hideShadow={true}
             hideButton={true}
           />
-          <div className="row p-3">
-            <TripCard
-              parentProps={{
-                tripId: 100015,
-                tripDriver: "Kobe",
-                tripCustomer: "Lebron",
-                tripPickUp: "16/26 23",
-                tripFrom: "321 s",
-                tripTo: "123 s"
-              }}
-            />
+          <div className="row p-3 triplist-scroll">
+            {trip_list_in_driver.record_list.map((trip, index) => (
+              <TripCard
+                parentProps={{
+                  tripCustomer: trip.customer_name,
+                  tripPickUp: trip.pickup_time,
+                  tripFrom: trip.from_addr_str,
+                  tripTo: trip.to_addr_str,
+                  tripStatus: trip.status_str
+                }}
+                hideDriver={true}
+              />
+            ))}
           </div>
         </section>
         <section className="mb-4 bg-white rounded-custom shadow-sm">
@@ -246,7 +250,8 @@ const mapStateToProps = state => {
   return {
     driver_detail_in_lord: state.driverReducer.driver_detail_in_lord,
     vehicle_list_in_lord: state.vehicleReducer.vehicle_list_in_lord,
-    car_list_for_a_driver: state.driverReducer.car_list_for_a_driver
+    car_list_for_a_driver: state.driverReducer.car_list_for_a_driver,
+    trip_list_in_driver: state.tripReducer.trip_list_in_driver
   };
 };
 const mapDispatchToProps = {

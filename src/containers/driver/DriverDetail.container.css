@@ -1,0 +1,6 @@
+.triplist-scroll{
+  max-height: 520px !important; 
+  overflow: auto; 
+  overflow-y: scroll; 
+  overflow-x: hidden;
+}
