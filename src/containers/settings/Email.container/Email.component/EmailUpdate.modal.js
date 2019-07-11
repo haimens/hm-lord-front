@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Modal } from "../../../../../components/shared";
+import { Modal } from "../../../../components/shared";
 import alertify from "alertifyjs";
-export default class CompanyAdmin extends Component {
+export default class EmailUpdate extends Component {
   state = {
     sendgrid_api_key: "",
     sendgrid_from_email: ""
@@ -22,11 +22,15 @@ export default class CompanyAdmin extends Component {
   handleImageUpload = img_path => {
     this.setState({ img_url: img_path });
   };
-  handleCreateEmailResource = () => {
+  handleUpdateEmailResource = () => {
     const { sendgrid_api_key, sendgrid_from_email } = this.state;
-    const { realm_token, createAEmailMethod } = this.props;
+    const {
+      realm_token,
+      updateAEmailMethod,
+      currEmailResource: { email_resource_token }
+    } = this.props;
     if (sendgrid_api_key !== "" && sendgrid_from_email !== "") {
-      createAEmailMethod(realm_token, {
+      updateAEmailMethod(realm_token, email_resource_token, {
         sendgrid_api_key,
         sendgrid_from_email
       });
@@ -35,13 +39,17 @@ export default class CompanyAdmin extends Component {
       alertify.alert("Error!", "Please Finish The Form!");
     }
   };
-
+  async componentDidMount() {
+    console.log(this.props);
+    const { sendgrid_api_key, sendgrid_from_email } = this.props.currEmailResource.currEmail;
+    await this.setState({ sendgrid_api_key, sendgrid_from_email });
+  }
   render() {
     const { sendgrid_api_key, sendgrid_from_email } = this.state;
     return (
       <div>
         <Modal
-          title="Add Email Resource"
+          title="Add Email Information"
           onClose={this.handleClose}
           position="center"
           getWidth={"467px"}
@@ -71,12 +79,13 @@ export default class CompanyAdmin extends Component {
                   onChange={this.handleInputChange}
                 />
               </div>
+
               <div className="form-group text-right pt-3">
                 <button
                   className="button-main-background btn button-main-size px-4 text-white mr-3"
-                  onClick={this.handleCreateEmailResource}
+                  onClick={this.handleUpdateEmailResource}
                 >
-                  Add
+                  Update
                 </button>
                 <button onClick={this.handleClose} className="btn button-main-size btn-outline-secondary px-4">
                   Cancel

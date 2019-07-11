@@ -1,11 +1,11 @@
 import React from "react";
-import { EditButton } from "../../../../../components/shared";
+import { EditButton } from "../../../../components/shared";
 
 /**
  * @onClick
  * @onCorrect
  */
-export default function CompanyEmailListItem(props) {
+export default function EmailListItem(props) {
   const handleEditEmailResource = email_resource_token => {
     props.handleUpdateEmailResource(email_resource_token, props.parentProps);
   };

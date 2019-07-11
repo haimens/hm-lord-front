@@ -1,19 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import CompanyEmailDetailListItem from "./companyEmail.component/companyEmailList.item";
-import CompanyEmailModal from "./companyEmail.component/companyEmail.modal";
-import CompanyEmailUpdateModal from "./companyEmail.component/companyEmailUpdate.modal";
-import {
-  findCompanyDetail,
-  findAllEmailResourceList,
-  createAEmailMethod,
-  updateAEmailMethod,
-  setPrimaryForResources
-} from "../../../../actions/company.action";
-import { Header, ListView, ListHeader } from "../../../../components/shared";
-import CompanySourceDetail from "../companySource.share/companySourceDetail.container";
-class CompanyEmail extends Component {
+import EmailDetailListItem from "./Email.component/EmailList.item";
+import EmailModal from "./Email.component/Email.modal";
+import EmailUpdateModal from "./Email.component/EmailUpdate.modal";
+import { Header, ListView, ListHeader } from "../../../components/shared";
+import SourceDetail from "../Source.share/SourceDetail.container";
+class Email extends Component {
   state = {
     showCreateEmailResource: false,
     showEditEmailResource: false,
@@ -36,60 +29,49 @@ class CompanyEmail extends Component {
   async componentDidMount() {
     const { findAllEmailResourceList, match } = this.props;
     const { realm_token } = match.params;
-    Promise.all([findAllEmailResourceList(realm_token)]);
+    Promise.all([]);
   }
   handlePageChange = start => {
     this.props.findAllEmailResourceList({ start });
   };
   render() {
-    const {
-      company_detail,
-      email_list,
-      match,
-      createAEmailMethod,
-      updateAEmailMethod,
-      setPrimaryForResources,
-      history
-    } = this.props;
-    const { realm_token } = match.params;
+    const { history } = this.props;
     const { showCreateEmailResource, showEditEmailResource, currEmailResource } = this.state;
-    const { sendgrid_api_key, sendgrid_from_email } = company_detail.email_resource_info;
 
     return (
       <main>
-        {showCreateEmailResource && (
-          <CompanyEmailModal
+        {/* {showCreateEmailResource && (
+          <EmailModal
             realm_token={realm_token}
             createAEmailMethod={createAEmailMethod}
             onClose={this.handleCreateEmailResource}
           />
         )}
         {showEditEmailResource && (
-          <CompanyEmailUpdateModal
+          <EmailUpdateModal
             realm_token={realm_token}
             updateAEmailMethod={updateAEmailMethod}
             currEmailResource={currEmailResource}
             onClose={this.handleUpdateEmailResource}
           />
-        )}
+        )} */}
         <section className="container-fluid">
           <div className="mb-4">
             <Header
-              title="Company"
+              title=""
               history={history}
-              tabicon={"tabicon_company.svg"}
-              subTitle={"Company Detail"}
+              tabicon={"tabicon_.svg"}
+              subTitle={" Detail"}
               thirdTitle={"Primary Email"}
-              toLocation={"/company"}
-              toSubLocation={`/company/detail/${realm_token}`}
+              toLocation={"/"}
             />
           </div>
           <div className="mb-4 ">
-            <CompanySourceDetail
+            <SourceDetail
               title={"Primary Email Information"}
-              imgLink={company_detail.basic_info.logo_path}
+              imgLink={123}
               subTitles={["SendGrid API Key", "SendGrid From Email"]}
-              subTitlesInfos={[sendgrid_api_key, sendgrid_from_email]}
+              subTitlesInfos={[123, 123]}
             />
           </div>
           <div className="mb-4">
@@ -102,22 +84,22 @@ class CompanyEmail extends Component {
               buttonWidth={"146px"}
             />
             <ListView
-              totalCount={email_list.count}
+              totalCount={30}
               title="Email List"
               fieldNames={["sendgrid api key", "sendgrid from_email", "Status", "edit"]}
               hideHeader={true}
               onPageChange={this.handlePageChange}
             >
-              {email_list.record_list.map((email, index) => (
-                <CompanyEmailDetailListItem
+              {/* {email_list.record_list.map((email, index) => (
+                <EmailDetailListItem
                   parentProps={email}
                   handleUpdateEmailResource={this.handleUpdateEmailResource}
                   setPrimaryForResources={setPrimaryForResources}
                   realm_token={realm_token}
-                  isPrimary={company_detail.email_resource_info.email_resource_token === email.email_resource_token}
+                  isPrimary={_detail.email_resource_info.email_resource_token === email.email_resource_token}
                   key={index}
                 />
-              ))}
+              ))} */}
             </ListView>
           </div>
         </section>
@@ -127,20 +109,11 @@ class CompanyEmail extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    company_detail: state.companyReducer.company_detail,
-    email_list: state.companyReducer.email_list
-  };
+  return {};
 };
-const mapDispatchToProps = {
-  findCompanyDetail,
-  findAllEmailResourceList,
-  createAEmailMethod,
-  updateAEmailMethod,
-  setPrimaryForResources
-};
+const mapDispatchToProps = {};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(CompanyEmail));
+)(withRouter(Email));

@@ -29,6 +29,7 @@ import NotificationMessage from "./containers/notification/NotificationMessage.c
 
 import PaymentResource from "./containers/settings/Payment.container/Payment.container";
 import MessageResource from "./containers/settings/Message.container/Message.container";
+import EmailResource from "./containers/settings/Email.container/Email.container";
 
 const Login = React.lazy(() => import("./containers/login/Login.container"));
 const ResetPassword = React.lazy(() => import("./containers/resetPassword/ResetPassword.container"));
@@ -93,8 +94,8 @@ class App extends Component {
 
               <ProtectedRoute exact path="/settings/payment" component={PaymentResource} />
               <ProtectedRoute exact path="/settings/message" component={MessageResource} />
-              {/*<ProtectedRoute exact path="/settings/email" component={EmailResource} />
-              <ProtectedRoute exact path="/settings/coupon" component={Coupon} />
+              <ProtectedRoute exact path="/settings/email" component={EmailResource} />
+              {/* <ProtectedRoute exact path="/settings/coupon" component={Coupon} />
               <ProtectedRoute exact path="/settings/vehicle" component={VehicleType} />
               <ProtectedRoute exact path="/settings/general" component={KeyAndValue} /> */}
               <Route component={NoMatch} />
