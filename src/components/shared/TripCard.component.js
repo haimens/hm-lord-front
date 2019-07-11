@@ -1,15 +1,19 @@
 import React, { Component } from "react";
 import { convertUTCtoLocal } from "../../actions/utilities.action";
 export default class TripCard extends Component {
+  handleTripCardPushed = trip_token => {
+    const { history, currentPosition } = this.props;
+    if (currentPosition !== "abnormal") {
+      history.push(`/trip/${currentPosition}/detail/${trip_token}`);
+    }
+  };
   render() {
-    const { parentProps, dotColor, history, hideDriver } = this.props;
+    const { parentProps, hideDriver } = this.props;
     const { tripDriver, tripCustomer, tripPickUp, tripFrom, tripTo, trip_token, tripStatus } = parentProps;
     return (
       <div
         className={this.props.fullWidth ? "col-6" : "col-12 col-md-6  mb-4 hm-pointer-cursor"}
-        onClick={() => {
-          history.push(`/trip/upcoming/detail/${trip_token}`);
-        }}
+        onClick={() => this.handleTripCardPushed(trip_token)}
       >
         <div className="px-4 py-3 shadow-sm rounded-custom bg-white border">
           <div className="row">
