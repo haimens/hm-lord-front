@@ -38,15 +38,20 @@ class Nav extends Component {
         </div>
         <div className="d-flex flex-row align-items-center">
           <div className="btn-group mr-2">
-            <img src={localStorage.getItem("icon_path")} style={{ height: "36px", width: "36px" }} className="rounded-circle" alt="icon" />
+            <img
+              src={`${process.env.PUBLIC_URL}/img/haimenslogo.svg`}
+              style={{ height: "36px", width: "36px" }}
+              alt="error404"
+            />
             <button
               type="button"
-              className="btn dropdown-toggle text-white"
+              className="btn dropdown-toggle text-white ml-2 d-flex align-items-center"
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
             >
               {localStorage.getItem("username").toUpperCase()}
+              <i className="fas fa-sort-down ml-1" />
             </button>
 
             <div className="dropdown-menu shadow-sm p-3">
