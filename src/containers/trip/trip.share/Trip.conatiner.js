@@ -76,7 +76,6 @@ class TripContainer extends Component {
               }}
               key={index}
               currentPosition={currentPosition}
-              dotColor={"text-purple"}
               hideDriver={true}
               history={history}
             />

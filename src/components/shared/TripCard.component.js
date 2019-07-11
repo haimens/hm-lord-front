@@ -61,8 +61,24 @@ export default class TripCard extends Component {
               <div className="row">
                 <div className="col-12">
                   <div className="d-flex align-items-center justify-content-end">
-                    <i className={`fas fa-circle  ${dotColor} mr-3`} style={{ fontSize: "6px" }} />
-                    <div className="font-weight-500 text-main-color">{tripStatus}</div>
+                    <div className="hm-text-14 text-modal-color font-weight-bold">
+                      {tripStatus === "DISPATCHED" ? (
+                        <div className="d-flex align-items-center ">
+                          <i className="fas fa-circle success-text-color mr-3 pl-0" style={{ fontSize: "6px" }} />
+                          <div className="text-modal-color hm-text-14  font-weight-500">DISPATCHED</div>
+                        </div>
+                      ) : tripStatus === "ON-THE-WAY" ? (
+                        <div className="d-flex align-items-center ">
+                          <i className="fas fa-circle pending-text-color mr-3 pl-0" style={{ fontSize: "6px" }} />
+                          <div className="text-modal-color hm-text-14  font-weight-500">ON-THE-WAY</div>
+                        </div>
+                      ) : (
+                        <div className="d-flex align-items-center ">
+                          <i className="fas fa-circle text-purple mr-3 pl-0" style={{ fontSize: "6px" }} />
+                          <div className="text-modal-color hm-text-14  font-weight-500">{tripStatus}</div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
