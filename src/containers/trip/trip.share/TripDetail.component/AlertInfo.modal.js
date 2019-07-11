@@ -4,6 +4,7 @@ import { convertLocalToUTC } from "../../../../actions/utilities.action";
 import alertify from "alertifyjs";
 import { TimePicker } from "antd";
 import "./AlertInfoModal.css";
+import moment from "moment";
 export default class AlertInfo extends Component {
   state = {
     eta: "",
@@ -25,12 +26,34 @@ export default class AlertInfo extends Component {
   handleCreateAlerts = async () => {
     const { eta, arrival, cob } = this.state;
     const { createAnAlertForATrip, trip_token } = this.props;
+
     if (eta !== "" && arrival !== "" && cob !== "") {
       createAnAlertForATrip(trip_token, {
         alert_list: [
-          { type: 1, record_time: convertLocalToUTC(eta) },
-          { type: 2, record_time: convertLocalToUTC(arrival) },
-          { type: 3, record_time: convertLocalToUTC(cob) }
+          {
+            type: 1,
+            record_time: convertLocalToUTC(
+              moment(eta)
+                .subtract(1, "hour")
+                .format("YYYY-MM-DD HH:mm")
+            )
+          },
+          {
+            type: 2,
+            record_time: convertLocalToUTC(
+              moment(arrival)
+                .subtract(5, "minute")
+                .format("YYYY-MM-DD HH:mm")
+            )
+          },
+          {
+            type: 3,
+            record_time: convertLocalToUTC(
+              moment(cob)
+                .add(5, "minute")
+                .format("YYYY-MM-DD HH:mm")
+            )
+          }
         ]
       });
       this.handleClose();
@@ -66,7 +89,7 @@ export default class AlertInfo extends Component {
                   className="button-main-background btn button-main-size px-4 text-white mr-3"
                   onClick={this.handleCreateAlerts}
                 >
-                  Add
+                  Update
                 </button>
                 <button onClick={this.handleClose} className="btn button-main-size btn-outline-secondary px-4">
                   Cancel
