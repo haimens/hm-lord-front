@@ -10,6 +10,7 @@ export const findOrderListInLord = (query = {}) => async dispatch => {
       order_direction: "DESC",
       ...query
     });
+    console.log(payload);
     await dispatch({
       type: constant.ORDER_LIST_IN_LORD,
       payload

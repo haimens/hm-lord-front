@@ -2,18 +2,29 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { OrderCard, Header } from "../../components/shared";
-
 import { findOrderListInLord } from "../../actions/order.action";
+import { getPageIndex } from "../../actions/utilities.action";
 
 class Order extends Component {
-  handlePageChange = start => {
-    console.log(start);
+  state = {
+    hasMore: true
   };
+  handlePageChange = async start => {
+    console.log(start);
+    const { order_list_in_lord } = this.props;
+
+    this.props.findOrderListInLord({ start: order_list_in_lord.end });
+  };
+
   componentDidMount() {
     this.props.findOrderListInLord();
+
+    console.log("hey");
   }
   render() {
     const { order_list_in_lord } = this.props;
+    const { hasMore } = this.state;
+    console.log(hasMore);
     return (
       <main className="container-fluid">
         <section>
@@ -27,6 +38,7 @@ class Order extends Component {
               clickFunction={() => this.props.history.push("/order/creation")}
             />
           </div>
+
           <div className="row">
             {order_list_in_lord.record_list.map((order, index) => (
               <OrderCard
@@ -39,6 +51,7 @@ class Order extends Component {
                   contact_cell: order.contact_cell,
                   status_str: order.status_str
                 }}
+                key={index}
               />
             ))}
           </div>

@@ -2,7 +2,15 @@ import React, { Component } from "react";
 import { convertUTCtoLocal } from "../../actions/utilities.action";
 export default class OrderCard extends Component {
   render() {
-    const { order_token, order_img, contact_name, order_type, contact_cell, cdate, isActive } = this.props.parentProps;
+    const {
+      order_token,
+      order_img,
+      contact_name,
+      order_type,
+      contact_cell,
+      cdate,
+      status_str
+    } = this.props.parentProps;
     return (
       <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-4 mb-4 hm-pointer-cursor"}>
         <div
@@ -20,20 +28,21 @@ export default class OrderCard extends Component {
               <div className="text-secondary-color hm-text-12">{convertUTCtoLocal(cdate)}</div>
               <div className="text-secondary-color hm-text-12">{order_type}</div>
 
-              {isActive === 2 ? (
-                <section className="hm-text-14 my-2">
-                  <div className=" d-flex align-items-center">
-                    <i className="fas fa-circle success-text-color mr-3" style={{ fontSize: "6px" }} />
-                    <div className="font-weight-500 text-main-color hm-text-12">Active</div>
-                  </div>
-                </section>
+              {status_str === "DISPATCHED" ? (
+                <div className="d-flex align-items-center ">
+                  <i className="fas fa-circle success-text-color mr-3 pl-0" style={{ fontSize: "6px" }} />
+                  <div className="text-modal-color hm-text-14  font-weight-500">DISPATCHED</div>
+                </div>
+              ) : status_str === "ON-THE-WAY" ? (
+                <div className="d-flex align-items-center ">
+                  <i className="fas fa-circle pending-text-color mr-3 pl-0" style={{ fontSize: "6px" }} />
+                  <div className="text-modal-color hm-text-14  font-weight-500">ON-THE-WAY</div>
+                </div>
               ) : (
-                <section className="hm-text-14 my-2">
-                  <div className=" d-flex align-items-center">
-                    <i className="fas fa-circle text-danger mr-3" style={{ fontSize: "6px" }} />
-                    <div className="font-weight-500 text-main-color hm-text-12">Inactive</div>
-                  </div>
-                </section>
+                <div className="d-flex align-items-center ">
+                  <i className="fas fa-circle text-purple mr-3 pl-0" style={{ fontSize: "6px" }} />
+                  <div className="text-modal-color hm-text-14  font-weight-500">{status_str}</div>
+                </div>
               )}
             </div>
           </div>
