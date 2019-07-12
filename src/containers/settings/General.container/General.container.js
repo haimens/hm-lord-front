@@ -24,7 +24,7 @@ class General extends Component {
           <Header
             title="Settings"
             subTitle="General Setting"
-            tabicon={"tabicon_dashboard.svg"}
+            tabicon={"icon_settings_white.svg"}
             clickTitle={"General Type"}
             buttonWidth={"110px"}
           />

@@ -24,14 +24,14 @@ class Home extends Component {
       <main>
         <section className="container-fluid">
           <div className="mb-4">
-            <Header title="Dashboard" tabicon={"tabicon_dashboard.svg"} />
+            <Header title="Dashboard" tabicon={"icon_dashboard_white.svg"} />
           </div>
-          <div className="row pt-2">
+          <div className="row">
             <div className="col-12 col-md-6 h-100 mb-4">
               <DisplayCard
                 data={{
                   amount: 30,
-                  title: "Total Company",
+                  title: "TOTAL CUSTOMER",
                   icon: `${process.env.PUBLIC_URL}/img/icon_company.svg`
                 }}
                 red={true}

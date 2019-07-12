@@ -42,7 +42,7 @@ class OrderDetail extends Component {
           <div className="mb-4">
             <Header
               title="Order"
-              tabicon={"tabicon_dashboard.svg"}
+              tabicon={"icon_order_white.svg"}
               subTitle={"Order List"}
               thirdTitle={"Order Detail"}
               toSubLocation={"/order/list"}

@@ -30,7 +30,7 @@ class Driver extends Component {
           <div className="mb-4">
             <Header
               title="Driver"
-              tabicon={"tabicon_dashboard.svg"}
+              tabicon={"icon_driver_white.svg"}
               showButton={true}
               clickTitle={"Driver"}
               buttonWidth={"88px"}

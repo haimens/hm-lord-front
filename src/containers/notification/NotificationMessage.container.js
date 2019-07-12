@@ -18,7 +18,7 @@ class NotificationMessage extends Component {
     return (
       <main className="container-fluid">
         <section className="mb-4">
-          <Header title="Notification" subTitle="Message Center" tabicon={"tabicon_dashboard.svg"} />
+          <Header title="Notification" subTitle="Message Center" tabicon={"icon_notification_white.svg"} />
         </section>
         <section className="mb-4">
           <ListHeader

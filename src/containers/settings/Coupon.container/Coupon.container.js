@@ -24,7 +24,7 @@ class Coupon extends Component {
           <Header
             title="Settings"
             subTitle="Coupon"
-            tabicon={"tabicon_dashboard.svg"}
+            tabicon={"icon_settings_white.svg"}
             clickTitle={"Driver"}
             buttonWidth={"88px"}
           />

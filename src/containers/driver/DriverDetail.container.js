@@ -163,7 +163,7 @@ class DriverDetail extends Component {
               title="Driver"
               subTitle="Driver Detail"
               toLocation={"/driver"}
-              tabicon={"tabicon_dashboard.svg"}
+              tabicon={"icon_driver_white.svg"}
               clickTitle={"Driver"}
               history={history}
               buttonWidth={"88px"}

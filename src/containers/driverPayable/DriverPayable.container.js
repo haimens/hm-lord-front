@@ -21,7 +21,7 @@ class DriverPayable extends Component {
           <Header
             title="Driver"
             subTitle="Driver Payable"
-            tabicon={"tabicon_dashboard.svg"}
+            tabicon={"icon_payable_white.svg"}
             clickTitle={"Driver"}
             buttonWidth={"88px"}
           />

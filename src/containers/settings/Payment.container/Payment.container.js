@@ -65,7 +65,12 @@ class Payment extends Component {
         )}
         <section className="container-fluid">
           <div className="mb-4">
-            <Header title="Settings" history={history} tabicon={"tabicon_.svg"} subTitle={"Payment Resource"} />
+            <Header
+              title="Settings"
+              history={history}
+              tabicon={"icon_settings_white.svg"}
+              subTitle={"Payment Resource"}
+            />
           </div>
           <div className="mb-4 ">
             <SourceDetail

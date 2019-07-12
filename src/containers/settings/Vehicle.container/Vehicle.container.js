@@ -24,7 +24,7 @@ class Vehicle extends Component {
           <Header
             title="Settings"
             subTitle="Vehicle"
-            tabicon={"tabicon_dashboard.svg"}
+            tabicon={"icon_settings_white.svg"}
             clickTitle={"Vehicle Type"}
             buttonWidth={"110px"}
           />

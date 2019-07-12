@@ -18,7 +18,7 @@ class NotificationAlert extends Component {
     return (
       <main className="container-fluid">
         <section className="mb-4">
-          <Header title="Notification" subTitle="Trip Alert" tabicon={"tabicon_dashboard.svg"} />
+          <Header title="Notification" subTitle="Trip Alert" tabicon={"icon_notification_white.svg"} />
         </section>
         <section className="mb-4">
           <ListHeader

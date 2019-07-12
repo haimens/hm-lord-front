@@ -8,8 +8,8 @@ export default function OrderHeader(props) {
       <div className="d-flex align-items-center justify-content-between mb-4 text-white">
         <div className="d-flex align-items-center ">
           <img
-            src={`${process.env.PUBLIC_URL}/img/${"tabicon_dashboard.svg"}`}
-            style={{ width: "17px", height: "18px" }}
+            src={`${process.env.PUBLIC_URL}/img/${"icon_order_white.svg"}`}
+            style={{ width: "22px", height: "22px" }}
             alt="company"
             className="hm-header-size mr-3"
           />

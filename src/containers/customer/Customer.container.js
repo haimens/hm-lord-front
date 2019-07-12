@@ -40,7 +40,7 @@ class Customer extends Component {
           <div className="mb-4">
             <Header
               title="Customer"
-              tabicon={"tabicon_dashboard.svg"}
+              tabicon={"icon_customer_white.svg"}
               showButton={true}
               clickFunction={this.handleAddingCustomer}
               clickTitle={"Customer"}

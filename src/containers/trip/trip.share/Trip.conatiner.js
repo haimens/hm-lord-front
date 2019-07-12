@@ -56,7 +56,7 @@ class TripContainer extends Component {
               title="Trip"
               subTitle={title}
               toLocation={`/trip/${currentPosition}`}
-              tabicon={"tabicon_dashboard.svg"}
+              tabicon={"icon_trip_white.svg"}
               history={history}
               buttonWidth={"88px"}
             />

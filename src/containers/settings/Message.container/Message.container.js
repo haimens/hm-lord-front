@@ -67,7 +67,12 @@ class Message extends Component {
         )}
         <section className="container-fluid">
           <div className="mb-4">
-            <Header title="Settings" history={history} tabicon={"tabicon_.svg"} subTitle={"Message Resource"} />
+            <Header
+              title="Settings"
+              history={history}
+              tabicon={"icon_settings_white.svg"}
+              subTitle={"Message Resource"}
+            />
           </div>
           <div className="mb-4 ">
             <SourceDetail

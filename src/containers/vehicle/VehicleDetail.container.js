@@ -73,7 +73,7 @@ class VehicleDetail extends Component {
               title="Vehicle"
               subTitle="Vehicle Detail"
               toLocation={"/vehicle"}
-              tabicon={"tabicon_dashboard.svg"}
+              tabicon={"icon_vehicle_white.svg"}
               history={history}
               buttonWidth={"88px"}
             />

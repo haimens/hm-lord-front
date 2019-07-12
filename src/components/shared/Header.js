@@ -3,14 +3,14 @@ import React from "react";
 export default function Header(props) {
   return (
     <div>
-      <div className="d-flex align-items-center justify-content-between mb-4 text-white">
+      <div className="d-flex align-items-center justify-content-between mb-4 text-white" style={{ minHeight: "28px" }}>
         <div className="d-flex align-items-center ">
           {props.icon ? (
             <i className={`fas fa-${props.icon} hm-header-size mr-3`} />
           ) : (
             <img
               src={`${process.env.PUBLIC_URL}/img/${props.tabicon}`}
-              style={{ width: "17px", height: "18px" }}
+              style={{ width: "22px", height: "22px" }}
               alt="company"
               className="hm-header-size mr-3"
             />

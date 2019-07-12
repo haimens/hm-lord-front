@@ -20,7 +20,7 @@ class Order extends Component {
           <div className="mb-4">
             <Header
               title="Order List"
-              tabicon={"tabicon_dashboard.svg"}
+              tabicon={"icon_order_white.svg"}
               showButton={true}
               clickTitle={"Order"}
               buttonWidth={"88px"}

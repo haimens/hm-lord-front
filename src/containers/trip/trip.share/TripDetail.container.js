@@ -195,7 +195,7 @@ class TripDetailContainer extends Component {
               thirdTitle={"Trip Detail"}
               toLocation={`/trip/${currentPosition}`}
               toSubLocation={`/trip/${currentPosition}`}
-              tabicon={"tabicon_dashboard.svg"}
+              tabicon={"icon_trip_white.svg"}
               history={history}
               buttonWidth={"88px"}
             />

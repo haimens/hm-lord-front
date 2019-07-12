@@ -30,7 +30,7 @@ class Vehicle extends Component {
           <div className="mb-4">
             <Header
               title="Vehicle"
-              tabicon={"tabicon_dashboard.svg"}
+              tabicon={"icon_vehicle_white.svg"}
               showButton={true}
               clickFunction={this.handleAddingVehicle}
               clickTitle={"Vehicle"}

@@ -29,10 +29,10 @@ export default class Sidebar extends Component {
         <section className="d-flex flex-row justify-content-center">
           <a
             href="/dashboard"
-            style={{ marginTop: "21px", marginBottom: "61px" }}
+            style={{ marginTop: "21px", marginBottom: "21px" }}
             onClick={e => this.handleClickLogo(e)}
           >
-            <img src={localStorage.getItem("logo_path")} alt="logo" width={"142px"} height={"142px"} />
+            <img src={localStorage.getItem("logo_path")} alt="logo" width={"100px"} height={"100px"} />
           </a>
           {/* Handle Close */}
           {/* <ImageButton
@@ -47,7 +47,7 @@ export default class Sidebar extends Component {
         <section className="accordion">
           <NavItem
             onToggle={() => this.handleClick("/dashboard")}
-            image={`${process.env.PUBLIC_URL}/img/navicon_dashboard.svg`}
+            image={`${process.env.PUBLIC_URL}/img/tabicon_dashboard.svg`}
             name="Dashboard"
             path="dashboard"
             history={this.props.parentProps.history}
@@ -57,7 +57,7 @@ export default class Sidebar extends Component {
         <section className="accordion">
           <NavItem
             onToggle={() => this.handleClick("/driver")}
-            image={`${process.env.PUBLIC_URL}/img/navicon_company.svg`}
+            image={`${process.env.PUBLIC_URL}/img/tabicon_driver.svg`}
             name="Driver"
             path="driver"
             history={this.props.parentProps.history}
@@ -67,7 +67,7 @@ export default class Sidebar extends Component {
         <section className="accordion">
           <NavItem
             onToggle={() => this.handleClick("/vehicle")}
-            image={`${process.env.PUBLIC_URL}/img/navicon_company.svg`}
+            image={`${process.env.PUBLIC_URL}/img/tabicon_vehicle.svg`}
             name="Vehicle"
             path="vehicle"
             history={this.props.parentProps.history}
@@ -77,7 +77,7 @@ export default class Sidebar extends Component {
         <section className="accordion">
           <NavItem
             onToggle={() => this.handleClick("/customer")}
-            image={`${process.env.PUBLIC_URL}/img/navicon_company.svg`}
+            image={`${process.env.PUBLIC_URL}/img/tabicon_customer.svg`}
             name="Customer"
             path="customer"
             history={this.props.parentProps.history}
@@ -88,7 +88,7 @@ export default class Sidebar extends Component {
         <section className="accordion">
           <NavItem
             onToggle={() => this.handleClick("/order/list")}
-            image={`${process.env.PUBLIC_URL}/img/navicon_settings.svg`}
+            image={`${process.env.PUBLIC_URL}/img/tabicon_order.svg`}
             name="Order"
             path="order"
             history={this.props.parentProps.history}
@@ -115,7 +115,7 @@ export default class Sidebar extends Component {
         <section className="accordion">
           <NavItem
             onToggle={() => this.handleClick("/trip/ongoing")}
-            image={`${process.env.PUBLIC_URL}/img/navicon_settings.svg`}
+            image={`${process.env.PUBLIC_URL}/img/tabicon_trip.svg`}
             name="Trip"
             path="trip"
             history={this.props.parentProps.history}
@@ -155,7 +155,7 @@ export default class Sidebar extends Component {
         <section className="accordion">
           <NavItem
             onToggle={() => this.handleClick("/payable")}
-            image={`${process.env.PUBLIC_URL}/img/navicon_company.svg`}
+            image={`${process.env.PUBLIC_URL}/img/tabicon_payable.svg`}
             name="Driver Payable"
             path="payable"
             history={this.props.parentProps.history}
@@ -166,7 +166,7 @@ export default class Sidebar extends Component {
         <section className="accordion">
           <NavItem
             onToggle={() => this.handleClick("/notification/alert")}
-            image={`${process.env.PUBLIC_URL}/img/navicon_company.svg`}
+            image={`${process.env.PUBLIC_URL}/img/tabicon_notification.svg`}
             name="Notification"
             path="notification"
             history={this.props.parentProps.history}
@@ -192,7 +192,7 @@ export default class Sidebar extends Component {
         <section className="accordion  pb-4">
           <NavItem
             onToggle={() => this.handleClick("/settings/payment")}
-            image={`${process.env.PUBLIC_URL}/img/navicon_company.svg`}
+            image={`${process.env.PUBLIC_URL}/img/tabicon_settings.svg`}
             name="Settings"
             path="settings"
             history={this.props.parentProps.history}
