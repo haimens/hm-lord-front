@@ -32,7 +32,8 @@ class DriverDetail extends Component {
     showAddingWageModal: false,
     showAddingSalaryModal: false,
     showUpdatingDriverModal: false,
-    showMap: false
+    showMap: false,
+    available: 0
   };
   handleShowAddingTripModal = () => {
     this.setState(state => ({ showAddingTripModal: !state.showAddingTripModal }));
@@ -69,6 +70,7 @@ class DriverDetail extends Component {
       findActiveTripListInDriver,
       findWageListInDriver,
       findSalaryListInDriver,
+      findSumWageInDriver,
       findSumSalaryInDriver
     } = this.props;
     const { driver_token } = match.params;
@@ -115,7 +117,9 @@ class DriverDetail extends Component {
       wage_list_in_driver,
       salary_list_in_driver,
       createWageInDriver,
-      createSalaryInDriver
+      createSalaryInDriver,
+      wage_sum_list_in_driver,
+      salary_sum_list_in_driver
     } = this.props;
     return (
       <main className="container-fluid">
@@ -138,6 +142,7 @@ class DriverDetail extends Component {
         )}
         {showAddingWageModal && (
           <AddingWageModal
+            driver_name={driver_detail_in_lord.basic_info.name}
             driver_token={driver_token}
             createWageInDriver={createWageInDriver}
             onClose={this.handleShowAddingWageModal}
@@ -145,6 +150,8 @@ class DriverDetail extends Component {
         )}
         {showAddingSalaryModal && (
           <AddingSalaryModal
+            driver_name={driver_detail_in_lord.basic_info.name}
+            sum={wage_sum_list_in_driver.sum - salary_sum_list_in_driver.sum}
             driver_token={driver_token}
             createSalaryInDriver={createSalaryInDriver}
             onClose={this.handleShowAddingSalaryModal}
@@ -164,6 +171,7 @@ class DriverDetail extends Component {
           </div>
           <div>
             <DriverDetailCard
+              sum={wage_sum_list_in_driver.sum - salary_sum_list_in_driver.sum}
               handleDetailButtonClicked={this.handleDetailButtonClicked}
               driver_detail_in_lord={driver_detail_in_lord}
               showMap={showMap}
@@ -280,7 +288,8 @@ const mapStateToProps = state => {
     trip_list_in_driver: state.tripReducer.trip_list_in_driver,
     wage_list_in_driver: state.wageReducer.wage_list_in_driver,
     wage_sum_list_in_driver: state.wageReducer.wage_sum_list_in_driver,
-    salary_list_in_driver: state.salaryReducer.salary_list_in_driver
+    salary_list_in_driver: state.salaryReducer.salary_list_in_driver,
+    salary_sum_list_in_driver: state.salaryReducer.salary_sum_list_in_driver
   };
 };
 const mapDispatchToProps = {

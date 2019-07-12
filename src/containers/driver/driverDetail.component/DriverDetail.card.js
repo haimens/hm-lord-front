@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { GMapFlag } from "../../../components/shared";
-import { convertUTCtoLocal } from "../../../actions/utilities.action";
+import { convertUTCtoLocal, parseAmount } from "../../../actions/utilities.action";
 class DriverDetailCard extends Component {
   handleDetailButtonClicked = type => {
     this.props.handleDetailButtonClicked(type);
   };
 
   render() {
-    const { basic_info, location_info } = this.props.driver_detail_in_lord;
+    const { sum, driver_detail_in_lord } = this.props;
+    const { basic_info, location_info } = driver_detail_in_lord;
     const { name, cell, email, username, img_path, status } = basic_info;
     return (
       <div className="bg-white rounded-custom shadow-sm">
@@ -47,7 +48,7 @@ class DriverDetailCard extends Component {
                 </div>
                 <div className="mb-4 px-3">
                   <div className="text-secondary-color font-weight-500 hm-text-14">Available Balance</div>
-                  <div className="hm-text-14 font-weight-bold">{123}</div>
+                  <div className="hm-text-14 font-weight-bold">{parseAmount(sum)}</div>
                 </div>
                 <div className="mb-4 px-3">
                   <div className="text-secondary-color font-weight-500 hm-text-14">Status</div>

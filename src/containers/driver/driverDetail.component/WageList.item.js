@@ -1,8 +1,5 @@
 import React from "react";
 import { convertUTCtoLocal, parseAmount } from "../../../actions/utilities.action";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import alertify from "alertifyjs";
-
 /**
  * @onClick
  * @onCorrect

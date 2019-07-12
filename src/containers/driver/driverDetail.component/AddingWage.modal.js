@@ -30,6 +30,7 @@ export default class AddingWageModal extends Component {
   };
   render() {
     const { amount, type, note } = this.state;
+    const { driver_name } = this.props;
     return (
       <Modal title="Add Wage" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"473px"}>
         <div className="container">
@@ -38,7 +39,7 @@ export default class AddingWageModal extends Component {
               <label htmlFor="Driver" className="font-weight-500 hm-text-14 text-secondary-color">
                 Driver
               </label>
-              <div className="text-modal-color font-weight-bold hm-text-14">Chris Yao</div>
+              <div className="text-modal-color font-weight-bold hm-text-14">{driver_name}</div>
             </div>
 
             <div className="form-group input-group mb-4">

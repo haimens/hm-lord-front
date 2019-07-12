@@ -1,7 +1,6 @@
 import constant from "../constants/constant";
 import { callApi, startLoader, stopLoader, launchSuccess } from "./utilities.action";
 import { processLogout } from "./auth.action";
-
 export const findWageListInDriver = (driver_token, query = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
@@ -22,12 +21,11 @@ export const findWageListInDriver = (driver_token, query = {}) => async dispatch
 };
 
 export const createWageInDriver = (driver_token, body = {}) => async dispatch => {
-  console.log(driver_token);
-  console.log(body);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`wage/detail/${driver_token}`, "POST", body);
-    dispatch(findWageListInDriver(driver_token));
+    await dispatch(findWageListInDriver(driver_token));
+    await dispatch(findSumWageInDriver(driver_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
   } catch (err) {
@@ -39,10 +37,11 @@ export const createWageInDriver = (driver_token, body = {}) => async dispatch =>
 export const findSumWageInDriver = driver_token => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`wage/sum/driver/${driver_token}`, "GET");
+    const salary = await callApi(`wage/sum/driver/${driver_token}`, "GET", null, { type: 1 });
+    const fine = await callApi(`wage/sum/driver/${driver_token}`, "GET", null, { type: 2 });
     await dispatch({
       type: constant.WAGE_SUM_LIST_IN_DRIVER,
-      payload
+      payload: { sum: salary.payload.sum - fine.payload.sum }
     });
     await stopLoader(dispatch);
   } catch (err) {
