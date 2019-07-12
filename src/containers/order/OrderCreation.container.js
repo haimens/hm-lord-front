@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { OrderHeader, CustomerInformationCard } from "./orderCreation.component";
 import TripDetailCard from "./orderCreation.component/TripDetail.card";
 import CompleteOrderCard from "./orderCreation.component/CompleteOrderCard.card";
-import PaymentInfoCard from  "./orderCreation.component/PaymentInfo.card"
+import PaymentInfoCard from "./orderCreation.component/PaymentInfo.card";
 class OrderCreation extends Component {
   state = {
-    position: 5
+    position: 3,
+    loaded: false,
+    currentCustomer: ""
   };
   handleChangePosition = position => {
     this.setState(states => ({ position: states.position + position }));
@@ -13,20 +15,34 @@ class OrderCreation extends Component {
   handleCustomerInformationItemClicked = id => {
     console.log(id);
   };
+
+  handleSetCurrentCustomer = props => {
+    this.setState({ currentCustomer: props });
+  };
+
   render() {
-    const { position } = this.state;
+    const { position, loaded } = this.state;
     return (
       <main className="container-fluid">
         <section>
           <div className="mb-4">
-            <OrderHeader titles={["Add Order", "Customer Information", "Trip Detail", "Complete Order", "Payment Information"]} position={position} />
+            <OrderHeader
+              titles={["Add Order", "Customer Information", "Trip Detail", "Complete Order", "Payment Information"]}
+              position={position}
+            />
           </div>
         </section>
-        <section>{position === 2 && <CustomerInformationCard />}</section>
-        <section>{position === 3 && <TripDetailCard />}</section>
-        <section>{position === 4 && <CompleteOrderCard />}</section>
-        <section>{position === 5 && <PaymentInfoCard />}</section>
-
+        <section>
+          {position === 2 && (
+            <CustomerInformationCard
+              handleSetCurrentCustomer={this.handleSetCurrentCustomer}
+              handleMoveNext={this.handleChangePosition}
+            />
+          )}
+        </section>
+        <section>{position === 3 && <TripDetailCard handleMoveNext={this.handleChangePosition} />}</section>
+        <section>{position === 4 && <CompleteOrderCard handleMoveNext={this.handleChangePosition} />}</section>
+        <section>{position === 5 && <PaymentInfoCard handleMoveNext={this.handleChangePosition} />}</section>
       </main>
     );
   }

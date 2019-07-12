@@ -17,7 +17,7 @@ export default function OrderHeader(props) {
           <div className=" d-flex align-items-center ">
             {titles.slice(0, position).map((title, index) => (
               <>
-                <i className="fas fa-circle text-light-grey text-right mr-3" style={{ fontSize: "6px" }} />
+                <i className="fas fa-circle text-light-grey text-right mr-3" style={{ fontSize: "6px" }} key={index}/>
                 <h4 className="hm-header-size text-light-grey hm-pointer-cursor mr-3">{title}</h4>
               </>
             ))}

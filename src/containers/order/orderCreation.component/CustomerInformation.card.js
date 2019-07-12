@@ -2,20 +2,56 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { GAutoComplete } from "../../../components/shared";
-import { findCustomerListInLord } from "../../../actions/customer.action";
+import { findCustomerListInLord, createACustomerInLord } from "../../../actions/customer.action";
+import { createNewAddressInstance } from "../../../actions/address.action";
+import alertify from "alertifyjs";
+
 class CustomerInformation extends Component {
   state = {
     name: "",
     cell: "",
-    area: "",
+    area: "+1",
     email: "",
-    customer: ""
+    customer: "",
+    address_str: ""
   };
 
   handleInputChange = e => {
     const { id, value } = e.target;
     this.setState({ [id]: value });
   };
+
+  saveToAddress = address => {
+    this.setState({ address_str: address[0].formatted_address });
+  };
+
+  handleCreatingCompany = async () => {
+    const { name, cell, area, email, address_str } = this.state;
+    const { createNewAddressInstance, createACustomerInLord } = this.props;
+    if (name !== "" && cell !== "" && area !== "" && email !== "") {
+      const payload = await createNewAddressInstance({ address_str });
+      await createACustomerInLord({
+        customer_info: {
+          name,
+          cell: `${area} ${cell}`,
+          email
+        },
+        address_info: {
+          address_token: payload.address_token
+        }
+      });
+      this.props.handleSetCurrentCustomer(this.state);
+      this.props.handleMoveNext(1);
+    } else {
+      alertify.alert("Error!", "Please Finish The Form!");
+    }
+  };
+
+  handleSetCurrentCustomer = customer => {
+    this.props.handleSetCurrentCustomer(customer);
+    this.props.handleMoveNext(1);
+  };
+
   componentDidMount() {
     this.props.findCustomerListInLord();
   }
@@ -145,7 +181,7 @@ class CustomerInformation extends Component {
                       <div>
                         <button
                           className="btn button-main-background text-white shadow-sm"
-                          onClick={() => this.handleCarBeenClicked(customer.car_token)}
+                          onClick={() => this.handleSetCurrentCustomer(customer)}
                         >
                           Select
                         </button>
@@ -167,7 +203,7 @@ const mapStateToProps = state => {
     customer_list_in_lord: state.customerReducer.customer_list_in_lord
   };
 };
-const mapDispatchToProps = { findCustomerListInLord };
+const mapDispatchToProps = { findCustomerListInLord, createACustomerInLord, createNewAddressInstance };
 
 export default connect(
   mapStateToProps,

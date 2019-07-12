@@ -28,6 +28,8 @@ import AddingVehicleModal from "./AddingVehicle.modal";
 import AddingDriverModal from "./AddingDriver.modal";
 import EditButton from "./EditButton";
 import CouponCard from "./Coupon.card";
+import FlightCard from "./Flight.card";
+import FlightCardNoRecord from "./FlightCardNoRecord.modal";
 export {
   LoaderAlt,
   IconButton,
@@ -58,5 +60,7 @@ export {
   AddingVehicleModal,
   AddingDriverModal,
   EditButton,
-  CouponCard
+  CouponCard,
+  FlightCard,
+  FlightCardNoRecord
 };
