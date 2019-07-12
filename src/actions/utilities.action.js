@@ -10,13 +10,13 @@ export function formatDate(date, format) {
   return moment(date).format(format || "YYYY-MM-DD HH:mm");
 }
 
-export function convertUTCtoLocal(db_utc_time, format = "YYYY/MM/DD HH:mm") {
+export function convertUTCtoLocal(db_utc_time, format = "YYYY-MM-DD HH:mm") {
   return moment(db_utc_time)
     .local()
     .format(format);
 }
 
-export function convertLocalToUTC(local_time, format = "YYYY/MM/DD HH:mm") {
+export function convertLocalToUTC(local_time, format = "YYYY-MM-DD HH:mm") {
   return moment(local_time)
     .utc()
     .format(format);

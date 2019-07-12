@@ -13,6 +13,7 @@ class Order extends Component {
     this.props.findOrderListInLord();
   }
   render() {
+    const { order_list_in_lord } = this.props;
     return (
       <main className="container-fluid">
         <section>
@@ -27,15 +28,19 @@ class Order extends Component {
             />
           </div>
           <div className="row">
-            <OrderCard
-              parentProps={{
-                order_token: "1000016",
-                cdate: "06/16 16.30",
-                method: "Lebron James",
-                order_img: "unnamed.jpg",
-                orderPhone: "6266266266"
-              }}
-            />
+            {order_list_in_lord.record_list.map((order, index) => (
+              <OrderCard
+                parentProps={{
+                  order_token: order.order_token,
+                  contact_name: order.contact_name,
+                  cdate: order.cdate,
+                  order_img: order.img_path,
+                  order_type: order.order_type,
+                  contact_cell: order.contact_cell,
+                  status_str: order.status_str
+                }}
+              />
+            ))}
           </div>
         </section>
       </main>
