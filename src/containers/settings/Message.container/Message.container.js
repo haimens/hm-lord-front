@@ -8,6 +8,11 @@ import MessageUpdateModal from "./Message.component/MessageUpdate.modal";
 import SourceDetail from "../Source.share/SourceDetail.container";
 import { Header, ListView, ListHeader } from "../../../components/shared";
 
+import {
+  findRealmDetailInLord,
+  findMessageListInLord,
+  createRealmMessageInLord
+} from "../../../actions/settings.action";
 class Message extends Component {
   state = {
     showCreateMessageResource: false,
@@ -29,25 +34,21 @@ class Message extends Component {
   };
 
   async componentDidMount() {
-    const { match } = this.props;
-    Promise.all([]);
+    const { findRealmDetailInLord, findMessageListInLord } = this.props;
+    Promise.all([findRealmDetailInLord(), findMessageListInLord()]);
   }
   handlePageChange = start => {
     this.props.findAllMessageResourceList({ start });
   };
   render() {
-    const { history } = this.props;
+    const { history, createRealmMessageInLord } = this.props;
     const { showCreateMessageResource, showEditMessageResource, currMessageResource } = this.state;
     return (
       <main>
-        {/* {showCreateMessageResource && (
-          <MessageModal
-            realm_token={realm_token}
-            createAMessageMethod={createAMessageMethod}
-            onClose={this.handleCreateMessageResource}
-          />
+        {showCreateMessageResource && (
+          <MessageModal createAMessageMethod={createRealmMessageInLord} onClose={this.handleCreateMessageResource} />
         )}
-        {showEditMessageResource && (
+        {/* {showEditMessageResource && (
           <MessageUpdateModal
             realm_token={realm_token}
             updateAMessageMethod={updateAMessageMethod}
@@ -104,7 +105,7 @@ class Message extends Component {
 const mapStateToProps = state => {
   return {};
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = { findRealmDetailInLord, findMessageListInLord, createRealmMessageInLord };
 
 export default connect(
   mapStateToProps,

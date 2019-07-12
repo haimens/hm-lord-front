@@ -6,6 +6,14 @@ import EmailModal from "./Email.component/Email.modal";
 import EmailUpdateModal from "./Email.component/EmailUpdate.modal";
 import { Header, ListView, ListHeader } from "../../../components/shared";
 import SourceDetail from "../Source.share/SourceDetail.container";
+import {
+  findRealmDetailInLord,
+  findEmailListInLord,
+  createRealmEmailInLord,
+  updateAEmailMethod,
+  setPrimaryForResources
+} from "../../../actions/settings.action";
+
 class Email extends Component {
   state = {
     showCreateEmailResource: false,
@@ -27,33 +35,34 @@ class Email extends Component {
   };
 
   async componentDidMount() {
-    const { match } = this.props;
-    Promise.all([]);
+    const { findRealmDetailInLord, findEmailListInLord } = this.props;
+    Promise.all([findRealmDetailInLord(), findEmailListInLord()]);
   }
   handlePageChange = start => {
     this.props.findAllEmailResourceList({ start });
   };
   render() {
-    const { history } = this.props;
+    const {
+      history,
+      createRealmEmailInLord,
+      setPrimaryForResources,
+      realm_list_in_lord,
+      email_list_in_lord
+    } = this.props;
     const { showCreateEmailResource, showEditEmailResource, currEmailResource } = this.state;
 
     return (
       <main>
-        {/* {showCreateEmailResource && (
-          <EmailModal
-            realm_token={realm_token}
-            createAEmailMethod={createAEmailMethod}
-            onClose={this.handleCreateEmailResource}
-          />
+        {showCreateEmailResource && (
+          <EmailModal createAEmailMethod={createRealmEmailInLord} onClose={this.handleCreateEmailResource} />
         )}
         {showEditEmailResource && (
           <EmailUpdateModal
-            realm_token={realm_token}
             updateAEmailMethod={updateAEmailMethod}
             currEmailResource={currEmailResource}
             onClose={this.handleUpdateEmailResource}
           />
-        )} */}
+        )}
         <section className="container-fluid">
           <div className="mb-4">
             <Header title="Settings" history={history} tabicon={"tabicon_.svg"} subTitle={"Email Resource"} />
@@ -82,16 +91,18 @@ class Email extends Component {
               hideHeader={true}
               onPageChange={this.handlePageChange}
             >
-              {/* {email_list.record_list.map((email, index) => (
+              {email_list.record_list.map((email, index) => (
                 <EmailDetailListItem
                   parentProps={email}
                   handleUpdateEmailResource={this.handleUpdateEmailResource}
                   setPrimaryForResources={setPrimaryForResources}
-                  realm_token={realm_token}
-                  isPrimary={_detail.email_resource_info.email_resource_token === email.email_resource_token}
+                  isPrimary={
+                    realm_list_in_lord.payment_resource_info.payment_resource_token ===
+                    email_list_in_lord.payment_resource_token
+                  }
                   key={index}
                 />
-              ))} */}
+              ))}
             </ListView>
           </div>
         </section>
@@ -101,9 +112,18 @@ class Email extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    realm_list_in_lord: state.settingsReducer.realm_list_in_lord,
+    email_list_in_lord: state.settingsReducer.email_list_in_lord
+  };
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  findRealmDetailInLord,
+  findEmailListInLord,
+  createRealmEmailInLord,
+  updateAEmailMethod,
+  setPrimaryForResources
+};
 
 export default connect(
   mapStateToProps,

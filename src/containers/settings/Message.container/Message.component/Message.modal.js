@@ -25,9 +25,9 @@ export default class MessageModal extends Component {
   };
   handleCreateMessageResource = () => {
     const { twilio_account_id, twilio_auth_token, twilio_from_num } = this.state;
-    const { realm_token, createAMessageMethod } = this.props;
+    const { createAMessageMethod } = this.props;
     if (twilio_account_id !== "" && twilio_auth_token !== "" && twilio_from_num !== "") {
-      createAMessageMethod(realm_token, {
+      createAMessageMethod({
         twilio_account_id,
         twilio_auth_token,
         twilio_from_num

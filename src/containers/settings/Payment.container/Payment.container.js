@@ -6,6 +6,13 @@ import PaymentModal from "./Payment.component/Payment.modal";
 import PaymentUpdateModal from "./Payment.component/PaymentUpdate.modal";
 import { Header, ListView, ListHeader } from "../../../components/shared";
 import SourceDetail from "../Source.share/SourceDetail.container";
+import {
+  findRealmDetailInLord,
+  findPaymentListInLord,
+  createRealmPaymentInLord,
+  setPrimaryForResources,
+  updateAPaymentMethod
+} from "../../../actions/settings.action";
 class Payment extends Component {
   state = {
     showCreatePaymentResource: false,
@@ -27,31 +34,35 @@ class Payment extends Component {
   };
 
   async componentDidMount() {
-    Promise.all([]);
+    const { findRealmDetailInLord, findPaymentListInLord } = this.props;
+    Promise.all([findRealmDetailInLord(), findPaymentListInLord()]);
   }
   handlePageChange = start => {
     this.props.findAllPaymentResourceList({ start });
   };
   render() {
     const { showCreatePaymentResource, showEditPaymentResource, currPaymentResource } = this.state;
-    const { history } = this.props;
+    const {
+      history,
+      createRealmPaymentInLord,
+      realm_list_in_lord,
+      payment_list_in_lord,
+      setPrimaryForResources,
+      updateAPaymentMethod
+    } = this.props;
+    const { basic_info, payment_resource_info } = realm_list_in_lord;
     return (
       <main>
-        {/* {showCreatePaymentResource && (
-          <PaymentModal
-            realm_token={realm_token}
-            createAPaymentMethod={createAPaymentMethod}
-            onClose={this.handleCreatePaymentResource}
-          />
-        )} */}
-        {/* {showEditPaymentResource && (
+        {showCreatePaymentResource && (
+          <PaymentModal createAPaymentMethod={createRealmPaymentInLord} onClose={this.handleCreatePaymentResource} />
+        )}
+        {showEditPaymentResource && (
           <PaymentUpdateModal
-            realm_token={realm_token}
             updateAPaymentMethod={updateAPaymentMethod}
             currPaymentResource={currPaymentResource}
             onClose={this.handleUpdatePaymentResource}
           />
-        )} */}
+        )}
         <section className="container-fluid">
           <div className="mb-4">
             <Header title="Settings" history={history} tabicon={"tabicon_.svg"} subTitle={"Payment Resource"} />
@@ -59,9 +70,13 @@ class Payment extends Component {
           <div className="mb-4 ">
             <SourceDetail
               title={"Primary Payment Information"}
-              imgLink={123}
+              imgLink={basic_info.logo_path}
               subTitles={["Square Application Id", "Square Location Id", "Square Access Token"]}
-              subTitlesInfos={[123, 321, 123]}
+              subTitlesInfos={[
+                payment_resource_info.square_application_id,
+                payment_resource_info.square_location_id,
+                payment_resource_info.square_access_token
+              ]}
             />
           </div>
           <div className="mb-4">
@@ -80,16 +95,17 @@ class Payment extends Component {
               hideHeader={true}
               onPageChange={this.handlePageChange}
             >
-              {/* {payment_list.record_list.map((payment, index) => (
+              {payment_list_in_lord.record_list.map((payment, index) => (
                 <PaymentDetailListItem
                   parentProps={payment}
                   handleUpdatePaymentResource={this.handleUpdatePaymentResource}
                   setPrimaryForResources={setPrimaryForResources}
-                  realm_token={realm_token}
-                  isPrimary={_detail.payment_resource_info.payment_resource_token === payment.payment_resource_token}
+                  isPrimary={
+                    realm_list_in_lord.payment_resource_info.payment_resource_token === payment.payment_resource_token
+                  }
                   key={index}
                 />
-              ))} */}
+              ))}
             </ListView>
           </div>
         </section>
@@ -99,9 +115,18 @@ class Payment extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    realm_list_in_lord: state.settingsReducer.realm_list_in_lord,
+    payment_list_in_lord: state.settingsReducer.payment_list_in_lord
+  };
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  findRealmDetailInLord,
+  findPaymentListInLord,
+  createRealmPaymentInLord,
+  setPrimaryForResources,
+  updateAPaymentMethod
+};
 
 export default connect(
   mapStateToProps,

@@ -25,9 +25,9 @@ export default class CompanyAdmin extends Component {
   };
   handleCreatePaymentResource = () => {
     const { square_application_id, square_location_id, square_access_token } = this.state;
-    const { realm_token, createAPaymentMethod } = this.props;
+    const { createAPaymentMethod } = this.props;
     if (square_application_id !== "" && square_location_id !== "" && square_access_token !== "") {
-      createAPaymentMethod(realm_token, {
+      createAPaymentMethod({
         square_application_id,
         square_location_id,
         square_access_token

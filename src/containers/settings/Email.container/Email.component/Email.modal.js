@@ -24,9 +24,9 @@ export default class EmailModal extends Component {
   };
   handleCreateEmailResource = () => {
     const { sendgrid_api_key, sendgrid_from_email } = this.state;
-    const { realm_token, createAEmailMethod } = this.props;
+    const { createAEmailMethod } = this.props;
     if (sendgrid_api_key !== "" && sendgrid_from_email !== "") {
-      createAEmailMethod(realm_token, {
+      createAEmailMethod({
         sendgrid_api_key,
         sendgrid_from_email
       });
