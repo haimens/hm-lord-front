@@ -4,40 +4,64 @@ import { TimePicker, DatePicker } from "antd";
 import { convertLocalToUTC } from "../../../actions/utilities.action";
 import TripCard from "./TripCar.card";
 import alertify from "alertifyjs";
+import moment from "moment";
 import FlightDetailModal from "./FlightDetail.modal";
 class TripInfo extends Component {
   state = {
-    name: "",
-    cell: "",
-    area: "",
-    email: "",
-    customer: "",
     airlineCode: "",
     flightNumber: "",
     date: "",
     time: "",
+    from_address: "",
+    to_address: "",
     blueCardBeenClicked: false,
     redCardBeenClicked: false,
-    showFlightDetail: false
+    showFlightDetail: false,
+    currIndex: ""
   };
-  handleBlueCardBeenClicked = () => {
-    this.setState(state => ({ blueCardBeenClicked: !state.blueCardBeenClicked, redCardBeenClicked: false }));
-  };
+
   handleInputChange = e => {
     const { id, value } = e.target;
     this.setState({ [id]: value });
   };
 
-  handleRedCardBeenClicked = () => {
-    this.setState(state => ({ redCardBeenClicked: !state.redCardBeenClicked, blueCardBeenClicked: false }));
-  };
   handleDatePicker = date => {
     this.setState({ date });
   };
   handleTimePicker = time => {
     this.setState({ time });
   };
-
+  saveFromAddress = address => {
+    this.setState({ from_address: address[0].formatted_address });
+  };
+  saveToAddress = address => {
+    this.setState({ to_address: address[0].formatted_address });
+  };
+  handleFindQuote = () => {
+    const { from_address, to_address, date, time } = this.state;
+    if (date !== "" && time !== "") {
+      if (from_address !== "" && to_address !== "") {
+        let currDate = moment(date).format("YYYY/MM/DD");
+        let currTime = moment(time).format("HH:mm:ss");
+        let goodTime = moment(`${currDate} ${currTime}`);
+        let inputFrom = document.getElementById("from").value;
+        let inputTo = document.getElementById("to").value;
+        this.props.findQuoteInLord({
+          from_address_str: inputFrom,
+          to_address_str: inputTo,
+          pickup_time: convertLocalToUTC(goodTime),
+          pickup_time_local: moment(goodTime).format("YYYY-MM-DD HH:mm")
+        });
+      } else {
+        alertify.alert("Error!", "Please Choose an Address From the Drop Down!");
+      }
+    } else {
+      alertify.alert("Error!", "Please Finish The Form!");
+    }
+  };
+  handleCardBeenClicked = async currIndex => {
+    await this.setState({ currIndex });
+  };
   handleFlightDetailBeenClicked = async () => {
     await this.setState(state => ({ showFlightDetail: !state.showFlightDetail }));
   };
@@ -56,8 +80,9 @@ class TripInfo extends Component {
   };
 
   render() {
-    const { airlineCode, flightNumber, blueCardBeenClicked, redCardBeenClicked, showFlightDetail } = this.state;
-    const { flight_list_in_lord } = this.props;
+    const { airlineCode, flightNumber, showFlightDetail } = this.state;
+    const { flight_list_in_lord, quote_in_lord } = this.props;
+    const { basic_info, quote_list } = quote_in_lord;
     return (
       <div className="row pt-2 mb-4">
         {showFlightDetail && (
@@ -80,11 +105,11 @@ class TripInfo extends Component {
             <div className="p-3">
               <div className="form-group mb-4 ">
                 <label className="text-main-color hm-text-14 font-weight-bold my-4">Pickup Location</label>
-                <GAutoComplete getGoogleAddress={this.saveToAddress} />
+                <GAutoComplete customeId={`from`} getGoogleAddress={this.saveFromAddress} />
               </div>
               <div className="form-group mb-4">
                 <label className="text-main-color hm-text-14 font-weight-bold mb-4">Dropoff Location</label>
-                <GAutoComplete getGoogleAddress={this.saveToAddress} />
+                <GAutoComplete customeId={`to`} getGoogleAddress={this.saveToAddress} />
               </div>
               <div className="form-group input-group mb-4">
                 <label className="text-main-color hm-text-14 font-weight-bold mb-4">Date</label>
@@ -126,7 +151,7 @@ class TripInfo extends Component {
                 <button
                   className="button-main-background btn button-main-size text-white"
                   style={{ width: "119px" }}
-                  onClick={this.handleCreatingCompany}
+                  onClick={this.handleFindQuote}
                 >
                   Get price
                 </button>
@@ -136,7 +161,7 @@ class TripInfo extends Component {
         </div>
 
         <div className="col-4">
-          <div className="rounded-custom bg-white shadow-sm h-100">
+          <div className="rounded-custom bg-white shadow-sm" style={{ height: "737px", overflow: "auto" }}>
             <div
               className="d-flex justify-content-between align-items-center p-3 border-bottom-custom"
               style={{ height: "65px" }}
@@ -145,41 +170,64 @@ class TripInfo extends Component {
                 Select Vehicle Type
               </h6>
             </div>
-            <div className="px-3 py-4">
-              <div style={{ height: "161px" }}>
-                <GMapLocation
-                  position={{
-                    center: {
-                      lat: 0,
-                      lng: 0
-                    },
-                    origin: {
-                      lat: 0,
-                      lng: 0
-                    },
-                    destination: {
-                      lat: 0,
-                      lng: 0
-                    }
-                  }}
-                />
+            {basic_info !== "" && (
+              <div className="px-3 py-4">
+                <div style={{ height: "161px" }}>
+                  <GMapLocation
+                    position={{
+                      center: {
+                        lat: basic_info.from_lat,
+                        lng: basic_info.from_lng
+                      },
+                      origin: {
+                        lat: basic_info.from_lat,
+                        lng: basic_info.from_lng
+                      },
+                      destination: {
+                        lat: basic_info.to_lat,
+                        lng: basic_info.to_lng
+                      }
+                    }}
+                  />
+                </div>
               </div>
-            </div>
-
+            )}
+            {basic_info === "" && (
+              <div className="px-3 py-4">
+                <div style={{ height: "161px" }}>
+                  <GMapLocation
+                    position={{
+                      center: {
+                        lat: 0,
+                        lng: 0
+                      },
+                      origin: {
+                        lat: 0,
+                        lng: 0
+                      },
+                      destination: {
+                        lat: 0,
+                        lng: 0
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+            )}
             <div className="px-3 py-4">
               <div className="mb-4">
-                <TripCard
-                  showPriceDetail={blueCardBeenClicked}
-                  handleShowPriceDetail={this.handleBlueCardBeenClicked}
-                  backgroundColor={`blue-background`}
-                />
-              </div>
-              <div>
-                <TripCard
-                  showPriceDetail={redCardBeenClicked}
-                  handleShowPriceDetail={this.handleRedCardBeenClicked}
-                  backgroundColor={`red-background`}
-                />
+                {quote_list.length > 0 &&
+                  quote_list.map((car, index) => (
+                    <TripCard
+                      showPriceDetail={this.state.currIndex === index}
+                      handleCardBeenClicked={() => this.handleCardBeenClicked(index)}
+                      basic_info={basic_info}
+                      quote_list={car}
+                      handleShowPriceDetail={this.handleBlueCardBeenClicked}
+                      backgroundColor={index % 2 === 0 ? `blue-background` : `red-background`}
+                      key={index}
+                    />
+                  ))}
               </div>
             </div>
           </div>

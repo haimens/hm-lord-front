@@ -19,6 +19,7 @@ class GAutoComplete extends Component {
         _getAddress={this._getAddress}
         defaultValue={this.props.defaultValue}
         inputClass={this.props.inputClass}
+        customeId={this.props.customeId}
       />
     );
   }
@@ -64,6 +65,7 @@ const PlacesWithStandaloneSearchBox = compose(
       <div className="input-group ">
         <input
           className={`form-control  ${props.inputClass} hm-input-height `}
+          id={props.customeId}
           type="text"
           placeholder={"Address"}
           defaultValue={props.defaultValue}
