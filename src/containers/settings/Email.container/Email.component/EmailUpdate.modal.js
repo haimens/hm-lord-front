@@ -30,7 +30,7 @@ export default class EmailUpdate extends Component {
       currEmailResource: { email_resource_token }
     } = this.props;
     if (sendgrid_api_key !== "" && sendgrid_from_email !== "") {
-      updateAEmailMethod(realm_token, email_resource_token, {
+      updateAEmailMethod(email_resource_token, {
         sendgrid_api_key,
         sendgrid_from_email
       });

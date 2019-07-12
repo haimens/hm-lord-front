@@ -10,7 +10,7 @@ export default function EmailListItem(props) {
     props.handleUpdateEmailResource(email_resource_token, props.parentProps);
   };
   const handleSetEmailPrimary = (realm_token, email_resource_token) => {
-    props.setPrimaryForResources(realm_token, { email_resource_token });
+    props.setPrimaryForResources({ email_resource_token });
   };
   const { isPrimary, realm_token, parentProps } = props;
   const { sendgrid_api_key, sendgrid_from_email, email_resource_token } = parentProps;

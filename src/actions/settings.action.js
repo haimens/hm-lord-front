@@ -100,6 +100,7 @@ export const createRealmEmailInLord = (body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`realm/email`, "POST", body);
+    await dispatch(findEmailListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
   } catch (err) {

@@ -47,9 +47,11 @@ class Email extends Component {
       createRealmEmailInLord,
       setPrimaryForResources,
       realm_list_in_lord,
-      email_list_in_lord
+      email_list_in_lord,
+      updateAEmailMethod
     } = this.props;
     const { showCreateEmailResource, showEditEmailResource, currEmailResource } = this.state;
+    const { basic_info, email_resource_info } = realm_list_in_lord;
 
     return (
       <main>
@@ -70,9 +72,9 @@ class Email extends Component {
           <div className="mb-4 ">
             <SourceDetail
               title={"Primary Email Information"}
-              imgLink={123}
+              imgLink={basic_info.logo_path}
               subTitles={["SendGrid API Key", "SendGrid From Email"]}
-              subTitlesInfos={[123, 123]}
+              subTitlesInfos={[email_resource_info.sendgrid_api_key, email_resource_info.sendgrid_from_email]}
             />
           </div>
           <div className="mb-4">
@@ -85,21 +87,18 @@ class Email extends Component {
               buttonWidth={"146px"}
             />
             <ListView
-              totalCount={30}
+              totalCount={email_list_in_lord.count}
               title="Email List"
               fieldNames={["sendgrid api key", "sendgrid from_email", "Status", "edit"]}
               hideHeader={true}
               onPageChange={this.handlePageChange}
             >
-              {email_list.record_list.map((email, index) => (
+              {email_list_in_lord.record_list.map((email, index) => (
                 <EmailDetailListItem
                   parentProps={email}
                   handleUpdateEmailResource={this.handleUpdateEmailResource}
                   setPrimaryForResources={setPrimaryForResources}
-                  isPrimary={
-                    realm_list_in_lord.payment_resource_info.payment_resource_token ===
-                    email_list_in_lord.payment_resource_token
-                  }
+                  isPrimary={realm_list_in_lord.email_resource_info.email_resource_token === email.email_resource_token}
                   key={index}
                 />
               ))}
