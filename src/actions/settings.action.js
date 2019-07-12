@@ -69,6 +69,7 @@ export const createRealmMessageInLord = (body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`realm/message`, "POST", body);
+    await dispatch(findMessageListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
   } catch (err) {
@@ -89,6 +90,19 @@ export const findMessageListInLord = (query = {}) => async dispatch => {
       type: constant.MESSAGE_LIST_IN_LORD,
       payload
     });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
+export const updateMessageMethod = (message_resource_token, body = {}) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`realm/message/${message_resource_token}`, "PATCH", body);
+    await dispatch(findMessageListInLord());
+    await launchSuccess(dispatch);
     await stopLoader(dispatch);
   } catch (err) {
     await stopLoader(dispatch);

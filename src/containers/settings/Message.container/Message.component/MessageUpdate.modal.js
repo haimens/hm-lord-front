@@ -27,12 +27,11 @@ export default class MessageUpdate extends Component {
     console.log(this.props);
     const { twilio_account_id, twilio_auth_token, twilio_from_num } = this.state;
     const {
-      realm_token,
       updateAMessageMethod,
       currMessageResource: { message_resource_token }
     } = this.props;
     if (twilio_account_id !== "" && twilio_auth_token !== "" && twilio_from_num !== "") {
-      updateAMessageMethod(realm_token, message_resource_token, {
+      updateAMessageMethod(message_resource_token, {
         twilio_account_id,
         twilio_auth_token,
         twilio_from_num

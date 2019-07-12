@@ -11,7 +11,9 @@ import { Header, ListView, ListHeader } from "../../../components/shared";
 import {
   findRealmDetailInLord,
   findMessageListInLord,
-  createRealmMessageInLord
+  createRealmMessageInLord,
+  setPrimaryForResources,
+  updateMessageMethod
 } from "../../../actions/settings.action";
 class Message extends Component {
   state = {
@@ -41,21 +43,28 @@ class Message extends Component {
     this.props.findAllMessageResourceList({ start });
   };
   render() {
-    const { history, createRealmMessageInLord } = this.props;
+    const {
+      history,
+      createRealmMessageInLord,
+      setPrimaryForResources,
+      realm_list_in_lord,
+      message_list_in_lord,
+      updateMessageMethod
+    } = this.props;
+    const { basic_info, message_resource_info } = realm_list_in_lord;
     const { showCreateMessageResource, showEditMessageResource, currMessageResource } = this.state;
     return (
       <main>
         {showCreateMessageResource && (
           <MessageModal createAMessageMethod={createRealmMessageInLord} onClose={this.handleCreateMessageResource} />
         )}
-        {/* {showEditMessageResource && (
+        {showEditMessageResource && (
           <MessageUpdateModal
-            realm_token={realm_token}
-            updateAMessageMethod={updateAMessageMethod}
+            updateAMessageMethod={updateMessageMethod}
             currMessageResource={currMessageResource}
             onClose={this.handleUpdateMessageResource}
           />
-        )} */}
+        )}
         <section className="container-fluid">
           <div className="mb-4">
             <Header title="Settings" history={history} tabicon={"tabicon_.svg"} subTitle={"Message Resource"} />
@@ -63,9 +72,13 @@ class Message extends Component {
           <div className="mb-4 ">
             <SourceDetail
               title={"Primary Message Information"}
-              imgLink={123}
+              imgLink={basic_info.logo_path}
               subTitles={["Twilio Account Id", "Twilio Auth Id", "Twilio From Num"]}
-              subTitlesInfos={[123, 123, 123]}
+              subTitlesInfos={[
+                message_resource_info.twilio_account_id,
+                message_resource_info.twilio_auth_token,
+                message_resource_info.twilio_from_num
+              ]}
             />
           </div>
           <div className="mb-4">
@@ -78,22 +91,23 @@ class Message extends Component {
               buttonWidth={"146px"}
             />
             <ListView
-              totalCount={30}
+              totalCount={message_list_in_lord.count}
               title=" Admin List"
               fieldNames={["Twilio Account Id", "Twilio Auth Id", "Twilio From Num", "Status", "edit"]}
               hideHeader={true}
               onPageChange={this.handlePageChange}
             >
-              {/* {message_list.record_list.map((message, index) => (
+              {message_list_in_lord.record_list.map((message, index) => (
                 <MessageDetailListItem
                   parentProps={message}
                   handleUpdateMessageResource={this.handleUpdateMessageResource}
                   setPrimaryForResources={setPrimaryForResources}
-                  realm_token={realm_token}
-                  isPrimary={_detail.message_resource_info.message_resource_token === message.message_resource_token}
+                  isPrimary={
+                    realm_list_in_lord.message_resource_info.message_resource_token === message.message_resource_token
+                  }
                   key={index}
                 />
-              ))} */}
+              ))}
             </ListView>
           </div>
         </section>
@@ -103,9 +117,18 @@ class Message extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    realm_list_in_lord: state.settingsReducer.realm_list_in_lord,
+    message_list_in_lord: state.settingsReducer.message_list_in_lord
+  };
 };
-const mapDispatchToProps = { findRealmDetailInLord, findMessageListInLord, createRealmMessageInLord };
+const mapDispatchToProps = {
+  findRealmDetailInLord,
+  findMessageListInLord,
+  createRealmMessageInLord,
+  setPrimaryForResources,
+  updateMessageMethod
+};
 
 export default connect(
   mapStateToProps,

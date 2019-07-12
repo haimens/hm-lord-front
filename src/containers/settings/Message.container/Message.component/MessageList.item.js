@@ -9,10 +9,10 @@ export default function MessageListItem(props) {
   const handleEditPaymentResource = message_resource_token => {
     props.handleUpdateMessageResource(message_resource_token, props.parentProps);
   };
-  const handleSetMessagePrimary = (realm_token, message_resource_token) => {
-    props.setPrimaryForResources(realm_token, { message_resource_token });
+  const handleSetMessagePrimary = message_resource_token => {
+    props.setPrimaryForResources({ message_resource_token });
   };
-  const { isPrimary, realm_token, parentProps } = props;
+  const { isPrimary, parentProps } = props;
   const { twilio_account_id, twilio_auth_token, twilio_from_num, message_resource_token } = parentProps;
   return (
     <tr className="border-bottom">
@@ -44,10 +44,7 @@ export default function MessageListItem(props) {
             className="text-lg-center text-right align-middle hm-text-14 font-weight-bold"
             style={{ color: "#5e72e4" }}
           >
-            <button
-              className="primary-set-button"
-              onClick={() => handleSetMessagePrimary(realm_token, message_resource_token)}
-            >
+            <button className="primary-set-button" onClick={() => handleSetMessagePrimary(message_resource_token)}>
               Set Primary
             </button>
           </section>
