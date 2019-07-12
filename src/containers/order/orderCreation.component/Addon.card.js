@@ -6,7 +6,7 @@ export default function AddonCard(props) {
     <div>
       <div className="purple-border p-3">
         <div className="d-flex justify-content-between align-items-center  ">
-          <div className="hm-text-16 font-weight-bold text-modal-color">Basic Information</div>
+          <div className="hm-text-16 font-weight-bold text-modal-color">Tip</div>
           {showEditButton && (
             <button className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center">
               <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
@@ -14,37 +14,30 @@ export default function AddonCard(props) {
           )}
         </div>
       </div>
-      <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Pickup Time</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
-      </div>
-      <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">From</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
-      </div>
-      <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">To</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
-      </div>
-      <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Flight Information</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{"N/A"}</div>
-      </div>
-      <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Vehicle Type</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{12}</div>
-      </div>
-      <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Trip Amount</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{parseAmount(12)}</div>
-      </div>
-      <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Note</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{"N/A"}</div>
-      </div>
-      <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Type</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{"N/A"}</div>
+      <div className="mb-4">
+        <div className="container-fluid">
+          <div
+            className="coupon-card  rounded-custom shadow-sm d-flex flex-column justify-content-between p-4"
+            style={{ height: "110px" }}
+          >
+            <div className="row text-white">
+              <div className="col-12 hm-text-14 font-weight-500 ">Tip 10%</div>
+            </div>
+            <div className="row text-white">
+              <div className="col-12">
+                <div className="d-flex align-items-center mt-auto">
+                  <div className="hm-text-16 font-weight-500">$10.00</div>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/img/icon_delete.svg`}
+                    className="hm-pointer-cursor ml-auto"
+                    alt="delete"
+                    style={{ height: "25px", width: "25px" }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

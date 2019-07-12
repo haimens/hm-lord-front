@@ -168,28 +168,38 @@ class TripDetail extends Component {
             hideShadow={true}
             hideButton={true}
           />
-          <div className="container">
-            <div className="d-flex justify-content-between border-bottom-custom">
-              <div className="">Trip Subtotal:</div>
-              <div className="">Trip Subtotal:</div>
+          <div className="container mt-3">
+            <div className="d-flex justify-content-between border-bottom-custom py-2">
+              <div className="text-secondary-color hm-text-14 font-weight-bold">Trip 1 Subtotal:</div>
+              <div className="hm-text-14 font-weight-bold text-modal-color">{200}</div>
             </div>
-            <div className="d-flex justify-content-between border-bottom-custom">
-              <div className="">Trip Subtotal:</div>
-              <div className="">Trip Subtotal:</div>
+            <div className="d-flex justify-content-between border-bottom-custom py-2">
+              <div className="text-secondary-color hm-text-14 font-weight-bold">Trip 2 Subtotal:</div>
+              <div className="hm-text-14 font-weight-bold text-modal-color">{200}</div>
             </div>
-            <div className="d-flex justify-content-between border-bottom-custom">
-              <div className="">Trip Subtotal:</div>
-              <div className="">Trip Subtotal:</div>
+            <div className="d-flex justify-content-between border-bottom-custom py-2">
+              <div className="text-secondary-color hm-text-14 font-weight-bold">Discount:</div>
+              <div className="hm-text-14 font-weight-bold text-modal-color">{200}</div>
             </div>
-            <div className="d-flex justify-content-between">
-              <div className="">Trip Subtotal:</div>
-              <div className="">Trip Subtotal:</div>
+            <div className="d-flex justify-content-between  py-3">
+              <div className="text-secondary-color hm-text-14 font-weight-bold hm-title-sub-size">Order Total Due:</div>
+              <div className="hm-title-sub-size font-weight-bold text-modal-color">{200}</div>
             </div>
           </div>
-          <div className="p-4 border-top">
+          <div className="px-4 py-5 border-top">
             <div className="d-flex justify-content-between">
-              <button>123</button>
-              <button>123</button>
+              <button
+                className="btn shadow-sm border bg-white text-white font-weight-bold text-dark hm-text-12 rounded-custom"
+                style={{ width: "310px", height: "43px" }}
+              >
+                Back
+              </button>
+              <button
+                className="btn shadow-sm button-main-background font-weight-bold text-white hm-text-12 rounded-custom"
+                style={{ width: "310px", height: "43px" }}
+              >
+                Next to payment
+              </button>
             </div>
           </div>
         </div>
