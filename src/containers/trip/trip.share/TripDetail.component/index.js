@@ -8,6 +8,7 @@ import BasicInfoModal from "./BasicInfo.modal";
 import AlertInfoModal from "./AlertInfo.modal";
 import CustomerInfoModal from "./CustomerInfo.modal";
 import TimeStampsModal from "./TimeStamps.modal";
+import AlertEditModal from "./AlertEdit.modal";
 export {
   AlertInfo,
   BasicInfo,
@@ -18,5 +19,6 @@ export {
   BasicInfoModal,
   AlertInfoModal,
   CustomerInfoModal,
-  TimeStampsModal
+  TimeStampsModal,
+  AlertEditModal
 };

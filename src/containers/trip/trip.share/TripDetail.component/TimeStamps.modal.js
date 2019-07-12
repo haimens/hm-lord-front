@@ -48,7 +48,13 @@ export default class TimeStaps extends Component {
   render() {
     return (
       <div>
-        <Modal title="Add Customer" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"480px"}>
+        <Modal
+          title="Edit Time Stamps"
+          onClose={this.handleClose}
+          position="center"
+          getWidth={"467px"}
+          getHeight={"480px"}
+        >
           <div className="container">
             <div className="p-3">
               <div className="form-group my-4">
