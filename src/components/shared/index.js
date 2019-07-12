@@ -27,6 +27,7 @@ import GMapLocation from "./GMapLocation";
 import AddingVehicleModal from "./AddingVehicle.modal";
 import AddingDriverModal from "./AddingDriver.modal";
 import EditButton from "./EditButton";
+import CouponCard from "./Coupon.card";
 export {
   LoaderAlt,
   IconButton,
@@ -56,5 +57,6 @@ export {
   GMapLocation,
   AddingVehicleModal,
   AddingDriverModal,
-  EditButton
+  EditButton,
+  CouponCard
 };

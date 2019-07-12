@@ -257,7 +257,6 @@ border-radius: 6px;
 }
 
 .border-bottom-custom{
-    height: 1px;
     border-bottom: solid 1px rgba(151, 151, 151, 0.15);
 }
 .purple-border{
@@ -281,4 +280,10 @@ border-radius: 6px;
 .ant-calendar-picker-input{
   height: 46px !important;
   width: 100% !important;
+}
+.coupon-card{
+  background-color: #1a1b4d
+}
+.tip-card{
+  background-color: #2ece89
 }

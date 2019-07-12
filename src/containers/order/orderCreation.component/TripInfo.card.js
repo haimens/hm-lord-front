@@ -26,8 +26,11 @@ export default class TripInfo extends Component {
       <div className="row pt-2 mb-4">
         <div className="col-8">
           <div className="rounded-custom bg-white shadow-sm">
-            <div className="d-flex justify-content-between align-items-center p-3 border-bottom-custom h-100">
-              <h6 className="d-block d-flex align-items-center hm-title-sub-size text-main-color font-weight-bold">
+            <div className="d-flex justify-content-between align-items-center px-3 border-bottom-custom h-100">
+              <h6
+                className="d-block d-flex align-items-center hm-title-sub-size text-main-color font-weight-bold"
+                style={{ height: "65px" }}
+              >
                 Trip Detail
               </h6>
             </div>
