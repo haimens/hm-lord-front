@@ -1,6 +1,5 @@
 import React from "react";
-import { convertUTCtoLocal, parseAmount } from "../../../actions/utilities.action";
-import { GMapLocation } from "../../../components/shared";
+import { GMapLocation } from "../../../../components/shared";
 export default function TripSubtotal(props) {
   const { showEditButton, from_address_info, to_address_info } = props;
   const saveToAddress = () => {};

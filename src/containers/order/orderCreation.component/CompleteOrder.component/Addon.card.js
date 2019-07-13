@@ -1,14 +1,16 @@
 import React from "react";
-import { convertUTCtoLocal, parseAmount } from "../../../actions/utilities.action";
-export default function TipCard(props) {
-  const { showEditButton } = props;
+export default function AddonCard(props) {
+  const { showEditButton, trip_token } = props;
   return (
     <div>
       <div className="purple-border p-3">
         <div className="d-flex justify-content-between align-items-center  ">
-          <div className="hm-text-16 font-weight-bold text-modal-color">Tip</div>
+          <div className="hm-text-16 font-weight-bold text-modal-color">Add-on Service</div>
           {showEditButton && (
-            <button className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center">
+            <button
+              className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
+              onClick={() => props.handleAddingAddon(trip_token)}
+            >
               <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
             </button>
           )}
@@ -17,11 +19,11 @@ export default function TipCard(props) {
       <div className="mb-4">
         <div className="container-fluid">
           <div
-            className="tip-card  rounded-custom shadow-sm d-flex flex-column justify-content-between p-4"
+            className="coupon-card  rounded-custom shadow-sm d-flex flex-column justify-content-between p-4"
             style={{ height: "110px" }}
           >
             <div className="row text-white">
-              <div className="col-12 hm-text-14 font-weight-500">Tip 10%</div>
+              <div className="col-12 hm-text-14 font-weight-500 ">Tip 10%</div>
             </div>
             <div className="row text-white">
               <div className="col-12">

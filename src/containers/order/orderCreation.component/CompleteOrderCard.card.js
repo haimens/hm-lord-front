@@ -4,11 +4,7 @@ import { withRouter } from "react-router-dom";
 import { Header, ListHeader, ListView, CouponCard, CouponModal } from "../../../components/shared";
 import { convertUTCtoLocal, parseAmount } from "../../../actions/utilities.action";
 
-import BasicInfo from "./BasicInfo.card";
 import "./TripDetail.card.css";
-import TripSubtotal from "./TripSubtotal.card";
-import TipCard from "./Tip.card";
-import AddonCard from "./Addon.card";
 
 import {
   findOrderDetailInLord,
@@ -16,12 +12,15 @@ import {
   updateOrderDiscountInLord
 } from "../../../actions/order.action";
 import { findCouponListInLord } from "../../../actions/coupon.action";
-import { findTripDetailInLord } from "../../../actions/trip.action";
+import { findTripDetailInLord, createAddonToTrip } from "../../../actions/trip.action";
+import CompleteTop from "./CompleteOrder.component/CompleteTop.card";
+import AddonModal from "./CompleteOrder.component/Addon.modal";
 
 class TripDetail extends Component {
   state = {
-    round_trip: false,
-    showCouponModal: false
+    showCouponModal: false,
+    showAddingAddon: false,
+    curr_trip_token: ""
   };
   handleInputChange = e => {
     const { id, value } = e.target;
@@ -37,6 +36,9 @@ class TripDetail extends Component {
     let orderStr = "ORD-b7a2137a9353dea1db332fb0f9d67603";
     this.props.applyOrderDiscountInLord(orderStr, { code });
   };
+  handleAddingAddon = curr_trip_token => {
+    this.setState(state => ({ showAddingAddon: !state.showAddingAddon, curr_trip_token }));
+  };
 
   handleDeleteCouponFromOrder = order_discount_token => {
     let orderStr = "ORD-b7a2137a9353dea1db332fb0f9d67603";
@@ -51,13 +53,24 @@ class TripDetail extends Component {
     Promise.all([findOrderDetailInLord(orderStr), findTripDetailInLord(tripStr), findCouponListInLord()]);
   }
   render() {
-    const { showCouponModal } = this.state;
-    const { history, coupon_list_in_lord, trip_detail_in_lord, order_detail, round_trip } = this.props;
-    const { basic_info, from_address_info, to_address_info } = trip_detail_in_lord;
+    const { showCouponModal, showAddingAddon, curr_trip_token } = this.state;
+    const {
+      history,
+      coupon_list_in_lord,
+      trip_detail_in_lord,
+      order_detail,
+      round_trip,
+      createAddonToTrip
+    } = this.props;
+    const { basic_info } = trip_detail_in_lord;
     let totalDiscount = 0;
     if (order_detail.order_discount_list.length > 0) {
       totalDiscount = order_detail.order_discount_list.map(discount => console.log(discount));
     }
+    let order_token = "ORD-b7a2137a9353dea1db332fb0f9d67603";
+
+    let trip_token = "TRIP-8ea520fbb71c379142994763322a4a12";
+
     return (
       <section>
         {showCouponModal && (
@@ -68,66 +81,31 @@ class TripDetail extends Component {
             onClose={this.handleShowCouponModal}
           />
         )}
+        {showAddingAddon && (
+          <AddonModal
+            onClose={this.handleAddingAddon}
+            createAddonToTrip={createAddonToTrip}
+            order_token={order_token}
+            trip_token={trip_token}
+          />
+        )}
         <div className="mb-4">
-          <div className="bg-white rounded-custom shadow-sm">
-            <div className="container-fluid">
-              <div className="row">
-                <div className="col-lg-6 col-12 mb-4">
-                  <div className="hm-title-sub-size font-weight-bold text-modal-color p-4">Trip 1</div>
-                  <BasicInfo
-                    from_address_info={from_address_info}
-                    to_address_info={to_address_info}
-                    basic_info={basic_info}
-                    showEditButton={true}
-                  />
-                </div>
-                <div className="col-lg-6 col-12 mb-4">
-                  <div className="text-right hm-title-sub-size font-weight-bold text-modal-color p-4">
-                    <span className="hm-title-sub-size font-weight-bold text-secondary-color text-modal-color mr-3">
-                      Trip 1 Subtotal:
-                    </span>
-                    {parseAmount(basic_info.amount, 2)}
-                  </div>
-                  <TripSubtotal from_address_info={from_address_info} to_address_info={to_address_info} />
-                </div>
-                <div className="col-lg-6 col-12 mb-4">
-                  <TipCard showEditButton={true} />
-                </div>
-                <div className="col-lg-6 col-12 mb-4">
-                  <AddonCard showEditButton={true} />
-                </div>
-              </div>
-            </div>
-          </div>
+          <CompleteTop
+            trip_token={trip_token}
+            handleAddingAddon={this.handleAddingAddon}
+            trip_detail_in_lord={trip_detail_in_lord}
+          />
         </div>
-        {/* 
-        <div className="mb-4">
-          <div className="bg-white rounded-custom shadow-sm">
-            <div className="container-fluid">
-              <div className="row">
-                <div className="col-lg-6 col-12 mb-4">
-                  <div className="hm-title-sub-size font-weight-bold text-modal-color p-4">Trip 2</div>
-                  <BasicInfo showEditButton={true} />
-                </div>
-                <div className="col-lg-6 col-12 mb-4">
-                  <div className="text-right hm-title-sub-size font-weight-bold text-modal-color p-4">
-                    <span className="hm-title-sub-size font-weight-bold text-secondary-color text-modal-color mr-3">
-                      Trip 2 Subtotal:
-                    </span>
-                    ${100}
-                  </div>
-                  <TripSubtotal />
-                </div>
-                <div className="col-lg-6 col-12 mb-4">
-                  <TipCard showEditButton={true} />
-                </div>
-                <div className="col-lg-6 col-12 mb-4">
-                  <AddonCard showEditButton={true} />
-                </div>
-              </div>
-            </div>
+
+        {round_trip && (
+          <div className="mb-4">
+            <CompleteTop
+              trip_token={trip_token}
+              handleAddingAddon={this.handleAddingAddon}
+              trip_detail_in_lord={trip_detail_in_lord}
+            />
           </div>
-        </div> */}
+        )}
 
         <div className="mb-4 bg-white rounded-custom shadow-sm">
           <ListHeader
@@ -283,7 +261,8 @@ const mapDispatchToProps = {
   findTripDetailInLord,
   findCouponListInLord,
   applyOrderDiscountInLord,
-  updateOrderDiscountInLord
+  updateOrderDiscountInLord,
+  createAddonToTrip
 };
 
 export default connect(
