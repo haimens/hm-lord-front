@@ -5,7 +5,7 @@ import CompleteOrderCard from "./orderCreation.component/CompleteOrderCard.card"
 import PaymentInfoCard from "./orderCreation.component/PaymentInfo.card";
 class OrderCreation extends Component {
   state = {
-    position: 3,
+    position: 2,
     loaded: false,
     currentCustomer: ""
   };
@@ -21,7 +21,7 @@ class OrderCreation extends Component {
   };
 
   render() {
-    const { position, loaded } = this.state;
+    const { position, loaded, currentCustomer } = this.state;
     return (
       <main className="container-fluid">
         <section>
@@ -40,7 +40,11 @@ class OrderCreation extends Component {
             />
           )}
         </section>
-        <section>{position === 3 && <TripDetailCard handleMoveNext={this.handleChangePosition} />}</section>
+        <section>
+          {position === 3 && (
+            <TripDetailCard currentCustomer={currentCustomer} handleMoveNext={this.handleChangePosition} />
+          )}
+        </section>
         <section>{position === 4 && <CompleteOrderCard handleMoveNext={this.handleChangePosition} />}</section>
         <section>{position === 5 && <PaymentInfoCard handleMoveNext={this.handleChangePosition} />}</section>
       </main>

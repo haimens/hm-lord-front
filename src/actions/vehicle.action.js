@@ -104,3 +104,48 @@ export const updateADriverForACar = (driver_car_token, body = {}) => async dispa
     dispatch(processLogout(err));
   }
 };
+
+export const findVehicleTypeListInLord = (query = {}) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`car/all/type`, "GET", null, {
+      order_key: "udate",
+      order_direction: "DESC",
+      ...query
+    });
+    await dispatch({
+      type: constant.VEHICLE_TYPE_LIST_IN_LORD,
+      payload
+    });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
+export const createACarTypeInLord = (body = {}) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`car/type`, "POST", body);
+    await dispatch(findVehicleTypeListInLord());
+    await launchSuccess(dispatch);
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
+export const updateACarTypeInLord = (car_type_token, body = {}) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`car/type/${car_type_token}`, "PATCH", body);
+    await dispatch(findVehicleTypeListInLord());
+    await launchSuccess(dispatch);
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};

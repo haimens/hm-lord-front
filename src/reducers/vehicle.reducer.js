@@ -19,6 +19,11 @@ const initialState = {
       description: "",
       status: ""
     }
+  },
+  vehicle_type_list_in_lord: {
+    record_list: [],
+    count: 0,
+    end: 0
   }
 };
 
@@ -30,6 +35,8 @@ export default (state = initialState, action) => {
       return { ...state, driver_list_for_a_car: action.payload };
     case constant.VEHICLE_DETAIL_IN_LORD:
       return { ...state, vehicle_detail_in_lord: action.payload };
+    case constant.VEHICLE_TYPE_LIST_IN_LORD:
+      return { ...state, vehicle_type_list_in_lord: action.payload };
     default:
       return state;
   }

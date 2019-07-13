@@ -4,6 +4,8 @@ import { withRouter } from "react-router-dom";
 import { ListView, Header, ListHeader } from "../../../components/shared";
 import VehicleListItem from "./Vehicle.component/VehicleList.item";
 import VehicleAdding from "./Vehicle.component/VehicleAdding.modal";
+import { findVehicleTypeListInLord, createACarTypeInLord, updateACarTypeInLord } from "../../../actions/vehicle.action";
+
 class Vehicle extends Component {
   state = {
     showAddWage: false
@@ -14,12 +16,20 @@ class Vehicle extends Component {
   handleAddingVehicle = () => {
     this.setState(state => ({ showAddVehicle: !state.showAddVehicle }));
   };
+  handleCarTypeBeenClicked = car_type_token => {
+    this.props.updateACarTypeInLord(car_type_token, { status: 0 });
+  };
+  componentDidMount() {
+    this.props.findVehicleTypeListInLord();
+  }
   render() {
-    const { history } = this.props;
+    const { history, createACarTypeInLord, vehicle_type_list_in_lord } = this.props;
     const { showAddVehicle } = this.state;
     return (
       <main className="container-fluid">
-        {showAddVehicle && <VehicleAdding onClose={this.handleAddingVehicle} />}
+        {showAddVehicle && (
+          <VehicleAdding createACarTypeInLord={createACarTypeInLord} onClose={this.handleAddingVehicle} />
+        )}
         <section className="mb-4">
           <Header
             title="Settings"
@@ -41,13 +51,13 @@ class Vehicle extends Component {
           <ListView
             totalCount={30}
             title="Vehicle"
-            fieldNames={["Created On", "Name", "Amount", "Delete"]}
+            fieldNames={["Vehicle Img", "Name", "price prefix", "Max Capacity", "Delete"]}
             hideHeader={true}
             onPageChange={this.handlePageChange}
           >
-            {/* {punch_list_in_puri.record_list.map((punch, index) => (
-              <WageListItem parentProps={punch} key={index} onClick={this.handlePunchItemClick} />
-            ))} */}
+            {vehicle_type_list_in_lord.record_list.map((type, index) => (
+              <VehicleListItem parentProps={type} key={index} onClick={this.handleCarTypeBeenClicked} />
+            ))}
           </ListView>
         </section>
       </main>
@@ -55,9 +65,11 @@ class Vehicle extends Component {
   }
 }
 const mapStateToProps = state => {
-  return {};
+  return {
+    vehicle_type_list_in_lord: state.vehicleReducer.vehicle_type_list_in_lord
+  };
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = { findVehicleTypeListInLord, createACarTypeInLord, updateACarTypeInLord };
 
 export default connect(
   mapStateToProps,

@@ -7,8 +7,8 @@ export default class VehicleAdding extends Component {
     showImage: false,
     showPreview: false,
     name: "",
-    prefix: "",
-    capacity: ""
+    price_prefix: "",
+    max_capacity: ""
   };
 
   handleInputChange = e => {
@@ -32,15 +32,13 @@ export default class VehicleAdding extends Component {
   };
 
   handleCreateADriverInLord = () => {
-    const { name, cell, email, username, img_path, capacity, identifier, rate } = this.state;
-    if (name !== "" && cell !== "" && email !== "" && username !== "" && identifier !== "" && rate !== "") {
-      this.props.createADriverInLord({
+    const { name, price_prefix, img_path, max_capacity } = this.state;
+    if (name !== "" && price_prefix !== "" && max_capacity !== "" && img_path !== "") {
+      this.props.createACarTypeInLord({
         name,
         img_path,
-        email,
-        username,
-        identifier,
-        rate: rate * 10
+        price_prefix: price_prefix * 100,
+        max_capacity
       });
       this.handleClose();
     } else {
@@ -52,10 +50,8 @@ export default class VehicleAdding extends Component {
     this.setState({ company_address: address });
   };
 
-  async componentDidMount() {}
-
   render() {
-    const { img_path, showImage, showPreview, name, prefix, capacity } = this.state;
+    const { img_path, showImage, showPreview, name, price_prefix, max_capacity } = this.state;
     return (
       <div>
         {showImage && (
@@ -85,10 +81,10 @@ export default class VehicleAdding extends Component {
                 <input
                   type="text"
                   className="form-control hm-input-height "
-                  name="prefix"
-                  id="prefix"
+                  name="price_prefix"
+                  id="price_prefix"
                   placeholder={"Price Prefix"}
-                  value={prefix}
+                  value={price_prefix}
                   onChange={this.handleInputChange}
                 />
               </div>
@@ -97,10 +93,10 @@ export default class VehicleAdding extends Component {
                 <input
                   type="text"
                   className="form-control hm-input-height "
-                  name="capacity"
-                  id="capacity"
+                  name="max_capacity"
+                  id="max_capacity"
                   placeholder={"Max Capacity"}
-                  value={capacity}
+                  value={max_capacity}
                   onChange={this.handleInputChange}
                 />
               </div>

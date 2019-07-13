@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 import { Modal } from "../../../../components/shared";
 import alertify from "alertifyjs";
-
+import { DatePicker } from "antd";
+import { convertLocalToUTC } from "../../../../actions/utilities.action";
 export default class CouponAdding extends Component {
   state = {
     showImage: false,
     showPreview: false,
-    name: "",
-    cell: "",
-    email: "",
-    username: "",
-    img_path: "",
-    license_num: "",
-    identifier: "",
-    rate: 70,
-    area: "+1"
+    vdate: "",
+    amount: "",
+    type: 1,
+    min_price: "",
+    available_usage: "",
+    code: ""
+  };
+
+  handleSetType = type => {
+    this.setState({ type });
   };
 
   handleInputChange = e => {
@@ -27,27 +29,28 @@ export default class CouponAdding extends Component {
   };
 
   handleCreateACouponInLord = () => {
-    const { name, cell, email, username, img_path, area, license_num, identifier, rate } = this.state;
-    if (
-      name !== "" &&
-      cell !== "" &&
-      email !== "" &&
-      username !== "" &&
-      area !== "" &&
-      license_num !== "" &&
-      identifier !== "" &&
-      rate !== ""
-    ) {
-      this.props.createADriverInLord({
-        name,
-        img_path,
-        cell: `${area} ${cell}`,
-        email,
-        username,
-        license_num,
-        identifier,
-        rate: rate * 10
-      });
+    const { vdate, amount, type, min_price, available_usage, code } = this.state;
+    if ((vdate !== "", amount !== "", type !== "", min_price !== "", available_usage !== "", code !== "")) {
+      if (type === 1) {
+        this.props.createACouponInLord({
+          vdate: convertLocalToUTC(vdate),
+          amount: amount * 100,
+          type,
+          min_price: min_price * 100,
+          available_usage,
+          code
+        });
+      }
+      if (type === 2) {
+        this.props.createACouponInLord({
+          vdate: convertLocalToUTC(vdate),
+          rate: amount * 10,
+          type,
+          min_price: min_price * 100,
+          available_usage,
+          code
+        });
+      }
       this.handleClose();
     } else {
       alertify.alert("Error!", "Please Finish The Form!");
@@ -58,40 +61,57 @@ export default class CouponAdding extends Component {
     this.setState({ company_address: address });
   };
 
+  handleDatePicker = vdate => {
+    this.setState({ vdate });
+  };
+
   async componentDidMount() {}
 
   render() {
-    const { name, amount, minimal_amount } = this.state;
+    const { code, amount, min_price, available_usage, type } = this.state;
     return (
       <div>
-        <Modal title="Add Coupon" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"400px"}>
+        <Modal title="Add Coupon" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"540px"}>
           <div className="container">
             <div className="p-3">
               <div className="form-group mb-4">
                 <input
                   className="form-control hm-input-height mt-3"
-                  name="name"
-                  id="name"
-                  placeholder={"Coupon Name"}
-                  value={name}
+                  id="code"
+                  placeholder={"Coupon Code"}
+                  value={code}
                   onChange={this.handleInputChange}
                 />
               </div>
-
+              <div className="form-group mb-4">
+                <DatePicker placeholder={"Expiration Date"} onChange={this.handleDatePicker} />
+              </div>
               <div className="form-group input-group mb-4 d-flex">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control hm-input-height "
                   id="amount"
                   placeholder="Coupon Amount"
                   value={amount}
                   onChange={this.handleInputChange}
                 />
-                <div class="input-group-append">
-                  <button class="btn primary-set-button text-purple input-addon-width" type="button">
+                <div className="input-group-append">
+                  <button
+                    className={`btn text-purple input-addon-width ${
+                      type === 1 ? "button-main-background text-white" : "primary-set-button "
+                    }`}
+                    type="button"
+                    onClick={() => this.handleSetType(1)}
+                  >
                     $
                   </button>
-                  <button class="btn button-main-background text-white input-addon-width" type="button">
+                  <button
+                    className={`btn text-purple input-addon-width ${
+                      type === 2 ? "button-main-background text-white" : "primary-set-button "
+                    }`}
+                    type="button"
+                    onClick={() => this.handleSetType(2)}
+                  >
                     %
                   </button>
                 </div>
@@ -99,12 +119,24 @@ export default class CouponAdding extends Component {
 
               <div className="form-group mb-4">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control hm-input-height "
-                  name="minimal_amount"
-                  id="minimal_amount"
+                  name="min_price"
+                  id="min_price"
                   placeholder={"Minimal Amount"}
-                  value={minimal_amount}
+                  value={min_price}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+
+              <div className="form-group mb-4">
+                <input
+                  type="number"
+                  className="form-control hm-input-height "
+                  name="available_usage"
+                  id="available_usage"
+                  placeholder={"Available Usage"}
+                  value={available_usage}
                   onChange={this.handleInputChange}
                 />
               </div>

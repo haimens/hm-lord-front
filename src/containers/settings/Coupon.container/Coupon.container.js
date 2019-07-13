@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { ListView, Header, ListHeader } from "../../../components/shared";
 import CouponListItem from "./Coupon.component/CouponList.item";
 import CouponAdding from "./Coupon.component/CouponAdding.modal";
+import { findCouponListInLord, createACouponInLord } from "../../../actions/coupon.action";
 class Coupon extends Component {
   state = {
     showAddCouponModal: false
@@ -14,12 +15,18 @@ class Coupon extends Component {
   handleShowAddingCouponModal = () => {
     this.setState(state => ({ showAddCouponModal: !state.showAddCouponModal }));
   };
+
+  componentDidMount() {
+    this.props.findCouponListInLord();
+  }
   render() {
-    const { history } = this.props;
+    const { history, createACouponInLord } = this.props;
     const { showAddCouponModal } = this.state;
     return (
       <main className="container-fluid">
-        {showAddCouponModal && <CouponAdding onClose={this.handleShowAddingCouponModal} />}
+        {showAddCouponModal && (
+          <CouponAdding createACouponInLord={createACouponInLord} onClose={this.handleShowAddingCouponModal} />
+        )}
         <section className="mb-4">
           <Header
             title="Settings"
@@ -57,7 +64,7 @@ class Coupon extends Component {
 const mapStateToProps = state => {
   return {};
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = { findCouponListInLord, createACouponInLord };
 
 export default connect(
   mapStateToProps,

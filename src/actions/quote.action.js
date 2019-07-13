@@ -3,7 +3,6 @@ import { callApi, startLoader, stopLoader, launchSuccess } from "./utilities.act
 import { processLogout } from "./auth.action";
 
 export const findQuoteInLord = (body = {}) => async dispatch => {
-  console.log(body);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`quote/detail`, "POST", body);
@@ -19,7 +18,6 @@ export const findQuoteInLord = (body = {}) => async dispatch => {
 };
 
 export const findQuoteInLordAgain = (body = {}) => async dispatch => {
-  console.log(body);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`quote/detail`, "POST", body);

@@ -13,6 +13,11 @@ class GAutoComplete extends Component {
     this.props.getGoogleAddress(address);
   };
 
+  handleInputChange = () => {
+    console.log("hello");
+    this.props.handleInputHasChanded();
+  };
+
   render() {
     return (
       <PlacesWithStandaloneSearchBox
@@ -20,6 +25,7 @@ class GAutoComplete extends Component {
         defaultValue={this.props.defaultValue}
         inputClass={this.props.inputClass}
         customeId={this.props.customeId}
+        inputOnClick={this.handleInputChange}
       />
     );
   }
@@ -66,6 +72,7 @@ const PlacesWithStandaloneSearchBox = compose(
         <input
           className={`form-control  ${props.inputClass} hm-input-height `}
           id={props.customeId}
+          onClick={props.inputOnClick}
           type="text"
           placeholder={"Address"}
           defaultValue={props.defaultValue}

@@ -6,6 +6,7 @@ import TripCard from "./TripCar.card";
 import alertify from "alertifyjs";
 import moment from "moment";
 import FlightDetailModal from "./FlightDetail.modal";
+import { inflate } from "zlib";
 class TripInfo extends Component {
   state = {
     airlineCode: "",
@@ -17,7 +18,10 @@ class TripInfo extends Component {
     blueCardBeenClicked: false,
     redCardBeenClicked: false,
     showFlightDetail: false,
-    currIndex: ""
+    currIndex: "",
+    hasInputChanged: false,
+    inputFrom: false,
+    inputTo: false
   };
 
   handleInputChange = e => {
@@ -37,7 +41,7 @@ class TripInfo extends Component {
   saveToAddress = address => {
     this.setState({ to_address: address[0].formatted_address });
   };
-  handleFindQuote = () => {
+  handleFindQuote = async () => {
     const { from_address, to_address, date, time } = this.state;
     if (date !== "" && time !== "") {
       if (from_address !== "" && to_address !== "") {
@@ -46,12 +50,13 @@ class TripInfo extends Component {
         let goodTime = moment(`${currDate} ${currTime}`);
         let inputFrom = document.getElementById("from").value;
         let inputTo = document.getElementById("to").value;
-        this.props.findQuoteInLord({
+        await this.props.findQuoteInLord({
           from_address_str: inputFrom,
           to_address_str: inputTo,
           pickup_time: convertLocalToUTC(goodTime),
           pickup_time_local: moment(goodTime).format("YYYY-MM-DD HH:mm")
         });
+        this.setState({ hasInputChanged: true });
       } else {
         alertify.alert("Error!", "Please Choose an Address From the Drop Down!");
       }
@@ -59,8 +64,12 @@ class TripInfo extends Component {
       alertify.alert("Error!", "Please Finish The Form!");
     }
   };
-  handleCardBeenClicked = async currIndex => {
+  handleInputHasChanded = () => {
+    this.setState({ hasInputChanged: false });
+  };
+  handleCardBeenClicked = async (currIndex, quote_token) => {
     await this.setState({ currIndex });
+    await this.props.handleCarBeenClicked(quote_token);
   };
   handleFlightDetailBeenClicked = async () => {
     await this.setState(state => ({ showFlightDetail: !state.showFlightDetail }));
@@ -80,8 +89,8 @@ class TripInfo extends Component {
   };
 
   render() {
-    const { airlineCode, flightNumber, showFlightDetail } = this.state;
-    const { flight_list_in_lord, quote_in_lord } = this.props;
+    const { showFlightDetail, hasInputChanged } = this.state;
+    const { airlineCode, flightNumber, flight_list_in_lord, quote_in_lord, handleInputChange } = this.props;
     const { basic_info, quote_list } = quote_in_lord;
     return (
       <div className="row pt-2 mb-4">
@@ -105,11 +114,19 @@ class TripInfo extends Component {
             <div className="p-3">
               <div className="form-group mb-4 ">
                 <label className="text-main-color hm-text-14 font-weight-bold my-4">Pickup Location</label>
-                <GAutoComplete customeId={`from`} getGoogleAddress={this.saveFromAddress} />
+                <GAutoComplete
+                  handleInputHasChanded={this.handleInputHasChanded}
+                  customeId={`from`}
+                  getGoogleAddress={this.saveFromAddress}
+                />
               </div>
               <div className="form-group mb-4">
                 <label className="text-main-color hm-text-14 font-weight-bold mb-4">Dropoff Location</label>
-                <GAutoComplete customeId={`to`} getGoogleAddress={this.saveToAddress} />
+                <GAutoComplete
+                  handleInputHasChanded={this.handleInputHasChanded}
+                  customeId={`to`}
+                  getGoogleAddress={this.saveToAddress}
+                />
               </div>
               <div className="form-group input-group mb-4">
                 <label className="text-main-color hm-text-14 font-weight-bold mb-4">Date</label>
@@ -125,19 +142,19 @@ class TripInfo extends Component {
                   <input
                     type="text"
                     className="form-control hm-input-height col-2"
-                    id="airlineCode"
+                    id={`${airlineCode}`}
                     placeholder="Airline Code"
                     value={airlineCode}
-                    onChange={this.handleInputChange}
+                    onChange={handleInputChange}
                   />
 
                   <input
                     type="text"
                     className="form-control hm-input-height "
-                    id="flightNumber"
+                    id={`${flightNumber}`}
                     placeholder="Flight Number"
                     value={flightNumber}
-                    onChange={this.handleInputChange}
+                    onChange={handleInputChange}
                   />
                   <i
                     className="fas fa-search d-flex justify-content-center align-items-center button-main-background text-white hm-pointer-cursor"
@@ -170,7 +187,7 @@ class TripInfo extends Component {
                 Select Vehicle Type
               </h6>
             </div>
-            {basic_info !== "" && (
+            {hasInputChanged && basic_info !== "" && (
               <div className="px-3 py-4">
                 <div style={{ height: "161px" }}>
                   <GMapLocation
@@ -192,7 +209,7 @@ class TripInfo extends Component {
                 </div>
               </div>
             )}
-            {basic_info === "" && (
+            {hasInputChanged && basic_info === "" && (
               <div className="px-3 py-4">
                 <div style={{ height: "161px" }}>
                   <GMapLocation
@@ -216,11 +233,12 @@ class TripInfo extends Component {
             )}
             <div className="px-3 py-4">
               <div className="mb-4">
-                {quote_list.length > 0 &&
+                {hasInputChanged &&
+                  quote_list.length > 0 &&
                   quote_list.map((car, index) => (
                     <TripCard
                       showPriceDetail={this.state.currIndex === index}
-                      handleCardBeenClicked={() => this.handleCardBeenClicked(index)}
+                      handleCardBeenClicked={() => this.handleCardBeenClicked(index, car.quote_token)}
                       basic_info={basic_info}
                       quote_list={car}
                       handleShowPriceDetail={this.handleBlueCardBeenClicked}

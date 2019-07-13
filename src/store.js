@@ -17,6 +17,7 @@ import wageReducer from "./reducers/wage.reducer";
 import salaryReducer from "./reducers/salary.reducer";
 import flightReducer from "./reducers/flight.reducer";
 import quoteReducer from "./reducers/quote.reducer";
+import couponReducer from "./reducers/coupon.reducer";
 const store = createStore(
   combineReducers({
     authReducer,
@@ -34,7 +35,8 @@ const store = createStore(
     wageReducer,
     salaryReducer,
     flightReducer,
-    quoteReducer
+    quoteReducer,
+    couponReducer
   }),
   composeWithDevTools(applyMiddleware(thunk))
 );

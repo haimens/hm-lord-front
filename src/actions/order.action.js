@@ -10,11 +10,23 @@ export const findOrderListInLord = (query = {}) => async dispatch => {
       order_direction: "DESC",
       ...query
     });
-    console.log(payload);
     await dispatch({
       type: constant.ORDER_LIST_IN_LORD,
       payload
     });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
+export const createOrderInLord = (body = {}) => async dispatch => {
+  console.log(body);
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`order/detail`, "POST", body);
+    console.log(payload);
     await stopLoader(dispatch);
   } catch (err) {
     await stopLoader(dispatch);
