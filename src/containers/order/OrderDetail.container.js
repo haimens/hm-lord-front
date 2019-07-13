@@ -8,7 +8,7 @@ import BasicInfoModal from "./orderDetail.component/BasicInfo.modal";
 import CustomerInfoModal from "./orderDetail.component/CustomerInfo.modal";
 import CouponModal from "./orderDetail.component/Coupon.modal";
 import LogModal from "./orderDetail.component/Log.modal";
-
+import { findOrderDetailInLord } from "../../actions/order.action";
 class OrderDetail extends Component {
   state = {
     showUpdateBasicInfoModal: false,
@@ -28,10 +28,15 @@ class OrderDetail extends Component {
   handleShowLogModal = () => {
     this.setState(state => ({ showLogModal: !state.showLogModal }));
   };
-  
+
+  componentDidMount() {
+    const { order_token } = this.props.match.params;
+    this.props.findOrderDetailInLord(order_token);
+  }
+
   render() {
     const { showUpdateBasicInfoModal, showUpdateCustomerInfoModal, showCouponModal, showLogModal } = this.state;
-    const { history } = this.props;
+    const { history, order_detail } = this.props;
     return (
       <main className="container-fluid">
         {showUpdateBasicInfoModal && <BasicInfoModal onClose={this.handleUpdateBasicInfo} />}
@@ -134,9 +139,11 @@ class OrderDetail extends Component {
   }
 }
 const mapStateToProps = state => {
-  return {};
+  return {
+    order_detail: state.orderReducer.order_detail
+  };
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = { findOrderDetailInLord };
 
 export default connect(
   mapStateToProps,
