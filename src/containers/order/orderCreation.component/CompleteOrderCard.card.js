@@ -51,8 +51,8 @@ class TripDetail extends Component {
     Promise.all([findOrderDetailInLord(orderStr), findTripDetailInLord(tripStr), findCouponListInLord()]);
   }
   render() {
-    const { round_trip, showCouponModal } = this.state;
-    const { history, coupon_list_in_lord, trip_detail_in_lord, order_detail } = this.props;
+    const { showCouponModal } = this.state;
+    const { history, coupon_list_in_lord, trip_detail_in_lord, order_detail, round_trip } = this.props;
     const { basic_info, from_address_info, to_address_info } = trip_detail_in_lord;
     let totalDiscount = 0;
     if (order_detail.order_discount_list.length > 0) {

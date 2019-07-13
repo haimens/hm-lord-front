@@ -7,6 +7,7 @@ class OrderCreation extends Component {
   state = {
     position: 4,
     loaded: false,
+    round_trip: false,
     currentCustomer: ""
   };
   handleChangePosition = position => {
@@ -14,12 +15,16 @@ class OrderCreation extends Component {
   };
   handleCustomerInformationItemClicked = id => {};
 
+  handleRoundTrip = () => {
+    this.setState(state => ({ round_trip: !state.round_trip }));
+  };
+
   handleSetCurrentCustomer = props => {
     this.setState({ currentCustomer: props });
   };
 
   render() {
-    const { position, loaded, currentCustomer } = this.state;
+    const { position, round_trip, currentCustomer } = this.state;
     return (
       <main className="container-fluid">
         <section>
@@ -40,10 +45,17 @@ class OrderCreation extends Component {
         </section>
         <section>
           {position === 3 && (
-            <TripDetailCard currentCustomer={currentCustomer} handleMoveNext={this.handleChangePosition} />
+            <TripDetailCard
+              round_trip={round_trip}
+              handleRoundTrip={this.handleRoundTrip}
+              currentCustomer={currentCustomer}
+              handleMoveNext={this.handleChangePosition}
+            />
           )}
         </section>
-        <section>{position === 4 && <CompleteOrderCard handleMoveNext={this.handleChangePosition} />}</section>
+        <section>
+          {position === 4 && <CompleteOrderCard round_trip={round_trip} handleMoveNext={this.handleChangePosition} />}
+        </section>
         <section>{position === 5 && <PaymentInfoCard handleMoveNext={this.handleChangePosition} />}</section>
       </main>
     );

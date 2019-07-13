@@ -8,7 +8,6 @@ import { createOrderInLord } from "../../../actions/order.action";
 import { findQuoteInLord } from "../../../actions/quote.action";
 class TripDetail extends Component {
   state = {
-    round_trip: false,
     flight_token: "",
     flight_token_again: "",
     quote_token: "",
@@ -32,7 +31,7 @@ class TripDetail extends Component {
     this.props.handleMoveNext(1);
   };
   handleRoundTripButton = () => {
-    this.setState(state => ({ round_trip: !state.round_trip }));
+    this.props.handleRoundTrip();
   };
   saveFlightToken = flight_token => {
     this.setState({ flight_token });
@@ -51,14 +50,15 @@ class TripDetail extends Component {
   };
   componentDidMount() {}
   render() {
-    const { flightNumber, airlineCode, round_trip, flightNumberAgain, airlineCodeAgain } = this.state;
+    const { flightNumber, airlineCode, flightNumberAgain, airlineCodeAgain } = this.state;
     const {
       flight_list_in_lord,
       flight_list_in_lord_round,
       findFlightListInLord,
       findFlightListInLordAgain,
       quote_in_lord,
-      quote_in_lord_again
+      quote_in_lord_again,
+      round_trip
     } = this.props;
     return (
       <div>

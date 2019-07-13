@@ -6,7 +6,7 @@ export default function AddonCard(props) {
     <div>
       <div className="purple-border p-3">
         <div className="d-flex justify-content-between align-items-center  ">
-          <div className="hm-text-16 font-weight-bold text-modal-color">Tip</div>
+          <div className="hm-text-16 font-weight-bold text-modal-color">Add-on Service</div>
           {showEditButton && (
             <button className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center">
               <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
