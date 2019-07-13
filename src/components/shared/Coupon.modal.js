@@ -4,72 +4,13 @@ import { parseRate, parseAmount } from "../../actions/utilities.action";
 import alertify from "alertifyjs";
 
 export default class CouponModal extends Component {
-  state = {
-    showImage: false,
-    showPreview: false,
-    name: "",
-    cell: "",
-    email: "",
-    username: "",
-    img_path: "",
-    license_num: "",
-    identifier: "",
-    rate: 70,
-    area: "+1"
-  };
-
   handleInputChange = e => {
     const { id, value } = e.target;
     this.setState({ [id]: value });
   };
-
-  handleShowImage = () => {
-    this.setState(states => ({ showImage: !states.showImage }));
-  };
-  handleShowPreview = () => {
-    this.setState(states => ({ showPreview: !states.showPreview }));
-  };
-
-  handleImageUpload = img_path => {
-    this.setState({ img_path: img_path });
-  };
-
   handleClose = () => {
     this.props.onClose();
   };
-
-  handleCreateADriverInLord = () => {
-    const { name, cell, email, username, img_path, area, license_num, identifier, rate } = this.state;
-    if (
-      name !== "" &&
-      cell !== "" &&
-      email !== "" &&
-      username !== "" &&
-      area !== "" &&
-      license_num !== "" &&
-      identifier !== "" &&
-      rate !== ""
-    ) {
-      this.props.createADriverInLord({
-        name,
-        img_path,
-        cell: `${area} ${cell}`,
-        email,
-        username,
-        license_num,
-        identifier,
-        rate: rate * 10
-      });
-      this.handleClose();
-    } else {
-      alertify.alert("Error!", "Please Finish The Form!");
-    }
-  };
-
-  saveToAddress = address => {
-    this.setState({ company_address: address });
-  };
-
   async componentDidMount() {}
 
   render() {

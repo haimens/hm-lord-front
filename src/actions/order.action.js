@@ -66,6 +66,8 @@ export const updateOrderDiscountInLord = (order_token, order_discount_token, bod
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`order/discount/${order_token}/${order_discount_token}`, "PATCH", body);
+    await dispatch(findOrderDetailInLord(order_token));
+    await launchSuccess(dispatch);
     await stopLoader(dispatch);
   } catch (err) {
     await stopLoader(dispatch);

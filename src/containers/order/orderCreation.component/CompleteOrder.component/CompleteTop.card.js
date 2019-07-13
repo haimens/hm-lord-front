@@ -7,7 +7,7 @@ import { parseAmount } from "../../../../actions/utilities.action";
 
 export default class CompleteTop extends Component {
   render() {
-    const { trip_detail_in_lord, handleAddingAddon, trip_token } = this.props;
+    const { trip_detail_in_lord, handleAddingAddon, trip_token, addon_list, deleteAddonItem } = this.props;
     const { basic_info, from_address_info, to_address_info } = trip_detail_in_lord;
     return (
       <div className="bg-white rounded-custom shadow-sm">
@@ -32,10 +32,22 @@ export default class CompleteTop extends Component {
               <TripSubtotal from_address_info={from_address_info} to_address_info={to_address_info} />
             </div>
             <div className="col-lg-6 col-12 mb-4">
-              <TipCard showEditButton={true} />
+              <TipCard
+                deleteAddonItem={deleteAddonItem}
+                addon_list={addon_list}
+                handleAddingAddon={handleAddingAddon}
+                trip_token={trip_token}
+                showEditButton={true}
+              />
             </div>
             <div className="col-lg-6 col-12 mb-4">
-              <AddonCard trip_token={trip_token} handleAddingAddon={handleAddingAddon} showEditButton={true} />
+              <AddonCard
+                deleteAddonItem={deleteAddonItem}
+                addon_list={addon_list}
+                trip_token={trip_token}
+                handleAddingAddon={handleAddingAddon}
+                showEditButton={true}
+              />
             </div>
           </div>
         </div>

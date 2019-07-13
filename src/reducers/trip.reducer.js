@@ -67,7 +67,8 @@ const initialState = {
       plate: "",
       description: ""
     },
-    alert_list: [{ type: "", record_time: "" }, { type: "", record_time: "" }, { type: "", record_time: "" }]
+    alert_list: [{ type: "", record_time: "" }, { type: "", record_time: "" }, { type: "", record_time: "" }],
+    addon_list: []
   }
 };
 

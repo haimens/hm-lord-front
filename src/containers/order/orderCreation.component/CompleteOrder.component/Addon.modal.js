@@ -18,12 +18,12 @@ export default class AddonModal extends Component {
 
   handleAddingAddon = async () => {
     const { amount, note } = this.state;
-    const { createAddonToTrip, order_token, trip_token } = this.props;
+    const { createAddonToTrip, order_token, trip_token, title } = this.props;
     if (amount !== "" && note !== "") {
       createAddonToTrip(order_token, trip_token, {
         amount: amount * 100,
         note,
-        type: 2
+        type: title === "An Add-on" ? 2 : 1
       });
       this.handleClose();
     } else {
@@ -35,7 +35,7 @@ export default class AddonModal extends Component {
     const { amount, note } = this.state;
     return (
       <Modal
-        title="Add An Add-on Service"
+        title={`Add ${this.props.title}`}
         onClose={this.handleClose}
         position="center"
         getWidth={"467px"}

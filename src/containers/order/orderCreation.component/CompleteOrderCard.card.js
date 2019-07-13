@@ -12,7 +12,7 @@ import {
   updateOrderDiscountInLord
 } from "../../../actions/order.action";
 import { findCouponListInLord } from "../../../actions/coupon.action";
-import { findTripDetailInLord, createAddonToTrip } from "../../../actions/trip.action";
+import { findTripDetailInLord, createAddonToTrip, deleteAddonItem } from "../../../actions/trip.action";
 import CompleteTop from "./CompleteOrder.component/CompleteTop.card";
 import AddonModal from "./CompleteOrder.component/Addon.modal";
 
@@ -20,7 +20,13 @@ class TripDetail extends Component {
   state = {
     showCouponModal: false,
     showAddingAddon: false,
-    curr_trip_token: ""
+    curr_trip_token: "",
+    currButtonItem: "",
+    name: "",
+    cell: "",
+    email: "",
+    area: "",
+    special_instruction: ""
   };
   handleInputChange = e => {
     const { id, value } = e.target;
@@ -35,25 +41,47 @@ class TripDetail extends Component {
   handleAddingCoupon = code => {
     let orderStr = "ORD-b7a2137a9353dea1db332fb0f9d67603";
     this.props.applyOrderDiscountInLord(orderStr, { code });
+    this.handleShowCouponModal();
   };
-  handleAddingAddon = curr_trip_token => {
-    this.setState(state => ({ showAddingAddon: !state.showAddingAddon, curr_trip_token }));
+
+  handleDeleteAddonItem = (trip_token, addon_token) => {
+    let orderStr = "ORD-b7a2137a9353dea1db332fb0f9d67603";
+    this.props.deleteAddonItem(orderStr, trip_token, addon_token);
+  };
+
+  handleAddingAddon = async (curr_trip_token, currButtonItem) => {
+    await this.setState(state => ({ showAddingAddon: !state.showAddingAddon, curr_trip_token, currButtonItem }));
   };
 
   handleDeleteCouponFromOrder = order_discount_token => {
     let orderStr = "ORD-b7a2137a9353dea1db332fb0f9d67603";
-    console.log(order_discount_token);
     this.props.updateOrderDiscountInLord(orderStr, order_discount_token, { status: 0 });
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { current_order, findOrderDetailInLord, findTripDetailInLord, findCouponListInLord } = this.props;
     let orderStr = "ORD-b7a2137a9353dea1db332fb0f9d67603";
     let tripStr = "TRIP-8ea520fbb71c379142994763322a4a12";
-    Promise.all([findOrderDetailInLord(orderStr), findTripDetailInLord(tripStr), findCouponListInLord()]);
+    await Promise.all([findOrderDetailInLord(orderStr), findTripDetailInLord(tripStr), findCouponListInLord()]);
+    const { customer_info } = this.props.order_detail;
+    this.setState({
+      name: customer_info.name,
+      email: customer_info.email,
+      cell: customer_info.cell.split(" ")[1],
+      area: customer_info.cell.split(" ")[0]
+    });
   }
   render() {
-    const { showCouponModal, showAddingAddon, curr_trip_token } = this.state;
+    const {
+      showCouponModal,
+      showAddingAddon,
+      curr_trip_token,
+      name,
+      email,
+      cell,
+      area,
+      special_instruction
+    } = this.state;
     const {
       history,
       coupon_list_in_lord,
@@ -62,7 +90,7 @@ class TripDetail extends Component {
       round_trip,
       createAddonToTrip
     } = this.props;
-    const { basic_info } = trip_detail_in_lord;
+    const { basic_info, addon_list } = trip_detail_in_lord;
     let totalDiscount = 0;
     if (order_detail.order_discount_list.length > 0) {
       totalDiscount = order_detail.order_discount_list.map(discount => console.log(discount));
@@ -83,14 +111,17 @@ class TripDetail extends Component {
         )}
         {showAddingAddon && (
           <AddonModal
+            title={this.state.currButtonItem}
             onClose={this.handleAddingAddon}
             createAddonToTrip={createAddonToTrip}
             order_token={order_token}
-            trip_token={trip_token}
+            trip_token={curr_trip_token}
           />
         )}
         <div className="mb-4">
           <CompleteTop
+            deleteAddonItem={this.handleDeleteAddonItem}
+            addon_list={addon_list}
             trip_token={trip_token}
             handleAddingAddon={this.handleAddingAddon}
             trip_detail_in_lord={trip_detail_in_lord}
@@ -100,6 +131,8 @@ class TripDetail extends Component {
         {round_trip && (
           <div className="mb-4">
             <CompleteTop
+              deleteAddonItem={this.handleDeleteAddonItem}
+              addon_list={addon_list}
               trip_token={trip_token}
               handleAddingAddon={this.handleAddingAddon}
               trip_detail_in_lord={trip_detail_in_lord}
@@ -124,23 +157,33 @@ class TripDetail extends Component {
                   </label>
                   <input
                     className="form-control hm-input-height"
-                    name="name"
                     id="name"
+                    value={name}
                     placeholder={"Name"}
                     onChange={this.handleInputChange}
                   />
                 </div>
               </div>
               <div className="col-4">
-                <div className="form-group mb-4">
-                  <label htmlFor="Name" className="hm-text-14 text-main-color font-weight-bold">
-                    Cell
-                  </label>
+                <label htmlFor="cell" className="hm-text-14 text-main-color font-weight-bold">
+                  Cell
+                </label>
+                <div className="form-group input-group d-flex">
                   <input
-                    className="form-control hm-input-height"
-                    name="cell"
+                    type="text"
+                    className="form-control hm-input-height col-2"
+                    id="area"
+                    placeholder="Area"
+                    value={area}
+                    onChange={this.handleInputChange}
+                  />
+
+                  <input
+                    type="text"
+                    className="form-control hm-input-height "
                     id="cell"
-                    placeholder={"Cell"}
+                    placeholder="Cell"
+                    value={cell}
                     onChange={this.handleInputChange}
                   />
                 </div>
@@ -152,8 +195,8 @@ class TripDetail extends Component {
                   </label>
                   <input
                     className="form-control hm-input-height"
-                    name="email"
                     id="email"
+                    value={email}
                     placeholder={"Email"}
                     onChange={this.handleInputChange}
                   />
@@ -168,6 +211,7 @@ class TripDetail extends Component {
                     className="form-control hm-input-height"
                     name="special_instruction"
                     id="special_instruction"
+                    value={special_instruction}
                     placeholder={"Special Instruction"}
                     onChange={this.handleInputChange}
                   />
@@ -262,7 +306,8 @@ const mapDispatchToProps = {
   findCouponListInLord,
   applyOrderDiscountInLord,
   updateOrderDiscountInLord,
-  createAddonToTrip
+  createAddonToTrip,
+  deleteAddonItem
 };
 
 export default connect(
