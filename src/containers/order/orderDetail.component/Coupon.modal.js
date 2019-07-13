@@ -81,7 +81,7 @@ export default class CouponModal extends Component {
               <div className={"col-12 mb-4"} key={index}>
                 <div className="px-4 py-3 shadow-sm rounded-custom text-white coupon-card">
                   <div className="d-flex justify-content-between">
-                    <div className="hm-text-16">New Member Discount</div>
+                    <div className="hm-text-16">{coupon.code}</div>
                     <div className="hm-text-16 text-danger">
                       <button
                         className="btn btn-sm bg-white"
