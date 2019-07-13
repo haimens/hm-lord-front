@@ -72,3 +72,16 @@ export const updateOrderDiscountInLord = (order_token, order_discount_token, bod
     dispatch(processLogout(err));
   }
 };
+
+export const applyOrderDiscountInLord = (order_token, body) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`order/discount/${order_token}`, "POST", body);
+    await dispatch(findOrderDetailInLord(order_token));
+    await launchSuccess(dispatch);
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};

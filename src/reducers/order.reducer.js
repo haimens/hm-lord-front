@@ -6,7 +6,9 @@ const initialState = {
     count: 0,
     end: 0
   },
-  order_detail: {},
+  order_detail: {
+    order_discount_list: []
+  },
   current_order: ""
 };
 

@@ -39,7 +39,7 @@ class OrderDetail extends Component {
 
   render() {
     const { showUpdateBasicInfoModal, showUpdateCustomerInfoModal, showCouponModal, showLogModal } = this.state;
-    const { history, coupon_list_in_lord } = this.props;
+    const { history, coupon_list_in_lord, order_detail } = this.props;
     return (
       <main className="container-fluid">
         {showUpdateBasicInfoModal && <BasicInfoModal onClose={this.handleUpdateBasicInfo} />}
@@ -93,7 +93,13 @@ class OrderDetail extends Component {
             buttonWidth={"88px"}
           />
           <div className="row p-3 triplist-scroll">
-            <CouponCard />
+            {order_detail.order_discount_list.map((discount, index) => (
+              <CouponCard
+                handleDeleteCouponFromOrder={this.handleDeleteCouponFromOrder}
+                discount={discount}
+                key={index}
+              />
+            ))}
           </div>
         </section>
 
