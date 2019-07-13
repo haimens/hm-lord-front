@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Modal, ImageLoaderModal, PreviewImageModal, AddingImage } from "../../../components/shared";
-import { parseRate } from "../../../actions/utilities.action";
+import { parseRate, parseAmount } from "../../../actions/utilities.action";
 import alertify from "alertifyjs";
 
 export default class CouponModal extends Component {
@@ -73,145 +73,35 @@ export default class CouponModal extends Component {
   async componentDidMount() {}
 
   render() {
-    const {
-      img_path,
-      showImage,
-      showPreview,
-      name,
-      cell,
-      email,
-      username,
-      area,
-      license_num,
-      identifier,
-      rate
-    } = this.state;
     return (
       <div>
-        {showImage && (
-          <ImageLoaderModal
-            onClose={() => this.setState({ showImage: false })}
-            onImageUpload={this.handleImageUpload}
-            title="Upload Image"
-          />
-        )}
-        {showPreview && <PreviewImageModal image={img_path} onClose={() => this.setState({ showPreview: false })} />}
+        <Modal title="Add Coupon" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"500px"}>
+          <div className="p-2 py-4">
+            {this.props.coupon_list_in_lord.record_list.map((coupon, index) => (
+              <div className={"col-12 mb-4"} key={index}>
+                <div className="px-4 py-3 shadow-sm rounded-custom text-white coupon-card">
+                  <div className="d-flex justify-content-between">
+                    <div className="hm-text-16">New Member Discount</div>
+                    <div className="hm-text-16 text-danger">
+                      <button
+                        className="btn btn-sm bg-white"
+                        onClick={() => this.props.handleAddingCoupon(coupon.discount_token)}
+                      >
+                        Select
+                      </button>
+                    </div>
+                  </div>
 
-        <Modal title="Add Driver" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"720px"}>
-          <div className="container">
-            <div className="p-3">
-              <div className="form-group mb-4">
-                <input
-                  className="form-control hm-input-height mt-3"
-                  name="name"
-                  id="name"
-                  placeholder={"Name"}
-                  value={name}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-
-              <div className="form-group input-group mb-4 d-flex">
-                <input
-                  type="text"
-                  className="form-control hm-input-height col-2"
-                  id="area"
-                  placeholder="Area"
-                  value={area}
-                  onChange={this.handleInputChange}
-                />
-
-                <input
-                  type="text"
-                  className="form-control hm-input-height "
-                  id="cell"
-                  placeholder="Cell"
-                  value={cell}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-
-              <div className="form-group mb-4">
-                <input
-                  type="email"
-                  className="form-control hm-input-height "
-                  name="email"
-                  id="email"
-                  placeholder={"Email"}
-                  value={email}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-
-              <div className="form-group mb-4">
-                <input
-                  type="text"
-                  className="form-control hm-input-height "
-                  name="license_num"
-                  id="license_num"
-                  placeholder={"License Number"}
-                  value={license_num}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-
-              <div className="form-group mb-4">
-                <input
-                  type="text"
-                  className="form-control hm-input-height "
-                  name="identifier"
-                  id="identifier"
-                  placeholder={"Identifier"}
-                  value={identifier}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-
-              <div className="form-group mb-4">
-                <input
-                  type="text"
-                  className="form-control hm-input-height "
-                  name="username"
-                  id="username"
-                  placeholder={"Username"}
-                  value={username}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-
-              <div className="form-group input-group  mb-4">
-                <input
-                  type="text"
-                  className="form-control hm-input-height border-right-0"
-                  name="rate"
-                  id="rate"
-                  placeholder={"Rate"}
-                  value={rate}
-                  onChange={this.handleInputChange}
-                />
-                <div className="input-group-append bg-white border-left-0">
-                  <span className="input-group-text bg-white border-left-0 ">%</span>
+                  <div className="d-flex justify-content-between">
+                    {coupon.type === 1 ? (
+                      <div className="hm-text-14 mt-1">{parseAmount(coupon.amount, 2)} OFF</div>
+                    ) : (
+                      <div className="hm-text-14 mt-1">{parseRate(coupon.rate)} OFF</div>
+                    )}
+                  </div>
                 </div>
               </div>
-
-              <AddingImage
-                title={"Logo:"}
-                parentProps={{ img_url: img_path, handleShowPreview: this.handleShowPreview }}
-                handleShowImage={this.handleShowImage}
-              />
-
-              <div className="form-group text-right pt-3">
-                <button
-                  className="button-main-background btn button-main-size px-4 text-white mr-3"
-                  onClick={this.handleCreateADriverInLord}
-                >
-                  Add
-                </button>
-                <button onClick={this.handleClose} className="btn button-main-size btn-outline-secondary px-4">
-                  Cancel
-                </button>
-              </div>
-            </div>
+            ))}
           </div>
         </Modal>
       </div>

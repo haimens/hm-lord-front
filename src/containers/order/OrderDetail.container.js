@@ -9,6 +9,7 @@ import CustomerInfoModal from "./orderDetail.component/CustomerInfo.modal";
 import CouponModal from "./orderDetail.component/Coupon.modal";
 import LogModal from "./orderDetail.component/Log.modal";
 import { findOrderDetailInLord } from "../../actions/order.action";
+import { findCouponListInLord } from "../../actions/coupon.action";
 class OrderDetail extends Component {
   state = {
     showUpdateBasicInfoModal: false,
@@ -28,20 +29,29 @@ class OrderDetail extends Component {
   handleShowLogModal = () => {
     this.setState(state => ({ showLogModal: !state.showLogModal }));
   };
+  handleAddingCoupon = discount_token => {
+    console.log(discount_token);
+  };
 
   componentDidMount() {
     const { order_token } = this.props.match.params;
-    this.props.findOrderDetailInLord(order_token);
+    Promise.all([this.props.findOrderDetailInLord(order_token), this.props.findCouponListInLord()]);
   }
 
   render() {
     const { showUpdateBasicInfoModal, showUpdateCustomerInfoModal, showCouponModal, showLogModal } = this.state;
-    const { history, order_detail } = this.props;
+    const { history, coupon_list_in_lord } = this.props;
     return (
       <main className="container-fluid">
         {showUpdateBasicInfoModal && <BasicInfoModal onClose={this.handleUpdateBasicInfo} />}
         {showUpdateCustomerInfoModal && <CustomerInfoModal onClose={this.handleUpdateCustomerInfo} />}
-        {showCouponModal && <CouponModal onClose={this.handleShowCouponModal} />}
+        {showCouponModal && (
+          <CouponModal
+            handleAddingCoupon={this.handleAddingCoupon}
+            coupon_list_in_lord={coupon_list_in_lord}
+            onClose={this.handleShowCouponModal}
+          />
+        )}
         {showLogModal && <LogModal onClose={this.handleShowLogModal} />}
 
         <section>
@@ -140,10 +150,11 @@ class OrderDetail extends Component {
 }
 const mapStateToProps = state => {
   return {
-    order_detail: state.orderReducer.order_detail
+    order_detail: state.orderReducer.order_detail,
+    coupon_list_in_lord: state.couponReducer.coupon_list_in_lord
   };
 };
-const mapDispatchToProps = { findOrderDetailInLord };
+const mapDispatchToProps = { findOrderDetailInLord, findCouponListInLord };
 
 export default connect(
   mapStateToProps,

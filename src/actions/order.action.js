@@ -21,7 +21,7 @@ export const findOrderListInLord = (query = {}) => async dispatch => {
   }
 };
 
-export const findOrderDetailInLord = (order_token ) => async dispatch => {
+export const findOrderDetailInLord = order_token => async dispatch => {
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`order/detail/${order_token}`, "GET");
@@ -44,6 +44,28 @@ export const createOrderInLord = (body = {}) => async dispatch => {
       type: constant.CURRENT_ORDER,
       payload
     });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
+export const createOrderDiscountInLord = (order_token, body) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`order/discount/${order_token}`, "POST", body);
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
+export const updateOrderDiscountInLord = (order_token, order_discount_token, body) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`order/discount/${order_token}/${order_discount_token}`, "PATCH", body);
     await stopLoader(dispatch);
   } catch (err) {
     await stopLoader(dispatch);
