@@ -29,6 +29,7 @@ class TripDetail extends Component {
       customer_token: currentCustomer.customer_token,
       quote_list: [{ flight_str: `${airlineCode}${flightNumber}`, quote_token }]
     });
+    this.props.handleMoveNext(1);
   };
   handleRoundTripButton = () => {
     this.setState(state => ({ round_trip: !state.round_trip }));

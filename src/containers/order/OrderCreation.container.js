@@ -5,7 +5,7 @@ import CompleteOrderCard from "./orderCreation.component/CompleteOrderCard.card"
 import PaymentInfoCard from "./orderCreation.component/PaymentInfo.card";
 class OrderCreation extends Component {
   state = {
-    position: 2,
+    position: 4,
     loaded: false,
     currentCustomer: ""
   };

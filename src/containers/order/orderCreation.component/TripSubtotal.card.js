@@ -2,8 +2,8 @@ import React from "react";
 import { convertUTCtoLocal, parseAmount } from "../../../actions/utilities.action";
 import { GMapLocation } from "../../../components/shared";
 export default function TripSubtotal(props) {
-  const { showEditButton } = props;
-
+  const { showEditButton, from_address_info, to_address_info } = props;
+  console.log(from_address_info);
   const saveToAddress = () => {};
   return (
     <div>
@@ -16,24 +16,26 @@ export default function TripSubtotal(props) {
             </button>
           )}
         </div>
-        <div style={{ height: "183px" }}>
-          <GMapLocation
-            position={{
-              center: {
-                lat: 0,
-                lng: 0
-              },
-              origin: {
-                lat: 0,
-                lng: 0
-              },
-              destination: {
-                lat: 0,
-                lng: 0
-              }
-            }}
-          />
-        </div>
+        {from_address_info.addr_str !== "" && (
+          <div style={{ height: "183px" }}>
+            <GMapLocation
+              position={{
+                center: {
+                  lat: from_address_info.lat,
+                  lng: from_address_info.lng
+                },
+                origin: {
+                  lat: from_address_info.lat,
+                  lng: from_address_info.lng
+                },
+                destination: {
+                  lat: to_address_info.lat,
+                  lng: to_address_info.lng
+                }
+              }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -2,12 +2,17 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Header, ListHeader, ListView, CouponCard } from "../../../components/shared";
+import { convertUTCtoLocal, parseAmount } from "../../../actions/utilities.action";
 
 import BasicInfo from "./BasicInfo.card";
 import "./TripDetail.card.css";
 import TripSubtotal from "./TripSubtotal.card";
 import TipCard from "./Tip.card";
 import AddonCard from "./Addon.card";
+
+import { findOrderDetailInLord } from "../../../actions/order.action";
+import { findTripDetailInLord } from "../../../actions/trip.action";
+
 class TripDetail extends Component {
   state = {
     round_trip: false
@@ -19,10 +24,15 @@ class TripDetail extends Component {
   handleRoundTripButton = () => {
     this.setState(state => ({ round_trip: !state.round_trip }));
   };
-  componentDidMount() {}
+  componentDidMount() {
+    const { current_order, findOrderDetailInLord, findTripDetailInLord } = this.props;
+    let orderStr = "ORD-b7a2137a9353dea1db332fb0f9d67603";
+    let tripStr = "TRIP-8ea520fbb71c379142994763322a4a12";
+    Promise.all([findOrderDetailInLord(orderStr), findTripDetailInLord(tripStr)]);
+  }
   render() {
-    const { customer_list_in_lord } = this.props;
     const { round_trip } = this.state;
+    const { basic_info, from_address_info, to_address_info } = this.props.trip_detail_in_lord;
     return (
       <section>
         <div className="mb-4">
@@ -31,16 +41,21 @@ class TripDetail extends Component {
               <div className="row">
                 <div className="col-lg-6 col-12 mb-4">
                   <div className="hm-title-sub-size font-weight-bold text-modal-color p-4">Trip 1</div>
-                  <BasicInfo showEditButton={true} />
+                  <BasicInfo
+                    from_address_info={from_address_info}
+                    to_address_info={to_address_info}
+                    basic_info={basic_info}
+                    showEditButton={true}
+                  />
                 </div>
                 <div className="col-lg-6 col-12 mb-4">
                   <div className="text-right hm-title-sub-size font-weight-bold text-modal-color p-4">
                     <span className="hm-title-sub-size font-weight-bold text-secondary-color text-modal-color mr-3">
                       Trip 1 Subtotal:
                     </span>
-                    ${100}
+                    {parseAmount(basic_info.amount, 2)}
                   </div>
-                  <TripSubtotal />
+                  <TripSubtotal from_address_info={from_address_info} to_address_info={to_address_info} />
                 </div>
                 <div className="col-lg-6 col-12 mb-4">
                   <TipCard showEditButton={true} />
@@ -52,7 +67,7 @@ class TripDetail extends Component {
             </div>
           </div>
         </div>
-
+        {/* 
         <div className="mb-4">
           <div className="bg-white rounded-custom shadow-sm">
             <div className="container-fluid">
@@ -79,23 +94,23 @@ class TripDetail extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="mb-4 bg-white rounded-custom shadow-sm">
           <ListHeader
             parentProps={{
-              title: "Coupon List",
-              clickFunction: this.handleShowCouponModal,
-              clickTitle: "Coupon"
+              title: "Passenger Information"
             }}
             hideShadow={true}
-            buttonWidth={"88px"}
+            hideButton={true}
           />
           <div className="container-fluid">
             <div className="row ">
               <div className="col-4">
                 <div className="form-group mb-4">
-                  <label htmlFor="Name">Name</label>
+                  <label htmlFor="Name" className="hm-text-14 text-main-color font-weight-bold">
+                    Name
+                  </label>
                   <input
                     className="form-control hm-input-height"
                     name="name"
@@ -107,36 +122,42 @@ class TripDetail extends Component {
               </div>
               <div className="col-4">
                 <div className="form-group mb-4">
-                  <label htmlFor="Name">Name</label>
+                  <label htmlFor="Name" className="hm-text-14 text-main-color font-weight-bold">
+                    Cell
+                  </label>
                   <input
                     className="form-control hm-input-height"
-                    name="name"
-                    id="name"
-                    placeholder={"Name"}
+                    name="cell"
+                    id="cell"
+                    placeholder={"Cell"}
                     onChange={this.handleInputChange}
                   />
                 </div>
               </div>
               <div className="col-4">
                 <div className="form-group mb-4">
-                  <label htmlFor="Name">Name</label>
+                  <label htmlFor="Name" className="hm-text-14 text-main-color font-weight-bold">
+                    Email
+                  </label>
                   <input
                     className="form-control hm-input-height"
-                    name="name"
-                    id="name"
-                    placeholder={"Name"}
+                    name="email"
+                    id="email"
+                    placeholder={"Email"}
                     onChange={this.handleInputChange}
                   />
                 </div>
               </div>
               <div className="col-12">
                 <div className="form-group mb-4">
-                  <label htmlFor="Name">Name</label>
+                  <label htmlFor="Name" className="hm-text-14 text-main-color font-weight-bold">
+                    Special Instruction
+                  </label>
                   <input
                     className="form-control hm-input-height"
-                    name="name"
-                    id="name"
-                    placeholder={"Name"}
+                    name="special_instruction"
+                    id="special_instruction"
+                    placeholder={"Special Instruction"}
                     onChange={this.handleInputChange}
                   />
                 </div>
@@ -209,9 +230,12 @@ class TripDetail extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    current_order: state.orderReducer.current_order,
+    trip_detail_in_lord: state.tripReducer.trip_detail_in_lord
+  };
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = { findOrderDetailInLord, findTripDetailInLord };
 
 export default connect(
   mapStateToProps,
