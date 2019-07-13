@@ -8,9 +8,7 @@ class General extends Component {
   state = {
     showAddGeneral: false
   };
-  handleGeneralSearch = keywords => {
-    console.log(keywords);
-  };
+  handleGeneralSearch = keywords => {};
   handleShowGeneralModal = () => {
     this.setState(state => ({ showAddGeneral: !state.showAddGeneral }));
   };

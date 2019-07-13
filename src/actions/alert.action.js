@@ -3,8 +3,6 @@ import { callApi, startLoader, stopLoader, launchSuccess } from "./utilities.act
 import { processLogout } from "./auth.action";
 import { findTripDetailInLord } from "./trip.action";
 export const editAlertInfoInTrip = (trip_token, alert_token, body = {}) => async dispatch => {
-  console.log(alert_token);
-  console.log(body);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`alert/detail/${alert_token}`, "PATCH", body);

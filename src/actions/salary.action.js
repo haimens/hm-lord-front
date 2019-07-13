@@ -39,7 +39,6 @@ export const findSumSalaryInDriver = driver_token => async dispatch => {
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`salary/sum/driver/${driver_token}`, "GET");
-    console.log(payload);
     await dispatch({
       type: constant.SALARY_SUM_LIST_IN_DRIVER,
       payload

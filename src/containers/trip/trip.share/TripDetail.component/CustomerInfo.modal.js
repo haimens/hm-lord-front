@@ -43,7 +43,6 @@ export default class BasicInfo extends Component {
     const { name, cell, area, email, img_path, address_str } = this.state;
     const { createACustomerInLord, createNewAddressInstance } = this.props;
     if (name !== "" && cell !== "" && area !== "" && email !== "") {
-      console.log(name);
       const payload = await createNewAddressInstance({ address_str });
       createACustomerInLord({
         customer_info: {

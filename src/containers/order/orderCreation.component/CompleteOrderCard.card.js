@@ -40,6 +40,7 @@ class TripDetail extends Component {
 
   handleDeleteCouponFromOrder = order_discount_token => {
     let orderStr = "ORD-b7a2137a9353dea1db332fb0f9d67603";
+    console.log(order_discount_token);
     this.props.updateOrderDiscountInLord(orderStr, order_discount_token, { status: 0 });
   };
 

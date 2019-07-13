@@ -12,9 +12,7 @@ class OrderCreation extends Component {
   handleChangePosition = position => {
     this.setState(states => ({ position: states.position + position }));
   };
-  handleCustomerInformationItemClicked = id => {
-    console.log(id);
-  };
+  handleCustomerInformationItemClicked = id => {};
 
   handleSetCurrentCustomer = props => {
     this.setState({ currentCustomer: props });

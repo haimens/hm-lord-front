@@ -8,9 +8,7 @@ class Driver extends Component {
   state = {
     showDriverCreationModal: false
   };
-  handlePageChange = start => {
-    console.log(start);
-  };
+  handlePageChange = start => {};
   handleAddingDriver = () => {
     this.setState(state => ({ showDriverCreationModal: !state.showDriverCreationModal }));
   };

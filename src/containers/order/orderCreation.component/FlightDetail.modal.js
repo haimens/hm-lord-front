@@ -11,7 +11,6 @@ export default class FlightDetail extends Component {
     this.props.onClose();
   };
   handleFlightInfoBeenClicked = flight_token => {
-    console.log(flight_token);
     this.props.saveFlightToken(flight_token);
     this.handleClose();
   };

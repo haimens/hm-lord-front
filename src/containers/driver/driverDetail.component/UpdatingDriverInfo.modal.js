@@ -70,7 +70,6 @@ export default class UpdatingDriverInfo extends Component {
 
   async componentDidMount() {
     const { name, cell, email, identifier, license_num, img_path, status } = this.props.driver_detail;
-    console.log(this.props);
     this.setState({
       name,
       cell: cell.split(" ")[1],

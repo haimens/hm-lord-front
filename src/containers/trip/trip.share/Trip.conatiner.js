@@ -47,7 +47,6 @@ class TripContainer extends Component {
     if (currentPosition === "abnormal") {
       title = "Abnormal";
     }
-    console.log(currentPosition);
     return (
       <main className="container-fluid">
         <section className="mb-4">

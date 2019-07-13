@@ -9,9 +9,7 @@ class Coupon extends Component {
   state = {
     showAddCouponModal: false
   };
-  handleWageSearch = keywords => {
-    console.log(keywords);
-  };
+  handleWageSearch = keywords => {};
   handleShowAddingCouponModal = () => {
     this.setState(state => ({ showAddCouponModal: !state.showAddCouponModal }));
   };

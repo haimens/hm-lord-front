@@ -8,9 +8,7 @@ class Vehicle extends Component {
   state = {
     showVehicleCreationModal: false
   };
-  handlePageChange = start => {
-    console.log(start);
-  };
+  handlePageChange = start => {};
   handleAddingVehicle = () => {
     this.setState(state => ({ showVehicleCreationModal: !state.showVehicleCreationModal }));
   };

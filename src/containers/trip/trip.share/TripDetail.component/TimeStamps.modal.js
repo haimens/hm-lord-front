@@ -13,7 +13,6 @@ export default class TimeStaps extends Component {
   };
 
   handleStartTime = time => {
-    console.log(time);
     this.setState({ start: time._d });
   };
   handleArriveTime = time => {

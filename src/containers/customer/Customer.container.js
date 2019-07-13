@@ -12,15 +12,11 @@ class Customer extends Component {
   state = {
     showCustomerAdding: false
   };
-  handlePageChange = start => {
-    console.log(start);
-  };
+  handlePageChange = start => {};
   handleAddingCustomer = () => {
     this.setState(state => ({ showCustomerAdding: !state.showCustomerAdding }));
   };
-  handlePageChange = start => {
-    console.log(start);
-  };
+  handlePageChange = start => {};
   componentDidMount() {
     this.props.findCustomerListInLord();
   }

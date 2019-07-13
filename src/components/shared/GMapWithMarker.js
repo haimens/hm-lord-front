@@ -16,7 +16,6 @@ class GMapWithMarker extends Component {
       });
   }
   handleClick = (marker, event) => {
-    // console.log({ marker })
     this.setState({ selectedMarker: marker });
   };
   render() {

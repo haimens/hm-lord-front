@@ -14,9 +14,7 @@ class Home extends Component {
     this.state = {};
   }
 
-  handleCalendarBeenClicked = date => {
-    console.log(date);
-  };
+  handleCalendarBeenClicked = date => {};
 
   render() {
     const localizer = momentLocalizer(moment);

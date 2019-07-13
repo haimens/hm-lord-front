@@ -40,7 +40,6 @@ export default class EmailUpdate extends Component {
     }
   };
   async componentDidMount() {
-    console.log(this.props);
     const { sendgrid_api_key, sendgrid_from_email } = this.props.currEmailResource.currEmail;
     await this.setState({ sendgrid_api_key, sendgrid_from_email });
   }

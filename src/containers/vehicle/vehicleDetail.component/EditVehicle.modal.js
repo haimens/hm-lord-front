@@ -48,7 +48,6 @@ export default class EditVehicle extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
     const { img_path, identifier, plate_num, description } = this.props.vehicle_detail_in_lord.basic_info;
     this.setState({ img_path, identifier, plate_num, description });
   }

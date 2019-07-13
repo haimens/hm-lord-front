@@ -3,7 +3,6 @@ import { convertUTCtoLocal, parseAmount } from "../../../actions/utilities.actio
 import { GMapLocation } from "../../../components/shared";
 export default function TripSubtotal(props) {
   const { showEditButton, from_address_info, to_address_info } = props;
-  console.log(from_address_info);
   const saveToAddress = () => {};
   return (
     <div>

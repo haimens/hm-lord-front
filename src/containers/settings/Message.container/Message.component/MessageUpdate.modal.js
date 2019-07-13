@@ -24,7 +24,6 @@ export default class MessageUpdate extends Component {
     this.setState({ img_url: img_path });
   };
   handleUpdateMessageResource = () => {
-    console.log(this.props);
     const { twilio_account_id, twilio_auth_token, twilio_from_num } = this.state;
     const {
       updateAMessageMethod,
@@ -42,7 +41,6 @@ export default class MessageUpdate extends Component {
     }
   };
   async componentDidMount() {
-    console.log(this.props);
     const { twilio_account_id, twilio_auth_token, twilio_from_num } = this.props.currMessageResource.currMessage;
     await this.setState({ twilio_account_id, twilio_auth_token, twilio_from_num });
   }

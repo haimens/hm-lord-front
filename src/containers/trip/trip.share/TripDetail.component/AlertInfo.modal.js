@@ -7,7 +7,6 @@ import "./AlertInfoModal.css";
 import moment from "moment";
 export default class AlertInfo extends Component {
   handleETAAlert = time => {
-    console.log(time);
     this.setState({ eta: time._d });
   };
   handleArrivalAlert = time => {

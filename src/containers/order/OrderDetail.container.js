@@ -28,9 +28,7 @@ class OrderDetail extends Component {
   handleShowLogModal = () => {
     this.setState(state => ({ showLogModal: !state.showLogModal }));
   };
-  handleAddingCoupon = discount_token => {
-    console.log(discount_token);
-  };
+  handleAddingCoupon = discount_token => {};
 
   componentDidMount() {
     const { order_token } = this.props.match.params;

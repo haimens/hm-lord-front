@@ -10,9 +10,7 @@ class Vehicle extends Component {
   state = {
     showAddWage: false
   };
-  handleWageSearch = keywords => {
-    console.log(keywords);
-  };
+  handleWageSearch = keywords => {};
   handleAddingVehicle = () => {
     this.setState(state => ({ showAddVehicle: !state.showAddVehicle }));
   };

@@ -23,7 +23,6 @@ export const findCouponListInLord = (query = {}) => async dispatch => {
 };
 
 export const createACouponInLord = (body = {}) => async dispatch => {
-  console.log(body);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`discount/detail`, "POST", body);
@@ -38,8 +37,6 @@ export const createACouponInLord = (body = {}) => async dispatch => {
 };
 
 export const updateACouponInLord = (discount_token, body = {}) => async dispatch => {
-  console.log(discount_token);
-  console.log(body);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`discount/detail/${discount_token}`, "PATCH", body);

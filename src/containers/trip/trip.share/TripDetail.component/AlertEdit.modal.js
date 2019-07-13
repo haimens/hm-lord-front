@@ -28,7 +28,6 @@ export default class AlertInfo extends Component {
   };
 
   handleWhenTimeChanged = time => {
-    console.log(time);
     this.setState({ currentTime: time._d });
   };
 

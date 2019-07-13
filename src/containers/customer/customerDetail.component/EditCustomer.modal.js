@@ -49,8 +49,6 @@ export default class CustomerEditing extends Component {
     } = this.props;
     if (name !== "" && cell !== "" && area !== "" && email !== "") {
       const payload = await createNewAddressInstance({ address_str });
-      console.log(address_str);
-      console.log(JSON.stringify(payload));
       Promise.all([
         updateACustomerInLord(customer_token, {
           name,

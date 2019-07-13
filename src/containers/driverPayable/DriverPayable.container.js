@@ -7,9 +7,7 @@ class DriverPayable extends Component {
   state = {
     showAddWage: false
   };
-  handleWageSearch = keywords => {
-    console.log(keywords);
-  };
+  handleWageSearch = keywords => {};
   handleAddingWage = () => {
     this.setState(state => ({ showAddWage: !state.showAddWage }));
   };
