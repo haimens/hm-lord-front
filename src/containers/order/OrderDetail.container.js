@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { Header, ListHeader, ListView, CouponCard } from "../../components/shared";
+import { Header, ListHeader, ListView, CouponCard, CouponModal } from "../../components/shared";
 import BasicInfo from "./orderDetail.component/BasicInfo.card";
 import CustomerInfo from "./orderDetail.component/CustomerInfo.card";
 import BasicInfoModal from "./orderDetail.component/BasicInfo.modal";
 import CustomerInfoModal from "./orderDetail.component/CustomerInfo.modal";
-import CouponModal from "./orderDetail.component/Coupon.modal";
 import LogModal from "./orderDetail.component/Log.modal";
 import { findOrderDetailInLord } from "../../actions/order.action";
 import { findCouponListInLord } from "../../actions/coupon.action";

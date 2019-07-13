@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { Header, ListHeader, ListView, CouponCard } from "../../../components/shared";
+import { Header, ListHeader, ListView, CouponCard, CouponModal } from "../../../components/shared";
 import { convertUTCtoLocal, parseAmount } from "../../../actions/utilities.action";
 
 import BasicInfo from "./BasicInfo.card";
@@ -11,30 +11,48 @@ import TipCard from "./Tip.card";
 import AddonCard from "./Addon.card";
 
 import { findOrderDetailInLord } from "../../../actions/order.action";
+import { findCouponListInLord } from "../../../actions/coupon.action";
 import { findTripDetailInLord } from "../../../actions/trip.action";
 
 class TripDetail extends Component {
   state = {
-    round_trip: false
+    round_trip: false,
+    showCouponModal: false
   };
   handleInputChange = e => {
     const { id, value } = e.target;
     this.setState({ [id]: value });
   };
+  handleShowCouponModal = () => {
+    this.setState(state => ({ showCouponModal: !state.showCouponModal }));
+  };
   handleRoundTripButton = () => {
     this.setState(state => ({ round_trip: !state.round_trip }));
   };
+  handleAddingCoupon = discount_token => {
+    console.log(discount_token);
+  };
+
   componentDidMount() {
-    const { current_order, findOrderDetailInLord, findTripDetailInLord } = this.props;
+    const { current_order, findOrderDetailInLord, findTripDetailInLord, findCouponListInLord } = this.props;
     let orderStr = "ORD-b7a2137a9353dea1db332fb0f9d67603";
     let tripStr = "TRIP-8ea520fbb71c379142994763322a4a12";
-    Promise.all([findOrderDetailInLord(orderStr), findTripDetailInLord(tripStr)]);
+    Promise.all([findOrderDetailInLord(orderStr), findTripDetailInLord(tripStr), findCouponListInLord()]);
   }
   render() {
-    const { round_trip } = this.state;
-    const { basic_info, from_address_info, to_address_info } = this.props.trip_detail_in_lord;
+    const { round_trip, showCouponModal } = this.state;
+    const { history, coupon_list_in_lord, trip_detail_in_lord } = this.props;
+    const { basic_info, from_address_info, to_address_info } = trip_detail_in_lord;
+
     return (
       <section>
+        {showCouponModal && (
+          <CouponModal
+            handleAddingCoupon={this.handleAddingCoupon}
+            coupon_list_in_lord={coupon_list_in_lord}
+            onClose={this.handleShowCouponModal}
+          />
+        )}
         <div className="mb-4">
           <div className="bg-white rounded-custom shadow-sm">
             <div className="container-fluid">
@@ -165,7 +183,7 @@ class TripDetail extends Component {
             </div>
           </div>
         </div>
-        <div className="mb-4 bg-white rounded-custom shadow-sm">
+        <section className="mb-4 bg-white rounded-custom shadow-sm">
           <ListHeader
             parentProps={{
               title: "Coupon List",
@@ -178,7 +196,7 @@ class TripDetail extends Component {
           <div className="row p-3 triplist-scroll">
             <CouponCard />
           </div>
-        </div>
+        </section>
         <div className="mb-4 bg-white rounded-custom shadow-sm">
           <ListHeader
             parentProps={{
@@ -232,10 +250,11 @@ class TripDetail extends Component {
 const mapStateToProps = state => {
   return {
     current_order: state.orderReducer.current_order,
-    trip_detail_in_lord: state.tripReducer.trip_detail_in_lord
+    trip_detail_in_lord: state.tripReducer.trip_detail_in_lord,
+    coupon_list_in_lord: state.couponReducer.coupon_list_in_lord
   };
 };
-const mapDispatchToProps = { findOrderDetailInLord, findTripDetailInLord };
+const mapDispatchToProps = { findOrderDetailInLord, findTripDetailInLord, findCouponListInLord };
 
 export default connect(
   mapStateToProps,

@@ -30,6 +30,7 @@ import EditButton from "./EditButton";
 import CouponCard from "./Coupon.card";
 import FlightCard from "./Flight.card";
 import FlightCardNoRecord from "./FlightCardNoRecord.modal";
+import CouponModal from "./Coupon.modal";
 export {
   LoaderAlt,
   IconButton,
@@ -62,5 +63,6 @@ export {
   EditButton,
   CouponCard,
   FlightCard,
-  FlightCardNoRecord
+  FlightCardNoRecord,
+  CouponModal
 };
