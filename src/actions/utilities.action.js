@@ -53,7 +53,7 @@ export const parseDecimalOneDigit = inputValue => {
 };
 
 export const parseRate = rate => {
-  return `${rate}%`;
+  return `${rate / 10}%`;
 };
 
 export const parseBloodRate = (rate, decimal = 0) => {

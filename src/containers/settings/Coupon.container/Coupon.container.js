@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { ListView, Header, ListHeader } from "../../../components/shared";
 import CouponListItem from "./Coupon.component/CouponList.item";
 import CouponAdding from "./Coupon.component/CouponAdding.modal";
-import { findCouponListInLord, createACouponInLord } from "../../../actions/coupon.action";
+import { findCouponListInLord, createACouponInLord, updateACouponInLord } from "../../../actions/coupon.action";
 class Coupon extends Component {
   state = {
     showAddCouponModal: false
@@ -15,12 +15,14 @@ class Coupon extends Component {
   handleShowAddingCouponModal = () => {
     this.setState(state => ({ showAddCouponModal: !state.showAddCouponModal }));
   };
-
+  handleUpdateACouponInLord = discount_token => {
+    this.props.updateACouponInLord(discount_token, { status: 0 });
+  };
   componentDidMount() {
     this.props.findCouponListInLord();
   }
   render() {
-    const { history, createACouponInLord } = this.props;
+    const { history, createACouponInLord, coupon_list_in_lord } = this.props;
     const { showAddCouponModal } = this.state;
     return (
       <main className="container-fluid">
@@ -48,13 +50,13 @@ class Coupon extends Component {
           <ListView
             totalCount={30}
             title="Coupon"
-            fieldNames={["Created On", "Name", "Amount", "Delete"]}
+            fieldNames={["Created On", "Amount", "Min Amount", "Available Usage", "Delete"]}
             hideHeader={true}
             onPageChange={this.handlePageChange}
           >
-            {/* {punch_list_in_puri.record_list.map((punch, index) => (
-              <WageListItem parentProps={punch} key={index} onClick={this.handlePunchItemClick} />
-            ))} */}
+            {coupon_list_in_lord.record_list.map((coupon, index) => (
+              <CouponListItem parentProps={coupon} key={index} onClick={this.handleUpdateACouponInLord} />
+            ))}
           </ListView>
         </section>
       </main>
@@ -62,9 +64,11 @@ class Coupon extends Component {
   }
 }
 const mapStateToProps = state => {
-  return {};
+  return {
+    coupon_list_in_lord: state.couponReducer.coupon_list_in_lord
+  };
 };
-const mapDispatchToProps = { findCouponListInLord, createACouponInLord };
+const mapDispatchToProps = { findCouponListInLord, createACouponInLord, updateACouponInLord };
 
 export default connect(
   mapStateToProps,
