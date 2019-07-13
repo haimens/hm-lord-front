@@ -5,7 +5,9 @@ const initialState = {
     record_list: [],
     count: 0,
     end: 0
-  }
+  },
+  order_detail: {},
+  current_order: ""
 };
 
 export default (state = initialState, action) => {
@@ -19,6 +21,10 @@ export default (state = initialState, action) => {
           end: action.payload.end
         }
       };
+    case constant.ORDER_DETAIL:
+      return { ...state, order_detail: action.payload };
+    case constant.CURRENT_ORDER:
+      return { ...state, current_order: action.payload };
     default:
       return state;
   }

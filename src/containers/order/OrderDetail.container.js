@@ -28,6 +28,7 @@ class OrderDetail extends Component {
   handleShowLogModal = () => {
     this.setState(state => ({ showLogModal: !state.showLogModal }));
   };
+  
   render() {
     const { showUpdateBasicInfoModal, showUpdateCustomerInfoModal, showCouponModal, showLogModal } = this.state;
     const { history } = this.props;

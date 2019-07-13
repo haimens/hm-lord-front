@@ -21,12 +21,29 @@ export const findOrderListInLord = (query = {}) => async dispatch => {
   }
 };
 
+export const findOrderDetailInLord = (order_token ) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`order/detail/${order_token}`, "GET");
+    await dispatch({
+      type: constant.ORDER_DETAIL,
+      payload
+    });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
 export const createOrderInLord = (body = {}) => async dispatch => {
-  console.log(body);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`order/detail`, "POST", body);
-    console.log(payload);
+    await dispatch({
+      type: constant.CURRENT_ORDER,
+      payload
+    });
     await stopLoader(dispatch);
   } catch (err) {
     await stopLoader(dispatch);

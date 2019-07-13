@@ -19,7 +19,7 @@ class Order extends Component {
     this.props.findOrderListInLord();
   }
   render() {
-    const { order_list_in_lord } = this.props;
+    const { history, order_list_in_lord } = this.props;
     const { hasMore } = this.state;
     return (
       <main className="container-fluid">
@@ -48,6 +48,7 @@ class Order extends Component {
                   status_str: order.status_str
                 }}
                 key={index}
+                history={history}
               />
             ))}
           </div>
