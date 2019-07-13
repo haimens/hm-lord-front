@@ -10,7 +10,6 @@ class Order extends Component {
     hasMore: true
   };
   handlePageChange = async start => {
-    console.log(start);
     const { order_list_in_lord } = this.props;
 
     this.props.findOrderListInLord({ start: order_list_in_lord.end });
@@ -18,13 +17,10 @@ class Order extends Component {
 
   componentDidMount() {
     this.props.findOrderListInLord();
-
-    console.log("hey");
   }
   render() {
     const { order_list_in_lord } = this.props;
     const { hasMore } = this.state;
-    console.log(hasMore);
     return (
       <main className="container-fluid">
         <section>
