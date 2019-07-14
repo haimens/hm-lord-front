@@ -95,18 +95,21 @@ class VehicleDetail extends Component {
             hideShadow={true}
             buttonWidth={"88px"}
           />
-          <div className="row p-3">
-            {driver_list_for_a_car.record_list.map((driver, index) => (
-              <DriverCard
-                parentProps={{
-                  driverName: driver.name,
-                  driverImage: driver.driver_img_path,
-                  driverPhone: driver.cell,
-                  driver_token: driver.driver_token
-                }}
-                history={history}
-              />
-            ))}
+          <div className="container-fluid">
+            <div className="row p-1">
+              {driver_list_for_a_car.record_list.map((driver, index) => (
+                <DriverCard
+                  parentProps={{
+                    driverName: driver.name,
+                    driverImage: driver.driver_img_path,
+                    driverPhone: driver.cell,
+                    driver_token: driver.driver_token
+                  }}
+                  history={history}
+                  key={index}
+                />
+              ))}
+            </div>
           </div>
         </section>
         <section className="mb-4">
