@@ -38,6 +38,7 @@ export const findOrderDetailInLord = order_token => async dispatch => {
 };
 
 export const createOrderInLord = (body = {}) => async dispatch => {
+  console.log(body);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`order/detail`, "POST", body);

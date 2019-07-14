@@ -12,7 +12,12 @@ import {
   updateOrderDiscountInLord
 } from "../../../actions/order.action";
 import { findCouponListInLord } from "../../../actions/coupon.action";
-import { findTripDetailInLord, createAddonToTrip, deleteAddonItem } from "../../../actions/trip.action";
+import {
+  findTripDetailInLord,
+  findTripDetailInLordAgain,
+  createAddonToTrip,
+  deleteAddonItem
+} from "../../../actions/trip.action";
 import CompleteTop from "./CompleteOrder.component/CompleteTop.card";
 import AddonModal from "./CompleteOrder.component/Addon.modal";
 
@@ -56,12 +61,22 @@ class CompleteOrderCard extends Component {
   };
 
   async componentDidMount() {
-    const { current_order, findOrderDetailInLord, findTripDetailInLord, findCouponListInLord } = this.props;
+    const {
+      current_order,
+      findOrderDetailInLord,
+      findTripDetailInLord,
+      findCouponListInLord,
+      round_trip,
+      findTripDetailInLordAgain
+    } = this.props;
     await Promise.all([
       findOrderDetailInLord(current_order.order_token),
       findTripDetailInLord(current_order.trip_list[0]),
       findCouponListInLord()
     ]);
+    if (round_trip) {
+      findTripDetailInLordAgain(current_order.trip_list[1]);
+    }
     const { customer_info } = this.props.order_detail;
     console.log(this.props);
     this.setState({
@@ -86,6 +101,7 @@ class CompleteOrderCard extends Component {
       history,
       coupon_list_in_lord,
       trip_detail_in_lord,
+      trip_detail_in_lord_again,
       order_detail,
       current_order,
       round_trip,
@@ -98,7 +114,10 @@ class CompleteOrderCard extends Component {
     }
     let order_token = current_order.order_token;
     let trip_token = current_order.trip_list[0];
-
+    let trip_token2 = 0;
+    if (round_trip) {
+      trip_token2 = current_order.trip_list[1];
+    }
     return (
       <section>
         {showCouponModal && (
@@ -132,10 +151,10 @@ class CompleteOrderCard extends Component {
           <div className="mb-4">
             <CompleteTop
               deleteAddonItem={this.handleDeleteAddonItem}
-              addon_list={addon_list}
-              trip_token={trip_token}
+              addon_list={trip_detail_in_lord_again.addon_list}
+              trip_token={trip_token2}
               handleAddingAddon={this.handleAddingAddon}
-              trip_detail_in_lord={trip_detail_in_lord}
+              trip_detail_in_lord={trip_detail_in_lord_again}
             />
           </div>
         )}
@@ -255,10 +274,14 @@ class CompleteOrderCard extends Component {
               <div className="text-secondary-color hm-text-14 font-weight-bold">Trip 1 Subtotal:</div>
               <div className="hm-text-14 font-weight-bold text-modal-color">{parseAmount(basic_info.amount, 2)}</div>
             </div>
-            {/* <div className="d-flex justify-content-between border-bottom-custom py-2">
-              <div className="text-secondary-color hm-text-14 font-weight-bold">Trip 2 Subtotal:</div>
-              <div className="hm-text-14 font-weight-bold text-modal-color">{200}</div>
-            </div> */}
+            {round_trip && (
+              <div className="d-flex justify-content-between border-bottom-custom py-2">
+                <div className="text-secondary-color hm-text-14 font-weight-bold">Trip 2 Subtotal:</div>
+                <div className="hm-text-14 font-weight-bold text-modal-color">
+                  {parseAmount(trip_detail_in_lord_again.basic_info.amount, 2)}
+                </div>
+              </div>
+            )}
             <div className="d-flex justify-content-between border-bottom-custom py-2">
               <div className="text-secondary-color hm-text-14 font-weight-bold">Discount:</div>
               <div className="hm-text-14 font-weight-bold text-modal-color">{200}</div>
@@ -266,7 +289,7 @@ class CompleteOrderCard extends Component {
             <div className="d-flex justify-content-between  py-3">
               <div className="text-secondary-color hm-text-14 font-weight-bold hm-title-sub-size">Order Total Due:</div>
               <div className="hm-title-sub-size font-weight-bold text-modal-color">
-                {parseAmount(basic_info.amount, 2)}
+                {parseAmount(basic_info.amount + trip_detail_in_lord_again.basic_info.amount, 2)}
               </div>
             </div>
           </div>
@@ -298,12 +321,14 @@ const mapStateToProps = state => {
     current_order: state.orderReducer.current_order,
     order_detail: state.orderReducer.order_detail,
     trip_detail_in_lord: state.tripReducer.trip_detail_in_lord,
+    trip_detail_in_lord_again: state.tripReducer.trip_detail_in_lord_again,
     coupon_list_in_lord: state.couponReducer.coupon_list_in_lord
   };
 };
 const mapDispatchToProps = {
   findOrderDetailInLord,
   findTripDetailInLord,
+  findTripDetailInLordAgain,
   findCouponListInLord,
   applyOrderDiscountInLord,
   updateOrderDiscountInLord,

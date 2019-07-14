@@ -9,7 +9,8 @@ const initialState = {
     basic_info: "",
     quote_list: []
   },
-  showMap: false
+  showMap: false,
+  showMapAgain: false
 };
 
 export default (state = initialState, action) => {
@@ -17,9 +18,11 @@ export default (state = initialState, action) => {
     case constant.QUOTE_IN_LORD:
       return { ...state, quote_in_lord: action.payload, showMap: true };
     case constant.QUOTE_IN_LORD_AGAIN:
-      return { ...state, quote_in_lord_again: action.payload };
+      return { ...state, quote_in_lord_again: action.payload, showMapAgain: true };
     case constant.QUOTE_IN_LORD_SET_MAP:
       return { ...state, showMap: false };
+    case constant.QUOTE_IN_LORD_SET_MAP_AGAIN:
+      return { ...state, showMapAgain: false };
     default:
       return state;
   }

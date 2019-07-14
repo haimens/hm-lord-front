@@ -90,6 +90,20 @@ export const findTripDetailInLord = trip_token => async dispatch => {
     dispatch(processLogout(err));
   }
 };
+export const findTripDetailInLordAgain = trip_token => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`trip/detail/${trip_token}`, "GET");
+    await dispatch({
+      type: constant.TRIP_DETAIL_IN_LORD_AGAIN,
+      payload
+    });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
 
 export const createAnAlertForATrip = (trip_token, body = {}) => async dispatch => {
   try {

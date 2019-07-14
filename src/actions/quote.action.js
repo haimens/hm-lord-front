@@ -31,7 +31,20 @@ export const setMapToFalse = () => async dispatch => {
   }
 };
 
+export const setMapToFalseAgain = () => async dispatch => {
+  try {
+    await dispatch({
+      type: constant.QUOTE_IN_LORD_SET_MAP_AGAIN,
+      showMapAgain: false
+    });
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
 export const findQuoteInLordAgain = (body = {}) => async dispatch => {
+  console.log(body);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`quote/detail`, "POST", body);

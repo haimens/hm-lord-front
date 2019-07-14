@@ -69,6 +69,55 @@ const initialState = {
     },
     alert_list: [{ type: "", record_time: "" }, { type: "", record_time: "" }, { type: "", record_time: "" }],
     addon_list: []
+  },
+  trip_detail_in_lord_again: {
+    basic_info: {
+      amount: "",
+      arrive_time: "",
+      cad_time: "",
+      cdate: "",
+      cob_time: "",
+      contact_cell: "",
+      contact_name: "",
+      eta_time: "",
+      flight_str: "",
+      is_paid: 0,
+      note: "",
+      order_token: "",
+      pickup_time: "",
+      pickup_time_local: "",
+      start_time: "",
+      status: "",
+      status_str: "",
+      trip_token: "",
+      type: "",
+      udate: "",
+      vehicle_type: ""
+    },
+    from_address_info: {
+      addr_str: ""
+    },
+    to_address_info: {
+      addr_str: ""
+    },
+    customer_info: {
+      name: "",
+      cell: "",
+      email: ""
+    },
+    driver_info: {
+      name: "",
+      cell: "",
+      email: "",
+      img_path: ""
+    },
+    car_info: {
+      identifier: "",
+      plate: "",
+      description: ""
+    },
+    alert_list: [{ type: "", record_time: "" }, { type: "", record_time: "" }, { type: "", record_time: "" }],
+    addon_list: []
   }
 };
 
@@ -84,6 +133,8 @@ export default (state = initialState, action) => {
       return { ...state, trip_list_in_lord: action.payload };
     case constant.TRIP_DETAIL_IN_LORD:
       return { ...state, trip_detail_in_lord: action.payload };
+    case constant.TRIP_DETAIL_IN_LORD_AGAIN:
+      return { ...state, trip_detail_in_lord_again: action.payload };
     default:
       return state;
   }

@@ -41,24 +41,48 @@ class TripInfo extends Component {
   };
   handleFindQuote = async () => {
     const { from_address, to_address, date, time } = this.state;
-    if (date !== "" && time !== "") {
-      if (from_address !== "" && to_address !== "") {
-        let currDate = moment(date).format("YYYY/MM/DD");
-        let currTime = moment(time).format("HH:mm:ss");
-        let goodTime = moment(`${currDate} ${currTime}`);
-        let inputFrom = document.getElementById("from").value;
-        let inputTo = document.getElementById("to").value;
-        await this.props.findQuoteInLord({
-          from_address_str: inputFrom,
-          to_address_str: inputTo,
-          pickup_time: convertLocalToUTC(goodTime),
-          pickup_time_local: moment(goodTime).format("YYYY-MM-DD HH:mm")
-        });
+    const { round_trip } = this.props;
+    if (!round_trip) {
+      if (date !== "" && time !== "") {
+        if (from_address !== "" && to_address !== "") {
+          let currDate = moment(date).format("YYYY/MM/DD");
+          let currTime = moment(time).format("HH:mm:ss");
+          let goodTime = moment(`${currDate} ${currTime}`);
+          let inputFrom = document.getElementById("from").value;
+          let inputTo = document.getElementById("to").value;
+          await this.props.findQuoteInLord({
+            from_address_str: inputFrom,
+            to_address_str: inputTo,
+            pickup_time: convertLocalToUTC(goodTime),
+            pickup_time_local: moment(goodTime).format("YYYY-MM-DD HH:mm")
+          });
+        } else {
+          alertify.alert("Error!", "Please Choose an Address From the Drop Down!");
+        }
       } else {
-        alertify.alert("Error!", "Please Choose an Address From the Drop Down!");
+        alertify.alert("Error!", "Please Finish The Form!");
       }
-    } else {
-      alertify.alert("Error!", "Please Finish The Form!");
+    }
+    if (round_trip) {
+      if (date !== "" && time !== "") {
+        if (from_address !== "" && to_address !== "") {
+          let currDate = moment(date).format("YYYY/MM/DD");
+          let currTime = moment(time).format("HH:mm:ss");
+          let goodTime = moment(`${currDate} ${currTime}`);
+          let inputFrom = document.getElementById("from_again").value;
+          let inputTo = document.getElementById("to_again").value;
+          await this.props.findQuoteInLord({
+            from_address_str: inputFrom,
+            to_address_str: inputTo,
+            pickup_time: convertLocalToUTC(goodTime),
+            pickup_time_local: moment(goodTime).format("YYYY-MM-DD HH:mm")
+          });
+        } else {
+          alertify.alert("Error!", "Please Choose an Address From the Drop Down!");
+        }
+      } else {
+        alertify.alert("Error!", "Please Finish The Form!");
+      }
     }
   };
   handleInputHasChanged = async () => {
@@ -87,8 +111,17 @@ class TripInfo extends Component {
 
   render() {
     const { showFlightDetail } = this.state;
-    const { airlineCode, flightNumber, flight_list_in_lord, quote_in_lord, handleInputChange, showMap } = this.props;
+    const {
+      airlineCode,
+      flightNumber,
+      flight_list_in_lord,
+      quote_in_lord,
+      handleInputChange,
+      showMap,
+      round_trip
+    } = this.props;
     const { basic_info, quote_list } = quote_in_lord;
+    console.log(quote_in_lord);
     return (
       <div className="row pt-2 mb-4">
         {showFlightDetail && (
@@ -113,7 +146,7 @@ class TripInfo extends Component {
                 <label className="text-main-color hm-text-14 font-weight-bold my-4">Pickup Location</label>
                 <GAutoComplete
                   handleInputHasChanged={this.handleInputHasChanged}
-                  customeId={`from`}
+                  customeId={!round_trip ? `from` : `from_again`}
                   getGoogleAddress={this.saveFromAddress}
                 />
               </div>
@@ -121,7 +154,7 @@ class TripInfo extends Component {
                 <label className="text-main-color hm-text-14 font-weight-bold mb-4">Dropoff Location</label>
                 <GAutoComplete
                   handleInputHasChanged={this.handleInputHasChanged}
-                  customeId={`to`}
+                  customeId={!round_trip ? `to` : `to_again`}
                   getGoogleAddress={this.saveToAddress}
                 />
               </div>

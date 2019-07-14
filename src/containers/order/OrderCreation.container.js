@@ -21,8 +21,9 @@ class OrderCreation extends Component {
 
   handleSetCurrentCustomer = props => {
     this.setState({ currentCustomer: props });
+    console.log(props);
   };
-
+  //CTM-202dd4246cfbfd6e5962f136eea83a58
   render() {
     const { position, round_trip, currentCustomer } = this.state;
     return (

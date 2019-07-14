@@ -5,7 +5,12 @@ import TripInfo from "./TripDetail.component/TripInfo.card";
 import "./TripDetail.card.css";
 import { findFlightListInLord, findFlightListInLordAgain } from "../../../actions/flight.action";
 import { createOrderInLord } from "../../../actions/order.action";
-import { findQuoteInLord, setMapToFalse } from "../../../actions/quote.action";
+import {
+  findQuoteInLord,
+  findQuoteInLordAgain,
+  setMapToFalse,
+  setMapToFalseAgain
+} from "../../../actions/quote.action";
 import alertify from "alertifyjs";
 class TripDetail extends Component {
   state = {
@@ -23,16 +28,40 @@ class TripDetail extends Component {
     this.setState({ [id]: value });
   };
   handleReviewTrip = async () => {
-    const { currentCustomer, createOrderInLord } = this.props;
-    const { airlineCode, flightNumber, quote_token } = this.state;
-    if (quote_token !== "") {
-      await createOrderInLord({
-        customer_token: currentCustomer.customer_token,
-        quote_list: [{ flight_str: `${airlineCode}${flightNumber}`, quote_token }]
-      });
-      this.props.handleMoveNext(1);
-    } else {
-      alertify.alert("Error!", "Please select a car before moving on");
+    const { currentCustomer, createOrderInLord, round_trip } = this.props;
+    const {
+      airlineCode,
+      flightNumber,
+      quote_token,
+      airlineCodeAgain,
+      flightNumberAgain,
+      quote_token_again
+    } = this.state;
+    if (!round_trip) {
+      if (quote_token !== "") {
+        await createOrderInLord({
+          customer_token: currentCustomer.customer_token,
+          quote_list: [{ flight_str: `${airlineCode}${flightNumber}`, quote_token }]
+        });
+        this.props.handleMoveNext(1);
+      } else {
+        alertify.alert("Error!", "Please select a car before moving on");
+      }
+    }
+
+    if (round_trip) {
+      if (quote_token !== "" && quote_token_again !== "") {
+        await createOrderInLord({
+          customer_token: currentCustomer.customer_token,
+          quote_list: [
+            { flight_str: `${airlineCode}${flightNumber}`, quote_token },
+            { flight_str: `${airlineCodeAgain}${flightNumberAgain}`, quote_token: quote_token_again }
+          ]
+        });
+        this.props.handleMoveNext(1);
+      } else {
+        alertify.alert("Error!", "Please select a car before moving on");
+      }
     }
   };
   handleRoundTripButton = () => {
@@ -47,6 +76,9 @@ class TripDetail extends Component {
   handleFindQuoteInLord = info => {
     this.props.findQuoteInLord({ ...info });
   };
+  handleFindQuoteInLordAgain = info => {
+    this.props.findQuoteInLordAgain({ ...info });
+  };
   handleCarBeenClicked = quote_token => {
     this.setState({ quote_token });
   };
@@ -57,19 +89,22 @@ class TripDetail extends Component {
   render() {
     const { flightNumber, airlineCode, flightNumberAgain, airlineCodeAgain } = this.state;
     const {
+      round_trip,
       flight_list_in_lord,
       flight_list_in_lord_round,
       findFlightListInLord,
       findFlightListInLordAgain,
       quote_in_lord,
       quote_in_lord_again,
-      round_trip,
       setMapToFalse,
-      showMap
+      setMapToFalseAgain,
+      showMap,
+      showMapAgain
     } = this.props;
     return (
       <div>
         <TripInfo
+          round_trip={false}
           setMapToFalse={setMapToFalse}
           showMap={showMap}
           handleInputChange={this.handleInputChange}
@@ -84,11 +119,14 @@ class TripDetail extends Component {
         />
         {round_trip && (
           <TripInfo
+            round_trip={true}
+            setMapToFalse={setMapToFalseAgain}
+            showMap={showMapAgain}
             handleInputChange={this.handleInputChange}
             flightNumber={flightNumberAgain}
             airlineCode={airlineCodeAgain}
             quote_in_lord={quote_in_lord_again}
-            findQuoteInLord={this.handleFindQuoteInLord}
+            findQuoteInLord={this.handleFindQuoteInLordAgain}
             saveFlightToken={this.saveFlightTokenAgain}
             flight_list_in_lord={flight_list_in_lord_round}
             findFlightListInLordAgain={findFlightListInLordAgain}
@@ -119,16 +157,19 @@ const mapStateToProps = state => {
     flight_list_in_lord: state.flightReducer.flight_list_in_lord,
     flight_list_in_lord_round: state.flightReducer.flight_list_in_lord_round,
     quote_in_lord: state.quoteReducer.quote_in_lord,
+    quote_in_lord_again: state.quoteReducer.quote_in_lord_again,
     showMap: state.quoteReducer.showMap,
-    quote_in_lord_again: state.quoteReducer.quote_in_lord_again
+    showMapAgain: state.quoteReducer.showMapAgain
   };
 };
 const mapDispatchToProps = {
   findFlightListInLord,
   findFlightListInLordAgain,
   findQuoteInLord,
+  findQuoteInLordAgain,
   createOrderInLord,
-  setMapToFalse
+  setMapToFalse,
+  setMapToFalseAgain
 };
 
 export default connect(
