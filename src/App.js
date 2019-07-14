@@ -100,7 +100,7 @@ class App extends Component {
               <ProtectedRoute exact path="/settings/email" component={EmailResource} />
               <ProtectedRoute exact path="/settings/coupon" component={CouponResource} />
               <ProtectedRoute exact path="/settings/vehicle" component={VehicleResource} />
-              <ProtectedRoute exact path="/settings/general" component={GeneralSetting} />
+              {/* <ProtectedRoute exact path="/settings/general" component={GeneralSetting} /> */}
               <Route component={NoMatch} />
             </Switch>
           </Main>
