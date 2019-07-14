@@ -77,16 +77,18 @@ class VehicleDetail extends Component {
             hideShadow={true}
             buttonWidth={"88px"}
           />
-          <div className="row p-3">
-            <OrderCard
-              parentProps={{
-                orderId: "1000016",
-                orderDate: "06/16 16.30",
-                orderName: "Lebron James",
-                orderImage: "unnamed.jpg",
-                orderPhone: "6266266266"
-              }}
-            />
+          <div className="container-fluid">
+            <div className="row p-1">
+              <OrderCard
+                parentProps={{
+                  orderId: "1000016",
+                  orderDate: "06/16 16.30",
+                  orderName: "Lebron James",
+                  orderImage: "unnamed.jpg",
+                  orderPhone: "6266266266"
+                }}
+              />
+            </div>
           </div>
         </section>
 
