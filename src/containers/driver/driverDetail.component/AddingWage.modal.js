@@ -44,7 +44,9 @@ export default class AddingWageModal extends Component {
 
             <div className="form-group input-group mb-4">
               <div className="input-group-prepend">
-                <span className="input-group-text bg-white border-right-0">$</span>
+                <span className="input-group-text bg-white border-right-0 text-modal-color font-weight-bold hm-text-14">
+                  $
+                </span>
               </div>
               <input
                 type="text"
@@ -55,7 +57,9 @@ export default class AddingWageModal extends Component {
                 onChange={this.handleInputChange}
               />
               <div className="input-group-append">
-                <span className="input-group-text bg-white border-left-0">.00</span>
+                <span className="input-group-text bg-white border-left-0 text-modal-color font-weight-bold hm-text-14">
+                  .00
+                </span>
               </div>
             </div>
 
@@ -63,7 +67,7 @@ export default class AddingWageModal extends Component {
               <select
                 value={type}
                 id="type"
-                className="custom-select hm-input-height"
+                className="custom-select hm-input-height text-modal-color hm-text-14"
                 onChange={this.handleInputChange}
               >
                 <option value="1">Income</option>

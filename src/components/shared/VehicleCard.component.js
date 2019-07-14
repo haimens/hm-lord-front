@@ -13,7 +13,7 @@ export default class VehicleCard extends Component {
     const { showButton, deleteButton } = this.props;
     const { vehicleId, vehicleName, vehicleImage, vehicleToken, isActive, driver_car_token } = this.props.parentProps;
     return (
-      <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-4 mb-4"}>
+      <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-3 mb-4"}>
         <div
           className={`col-12 rounded-custom border shadow-sm bg-white ${!deleteButton && "hm-pointer-cursor"}`}
           style={{ height: "140px" }}
@@ -29,8 +29,8 @@ export default class VehicleCard extends Component {
               />
             </div>
             <div className="col-7">
-              <div className="font-weight-bold my-2">{vehicleName}</div>
-              <div className="text-muted">
+              <div className="font-weight-bold hm-text-15 text-modal-color my-2">{vehicleName}</div>
+              <div className="text-secondary-color hm-text-12">
                 <div>{vehicleId}</div>
               </div>
               {showButton && (
