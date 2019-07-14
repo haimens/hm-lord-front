@@ -21,7 +21,7 @@ export default function WageListItem(props) {
           {type === 1 ? (
             <div className="d-flex align-items-center justify-content-center ">
               <i className="fas fa-circle success-text-color mr-3 pl-0" style={{ fontSize: "6px" }} />
-              <div className="text-modal-color hm-text-14  font-weight-500">Salary</div>
+              <div className="text-modal-color hm-text-14  font-weight-500">Income</div>
             </div>
           ) : (
             <div className="d-flex align-items-center justify-content-center ">
