@@ -190,14 +190,16 @@ export default class UpdatingDriverInfo extends Component {
                         status === 2 ? "hm-bg-green-border" : "btn-outline-secondary "
                       }`}
                       onClick={this.handleStatusChange}
-                      style={{ borderRadius: "20px", width: "88px", height: "24px" }}
+                      style={{ borderRadius: "12px", width: "88px", height: "24px" }}
                     >
                       <i className={`fas ${status === 2 && "hm-text-green"} fa-circle ml-1 pl-0`} />
 
                       {status === 2 ? (
-                        <div className="d-flex ml-2 align-items-center align-middle h-100 hm-text-green ">Active</div>
+                        <div className="d-flex ml-2 align-items-center hm-text-14 align-middle h-100 hm-text-green ">
+                          Active
+                        </div>
                       ) : (
-                        <div className="d-flex ml-2 align-items-center align-middle h-100">Inactive</div>
+                        <div className="d-flex ml-2 align-items-center hm-text-14 align-middle h-100">Inactive</div>
                       )}
                     </button>
                   </div>
