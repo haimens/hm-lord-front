@@ -5,14 +5,21 @@ export default class PaymentCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nonce: undefined
+      nonce: undefined,
+      creditCardButton: false,
+      cashdButton: false
     };
     this.requestCardNonce = this.requestCardNonce.bind(this);
   }
 
   requestCardNonce() {
     this.paymentForm.requestCardNonce();
+    this.setState({ creditCardButton: true, cashdButton: false });
   }
+
+  submitCash = () => {
+    this.setState({ cashdButton: true, creditCardButton: false, nonce: undefined });
+  };
 
   handleNoneReceived = (nonce, data) => {
     console.log(nonce);
@@ -131,6 +138,7 @@ export default class PaymentCard extends Component {
   }
 
   render() {
+    const { creditCardButton, cashdButton } = this.state;
     return (
       <div className="row pt-2 mb-4" id="sq-ccbox">
         <div className="col-8">
@@ -203,11 +211,17 @@ export default class PaymentCard extends Component {
                     alt="company"
                     className="rounded-circle shadow-sm"
                   />
-                  <div className="ml-5 hm-text-15 font-weight-bold">Sedan</div>
+                  <div className="ml-5 hm-text-15 font-weight-bold">Pay</div>
                 </div>
-                <button className="btn bg-white shadow-sm text-purple" onClick={this.requestCardNonce}>
-                  Select
-                </button>
+                {!creditCardButton ? (
+                  <button className="btn bg-white shadow-sm text-purple" onClick={this.requestCardNonce}>
+                    Credit Card
+                  </button>
+                ) : (
+                  <button className="btn btn-secondary shadow-sm" disabled onClick={this.requestCardNonce}>
+                    Credit Card
+                  </button>
+                )}
               </div>
             </div>
             <div className="px-3 pb-4">
@@ -224,7 +238,15 @@ export default class PaymentCard extends Component {
                   />
                   <div className="ml-5 hm-text-15 font-weight-bold">Sedan</div>
                 </div>
-                <button className="btn bg-white shadow-sm text-purple">Select</button>
+                {!cashdButton ? (
+                  <button className="btn bg-white shadow-sm text-purple" onClick={this.submitCash}>
+                    Cash
+                  </button>
+                ) : (
+                  <button className="btn btn-secondary shadow-sm" disabled onClick={this.submitCash}>
+                    Cash
+                  </button>
+                )}
               </div>
             </div>
           </div>
