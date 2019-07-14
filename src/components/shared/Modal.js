@@ -60,7 +60,7 @@ class Modal extends Component {
           style={{ zIndex: `${this.props.zIndex || 1}` }}
           onClick={this.handleClose}
         />
-        <section className={`${curr} ${this.props.className} rounded`} id="onlyScroll" style={widthHeight}>
+        <section className={`${curr} ${this.props.className} rounded-custom`} id="onlyScroll" style={widthHeight}>
           <div
             className={`sticky-top w-100 md-2 p-2 border-bottom ${
               this.props.headerContainerClassName ? this.props.headerContainerClassName : "bg-white"

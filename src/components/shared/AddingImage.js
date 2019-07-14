@@ -21,9 +21,9 @@ export default class CompanyImage extends Component {
           <div className="col-2">
             <button
               type="button"
-              className="btn btn-sm btn-outline-secondary"
+              className="btn btn-sm btn-outline-secondary d-flex align-items-center justify-content-center"
               onClick={e => this.handleModal(e)}
-              style={{ borderRadius: "20px" }}
+              style={{ borderRadius: "12px", width: "88px", height: "24px" }}
             >
               Upload
             </button>

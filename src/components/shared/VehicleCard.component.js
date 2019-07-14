@@ -11,7 +11,7 @@ export default class VehicleCard extends Component {
   };
   render() {
     const { showButton, deleteButton } = this.props;
-    const { vehicleId, vehicleName, vehicleImage, vehicleToken, isActive, driver_car_token } = this.props.parentProps;
+    const { vehicleId, vehicleName, vehicleImage, vehicleToken, driver_car_token } = this.props.parentProps;
     return (
       <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-3 mb-4"}>
         <div
@@ -43,7 +43,7 @@ export default class VehicleCard extends Component {
                   />
                 </section>
               )}
-              {!showButton &&
+              {/* {!showButton &&
                 (isActive ? (
                   <section className="hm-text-14 my-2">
                     <div className=" d-flex align-items-center">
@@ -58,7 +58,7 @@ export default class VehicleCard extends Component {
                       <div className="font-weight-500">Inactive</div>
                     </div>
                   </section>
-                ))}
+                ))} */}
             </div>
           </div>
         </div>

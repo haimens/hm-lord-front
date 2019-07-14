@@ -95,7 +95,13 @@ export default class UpdatingDriverInfo extends Component {
         )}
         {showPreview && <PreviewImageModal image={img_path} onClose={() => this.setState({ showPreview: false })} />}
 
-        <Modal title="Add Driver" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"660px"}>
+        <Modal
+          title="Update Driver"
+          onClose={this.handleClose}
+          position="center"
+          getWidth={"467px"}
+          getHeight={"630px"}
+        >
           <div className="container">
             <div className="p-3">
               <div className="form-group mb-4">
