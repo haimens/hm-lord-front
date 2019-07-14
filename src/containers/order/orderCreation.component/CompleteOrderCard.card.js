@@ -46,7 +46,7 @@ class CompleteOrderCard extends Component {
     this.setState(state => ({ round_trip: !state.round_trip }));
   };
   handleAddingCoupon = code => {
-    this.props.applyOrderDiscountInLord(this.state.curr_trip_token, { code });
+    this.props.applyOrderDiscountInLord(this.props.current_order.order_token, { code });
     this.handleShowCouponModal();
   };
 
@@ -66,11 +66,6 @@ class CompleteOrderCard extends Component {
 
   handleDeleteCouponFromOrder = async order_discount_token => {
     this.props.updateOrderDiscountInLord(this.props.current_order.order_token, order_discount_token, { status: 0 });
-    const { current_order, findTripDetailInLord, round_trip } = this.props;
-    await Promise.all([findTripDetailInLord(current_order.trip_list[0])]);
-    if (round_trip) {
-      findTripDetailInLordAgain(current_order.trip_list[1]);
-    }
   };
 
   handleMovingToPayment = () => {
