@@ -14,7 +14,7 @@ class GAutoComplete extends Component {
   };
 
   handleInputChange = () => {
-    this.props.handleInputHasChanded();
+    this.props.handleInputHasChanged();
   };
 
   render() {

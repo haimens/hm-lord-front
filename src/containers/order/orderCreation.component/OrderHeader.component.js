@@ -13,14 +13,12 @@ export default function OrderHeader(props) {
             className="hm-header-size mr-3"
           />
           <h4 className="hm-header-size text-white mr-3 hm-pointer-cursor">Order</h4>
-          <div className=" d-flex align-items-center ">
-            {titles.slice(0, position).map((title, index) => (
-              <>
-                <i className="fas fa-circle text-light-grey text-right mr-3" style={{ fontSize: "6px" }} />
-                <h4 className="hm-header-size text-light-grey hm-pointer-cursor mr-3">{title}</h4>
-              </>
-            ))}
-          </div>
+          {titles.slice(0, position).map((title, index) => (
+            <div className=" d-flex align-items-center" key={index}>
+              <i className="fas fa-circle text-light-grey text-right mr-3" style={{ fontSize: "6px" }} />
+              <h4 className="hm-header-size text-light-grey mr-3">{title}</h4>
+            </div>
+          ))}
         </div>
       </div>
     </div>

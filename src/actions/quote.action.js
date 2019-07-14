@@ -11,6 +11,20 @@ export const findQuoteInLord = (body = {}) => async dispatch => {
       payload
     });
     await stopLoader(dispatch);
+    console.log("here");
+    return true;
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
+export const setMapToFalse = () => async dispatch => {
+  try {
+    await dispatch({
+      type: constant.QUOTE_IN_LORD_SET_MAP,
+      showMap: false
+    });
   } catch (err) {
     await stopLoader(dispatch);
     dispatch(processLogout(err));

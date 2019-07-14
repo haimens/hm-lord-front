@@ -5,7 +5,7 @@ import TripInfo from "./TripInfo.card";
 import "./TripDetail.card.css";
 import { findFlightListInLord, findFlightListInLordAgain } from "../../../actions/flight.action";
 import { createOrderInLord } from "../../../actions/order.action";
-import { findQuoteInLord } from "../../../actions/quote.action";
+import { findQuoteInLord, setMapToFalse } from "../../../actions/quote.action";
 import alertify from "alertifyjs";
 class TripDetail extends Component {
   state = {
@@ -63,11 +63,15 @@ class TripDetail extends Component {
       findFlightListInLordAgain,
       quote_in_lord,
       quote_in_lord_again,
-      round_trip
+      round_trip,
+      setMapToFalse,
+      showMap
     } = this.props;
     return (
       <div>
         <TripInfo
+          setMapToFalse={setMapToFalse}
+          showMap={showMap}
           handleInputChange={this.handleInputChange}
           flightNumber={flightNumber}
           airlineCode={airlineCode}
@@ -115,10 +119,17 @@ const mapStateToProps = state => {
     flight_list_in_lord: state.flightReducer.flight_list_in_lord,
     flight_list_in_lord_round: state.flightReducer.flight_list_in_lord_round,
     quote_in_lord: state.quoteReducer.quote_in_lord,
+    showMap: state.quoteReducer.showMap,
     quote_in_lord_again: state.quoteReducer.quote_in_lord_again
   };
 };
-const mapDispatchToProps = { findFlightListInLord, findFlightListInLordAgain, findQuoteInLord, createOrderInLord };
+const mapDispatchToProps = {
+  findFlightListInLord,
+  findFlightListInLordAgain,
+  findQuoteInLord,
+  createOrderInLord,
+  setMapToFalse
+};
 
 export default connect(
   mapStateToProps,

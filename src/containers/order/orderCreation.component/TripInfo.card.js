@@ -19,7 +19,6 @@ class TripInfo extends Component {
     redCardBeenClicked: false,
     showFlightDetail: false,
     currIndex: "",
-    hasInputChanged: false,
     inputFrom: false,
     inputTo: false
   };
@@ -56,7 +55,6 @@ class TripInfo extends Component {
           pickup_time: convertLocalToUTC(goodTime),
           pickup_time_local: moment(goodTime).format("YYYY-MM-DD HH:mm")
         });
-        this.setState({ hasInputChanged: true });
       } else {
         alertify.alert("Error!", "Please Choose an Address From the Drop Down!");
       }
@@ -64,8 +62,8 @@ class TripInfo extends Component {
       alertify.alert("Error!", "Please Finish The Form!");
     }
   };
-  handleInputHasChanded = () => {
-    this.setState({ hasInputChanged: false });
+  handleInputHasChanged = async () => {
+    await this.props.setMapToFalse();
   };
   handleCardBeenClicked = async (currIndex, quote_token) => {
     await this.setState({ currIndex });
@@ -89,8 +87,8 @@ class TripInfo extends Component {
   };
 
   render() {
-    const { showFlightDetail, hasInputChanged } = this.state;
-    const { airlineCode, flightNumber, flight_list_in_lord, quote_in_lord, handleInputChange } = this.props;
+    const { showFlightDetail } = this.state;
+    const { airlineCode, flightNumber, flight_list_in_lord, quote_in_lord, handleInputChange, showMap } = this.props;
     const { basic_info, quote_list } = quote_in_lord;
     return (
       <div className="row pt-2 mb-4">
@@ -115,7 +113,7 @@ class TripInfo extends Component {
               <div className="form-group mb-4 ">
                 <label className="text-main-color hm-text-14 font-weight-bold my-4">Pickup Location</label>
                 <GAutoComplete
-                  handleInputHasChanded={this.handleInputHasChanded}
+                  handleInputHasChanged={this.handleInputHasChanged}
                   customeId={`from`}
                   getGoogleAddress={this.saveFromAddress}
                 />
@@ -123,7 +121,7 @@ class TripInfo extends Component {
               <div className="form-group mb-4">
                 <label className="text-main-color hm-text-14 font-weight-bold mb-4">Dropoff Location</label>
                 <GAutoComplete
-                  handleInputHasChanded={this.handleInputHasChanded}
+                  handleInputHasChanged={this.handleInputHasChanged}
                   customeId={`to`}
                   getGoogleAddress={this.saveToAddress}
                 />
@@ -187,7 +185,7 @@ class TripInfo extends Component {
                 Select Vehicle Type
               </h6>
             </div>
-            {hasInputChanged && basic_info !== "" && (
+            {showMap && basic_info !== "" && (
               <div className="px-3 py-4">
                 <div style={{ height: "161px" }}>
                   <GMapLocation
@@ -209,7 +207,7 @@ class TripInfo extends Component {
                 </div>
               </div>
             )}
-            {hasInputChanged && basic_info === "" && (
+            {showMap && basic_info === "" && (
               <div className="px-3 py-4">
                 <div style={{ height: "161px" }}>
                   <GMapLocation
@@ -233,7 +231,7 @@ class TripInfo extends Component {
             )}
             <div className="px-3 py-4">
               <div className="mb-4">
-                {hasInputChanged &&
+                {showMap &&
                   quote_list.length > 0 &&
                   quote_list.map((car, index) => (
                     <TripCard
