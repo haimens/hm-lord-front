@@ -1,7 +1,7 @@
 import React from "react";
 import { parseAmount } from "../../../../actions/utilities.action";
 export default function TipCard(props) {
-  const { showEditButton, trip_token, addon_list, deleteAddonItem } = props;
+  const { showEditButton, trip_token, addon_list, deleteAddonItem, position } = props;
   return (
     <div style={{ height: "185px", overflow: "auto" }}>
       <div className="purple-border p-3">
@@ -38,7 +38,7 @@ export default function TipCard(props) {
                           className="hm-pointer-cursor ml-auto"
                           alt="delete"
                           style={{ height: "25px", width: "25px" }}
-                          onClick={() => deleteAddonItem(trip_token, addon.addon_token)}
+                          onClick={() => deleteAddonItem(trip_token, addon.addon_token, position)}
                         />
                       </div>
                     </div>

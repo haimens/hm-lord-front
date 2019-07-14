@@ -26,6 +26,7 @@ class CompleteOrderCard extends Component {
   state = {
     showCouponModal: false,
     showAddingAddon: false,
+    currPosition: "",
     curr_trip_token: "",
     currButtonItem: "",
     name: "",
@@ -45,16 +46,22 @@ class CompleteOrderCard extends Component {
     this.setState(state => ({ round_trip: !state.round_trip }));
   };
   handleAddingCoupon = code => {
-    this.props.applyOrderDiscountInLord(this.props.current_order.order_token, { code });
+    this.props.applyOrderDiscountInLord(this.state.curr_trip_token, { code });
     this.handleShowCouponModal();
   };
 
-  handleDeleteAddonItem = (trip_token, addon_token) => {
-    this.props.deleteAddonItem(this.props.current_order.order_token, trip_token, addon_token);
+  handleDeleteAddonItem = (trip_token, addon_token, position) => {
+    this.props.deleteAddonItem(this.props.current_order.order_token, trip_token, addon_token, position);
   };
 
-  handleAddingAddon = async (curr_trip_token, currButtonItem) => {
-    await this.setState(state => ({ showAddingAddon: !state.showAddingAddon, curr_trip_token, currButtonItem }));
+  handleAddingAddon = async (curr_trip_token, currButtonItem, currPosition) => {
+    console.log(curr_trip_token);
+    await this.setState(state => ({
+      showAddingAddon: !state.showAddingAddon,
+      curr_trip_token,
+      currButtonItem,
+      currPosition
+    }));
   };
 
   handleDeleteCouponFromOrder = async order_discount_token => {
@@ -144,6 +151,7 @@ class CompleteOrderCard extends Component {
           <AddonModal
             title={this.state.currButtonItem}
             onClose={this.handleAddingAddon}
+            position={this.state.currPosition}
             createAddonToTrip={createAddonToTrip}
             order_token={order_token}
             trip_token={curr_trip_token}
@@ -154,6 +162,7 @@ class CompleteOrderCard extends Component {
             deleteAddonItem={this.handleDeleteAddonItem}
             addon_list={addon_list}
             trip_token={trip_token}
+            position={"first"}
             handleAddingAddon={this.handleAddingAddon}
             trip_detail_in_lord={trip_detail_in_lord}
           />
@@ -162,6 +171,7 @@ class CompleteOrderCard extends Component {
         {round_trip && (
           <div className="mb-4">
             <CompleteTop
+              position={"second"}
               deleteAddonItem={this.handleDeleteAddonItem}
               addon_list={trip_detail_in_lord_again.addon_list}
               trip_token={trip_token2}

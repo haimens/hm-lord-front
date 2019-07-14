@@ -1,7 +1,7 @@
 import React from "react";
 import { parseAmount } from "../../../../actions/utilities.action";
 export default function AddonCard(props) {
-  const { showEditButton, trip_token, deleteAddonItem, addon_list } = props;
+  const { showEditButton, trip_token, deleteAddonItem, addon_list, position } = props;
   return (
     <div>
       <div className="purple-border p-3">
@@ -39,7 +39,7 @@ export default function AddonCard(props) {
                           className="hm-pointer-cursor ml-auto"
                           alt="delete"
                           style={{ height: "25px", width: "25px" }}
-                          onClick={() => deleteAddonItem(trip_token, addon.addon_token)}
+                          onClick={() => deleteAddonItem(trip_token, addon.addon_token, position)}
                         />
                       </div>
                     </div>

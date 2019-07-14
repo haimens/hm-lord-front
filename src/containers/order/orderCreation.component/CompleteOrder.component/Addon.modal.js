@@ -18,9 +18,9 @@ export default class AddonModal extends Component {
 
   handleAddingAddon = async () => {
     const { amount, note } = this.state;
-    const { createAddonToTrip, order_token, trip_token, title } = this.props;
+    const { createAddonToTrip, order_token, trip_token, position, title } = this.props;
     if (amount !== "" && note !== "") {
-      createAddonToTrip(order_token, trip_token, {
+      createAddonToTrip(order_token, trip_token, position, {
         amount: amount * 100,
         note,
         type: title === "An Add-on" ? 2 : 1

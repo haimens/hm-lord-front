@@ -6,8 +6,12 @@ import AddonCard from "./Addon.card";
 import { parseAmount } from "../../../../actions/utilities.action";
 
 export default class CompleteTop extends Component {
+  handleAddingAddon = (trip_token, type) => {
+    const { handleAddingAddon, position } = this.props;
+    handleAddingAddon(trip_token, type, position);
+  };
   render() {
-    const { trip_detail_in_lord, handleAddingAddon, trip_token, addon_list, deleteAddonItem } = this.props;
+    const { trip_detail_in_lord, handleAddingAddon, trip_token, addon_list, deleteAddonItem, position } = this.props;
     const { basic_info, from_address_info, to_address_info } = trip_detail_in_lord;
     return (
       <div className="bg-white rounded-custom shadow-sm">
@@ -33,19 +37,21 @@ export default class CompleteTop extends Component {
             </div>
             <div className="col-lg-6 col-12 mb-4">
               <TipCard
+                position={position}
                 deleteAddonItem={deleteAddonItem}
                 addon_list={addon_list}
-                handleAddingAddon={handleAddingAddon}
+                handleAddingAddon={this.handleAddingAddon}
                 trip_token={trip_token}
                 showEditButton={true}
               />
             </div>
             <div className="col-lg-6 col-12 mb-4">
               <AddonCard
+                position={position}
                 deleteAddonItem={deleteAddonItem}
                 addon_list={addon_list}
                 trip_token={trip_token}
-                handleAddingAddon={handleAddingAddon}
+                handleAddingAddon={this.handleAddingAddon}
                 showEditButton={true}
               />
             </div>
