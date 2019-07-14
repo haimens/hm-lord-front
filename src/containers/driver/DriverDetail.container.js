@@ -55,6 +55,18 @@ class DriverDetail extends Component {
       this.handleShowUpdatingDriverModal();
     }
   };
+
+  handlePageChange = type => start => {
+    const { match, findWageListInDriver, findSalaryListInDriver } = this.props;
+    const { driver_token } = match.params;
+    if (type === "wage") {
+      findWageListInDriver(driver_token, { start });
+    }
+    if (type === "salary") {
+      findSalaryListInDriver(driver_token, { start });
+    }
+  };
+
   handleCreateDriverToACarInLord = car_token => {
     const { match, createDriverToACarInLord } = this.props;
     const { driver_token } = match.params;
@@ -189,20 +201,22 @@ class DriverDetail extends Component {
             hideShadow={true}
             hideButton={true}
           />
-          <div className="row p-3 triplist-scroll">
-            {trip_list_in_driver.record_list.map((trip, index) => (
-              <TripCard
-                parentProps={{
-                  tripCustomer: trip.customer_name,
-                  tripPickUp: trip.pickup_time,
-                  tripFrom: trip.from_addr_str,
-                  tripTo: trip.to_addr_str,
-                  tripStatus: trip.status_str
-                }}
-                key={index}
-                hideDriver={true}
-              />
-            ))}
+          <div className="container-fluid">
+            <div className="row triplist-scroll">
+              {trip_list_in_driver.record_list.map((trip, index) => (
+                <TripCard
+                  parentProps={{
+                    tripCustomer: trip.customer_name,
+                    tripPickUp: trip.pickup_time,
+                    tripFrom: trip.from_addr_str,
+                    tripTo: trip.to_addr_str,
+                    tripStatus: trip.status_str
+                  }}
+                  key={index}
+                  hideDriver={true}
+                />
+              ))}
+            </div>
           </div>
         </section>
         <section className="mb-4 bg-white rounded-custom shadow-sm">
@@ -215,22 +229,24 @@ class DriverDetail extends Component {
             hideShadow={true}
             buttonWidth={"88px"}
           />
-          <div className="row p-3">
-            {car_list_for_a_driver.record_list.map((car, index) => (
-              <VehicleCard
-                parentProps={{
-                  vehicleId: car.plate_num,
-                  vehicleName: car.identifier,
-                  vehicleImage: car.img_path,
-                  driver_car_token: car.driver_car_token
-                }}
-                driver_token={driver_token}
-                updateACarForADriver={updateACarForADriver}
-                key={index}
-                showButton={true}
-                deleteButton={true}
-              />
-            ))}
+          <div className="container-fluid">
+            <div className="row">
+              {car_list_for_a_driver.record_list.map((car, index) => (
+                <VehicleCard
+                  parentProps={{
+                    vehicleId: car.plate_num,
+                    vehicleName: car.identifier,
+                    vehicleImage: car.img_path,
+                    driver_car_token: car.driver_car_token
+                  }}
+                  driver_token={driver_token}
+                  updateACarForADriver={updateACarForADriver}
+                  key={index}
+                  showButton={true}
+                  deleteButton={true}
+                />
+              ))}
+            </div>
           </div>
         </section>
         <section className="mb-4">
@@ -243,11 +259,11 @@ class DriverDetail extends Component {
             buttonWidth={"88px"}
           />
           <ListView
-            totalCount={30}
+            totalCount={wage_list_in_driver.count}
             title="Wage List"
             fieldNames={["Created On", "Amount", "Type", "Note"]}
             hideHeader={true}
-            onPageChange={this.handlePageChange}
+            onPageChange={this.handlePageChange("wage")}
           >
             {wage_list_in_driver.record_list.map((wage, index) => (
               <WageListItem parentProps={wage} key={index} />
@@ -265,11 +281,11 @@ class DriverDetail extends Component {
             buttonWidth={"88px"}
           />
           <ListView
-            totalCount={30}
+            totalCount={salary_list_in_driver.count}
             title="Salary List"
             fieldNames={["Created On", "Updated On", "Amount"]}
             hideHeader={true}
-            onPageChange={this.handlePageChange}
+            onPageChange={this.handlePageChange("salary")}
           >
             {salary_list_in_driver.record_list.map((salary, index) => (
               <SalaryListItem parentProps={salary} key={index} />

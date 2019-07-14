@@ -12,7 +12,7 @@ export default class TripCard extends Component {
     const { tripDriver, tripCustomer, tripPickUp, tripFrom, tripTo, trip_token, tripStatus } = parentProps;
     return (
       <div
-        className={this.props.fullWidth ? "col-6" : "col-12 col-md-6  mb-4 hm-pointer-cursor"}
+        className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 mb-4 hm-pointer-cursor"}
         onClick={() => this.handleTripCardPushed(trip_token)}
       >
         <div className="px-4 py-3 shadow-sm rounded-custom bg-white border">

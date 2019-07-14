@@ -15,7 +15,7 @@ export default class VehicleCard extends Component {
     return (
       <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-4 mb-4"}>
         <div
-          className={`col-12 rounded-custom shadow-sm bg-white ${!deleteButton && "hm-pointer-cursor"}`}
+          className={`col-12 rounded-custom border shadow-sm bg-white ${!deleteButton && "hm-pointer-cursor"}`}
           style={{ height: "140px" }}
           onClick={() => this.handleButtonClick(vehicleToken)}
         >
