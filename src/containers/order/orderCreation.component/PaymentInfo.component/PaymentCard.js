@@ -215,11 +215,11 @@ export default class PaymentCard extends Component {
                 </div>
                 {!creditCardButton ? (
                   <button className="btn bg-white shadow-sm text-purple" onClick={this.requestCardNonce}>
-                    Credit Card
+                    Select
                   </button>
                 ) : (
                   <button className="btn btn-secondary shadow-sm" disabled onClick={this.requestCardNonce}>
-                    Credit Card
+                    Selected
                   </button>
                 )}
               </div>
@@ -236,15 +236,15 @@ export default class PaymentCard extends Component {
                     alt="company"
                     className="rounded-circle shadow-sm"
                   />
-                  <div className="ml-5 hm-text-15 font-weight-bold">Sedan</div>
+                  <div className="ml-5 hm-text-15 font-weight-bold">Cash</div>
                 </div>
                 {!cashdButton ? (
                   <button className="btn bg-white shadow-sm text-purple" onClick={this.submitCash}>
-                    Cash
+                    Select
                   </button>
                 ) : (
                   <button className="btn btn-secondary shadow-sm" disabled onClick={this.submitCash}>
-                    Cash
+                    Selected
                   </button>
                 )}
               </div>

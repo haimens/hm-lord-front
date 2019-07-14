@@ -9,7 +9,8 @@ import "./TripDetail.card.css";
 import {
   findOrderDetailInLord,
   applyOrderDiscountInLord,
-  updateOrderDiscountInLord
+  updateOrderDiscountInLord,
+  applyFinalOrder
 } from "../../../actions/order.action";
 import { findCouponListInLord } from "../../../actions/coupon.action";
 import {
@@ -56,8 +57,19 @@ class CompleteOrderCard extends Component {
     await this.setState(state => ({ showAddingAddon: !state.showAddingAddon, curr_trip_token, currButtonItem }));
   };
 
-  handleDeleteCouponFromOrder = order_discount_token => {
+  handleDeleteCouponFromOrder = async order_discount_token => {
     this.props.updateOrderDiscountInLord(this.props.current_order.order_token, order_discount_token, { status: 0 });
+    const { current_order, findTripDetailInLord, round_trip } = this.props;
+    await Promise.all([findTripDetailInLord(current_order.trip_list[0])]);
+    if (round_trip) {
+      findTripDetailInLordAgain(current_order.trip_list[1]);
+    }
+  };
+
+  handleMovingToPayment = () => {
+    const { current_order, handleMoveNext, applyFinalOrder } = this.props;
+    applyFinalOrder(current_order.order_token);
+    handleMoveNext(1);
   };
 
   async componentDidMount() {
@@ -304,7 +316,7 @@ class CompleteOrderCard extends Component {
               <button
                 className="btn shadow-sm button-main-background font-weight-bold text-white hm-text-12 rounded-custom"
                 style={{ width: "310px", height: "43px" }}
-                onClick={() => this.props.handleMoveNext(1)}
+                onClick={this.handleMovingToPayment}
               >
                 Next to payment
               </button>
@@ -333,7 +345,8 @@ const mapDispatchToProps = {
   applyOrderDiscountInLord,
   updateOrderDiscountInLord,
   createAddonToTrip,
-  deleteAddonItem
+  deleteAddonItem,
+  applyFinalOrder
 };
 
 export default connect(

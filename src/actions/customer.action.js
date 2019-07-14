@@ -28,6 +28,7 @@ export const createACustomerInLord = (body = {}) => async dispatch => {
     await dispatch(findCustomerListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
+    return payload;
   } catch (err) {
     await stopLoader(dispatch);
     dispatch(processLogout(err));

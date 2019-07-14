@@ -89,3 +89,14 @@ export const applyOrderDiscountInLord = (order_token, body) => async dispatch =>
     dispatch(processLogout(err));
   }
 };
+
+export const applyFinalOrder = order_token => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`order/finalize/${order_token}`, "PATCH");
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};

@@ -25,12 +25,14 @@ class CustomerInformation extends Component {
     this.setState({ address_str: address[0].formatted_address });
   };
 
+  handleInputHasChanged = () => {};
+
   handleCreatingCompany = async () => {
     const { name, cell, area, email, address_str } = this.state;
     const { createNewAddressInstance, createACustomerInLord } = this.props;
     if (name !== "" && cell !== "" && area !== "" && email !== "") {
       const payload = await createNewAddressInstance({ address_str });
-      await createACustomerInLord({
+      let customer = await createACustomerInLord({
         customer_info: {
           name,
           cell: `${area} ${cell}`,
@@ -40,7 +42,7 @@ class CustomerInformation extends Component {
           address_token: payload.address_token
         }
       });
-      this.props.handleSetCurrentCustomer(this.state);
+      this.props.handleSetCurrentCustomer({ ...this.state, customer_token: customer.customer_token });
       this.props.handleMoveNext(1);
     } else {
       alertify.alert("Error!", "Please Finish The Form!");
@@ -117,7 +119,10 @@ class CustomerInformation extends Component {
               </div>
               <div className="form-group mb-4 ">
                 <label className="text-main-color hm-text-14 font-weight-bold mb-2">Address</label>
-                <GAutoComplete getGoogleAddress={this.saveToAddress} />
+                <GAutoComplete
+                  handleInputHasChanged={this.handleInputHasChanged}
+                  getGoogleAddress={this.saveToAddress}
+                />
               </div>
 
               <div className="form-group text-right py-3">
