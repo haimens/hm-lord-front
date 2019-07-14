@@ -4,9 +4,9 @@ export default class DriverCard extends Component {
   render() {
     const { driverName, driverImage, driverPhone, driverUsername, isActive, driver_token } = this.props.parentProps;
     return (
-      <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-3 mb-4 hm-pointer-cursor"}>
+      <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-3 mb-4"}>
         <div
-          className="col-12 rounded-custom shadow-sm bg-white "
+          className="col-12 rounded-custom shadow-sm bg-white  hm-pointer-cursor"
           style={{ height: "140px" }}
           onClick={() => this.props.history.push(`/driver/detail/${driver_token}`)}
         >

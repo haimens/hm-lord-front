@@ -102,7 +102,7 @@ class VehicleDetail extends Component {
                   driverName: driver.name,
                   driverImage: driver.driver_img_path,
                   driverPhone: driver.cell,
-                  driver_token: driver.token
+                  driver_token: driver.driver_token
                 }}
                 history={history}
               />

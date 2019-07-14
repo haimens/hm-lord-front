@@ -91,7 +91,7 @@ export default class EditVehicle extends Component {
                 />
               </div>
 
-              <div className="form-group mb-4">
+              <div className="form-group mt-4">
                 <input
                   type="text"
                   className="form-control hm-input-height "
@@ -109,7 +109,7 @@ export default class EditVehicle extends Component {
                 handleShowImage={this.handleShowImage}
               />
 
-              <div className="form-group text-right pt-3">
+              <div className="form-group text-right pt-4">
                 <button
                   className="button-main-background btn button-main-size px-4 text-white mr-3"
                   onClick={this.handleCreateAVehicleInLord}
