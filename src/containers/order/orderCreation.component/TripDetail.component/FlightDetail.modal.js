@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, FlightCard, FlightCardNoRecord } from "../../../components/shared";
+import { Modal, FlightCard, FlightCardNoRecord } from "../../../../components/shared";
 
 export default class FlightDetail extends Component {
   handleInputChange = e => {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { parseAmount } from "../../../actions/utilities.action";
+import { parseAmount } from "../../../../actions/utilities.action";
 
 export default class TripCar extends Component {
   render() {

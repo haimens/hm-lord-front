@@ -281,6 +281,7 @@ class CompleteOrderCard extends Component {
               <button
                 className="btn shadow-sm button-main-background font-weight-bold text-white hm-text-12 rounded-custom"
                 style={{ width: "310px", height: "43px" }}
+                onClick={() => this.props.handleMoveNext(1)}
               >
                 Next to payment
               </button>

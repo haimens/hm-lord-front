@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import { GAutoComplete, GMapLocation } from "../../../components/shared";
+import { GAutoComplete, GMapLocation } from "../../../../components/shared";
 import { TimePicker, DatePicker } from "antd";
-import { convertLocalToUTC } from "../../../actions/utilities.action";
+import { convertLocalToUTC } from "../../../../actions/utilities.action";
 import TripCard from "./TripCar.card";
 import alertify from "alertifyjs";
 import moment from "moment";
 import FlightDetailModal from "./FlightDetail.modal";
-import { inflate } from "zlib";
 class TripInfo extends Component {
   state = {
     airlineCode: "",

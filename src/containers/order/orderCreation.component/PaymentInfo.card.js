@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import PaymentCard from "./PaymentCard";
+import PaymentCard from "./PaymentInfo.component/PaymentCard";
 import { findRealmDetailInLord } from "../../../actions/settings.action";
 import { handleSubmitAPaymentInLord } from "../../../actions/payment.action";
 import "./PaymentInfo.card.css";
@@ -26,12 +26,14 @@ class PaymentInfo extends Component {
     this.setState({ nounce });
   };
 
-  handleFinishOrder = () => {};
+  handleFinishOrder = () => {
+    const { current_order, handleSubmitAPaymentInLord } = this.props;
+    this.props.handleSubmitAPaymentInLord(current_order.order_token, { card_nounce: this.state.nounce });
+  };
 
   async componentWillMount() {
     const that = this;
     await this.props.findRealmDetailInLord();
-
     let sqPaymentScript = document.createElement("script");
     sqPaymentScript.src = "https://js.squareup.com/v2/paymentform";
     sqPaymentScript.type = "text/javascript";

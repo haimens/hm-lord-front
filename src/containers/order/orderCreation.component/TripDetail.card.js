@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import TripInfo from "./TripInfo.card";
+import TripInfo from "./TripDetail.component/TripInfo.card";
 import "./TripDetail.card.css";
 import { findFlightListInLord, findFlightListInLordAgain } from "../../../actions/flight.action";
 import { createOrderInLord } from "../../../actions/order.action";
