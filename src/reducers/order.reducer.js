@@ -7,9 +7,17 @@ const initialState = {
     end: 0
   },
   order_detail: {
+    customer_info: {
+      name: "",
+      email: "",
+      cell: ""
+    },
     order_discount_list: []
   },
-  current_order: ""
+  current_order: {
+    order_token: "",
+    trip_list: [{}, {}]
+  }
 };
 
 export default (state = initialState, action) => {

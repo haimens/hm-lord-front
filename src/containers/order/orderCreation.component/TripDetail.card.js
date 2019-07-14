@@ -6,6 +6,7 @@ import "./TripDetail.card.css";
 import { findFlightListInLord, findFlightListInLordAgain } from "../../../actions/flight.action";
 import { createOrderInLord } from "../../../actions/order.action";
 import { findQuoteInLord } from "../../../actions/quote.action";
+import alertify from "alertifyjs";
 class TripDetail extends Component {
   state = {
     flight_token: "",
@@ -21,14 +22,18 @@ class TripDetail extends Component {
     const { id, value } = e.target;
     this.setState({ [id]: value });
   };
-  handleReviewTrip = () => {
+  handleReviewTrip = async () => {
     const { currentCustomer, createOrderInLord } = this.props;
     const { airlineCode, flightNumber, quote_token } = this.state;
-    createOrderInLord({
-      customer_token: currentCustomer.customer_token,
-      quote_list: [{ flight_str: `${airlineCode}${flightNumber}`, quote_token }]
-    });
-    this.props.handleMoveNext(1);
+    if (quote_token !== "") {
+      await createOrderInLord({
+        customer_token: currentCustomer.customer_token,
+        quote_list: [{ flight_str: `${airlineCode}${flightNumber}`, quote_token }]
+      });
+      this.props.handleMoveNext(1);
+    } else {
+      alertify.alert("Error!", "Please select a car before moving on");
+    }
   };
   handleRoundTripButton = () => {
     this.props.handleRoundTrip();

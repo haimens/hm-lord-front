@@ -22,6 +22,7 @@ export const findOrderListInLord = (query = {}) => async dispatch => {
 };
 
 export const findOrderDetailInLord = order_token => async dispatch => {
+  console.log(order_token);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`order/detail/${order_token}`, "GET");

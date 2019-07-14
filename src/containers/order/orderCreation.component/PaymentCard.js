@@ -16,11 +16,17 @@ export default class PaymentCard extends Component {
 
   handleNoneReceived = (nonce, data) => {
     console.log(nonce);
+    this.props.handleNoneReceived(nonce);
   };
   componentDidMount() {
+    const {
+      square_application_id,
+      square_location_id,
+      square_access_token
+    } = this.props.realm_list_in_lord.payment_resource_info;
     const config = {
-      applicationId: "sq0idp-3ASxoXTMofredU3wDxTCrg",
-      locationId: "EAAAECB5ainjUZT0Bln5XMBwxmjOlOm7B0oAUmTg1cAIUyewbaoHfgCjfor9FO5M",
+      applicationId: square_application_id,
+      locationId: square_access_token,
       inputClass: "sq-input",
       autoBuild: false,
       inputStyles: [
@@ -94,10 +100,7 @@ export default class PaymentCard extends Component {
             case "focusClassRemoved":
               break;
             case "errorClassAdded":
-              document.getElementById("error").innerHTML = "Please fix card information errors before continuing.";
-              break;
-            case "errorClassRemoved":
-              document.getElementById("error").style.display = "none";
+              alertify.alert("Error", "Please fix card information errors before continuing.");
               break;
             case "cardBrandChanged":
               if (inputEvent.cardBrand !== "unknown") {
@@ -178,7 +181,6 @@ export default class PaymentCard extends Component {
             </div>
           </div>
         </div>
-
         <div className="col-4">
           <div className="rounded-custom bg-white shadow-sm h-100">
             <div

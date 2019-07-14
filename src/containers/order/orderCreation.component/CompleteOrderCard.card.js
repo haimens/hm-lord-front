@@ -16,7 +16,7 @@ import { findTripDetailInLord, createAddonToTrip, deleteAddonItem } from "../../
 import CompleteTop from "./CompleteOrder.component/CompleteTop.card";
 import AddonModal from "./CompleteOrder.component/Addon.modal";
 
-class TripDetail extends Component {
+class CompleteOrderCard extends Component {
   state = {
     showCouponModal: false,
     showAddingAddon: false,
@@ -39,14 +39,12 @@ class TripDetail extends Component {
     this.setState(state => ({ round_trip: !state.round_trip }));
   };
   handleAddingCoupon = code => {
-    let orderStr = "ORD-b7a2137a9353dea1db332fb0f9d67603";
-    this.props.applyOrderDiscountInLord(orderStr, { code });
+    this.props.applyOrderDiscountInLord(this.props.current_order.order_token, { code });
     this.handleShowCouponModal();
   };
 
   handleDeleteAddonItem = (trip_token, addon_token) => {
-    let orderStr = "ORD-b7a2137a9353dea1db332fb0f9d67603";
-    this.props.deleteAddonItem(orderStr, trip_token, addon_token);
+    this.props.deleteAddonItem(this.props.current_order.order_token, trip_token, addon_token);
   };
 
   handleAddingAddon = async (curr_trip_token, currButtonItem) => {
@@ -54,16 +52,18 @@ class TripDetail extends Component {
   };
 
   handleDeleteCouponFromOrder = order_discount_token => {
-    let orderStr = "ORD-b7a2137a9353dea1db332fb0f9d67603";
-    this.props.updateOrderDiscountInLord(orderStr, order_discount_token, { status: 0 });
+    this.props.updateOrderDiscountInLord(this.props.current_order.order_token, order_discount_token, { status: 0 });
   };
 
   async componentDidMount() {
     const { current_order, findOrderDetailInLord, findTripDetailInLord, findCouponListInLord } = this.props;
-    let orderStr = "ORD-b7a2137a9353dea1db332fb0f9d67603";
-    let tripStr = "TRIP-8ea520fbb71c379142994763322a4a12";
-    await Promise.all([findOrderDetailInLord(orderStr), findTripDetailInLord(tripStr), findCouponListInLord()]);
+    await Promise.all([
+      findOrderDetailInLord(current_order.order_token),
+      findTripDetailInLord(current_order.trip_list[0]),
+      findCouponListInLord()
+    ]);
     const { customer_info } = this.props.order_detail;
+    console.log(this.props);
     this.setState({
       name: customer_info.name,
       email: customer_info.email,
@@ -87,6 +87,7 @@ class TripDetail extends Component {
       coupon_list_in_lord,
       trip_detail_in_lord,
       order_detail,
+      current_order,
       round_trip,
       createAddonToTrip
     } = this.props;
@@ -95,9 +96,8 @@ class TripDetail extends Component {
     if (order_detail.order_discount_list.length > 0) {
       totalDiscount = order_detail.order_discount_list.map(discount => console.log(discount));
     }
-    let order_token = "ORD-b7a2137a9353dea1db332fb0f9d67603";
-
-    let trip_token = "TRIP-8ea520fbb71c379142994763322a4a12";
+    let order_token = current_order.order_token;
+    let trip_token = current_order.trip_list[0];
 
     return (
       <section>
@@ -313,4 +313,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(TripDetail));
+)(withRouter(CompleteOrderCard));
