@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53 (72520) - https://sketchapp.com -->
+    <title>homeicon_order</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#FB6640" offset="0%"></stop>
+            <stop stop-color="#E59E3C" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Lord-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Lord-V2-Dashboard" transform="translate(-921.000000, -160.000000)">
+            <g id="homeicon_order" transform="translate(921.000000, 160.000000)">
+                <circle id="Oval" fill="url(#linearGradient-1)" cx="24" cy="24" r="24"></circle>
+                <g id="icon_order" transform="translate(17.000000, 14.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                    <rect id="Rectangle" x="5.55904886" y="5.21706161" width="5.31420847" height="1"></rect>
+                    <rect id="Rectangle" x="5.55904886" y="6.99507109" width="5.31420847" height="1"></rect>
+                    <rect id="Rectangle" x="5.55904886" y="10.55109" width="5.31420847" height="1"></rect>
+                    <rect id="Rectangle" x="5.51162215" y="14.1071564" width="5.31420847" height="1"></rect>
+                    <rect id="Rectangle" x="5.51162215" y="12.3291469" width="5.31420847" height="1"></rect>
+                    <rect id="Rectangle" x="5.51162215" y="8.77308057" width="5.31420847" height="1"></rect>
+                    <rect id="Rectangle" x="5.55904886" y="15.8851659" width="5.31420847" height="1"></rect>
+                    <path d="M10.412215,1.29075829 L10.412215,0 L3.58869707,0 L3.58869707,1.29075829 L0.00711400651,1.29075829 L0.00711400651,19.9536019 L13.9938436,19.9536019 L13.9938436,1.29075829 L10.412215,1.29075829 Z M10.412215,4.22099526 L10.412215,3.60085308 L11.8455049,3.60085308 L11.8455049,17.6436019 L2.15545277,17.6436019 L2.15545277,3.60085308 L3.58874267,3.60085308 L3.58874267,4.22099526 L10.412215,4.22099526 Z M4.27273616,0.710900474 L9.7281759,0.710900474 L9.7281759,3.51009479 L4.27273616,3.51009479 L4.27273616,0.710900474 Z M13.3098046,19.2427014 L0.691153094,19.2427014 L0.691153094,2.00165877 L3.58869707,2.00165877 L3.58869707,2.88990521 L1.47136808,2.88990521 L1.47136808,18.354455 L12.5294984,18.354455 L12.5294984,2.88995261 L10.4121694,2.88995261 L10.4121694,2.00165877 L13.3098046,2.00165877 L13.3098046,19.2427014 L13.3098046,19.2427014 Z" id="Shape"></path>
+                    <rect id="Rectangle" x="5.33764821" y="1.7550237" width="3.32570684" height="1"></rect>
+                    <polygon id="Path" points="2.55237785 6.16066351 3.66485342 7.31687204 5.13207166 5.79203791 4.64836482 5.28938389 3.66485342 6.31146919 3.03608469 5.65800948"></polygon>
+                    <polygon id="Path" points="3.66485342 10.8375355 3.03608469 10.1840758 2.55237785 10.6867299 3.66485342 11.8429384 5.13207166 10.3181043 4.64836482 9.81545024"></polygon>
+                    <polygon id="Path" points="4.51940065 14.0895261 3.84220195 14.7932701 3.16504886 14.0895261 2.68138762 14.5921801 3.35854072 15.2959716 2.68138762 15.9997156 3.16504886 16.5023697 3.84220195 15.7986256 4.51940065 16.5023697 5.00306189 15.9997156 4.32590879 15.2959716 5.00306189 14.5921801"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

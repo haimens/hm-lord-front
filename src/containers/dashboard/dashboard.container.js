@@ -30,7 +30,7 @@ class Home extends Component {
                 data={{
                   amount: 30,
                   title: "TOTAL CUSTOMER",
-                  icon: `${process.env.PUBLIC_URL}/img/icon_company.svg`
+                  icon: `${process.env.PUBLIC_URL}/img/homeicon_customer.svg`
                 }}
                 red={true}
               />
@@ -39,8 +39,8 @@ class Home extends Component {
               <DisplayCard
                 data={{
                   amount: 20,
-                  title: "Total Invoice",
-                  icon: `${process.env.PUBLIC_URL}/img/icon_invoice.svg`
+                  title: "TOTAL ORDER",
+                  icon: `${process.env.PUBLIC_URL}/img/homeicon_order.svg`
                 }}
               />
             </div>
@@ -48,8 +48,8 @@ class Home extends Component {
               <DisplayCard
                 data={{
                   amount: 30,
-                  title: "Total Company",
-                  icon: `${process.env.PUBLIC_URL}/img/icon_company.svg`
+                  title: "TOTAL DRIVER",
+                  icon: `${process.env.PUBLIC_URL}/img/homeicon_driver.svg`
                 }}
                 red={true}
               />
@@ -58,8 +58,8 @@ class Home extends Component {
               <DisplayCard
                 data={{
                   amount: 20,
-                  title: "Total Invoice",
-                  icon: `${process.env.PUBLIC_URL}/img/icon_invoice.svg`
+                  title: "ORDER TODAY",
+                  icon: `${process.env.PUBLIC_URL}/img/homeicon_24hr.svg`
                 }}
               />
             </div>
