@@ -23,7 +23,7 @@ const initialState = {
   },
   trip_detail_in_lord: {
     basic_info: {
-      amount: "",
+      amount: 0,
       arrive_time: "",
       cad_time: "",
       cdate: "",
@@ -72,7 +72,7 @@ const initialState = {
   },
   trip_detail_in_lord_again: {
     basic_info: {
-      amount: "",
+      amount: 0,
       arrive_time: "",
       cad_time: "",
       cdate: "",

@@ -3,7 +3,7 @@ import { parseAmount } from "../../../../actions/utilities.action";
 export default function AddonCard(props) {
   const { showEditButton, trip_token, deleteAddonItem, addon_list, position } = props;
   return (
-    <div>
+    <div style={{ height: "185px", overflow: "auto" }}>
       <div className="purple-border p-3">
         <div className="d-flex justify-content-between align-items-center  ">
           <div className="hm-text-16 font-weight-bold text-modal-color">Add-on Service</div>
@@ -21,7 +21,7 @@ export default function AddonCard(props) {
       {addon_list.map(
         (addon, index) =>
           addon.type === 2 && (
-            <div className="mb-4">
+            <div className="mb-4" key={index}>
               <div className="container-fluid">
                 <div
                   className="coupon-card  rounded-custom shadow-sm d-flex flex-column justify-content-between p-4"

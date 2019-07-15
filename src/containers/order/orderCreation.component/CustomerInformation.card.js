@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { GAutoComplete } from "../../../components/shared";
 import { findCustomerListInLord, createACustomerInLord } from "../../../actions/customer.action";
 import { createNewAddressInstance } from "../../../actions/address.action";
+import { setMapToFalse, setMapToFalseAgain } from "../../../actions/quote.action";
 import alertify from "alertifyjs";
 
 class CustomerInformation extends Component {
@@ -55,7 +56,7 @@ class CustomerInformation extends Component {
   };
 
   componentDidMount() {
-    this.props.findCustomerListInLord();
+    Promise.all([this.props.findCustomerListInLord(), this.props.setMapToFalse(), this.props.setMapToFalseAgain()]);
   }
   render() {
     const { name, cell, area, email, customer } = this.state;
@@ -208,7 +209,13 @@ const mapStateToProps = state => {
     customer_list_in_lord: state.customerReducer.customer_list_in_lord
   };
 };
-const mapDispatchToProps = { findCustomerListInLord, createACustomerInLord, createNewAddressInstance };
+const mapDispatchToProps = {
+  findCustomerListInLord,
+  createACustomerInLord,
+  createNewAddressInstance,
+  setMapToFalse,
+  setMapToFalseAgain
+};
 
 export default connect(
   mapStateToProps,

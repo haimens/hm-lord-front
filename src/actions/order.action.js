@@ -100,3 +100,14 @@ export const applyFinalOrder = order_token => async dispatch => {
     dispatch(processLogout(err));
   }
 };
+
+export const updateOrderDetailInLord = (order_token, body) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`order/detail/${order_token}`, "PATCH", body);
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};

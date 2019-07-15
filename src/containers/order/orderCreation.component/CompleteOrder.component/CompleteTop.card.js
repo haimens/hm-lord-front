@@ -11,14 +11,16 @@ export default class CompleteTop extends Component {
     handleAddingAddon(trip_token, type, position);
   };
   render() {
-    const { trip_detail_in_lord, handleAddingAddon, trip_token, addon_list, deleteAddonItem, position } = this.props;
+    const { trip_detail_in_lord, addon_list, deleteAddonItem, position, sum } = this.props;
     const { basic_info, from_address_info, to_address_info } = trip_detail_in_lord;
     return (
       <div className="bg-white rounded-custom shadow-sm">
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-6 col-12 mb-4">
-              <div className="hm-title-sub-size font-weight-bold text-modal-color p-4">Trip 1</div>
+              <div className="hm-title-sub-size font-weight-bold text-modal-color p-4">
+                Trip {position === "first" ? 1 : 2}
+              </div>
               <BasicInfo
                 from_address_info={from_address_info}
                 to_address_info={to_address_info}
@@ -29,9 +31,9 @@ export default class CompleteTop extends Component {
             <div className="col-lg-6 col-12 mb-4">
               <div className="text-right hm-title-sub-size font-weight-bold text-modal-color p-4">
                 <span className="hm-title-sub-size font-weight-bold text-secondary-color text-modal-color mr-3">
-                  Trip 1 Subtotal:
+                  Trip {position === "first" ? 1 : 2} Subtotal:
                 </span>
-                {parseAmount(basic_info.amount, 2)}
+                {parseAmount(sum, 2)}
               </div>
               <TripSubtotal from_address_info={from_address_info} to_address_info={to_address_info} />
             </div>
@@ -41,7 +43,7 @@ export default class CompleteTop extends Component {
                 deleteAddonItem={deleteAddonItem}
                 addon_list={addon_list}
                 handleAddingAddon={this.handleAddingAddon}
-                trip_token={trip_token}
+                trip_token={basic_info.trip_token}
                 showEditButton={true}
               />
             </div>
@@ -50,7 +52,7 @@ export default class CompleteTop extends Component {
                 position={position}
                 deleteAddonItem={deleteAddonItem}
                 addon_list={addon_list}
-                trip_token={trip_token}
+                trip_token={basic_info.trip_token}
                 handleAddingAddon={this.handleAddingAddon}
                 showEditButton={true}
               />

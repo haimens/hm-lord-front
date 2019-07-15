@@ -10,7 +10,8 @@ import {
   findOrderDetailInLord,
   applyOrderDiscountInLord,
   updateOrderDiscountInLord,
-  applyFinalOrder
+  applyFinalOrder,
+  updateOrderDetailInLord
 } from "../../../actions/order.action";
 import { findCouponListInLord } from "../../../actions/coupon.action";
 import {
@@ -55,7 +56,6 @@ class CompleteOrderCard extends Component {
   };
 
   handleAddingAddon = async (curr_trip_token, currButtonItem, currPosition) => {
-    console.log(curr_trip_token);
     await this.setState(state => ({
       showAddingAddon: !state.showAddingAddon,
       curr_trip_token,
@@ -69,9 +69,21 @@ class CompleteOrderCard extends Component {
   };
 
   handleMovingToPayment = () => {
-    const { current_order, handleMoveNext, applyFinalOrder } = this.props;
+    const { current_order, handleMoveNext, applyFinalOrder, updateOrderDetailInLord } = this.props;
+    const { name, area, cell } = this.state;
+    updateOrderDetailInLord(current_order.order_token, { contact_name: name, contact_cell: `${area} ${cell}` });
     applyFinalOrder(current_order.order_token);
     handleMoveNext(1);
+  };
+
+  getTripTotal = (total, addon_list) => {
+    if (addon_list.length === 0) {
+      return 0;
+    }
+    if (addon_list.length > 0) {
+      addon_list.map(addon => (total += addon.amount));
+    }
+    return total;
   };
 
   async componentDidMount() {
@@ -92,7 +104,6 @@ class CompleteOrderCard extends Component {
       findTripDetailInLordAgain(current_order.trip_list[1]);
     }
     const { customer_info } = this.props.order_detail;
-    console.log(this.props);
     this.setState({
       name: customer_info.name,
       email: customer_info.email,
@@ -122,16 +133,29 @@ class CompleteOrderCard extends Component {
       createAddonToTrip
     } = this.props;
     const { basic_info, addon_list } = trip_detail_in_lord;
-    let totalDiscount = 0;
-    if (order_detail.order_discount_list.length > 0) {
-      totalDiscount = order_detail.order_discount_list.map(discount => console.log(discount));
-    }
+
     let order_token = current_order.order_token;
-    let trip_token = current_order.trip_list[0];
-    let trip_token2 = 0;
-    if (round_trip) {
-      trip_token2 = current_order.trip_list[1];
+    let first_trip_total = this.getTripTotal(basic_info.amount, addon_list);
+    let second_trip_total = this.getTripTotal(
+      trip_detail_in_lord_again.basic_info.amount,
+      trip_detail_in_lord_again.addon_list
+    );
+
+    let sum = first_trip_total + second_trip_total;
+    let total_discount_amount = 0;
+    let total_discount_rate = 0;
+    if (order_detail.order_discount_list.length > 0) {
+      order_detail.order_discount_list.map(discount => {
+        if (discount.type === 1) {
+          total_discount_amount += discount.amount;
+        }
+        if (discount.type === 2) {
+          total_discount_rate += discount.rate;
+        }
+      });
     }
+    total_discount_rate = ((total_discount_rate / 1000) * sum) / 100;
+    let total = (sum / 100 - total_discount_rate - total_discount_amount / 100).toFixed(2);
     return (
       <section>
         {showCouponModal && (
@@ -154,9 +178,9 @@ class CompleteOrderCard extends Component {
         )}
         <div className="mb-4">
           <CompleteTop
+            sum={first_trip_total}
             deleteAddonItem={this.handleDeleteAddonItem}
             addon_list={addon_list}
-            trip_token={trip_token}
             position={"first"}
             handleAddingAddon={this.handleAddingAddon}
             trip_detail_in_lord={trip_detail_in_lord}
@@ -166,10 +190,10 @@ class CompleteOrderCard extends Component {
         {round_trip && (
           <div className="mb-4">
             <CompleteTop
+              sum={second_trip_total}
               position={"second"}
               deleteAddonItem={this.handleDeleteAddonItem}
               addon_list={trip_detail_in_lord_again.addon_list}
-              trip_token={trip_token2}
               handleAddingAddon={this.handleAddingAddon}
               trip_detail_in_lord={trip_detail_in_lord_again}
             />
@@ -286,45 +310,54 @@ class CompleteOrderCard extends Component {
             hideShadow={true}
             hideButton={true}
           />
-          <div className="container mt-3">
-            <div className="d-flex justify-content-between border-bottom-custom py-2">
-              <div className="text-secondary-color hm-text-14 font-weight-bold">Trip 1 Subtotal:</div>
-              <div className="hm-text-14 font-weight-bold text-modal-color">{parseAmount(basic_info.amount, 2)}</div>
-            </div>
-            {round_trip && (
-              <div className="d-flex justify-content-between border-bottom-custom py-2">
-                <div className="text-secondary-color hm-text-14 font-weight-bold">Trip 2 Subtotal:</div>
-                <div className="hm-text-14 font-weight-bold text-modal-color">
-                  {parseAmount(trip_detail_in_lord_again.basic_info.amount, 2)}
+          <div className="container-fluid mt-3">
+            <div className="row p-3">
+              <div className="col-12">
+                <div className="d-flex justify-content-between border-bottom-custom py-2">
+                  <div className="text-secondary-color hm-text-14 font-weight-bold">Trip 1 Subtotal:</div>
+                  <div className="hm-text-14 font-weight-bold text-modal-color">
+                    +{parseAmount(first_trip_total, 2)}
+                  </div>
                 </div>
               </div>
-            )}
-            <div className="d-flex justify-content-between border-bottom-custom py-2">
-              <div className="text-secondary-color hm-text-14 font-weight-bold">Discount:</div>
-              <div className="hm-text-14 font-weight-bold text-modal-color">{200}</div>
-            </div>
-            <div className="d-flex justify-content-between  py-3">
-              <div className="text-secondary-color hm-text-14 font-weight-bold hm-title-sub-size">Order Total Due:</div>
-              <div className="hm-title-sub-size font-weight-bold text-modal-color">
-                {parseAmount(basic_info.amount + trip_detail_in_lord_again.basic_info.amount, 2)}
+              {round_trip && (
+                <div className="col-12">
+                  <div className="d-flex justify-content-between border-bottom-custom py-2">
+                    <div className="text-secondary-color hm-text-14 font-weight-bold">Trip 2 Subtotal:</div>
+                    <div className="hm-text-14 font-weight-bold text-modal-color">
+                      +{parseAmount(second_trip_total, 2)}
+                    </div>
+                  </div>
+                </div>
+              )}
+              <div className="col-12">
+                <div className="d-flex justify-content-between border-bottom-custom py-2">
+                  <div className="text-secondary-color hm-text-14 font-weight-bold">Discount:</div>
+                  <div className="hm-text-14 font-weight-bold text-modal-color">
+                    -${total_discount_amount / 100 + total_discount_rate}
+                  </div>
+                </div>
+              </div>
+              <div className="col-12">
+                <div className="d-flex justify-content-between  py-3">
+                  <div className="text-secondary-color hm-text-14 font-weight-bold hm-title-sub-size">
+                    Order Total Due:
+                  </div>
+                  <div className="hm-title-sub-size font-weight-bold text-modal-color">${total}</div>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="px-4 py-5 border-top">
-            <div className="d-flex justify-content-between">
-              <button
-                className="btn shadow-sm border bg-white text-white font-weight-bold text-dark hm-text-12 rounded-custom"
-                style={{ width: "310px", height: "43px" }}
-              >
-                Back
-              </button>
-              <button
-                className="btn shadow-sm button-main-background font-weight-bold text-white hm-text-12 rounded-custom"
-                style={{ width: "310px", height: "43px" }}
-                onClick={this.handleMovingToPayment}
-              >
-                Next to payment
-              </button>
+
+            <div className="px-4 py-5 border-top">
+              <div className="d-flex justify-content-end">
+                <button
+                  className="btn shadow-sm button-main-background font-weight-bold text-white hm-text-12 rounded-custom"
+                  style={{ width: "310px", height: "43px" }}
+                  onClick={this.handleMovingToPayment}
+                >
+                  Next to payment
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -351,7 +384,8 @@ const mapDispatchToProps = {
   updateOrderDiscountInLord,
   createAddonToTrip,
   deleteAddonItem,
-  applyFinalOrder
+  applyFinalOrder,
+  updateOrderDetailInLord
 };
 
 export default connect(
