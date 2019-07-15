@@ -2,17 +2,25 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { ListView, Header, ListHeader } from "../../components/shared";
+import { findDriverPayableListInLord } from "../../actions/driver.action";
 import DriverPayableListItem from "./driverPayable.component/DriverPayableList.item";
 class DriverPayable extends Component {
   state = {
     showAddWage: false
   };
-  handleWageSearch = keywords => {};
   handleAddingWage = () => {
     this.setState(state => ({ showAddWage: !state.showAddWage }));
   };
+
+  handlePageChange = start => {
+    this.props.findDriverPayableListInLord({ start });
+  };
+
+  componentDidMount() {
+    this.props.findDriverPayableListInLord();
+  }
   render() {
-    const { history } = this.props;
+    const { driver_payable_list_in_lord } = this.props;
     return (
       <main className="container-fluid">
         <section className="mb-4">
@@ -35,14 +43,14 @@ class DriverPayable extends Component {
           />
           <ListView
             totalCount={30}
-            title="Wage List"
-            fieldNames={["Created On", "Amount", "Type", "Note"]}
+            title="Driver Payable"
+            fieldNames={["Driver IMG", "Driver Name", "amount", "Driver Detail"]}
             hideHeader={true}
             onPageChange={this.handlePageChange}
           >
-            {/* {punch_list_in_puri.record_list.map((punch, index) => (
-              <WageListItem parentProps={punch} key={index} onClick={this.handlePunchItemClick} />
-            ))} */}
+            {driver_payable_list_in_lord.record_list.map((payable, index) => (
+              <DriverPayableListItem parentProps={payable} key={index} onClick={this.handlePayableItemClick} />
+            ))}
           </ListView>
         </section>
       </main>
@@ -50,9 +58,9 @@ class DriverPayable extends Component {
   }
 }
 const mapStateToProps = state => {
-  return {};
+  return { driver_payable_list_in_lord: state.driverReducer.driver_payable_list_in_lord };
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = { findDriverPayableListInLord };
 
 export default connect(
   mapStateToProps,

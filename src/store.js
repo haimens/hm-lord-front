@@ -8,7 +8,6 @@ import locationReducer from "./reducers/location.container";
 import contactReducer from "./reducers/contact.container";
 import driverReducer from "./reducers/driver.reducer";
 import customerReducer from "./reducers/customer.reducer";
-import driverPayableReducer from "./reducers/driverPayable.reducer";
 import orderReducer from "./reducers/order.reducer";
 import settingsReducer from "./reducers/settings.reducer";
 import vehicleReducer from "./reducers/vehicle.reducer";
@@ -27,7 +26,6 @@ const store = createStore(
     contactReducer,
     driverReducer,
     customerReducer,
-    driverPayableReducer,
     orderReducer,
     settingsReducer,
     vehicleReducer,

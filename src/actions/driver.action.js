@@ -125,3 +125,20 @@ export const updateACarForADriver = (driver_token, driver_car_token, body = {}) 
     dispatch(processLogout(err));
   }
 };
+
+export const findDriverPayableListInLord = (query = {}) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`driver/all/payable/realm`, "GET", null, {
+      ...query
+    });
+    await dispatch({
+      type: constant.DRIVER_PAYABLE_LIST_IN_LORD,
+      payload
+    });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};

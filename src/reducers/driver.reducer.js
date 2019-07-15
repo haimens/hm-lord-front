@@ -31,6 +31,11 @@ const initialState = {
       cdate: 0,
       udate: 0
     }
+  },
+  driver_payable_list_in_lord: {
+    record_list: [],
+    count: 0,
+    end: 0
   }
 };
 
@@ -44,6 +49,8 @@ export default (state = initialState, action) => {
       return { ...state, car_list_for_a_driver: action.payload };
     case constant.DRIVER_DETAIL_IN_LORD:
       return { ...state, driver_detail_in_lord: action.payload };
+    case constant.DRIVER_PAYABLE_LIST_IN_LORD:
+      return { ...state, driver_payable_list_in_lord: action.payload };
     default:
       return state;
   }
