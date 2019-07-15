@@ -27,7 +27,8 @@ class Home extends Component {
       findDriverListInLord,
       findCustomerListInLord,
       findOrderListInLord,
-      findOrderListInLordWithDate
+      findOrderListInLordWithDate,
+      findDriverLocationListInLord
     } = this.props;
     console.log(new Date());
     Promise.all([

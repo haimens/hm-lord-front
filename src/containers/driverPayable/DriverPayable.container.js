@@ -49,7 +49,7 @@ class DriverPayable extends Component {
             onPageChange={this.handlePageChange}
           >
             {driver_payable_list_in_lord.record_list.map((payable, index) => (
-              <DriverPayableListItem parentProps={payable} key={index} onClick={this.handlePayableItemClick} />
+              <DriverPayableListItem parentProps={payable} key={index} handlePayableItemClicked={this.handlePayableItemClick} />
             ))}
           </ListView>
         </section>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {  parseAmount } from "../../../actions/utilities.action";
 export default class WageList extends Component {
   render() {
-    const{onClick, parentProps} = this.props
+    const{handlePayableItemClicked, parentProps} = this.props
     const { payable, img_path, name } = parentProps;
     return (
       <tr className="border-bottom">
@@ -18,8 +18,8 @@ export default class WageList extends Component {
             {parseAmount(payable, 2)}
           </section>
         </td>
-        <td data-label="Driver Detail" className="items-height align-middle hm-pointer-cursor">
-          <img className="rounded-circle" style={{ height: "25px", width: "25px" }} src={`${process.env.PUBLIC_URL}/img/icon_detail.svg`} alt="avatar" onClick={()=>onClick()}/>
+        <td data-label="Driver Detail" className="items-height align-middle ">
+          <img className="rounded-circle hm-pointer-cursor" style={{ height: "25px", width: "25px" }} src={`${process.env.PUBLIC_URL}/img/icon_detail.svg`} alt="avatar" onClick={()=>handlePayableItemClicked()}/>
         </td>
       </tr>
     );
