@@ -2,10 +2,6 @@
   font-size:1.5rem;
 }
 
-.display-card-container{
-  min-height:120px;
-  font-size: 14px;
-}
 
 @media (min-width:992px) {
   .display-card{

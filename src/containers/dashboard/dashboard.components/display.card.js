@@ -22,13 +22,6 @@ export function DisplayCardItem(props) {
           />
         </div>
       </section>
-      <div className="text-secondary-color ">
-        <span className="success-text-color mr-3">
-          <i className="fas fa-arrow-up mr-2" />
-          3.48%
-        </span>
-        Since last month
-      </div>
     </main>
   );
 }
