@@ -9,7 +9,7 @@ import moment from "moment";
 import "./dashboard.container.css";
 import CalendarDailyList from "./dashboard.components/CalendarDailyList.component";
 
-import { findDriverListInLord } from "../../actions/driver.action";
+import { findDriverListInLord, findDriverLocationListInLord } from "../../actions/driver.action";
 import { findCustomerListInLord } from "../../actions/customer.action";
 import { findOrderListInLord, findOrderListInLordWithDate } from "../../actions/order.action";
 import { convertLocalToUTC } from "../../actions/utilities.action";
@@ -34,6 +34,7 @@ class Home extends Component {
       findDriverListInLord(),
       findCustomerListInLord(),
       findOrderListInLord(),
+      findDriverLocationListInLord(),
       findOrderListInLordWithDate({
         date_from: convertLocalToUTC(moment().startOf("day")),
         date_to: convertLocalToUTC(moment().endOf("day"))
@@ -178,6 +179,7 @@ class Home extends Component {
 const mapStateToProps = state => {
   return {
     driver_list_in_lord: state.driverReducer.driver_list_in_lord,
+    driver_location_list_in_lord: state.driverReducer.driver_location_list_in_lord,
     order_list_in_lord: state.orderReducer.order_list_in_lord,
     order_list_in_lord_with_date: state.orderReducer.order_list_in_lord_with_date,
     customer_list_in_lord: state.customerReducer.customer_list_in_lord
@@ -187,7 +189,8 @@ const mapDispatchToProps = {
   findDriverListInLord,
   findCustomerListInLord,
   findOrderListInLord,
-  findOrderListInLordWithDate
+  findOrderListInLordWithDate,
+  findDriverLocationListInLord
 };
 
 export default connect(

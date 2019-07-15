@@ -65,7 +65,7 @@ export const updateADriverInLord = (driver_token, body = {}) => async dispatch =
 export const findDriverLocationListInLord = (realm_token, query = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`driver/all/location/realm/${realm_token}`, "GET", null, {
+    const { payload } = await callApi(`driver/all/location/realm`, "GET", null, {
       order_key: "udate",
       order_direction: "DESC",
       ...query
