@@ -11,7 +11,8 @@ import CalendarDailyList from "./dashboard.components/CalendarDailyList.componen
 
 import { findDriverListInLord } from "../../actions/driver.action";
 import { findCustomerListInLord } from "../../actions/customer.action";
-import { findOrderListInLord } from "../../actions/order.action";
+import { findOrderListInLord, findOrderListInLordWithDate } from "../../actions/order.action";
+import { convertLocalToUTC } from "../../actions/utilities.action";
 
 class Home extends Component {
   constructor(props) {
@@ -22,13 +23,27 @@ class Home extends Component {
   handleCalendarBeenClicked = date => {};
 
   componentDidMount() {
-    const { findDriverListInLord, findCustomerListInLord, findOrderListInLord } = this.props;
-    Promise.all([findDriverListInLord(), findCustomerListInLord(), findOrderListInLord()]);
+    const {
+      findDriverListInLord,
+      findCustomerListInLord,
+      findOrderListInLord,
+      findOrderListInLordWithDate
+    } = this.props;
+    console.log(new Date());
+    Promise.all([
+      findDriverListInLord(),
+      findCustomerListInLord(),
+      findOrderListInLord(),
+      findOrderListInLordWithDate({
+        date_from: convertLocalToUTC(moment().startOf("day")),
+        date_to: convertLocalToUTC(moment().endOf("day"))
+      })
+    ]);
   }
 
   render() {
     const localizer = momentLocalizer(moment);
-    const { customer_list_in_lord, order_list_in_lord, driver_list_in_lord } = this.props;
+    const { customer_list_in_lord, order_list_in_lord, driver_list_in_lord, order_list_in_lord_with_date } = this.props;
     return (
       <main>
         <section className="container-fluid">
@@ -46,7 +61,7 @@ class Home extends Component {
                 red={true}
               />
             </div>
-            <div className="col-12 col-md-6 h-100">
+            <div className="col-12 col-md-6 h-100 mb-4">
               <DisplayCard
                 data={{
                   amount: order_list_in_lord.count,
@@ -65,10 +80,10 @@ class Home extends Component {
                 red={true}
               />
             </div>
-            <div className="col-12 col-md-6 h-100">
+            <div className="col-12 col-md-6 h-100 mb-4">
               <DisplayCard
                 data={{
-                  amount: 20,
+                  amount: order_list_in_lord_with_date.count,
                   title: "ORDER TODAY",
                   icon: `${process.env.PUBLIC_URL}/img/homeicon_24hr.svg`
                 }}
@@ -164,13 +179,15 @@ const mapStateToProps = state => {
   return {
     driver_list_in_lord: state.driverReducer.driver_list_in_lord,
     order_list_in_lord: state.orderReducer.order_list_in_lord,
+    order_list_in_lord_with_date: state.orderReducer.order_list_in_lord_with_date,
     customer_list_in_lord: state.customerReducer.customer_list_in_lord
   };
 };
 const mapDispatchToProps = {
   findDriverListInLord,
   findCustomerListInLord,
-  findOrderListInLord
+  findOrderListInLord,
+  findOrderListInLordWithDate
 };
 
 export default connect(

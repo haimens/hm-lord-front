@@ -6,6 +6,11 @@ const initialState = {
     count: 0,
     end: 0
   },
+  order_list_in_lord_with_date: {
+    record_list: [],
+    count: 0,
+    end: 0
+  },
   order_detail: {
     customer_info: {
       name: "",
@@ -24,6 +29,8 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case constant.ORDER_LIST_IN_LORD:
       return { ...state, order_list_in_lord: action.payload };
+    case constant.ORDER_LIST_IN_LORD_WITH_DATE:
+      return { ...state, order_list_in_lord_with_date: action.payload };
     case constant.ORDER_DETAIL:
       return { ...state, order_detail: action.payload };
     case constant.CURRENT_ORDER:

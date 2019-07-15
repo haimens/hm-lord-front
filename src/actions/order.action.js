@@ -21,6 +21,28 @@ export const findOrderListInLord = (query = {}) => async dispatch => {
   }
 };
 
+export const findOrderListInLordWithDate = (query = {}) => async dispatch => {
+  console.log(query);
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`order/all/detail/realm`, "GET", null, {
+      order_key: "udate",
+      order_direction: "DESC",
+      from_key: "cdate",
+      to_key: "cdate",
+      ...query
+    });
+    await dispatch({
+      type: constant.ORDER_LIST_IN_LORD_WITH_DATE,
+      payload
+    });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
 export const findOrderDetailInLord = order_token => async dispatch => {
   console.log(order_token);
   try {
