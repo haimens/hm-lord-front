@@ -19,8 +19,8 @@ class OrderCreation extends Component {
     this.setState(state => ({ round_trip: !state.round_trip }));
   };
 
-  handleSetCurrentCustomer = props => {
-    this.setState({ currentCustomer: props });
+  handleSetCurrentCustomer = currentCustomer => {
+    this.setState({ currentCustomer });
   };
   //CTM-202dd4246cfbfd6e5962f136eea83a58
   render() {

@@ -19,7 +19,9 @@ class TripInfo extends Component {
     showFlightDetail: false,
     currIndex: "",
     inputFrom: false,
-    inputTo: false
+    inputTo: false,
+    pickup_location: "",
+    dropoff_location: ""
   };
 
   handleInputChange = e => {
@@ -39,6 +41,21 @@ class TripInfo extends Component {
   saveToAddress = address => {
     this.setState({ to_address: address[0].formatted_address });
   };
+
+  handlePastAddressToPickUp = () => {
+    this.setState({
+      pickup_location: this.props.currentCustomer.addr_str,
+      from_address: this.props.currentCustomer.addr_str
+    });
+  };
+
+  handlePastAddressToDropOff = () => {
+    this.setState({
+      dropoff_location: this.props.currentCustomer.addr_str,
+      to_address: this.props.currentCustomer.addr_str
+    });
+  };
+
   handleFindQuote = async () => {
     const { from_address, to_address, date, time } = this.state;
     const { round_trip } = this.props;
@@ -110,8 +127,9 @@ class TripInfo extends Component {
   };
 
   render() {
-    const { showFlightDetail } = this.state;
+    const { showFlightDetail, pickup_location, dropoff_location } = this.state;
     const {
+      currentCustomer,
       airlineCode,
       flightNumber,
       flight_list_in_lord,
@@ -121,7 +139,7 @@ class TripInfo extends Component {
       round_trip
     } = this.props;
     const { basic_info, quote_list } = quote_in_lord;
-    console.log(quote_in_lord);
+    console.log(currentCustomer);
     return (
       <div className="row pt-2 mb-4">
         {showFlightDetail && (
@@ -144,19 +162,39 @@ class TripInfo extends Component {
             <div className="p-3">
               <div className="form-group mb-4 ">
                 <label className="text-main-color hm-text-14 font-weight-bold my-4">Pickup Location</label>
-                <GAutoComplete
-                  handleInputHasChanged={this.handleInputHasChanged}
-                  customeId={!round_trip ? `from` : `from_again`}
-                  getGoogleAddress={this.saveFromAddress}
-                />
+                <div className="d-flex">
+                  <GAutoComplete
+                    handleInputHasChanged={this.handleInputHasChanged}
+                    customeId={!round_trip ? `from` : `from_again`}
+                    getGoogleAddress={this.saveFromAddress}
+                    defaultValue={pickup_location}
+                  />
+                  <button
+                    className=" d-flex justify-content-center ml-2 align-items-center border-left-0 btn button-main-background text-white"
+                    style={{ width: "46px" }}
+                    onClick={this.handlePastAddressToPickUp}
+                  >
+                    Paste
+                  </button>
+                </div>
               </div>
               <div className="form-group mb-4">
                 <label className="text-main-color hm-text-14 font-weight-bold mb-4">Dropoff Location</label>
-                <GAutoComplete
-                  handleInputHasChanged={this.handleInputHasChanged}
-                  customeId={!round_trip ? `to` : `to_again`}
-                  getGoogleAddress={this.saveToAddress}
-                />
+                <div className="d-flex">
+                  <GAutoComplete
+                    handleInputHasChanged={this.handleInputHasChanged}
+                    customeId={!round_trip ? `to` : `to_again`}
+                    getGoogleAddress={this.saveToAddress}
+                    defaultValue={dropoff_location}
+                  />
+                  <button
+                    className=" d-flex justify-content-center ml-2 align-items-center border-left-0 btn button-main-background text-white"
+                    style={{ width: "46px" }}
+                    onClick={this.handlePastAddressToDropOff}
+                  >
+                    Paste
+                  </button>
+                </div>
               </div>
               <div className="form-group input-group mb-4">
                 <label className="text-main-color hm-text-14 font-weight-bold mb-4">Date</label>
@@ -172,7 +210,7 @@ class TripInfo extends Component {
                   <input
                     type="text"
                     className="form-control hm-input-height col-2"
-                    id={`${airlineCode}`}
+                    id="airlineCode"
                     placeholder="Airline Code"
                     value={airlineCode}
                     onChange={handleInputChange}
@@ -181,15 +219,10 @@ class TripInfo extends Component {
                   <input
                     type="text"
                     className="form-control hm-input-height "
-                    id={`${flightNumber}`}
+                    id="flightNumber"
                     placeholder="Flight Number"
                     value={flightNumber}
                     onChange={handleInputChange}
-                  />
-                  <i
-                    className="fas fa-search d-flex justify-content-center align-items-center button-main-background text-white hm-pointer-cursor"
-                    style={{ height: "46px", width: "46px" }}
-                    onClick={this.handleSearchFlight}
                   />
                 </div>
               </div>

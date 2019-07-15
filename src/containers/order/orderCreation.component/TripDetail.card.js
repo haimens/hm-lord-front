@@ -99,11 +99,13 @@ class TripDetail extends Component {
       setMapToFalse,
       setMapToFalseAgain,
       showMap,
-      showMapAgain
+      showMapAgain,
+      currentCustomer
     } = this.props;
     return (
       <div>
         <TripInfo
+          currentCustomer={currentCustomer}
           round_trip={false}
           setMapToFalse={setMapToFalse}
           showMap={showMap}
@@ -119,6 +121,7 @@ class TripDetail extends Component {
         />
         {round_trip && (
           <TripInfo
+            currentCustomer={currentCustomer}
             round_trip={true}
             setMapToFalse={setMapToFalseAgain}
             showMap={showMapAgain}
