@@ -8,7 +8,6 @@ class Driver extends Component {
   state = {
     showDriverCreationModal: false
   };
-  handlePageChange = start => {};
   handleAddingDriver = () => {
     this.setState(state => ({ showDriverCreationModal: !state.showDriverCreationModal }));
   };
@@ -16,6 +15,10 @@ class Driver extends Component {
     const { findDriverListInLord } = this.props;
     findDriverListInLord();
   }
+  handlePageChange = start => {
+    const { findDriverListInLord } = this.props;
+    findDriverListInLord({ start });
+  };
   render() {
     const { showDriverCreationModal } = this.state;
     const { history, driver_list_in_lord, createADriverInLord } = this.props;
@@ -52,6 +55,15 @@ class Driver extends Component {
             ))}
           </div>
         </section>
+        {driver_list_in_lord.count === 0 ? (
+          <section className="fixed-bottom">
+            <Pagination count={driver_list_in_lord.count} onPageChange={this.handlePageChange} />
+          </section>
+        ) : (
+          <section>
+            <Pagination count={driver_list_in_lord.count} onPageChange={this.handlePageChange} />
+          </section>
+        )}
       </main>
     );
   }

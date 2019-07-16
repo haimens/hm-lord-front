@@ -254,7 +254,7 @@ class DriverDetail extends Component {
         <section className="mb-4">
           <ListHeader
             parentProps={{
-              title: "Wage List",
+              title: "Transaction List",
               clickFunction: this.handleShowAddingWageModal,
               clickTitle: "Wage"
             }}
@@ -262,7 +262,7 @@ class DriverDetail extends Component {
           />
           <ListView
             totalCount={wage_list_in_driver.count}
-            title="Wage List"
+            title="Transaction List"
             fieldNames={["Created On", "Amount", "Type", "Note"]}
             hideHeader={true}
             onPageChange={this.handlePageChange("wage")}
@@ -276,7 +276,7 @@ class DriverDetail extends Component {
         <section className="mb-4">
           <ListHeader
             parentProps={{
-              title: "Salary List",
+              title: "Earning List",
               clickFunction: this.handleShowAddingSalaryModal,
               clickTitle: "Salary"
             }}
@@ -284,7 +284,7 @@ class DriverDetail extends Component {
           />
           <ListView
             totalCount={salary_list_in_driver.count}
-            title="Salary List"
+            title="Earning List"
             fieldNames={["Created On", "Updated On", "Amount"]}
             hideHeader={true}
             onPageChange={this.handlePageChange("salary")}
