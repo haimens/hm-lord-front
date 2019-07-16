@@ -317,3 +317,7 @@ color: #32325d !important;
   font-weight: bold;
   margin-top: 4px !important;
 }
+
+*{
+  border-color: rgba(151, 151, 151, 0.15) !important
+}
