@@ -114,7 +114,7 @@ class Calendar extends Component {
                       <div className="hm-text-14 font-weight-bold text-modal-color">Driver:</div>
                     </div>
                     <div className="col-8 px-0 ">
-                      <div className="text-modal-color hm-text-14">{trip.to_addr_str}</div>
+                      <div className="text-modal-color hm-text-14">{trip.driver_name}</div>
                     </div>
                   </div>
 
@@ -137,12 +137,24 @@ class Calendar extends Component {
                   </div>
                 </div>
                 <div className="col-2 px-0  d-flex justify-content-center ">
-                  <img
-                    src={`${process.env.PUBLIC_URL}/img/icon_detail.svg`}
-                    alt="detail"
-                    style={{ height: "25px", width: "25px" }}
-                    onClick={() => this.props.history.push(trip.trip_token)}
-                  />
+                  {trip.status === 7 && (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/img/icon_detail.svg`}
+                      alt="detail"
+                      className="hm-pointer-cursor"
+                      style={{ height: "25px", width: "25px" }}
+                      onClick={() => this.props.history.push(`/trip/finished/detail/${trip.trip_token}`)}
+                    />
+                  )}
+                  {trip.status !== 8 && trip.status !== 7 && (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/img/icon_detail.svg`}
+                      alt="detail"
+                      className="hm-pointer-cursor"
+                      style={{ height: "25px", width: "25px" }}
+                      onClick={() => this.props.history.push(`/trip/ongoing/detail/${trip.trip_token}`)}
+                    />
+                  )}
                 </div>
               </div>
             </div>

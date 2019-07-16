@@ -268,12 +268,12 @@ class Dashboard extends Component {
         <section className="container-fluid">
           <div className="mb-4">
             <ListHeader parentProps={{ title: "Trips" }} hideButton={true} />
-            <div className="bg-white p-3 border-top shadow-sm mb-3">
+            <div className="bg-white p-3 border-top shadow-sm" style={{ height: "900px" }}>
               <Calendar
                 localizer={localizer}
                 events={tripArray}
                 onRangeChange={this.handleOnRangeChange}
-                style={{ height: "900px" }}
+                style={{ height: "800px" }}
                 popup={true}
                 eventLimit={3}
                 onDrillDown={this.handleOnDrillDown}
