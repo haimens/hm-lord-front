@@ -183,14 +183,35 @@ export const deleteAddonItem = (order_token, trip_token, addon_token, position) 
 export const findTripCountInLord = (query = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`trip/count/realm/`, "GET", null, {
+    let currDate = await callApi(`trip/count/realm/`, "GET", null, {
       order_key: "udate",
       order_direction: "DESC",
+      status: "active",
       ...query
     });
     await dispatch({
-      type: constant.TRIP_COUNT_IN_LORD,
-      payload
+      type: constant.TRIP_COUNT_IN_LORD_ACTIVE,
+      payload: currDate.payload
+    });
+    currDate = await callApi(`trip/count/realm/`, "GET", null, {
+      order_key: "udate",
+      order_direction: "DESC",
+      status: "finished",
+      ...query
+    });
+    await dispatch({
+      type: constant.TRIP_COUNT_IN_LORD_FINISHED,
+      payload: currDate.payload
+    });
+    currDate = await callApi(`trip/count/realm/`, "GET", null, {
+      order_key: "udate",
+      order_direction: "DESC",
+      status: "failed",
+      ...query
+    });
+    await dispatch({
+      type: constant.TRIP_COUNT_IN_LORD_FAILED,
+      payload: currDate.payload
     });
     await stopLoader(dispatch);
   } catch (err) {

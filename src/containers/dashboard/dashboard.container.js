@@ -21,7 +21,32 @@ class Home extends Component {
     this.state = { curr_select: "" };
   }
 
-  handleCalendarBeenClicked = date => {};
+  handleCalendarBeenClicked = date => {
+    console.log(date);
+  };
+
+  handleEventPropGetter = (event, start, end, isSelected) => {
+    console.log(event);
+    if (event.title.includes("Failed")) {
+      return { style: { backgroundColor: "#f5365c", fontColor: "12px" } };
+    }
+    if (event.title.includes("Finished")) {
+      return { style: { backgroundColor: "#ffd600", fontColor: "12px" } };
+    }
+    if (event.title.includes("Ongoing")) {
+      return { style: { backgroundColor: "#2ece89", fontColor: "12px" } };
+    }
+  };
+
+  handleOnRangeChange = date => {
+    console.log(date);
+    this.props.findTripCountInLord({
+      date_from: convertLocalToUTC(date.start),
+      date_to: convertLocalToUTC(date.end),
+      from_key: "pickup_time",
+      to_key: "pickup_time"
+    });
+  };
 
   handleRefreshDriverLocation = () => {
     this.props.findDriverLocationListInLord();
@@ -29,6 +54,39 @@ class Home extends Component {
 
   handleDriverBeenClicked = curr_select => {
     this.setState({ curr_select });
+  };
+
+  handleGenerateDateItems = () => {
+    const { trip_count_in_lord_active, trip_count_in_lord_finished, trip_count_in_lord_failed } = this.props;
+    let tripArray = [];
+    trip_count_in_lord_active.map((active, index) =>
+      tripArray.push({
+        id: active.date,
+        title: `${active.count} Ongoing Trip`,
+        allDay: true,
+        start: active.date,
+        end: active.date
+      })
+    );
+    trip_count_in_lord_finished.map((finished, index) =>
+      tripArray.push({
+        id: finished.date,
+        title: `${finished.count} Finished Trip`,
+        allDay: true,
+        start: finished.date,
+        end: finished.date
+      })
+    );
+    trip_count_in_lord_failed.map((failed, index) =>
+      tripArray.push({
+        id: failed.date,
+        title: `${failed.count} Failed Trip`,
+        allDay: true,
+        start: failed.date,
+        end: failed.date
+      })
+    );
+    return tripArray;
   };
 
   componentDidMount() {
@@ -49,10 +107,14 @@ class Home extends Component {
         date_from: convertLocalToUTC(moment().startOf("day")),
         date_to: convertLocalToUTC(moment().endOf("day"))
       }),
-      findTripCountInLord()
+      findTripCountInLord({
+        date_from: convertLocalToUTC(moment().startOf("month")),
+        date_to: convertLocalToUTC(moment().endOf("month")),
+        from_key: "pickup_time",
+        to_key: "pickup_time"
+      })
     ]);
   }
-
   render() {
     const localizer = momentLocalizer(moment);
     const {
@@ -63,6 +125,7 @@ class Home extends Component {
       driver_location_list_in_lord
     } = this.props;
     const { curr_select } = this.state;
+    let tripArray = this.handleGenerateDateItems();
     return (
       <main>
         <section className="container-fluid">
@@ -161,6 +224,7 @@ class Home extends Component {
                           className="border-bottom-custom d-flex align-items-center hm-pointer-cursor"
                           style={{ height: "94px" }}
                           onClick={() => this.handleDriverBeenClicked(driver)}
+                          key={index}
                         >
                           <div className="container-fluid">
                             <div className="row">
@@ -189,13 +253,15 @@ class Home extends Component {
             <div className="bg-white p-3 border-top shadow-sm mb-3">
               <Calendar
                 localizer={localizer}
-                events={myEventsList}
-                style={{ minHeight: "804px" }}
+                events={tripArray}
+                onRangeChange={this.handleOnRangeChange}
+                style={{ minHeight: "900px" }}
                 views={["month"]}
                 startAccessor="start"
                 endAccessor="end"
                 onSelectEvent={this.handleCalendarBeenClicked}
                 showMultiDayTimes={true}
+                eventPropGetter={this.handleEventPropGetter}
               />
             </div>
           </div>
@@ -211,7 +277,10 @@ const mapStateToProps = state => {
     driver_location_list_in_lord: state.driverReducer.driver_location_list_in_lord,
     order_list_in_lord: state.orderReducer.order_list_in_lord,
     order_list_in_lord_with_date: state.orderReducer.order_list_in_lord_with_date,
-    customer_list_in_lord: state.customerReducer.customer_list_in_lord
+    customer_list_in_lord: state.customerReducer.customer_list_in_lord,
+    trip_count_in_lord_active: state.tripReducer.trip_count_in_lord_active,
+    trip_count_in_lord_finished: state.tripReducer.trip_count_in_lord_finished,
+    trip_count_in_lord_failed: state.tripReducer.trip_count_in_lord_failed
   };
 };
 const mapDispatchToProps = {

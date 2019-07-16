@@ -292,3 +292,28 @@ border-radius: 6px;
   max-width: none;
   border-radius: 25px !important;
  }
+.rbc-row-segment{
+margin-top: 4px !important;
+padding-left: 8px !important;
+padding-right: 8px !important;
+color: #32325d !important;
+}
+.rbc-header{
+  padding: 15px !important;
+  text-align: left !important;
+}
+.rbc-off-range-bg{
+  background-color: white !important;
+}
+
+.rbc-off-range a{
+  color: #aeb5bd !important;
+}
+
+.rbc-date-cell{
+  text-align: left !important;
+  margin-left: 16px;
+  color: #32325d !important;
+  font-weight: bold;
+  margin-top: 4px !important;
+}

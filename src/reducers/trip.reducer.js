@@ -119,11 +119,9 @@ const initialState = {
     alert_list: [{ type: "", record_time: "" }, { type: "", record_time: "" }, { type: "", record_time: "" }],
     addon_list: []
   },
-  trip_count_in_lord: {
-    record_list: [],
-    count: 0,
-    end: 0
-  }
+  trip_count_in_lord_active: [],
+  trip_count_in_lord_finished: [],
+  trip_count_in_lord_failed: []
 };
 
 export default (state = initialState, action) => {
@@ -140,8 +138,12 @@ export default (state = initialState, action) => {
       return { ...state, trip_detail_in_lord: action.payload };
     case constant.TRIP_DETAIL_IN_LORD_AGAIN:
       return { ...state, trip_detail_in_lord_again: action.payload };
-    case constant.TRIP_COUNT_IN_LORD:
-      return { ...state, trip_count_in_lord: action.payload };
+    case constant.TRIP_COUNT_IN_LORD_ACTIVE:
+      return { ...state, trip_count_in_lord_active: action.payload };
+    case constant.TRIP_COUNT_IN_LORD_FINISHED:
+      return { ...state, trip_count_in_lord_finished: action.payload };
+    case constant.TRIP_COUNT_IN_LORD_FAILED:
+      return { ...state, trip_count_in_lord_failed: action.payload };
     default:
       return state;
   }
