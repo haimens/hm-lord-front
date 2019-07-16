@@ -9,7 +9,11 @@ import moment from "moment";
 import "./dashboard.container.css";
 import CalendarDailyList from "./dashboard.components/CalendarDailyList.component";
 
-import { findDriverListInLord, findDriverLocationListInLord } from "../../actions/driver.action";
+import {
+  findDriverListInLord,
+  findDriverLocationListInLord,
+  setDriverLocationMapToFalse
+} from "../../actions/driver.action";
 import { findCustomerListInLord } from "../../actions/customer.action";
 import { findOrderListInLord, findOrderListInLordWithDate } from "../../actions/order.action";
 import { convertLocalToUTC } from "../../actions/utilities.action";
@@ -25,8 +29,11 @@ class Home extends Component {
     console.log(date);
   };
 
+  handleOnDrillDown = data => {
+    console.log(data);
+  };
+
   handleEventPropGetter = (event, start, end, isSelected) => {
-    console.log(event);
     if (event.title.includes("Failed")) {
       return { style: { backgroundColor: "#f5365c", fontColor: "12px" } };
     }
@@ -39,7 +46,6 @@ class Home extends Component {
   };
 
   handleOnRangeChange = date => {
-    console.log(date);
     this.props.findTripCountInLord({
       date_from: convertLocalToUTC(date.start),
       date_to: convertLocalToUTC(date.end),
@@ -49,6 +55,8 @@ class Home extends Component {
   };
 
   handleRefreshDriverLocation = () => {
+    this.setState({ curr_select: "" });
+    this.props.setDriverLocationMapToFalse();
     this.props.findDriverLocationListInLord();
   };
 
@@ -122,7 +130,8 @@ class Home extends Component {
       order_list_in_lord,
       driver_list_in_lord,
       order_list_in_lord_with_date,
-      driver_location_list_in_lord
+      driver_location_list_in_lord,
+      showMap
     } = this.props;
     const { curr_select } = this.state;
     let tripArray = this.handleGenerateDateItems();
@@ -189,7 +198,7 @@ class Home extends Component {
               <div className="container-fluid">
                 <div className="row p-1">
                   <div className="col-7 py-3" style={{ height: "512px" }}>
-                    {driver_location_list_in_lord.record_list.length > 0 && (
+                    {showMap && driver_location_list_in_lord.record_list.length > 0 && (
                       <GMapWithMarker
                         selected={curr_select}
                         driver_location_list_in_lord={driver_location_list_in_lord}
@@ -255,7 +264,10 @@ class Home extends Component {
                 localizer={localizer}
                 events={tripArray}
                 onRangeChange={this.handleOnRangeChange}
-                style={{ minHeight: "900px" }}
+                style={{ height: "900px" }}
+                popup={true}
+                eventLimit={3}
+                onDrillDown={this.handleOnDrillDown}
                 views={["month"]}
                 startAccessor="start"
                 endAccessor="end"
@@ -280,7 +292,8 @@ const mapStateToProps = state => {
     customer_list_in_lord: state.customerReducer.customer_list_in_lord,
     trip_count_in_lord_active: state.tripReducer.trip_count_in_lord_active,
     trip_count_in_lord_finished: state.tripReducer.trip_count_in_lord_finished,
-    trip_count_in_lord_failed: state.tripReducer.trip_count_in_lord_failed
+    trip_count_in_lord_failed: state.tripReducer.trip_count_in_lord_failed,
+    showMap: state.driverReducer.showMap
   };
 };
 const mapDispatchToProps = {
@@ -289,7 +302,8 @@ const mapDispatchToProps = {
   findOrderListInLord,
   findOrderListInLordWithDate,
   findDriverLocationListInLord,
-  findTripCountInLord
+  findTripCountInLord,
+  setDriverLocationMapToFalse
 };
 
 export default connect(

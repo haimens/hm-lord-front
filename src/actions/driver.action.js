@@ -72,9 +72,22 @@ export const findDriverLocationListInLord = (realm_token, query = {}) => async d
     });
     await dispatch({
       type: constant.DRIVER_LOCATION_LIST_IN_LORD,
-      payload
+      payload,
+      showMap: true
     });
     await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
+export const setDriverLocationMapToFalse = (realm_token, query = {}) => async dispatch => {
+  try {
+    await dispatch({
+      type: constant.DRIVER_LOCATION_LIST_IN_LORD_MAP_FALSE,
+      showMap: false
+    });
   } catch (err) {
     await stopLoader(dispatch);
     dispatch(processLogout(err));
