@@ -1,4 +1,5 @@
 import React from "react";
+import { SearchBar } from ".";
 
 export default function ListHeader(props) {
   let { buttonWidth } = props;
@@ -28,6 +29,18 @@ export default function ListHeader(props) {
             <div className="font-weight-bold hm-text-12 "> {props.parentProps.clickTitle}</div>
           </button>
         )}
+        <div className="d-flex ">
+          <div>{props.showSearch && <SearchBar />}</div>
+          <button
+            className="button-main-background  shadow-sm  text-white rounded-custom"
+            style={{ width: "88px", height: "28px" }}
+          >
+            hello
+          </button>
+          <button className="text-purple shadow-sm rounded-custom" style={{ width: "88px", height: "28px" }}>
+            hello
+          </button>
+        </div>
       </section>
     </div>
   );

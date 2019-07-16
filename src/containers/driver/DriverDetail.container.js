@@ -200,6 +200,7 @@ class DriverDetail extends Component {
             }}
             hideShadow={true}
             hideButton={true}
+            showSearch={true}
           />
           <div className="container-fluid">
             <div className="row triplist-scroll p-1">
