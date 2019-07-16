@@ -17,10 +17,18 @@ import { convertLocalToUTC } from "../../actions/utilities.action";
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { curr_select: "" };
   }
 
   handleCalendarBeenClicked = date => {};
+
+  handleRefreshDriverLocation = () => {
+    this.props.findDriverLocationListInLord();
+  };
+
+  handleDriverBeenClicked = curr_select => {
+    this.setState({ curr_select });
+  };
 
   componentDidMount() {
     const {
@@ -45,7 +53,14 @@ class Home extends Component {
 
   render() {
     const localizer = momentLocalizer(moment);
-    const { customer_list_in_lord, order_list_in_lord, driver_list_in_lord, order_list_in_lord_with_date } = this.props;
+    const {
+      customer_list_in_lord,
+      order_list_in_lord,
+      driver_list_in_lord,
+      order_list_in_lord_with_date,
+      driver_location_list_in_lord
+    } = this.props;
+    const { curr_select } = this.state;
     return (
       <main>
         <section className="container-fluid">
@@ -97,14 +112,24 @@ class Home extends Component {
         <section className="container-fluid">
           <div className="mb-4">
             <ListHeader
-              parentProps={{ title: "Driver Map", clickFunction: this.handleAddCompanyModal, clickTitle: "Refresh" }}
+              parentProps={{
+                title: "Driver Map",
+                clickFunction: this.handleRefreshDriverLocation,
+                clickTitle: "Refresh"
+              }}
+              hideShadow={false}
               buttonWidth={"88px"}
             />
             <div className="bg-white rounded-custom-bottom shadow-sm">
               <div className="container-fluid">
                 <div className="row p-1">
-                  <div className="col-7 " style={{ height: "512px" }}>
-                    <GMapWithMarker />
+                  <div className="col-7 py-3" style={{ height: "512px" }}>
+                    {driver_location_list_in_lord.record_list.length > 0 && (
+                      <GMapWithMarker
+                        selected={curr_select}
+                        driver_location_list_in_lord={driver_location_list_in_lord}
+                      />
+                    )}
                   </div>
                   <div className="col-5">
                     <div className="shadow-sm rounded-custom" style={{ height: "512px" }}>
@@ -129,24 +154,25 @@ class Home extends Component {
                           />
                         </div>
                       </div>
-
-                      <div className="border-bottom-custom d-flex align-items-center" style={{ height: "94px" }}>
-                        <div className="container-fluid">
-                          <div className="row">
-                            <div className="col-3 d-flex justify-content-end">
-                              <img
-                                src={`${process.env.PUBLIC_URL}/img/hd.png`}
-                                alt="driver-avatar"
-                                className="avatar-md rounded-circle "
-                              />
-                            </div>
-                            <div className="col-9">
-                              <div>Chris Yao</div>
-                              <div>12431241414</div>
+                      {driver_location_list_in_lord.record_list.map((driver, index) => (
+                        <div
+                          className="border-bottom-custom d-flex align-items-center hm-pointer-cursor"
+                          style={{ height: "94px" }}
+                          onClick={() => this.handleDriverBeenClicked(driver)}
+                        >
+                          <div className="container-fluid">
+                            <div className="row">
+                              <div className="col-3 d-flex justify-content-end">
+                                <img src={driver.img_path} alt="driver-avatar" className="avatar-md rounded-circle " />
+                              </div>
+                              <div className="col-9">
+                                <div className="text-modal-color font-weight-bold hm-text-15">{driver.name}</div>
+                                <div className="text-modal-color hm-text-13">{driver.cell}</div>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
+                      ))}
                     </div>
                   </div>
                 </div>

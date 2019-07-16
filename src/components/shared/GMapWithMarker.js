@@ -9,19 +9,16 @@ class GMapWithMarker extends Component {
     };
   }
   componentDidMount() {
-    fetch("https://api.harveyneeds.org/api/v1/shelters?limit=20")
-      .then(r => r.json())
-      .then(data => {
-        this.setState({ shelters: data.shelters });
-      });
+    this.setState({ shelters: this.props.driver_location_list_in_lord.record_list });
   }
   handleClick = (marker, event) => {
+    // console.log({ marker })
     this.setState({ selectedMarker: marker });
   };
   render() {
     return (
       <MapWithAMarker
-        selectedMarker={this.state.selectedMarker}
+        selectedMarker={this.props.selected}
         markers={this.state.shelters}
         onClick={this.handleClick}
         googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${
@@ -47,7 +44,7 @@ const MapWithAMarker = compose(
   return (
     <GoogleMap
       defaultZoom={8}
-      defaultCenter={{ lat: 29.5, lng: -95 }}
+      defaultCenter={{ lat: props.markers[0].lat, lng: props.markers[0].lng }}
       defaultOptions={{
         styles: [
           {
@@ -131,13 +128,26 @@ const MapWithAMarker = compose(
         ]
       }}
     >
-      {props.markers.map(marker => {
+      {props.markers.map((marker, index) => {
         const onClick = props.onClick.bind(this, marker);
+        console.log(marker);
         return (
-          <Marker key={marker.id} onClick={onClick} position={{ lat: marker.latitude, lng: marker.longitude }}>
+          <Marker
+            key={index}
+            icon={
+              {
+                // url: marker.img_path,
+                // scaledSize: new window.google.maps.Size(30, 30)
+              }
+            }
+            position={{ lat: marker.lat, lng: marker.lng }}
+          >
             {props.selectedMarker === marker && (
               <InfoWindow>
-                <div>{"name"}</div>
+                <div className="d-flex justify-content-center align-items-center">
+                  <img src={marker.img_path} style={{ width: "30px", height: "30px" }} alt="driver" />
+                  <div className="ml-2 text-modal-color">{marker.name}</div>
+                </div>
               </InfoWindow>
             )}
           </Marker>

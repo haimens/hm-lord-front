@@ -6,7 +6,11 @@ export default function ListHeader(props) {
     buttonWidth = "30px";
   }
   return (
-    <div className={`rounded-custom-top bg-white ${!props.hideShadow ? "shadow-sm" : "border-bottom mb-3"}`}>
+    <div
+      className={`rounded-custom-top bg-white ${
+        !props.hideShadow ? "shadow-sm border-bottom-custom" : "border-bottom-custom mb-3"
+      }`}
+    >
       <section className="d-flex justify-content-between align-items-center py-3 px-4" style={{ height: "65px" }}>
         <h6 className="d-block d-flex align-items-center hm-title-sub-size text-main-color font-weight-bold ">
           {props.parentProps.title}
