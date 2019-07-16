@@ -319,5 +319,6 @@ color: #32325d !important;
 }
 
 *{
-  border-color: rgba(151, 151, 151, 0.15) !important
+  border-color: rgba(151, 151, 151, 0.15) !important;
+  word-break: break-all !important;
 }

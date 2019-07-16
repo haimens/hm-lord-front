@@ -60,12 +60,15 @@ export const findTripListInLord = (query = {}) => async dispatch => {
 };
 export const findTripActiveListInLord = (query = {}) => async dispatch => {
   try {
+    console.log(query);
+
     await startLoader(dispatch);
     const { payload } = await callApi(`trip/all/active/realm`, "GET", null, {
       order_key: "udate",
       order_direction: "DESC",
       ...query
     });
+    console.log(payload);
     await dispatch({
       type: constant.TRIP_ACTIVE_LIST_IN_LORD,
       payload

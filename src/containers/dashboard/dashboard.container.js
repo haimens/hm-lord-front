@@ -8,7 +8,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "./dashboard.container.css";
 import CalendarDailyList from "./dashboard.components/CalendarDailyList.component";
-
+import CalendarModal from "./dashboard.components/Calendar.modal";
 import {
   findDriverListInLord,
   findDriverLocationListInLord,
@@ -19,22 +19,30 @@ import { findOrderListInLord, findOrderListInLordWithDate } from "../../actions/
 import { convertLocalToUTC } from "../../actions/utilities.action";
 import { findTripCountInLord } from "../../actions/trip.action";
 
-class Home extends Component {
+class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = { curr_select: "" };
+    this.state = {
+      curr_select: "",
+      showCalendarInfo: false,
+      curr_date: ""
+    };
   }
 
   handleCalendarBeenClicked = date => {
+    this.setState({ showCalendarInfo: true, curr_date: date });
+  };
+
+  handleCalendarClose = () => {
+    this.setState({ showCalendarInfo: false, curr_date: "" });
+  };
+
+  handleOnDrillDown = date => {
     console.log(date);
   };
 
-  handleOnDrillDown = data => {
-    console.log(data);
-  };
-
   handleEventPropGetter = (event, start, end, isSelected) => {
-    if (event.title.includes("Failed")) {
+    if (event.title.includes("Abnormal")) {
       return { style: { backgroundColor: "#f5365c", fontColor: "12px" } };
     }
     if (event.title.includes("Finished")) {
@@ -88,7 +96,7 @@ class Home extends Component {
     trip_count_in_lord_failed.map((failed, index) =>
       tripArray.push({
         id: failed.date,
-        title: `${failed.count} Failed Trip`,
+        title: `${failed.count} Abnormal Trip`,
         allDay: true,
         start: failed.date,
         end: failed.date
@@ -133,10 +141,11 @@ class Home extends Component {
       driver_location_list_in_lord,
       showMap
     } = this.props;
-    const { curr_select } = this.state;
+    const { curr_select, showCalendarInfo, curr_date } = this.state;
     let tripArray = this.handleGenerateDateItems();
     return (
       <main>
+        {showCalendarInfo && <CalendarModal onClose={this.handleCalendarClose} curr_date={curr_date} />}
         <section className="container-fluid">
           <div className="mb-4">
             <Header title="Dashboard" tabicon={"icon_dashboard_white.svg"} />
@@ -293,6 +302,8 @@ const mapStateToProps = state => {
     trip_count_in_lord_active: state.tripReducer.trip_count_in_lord_active,
     trip_count_in_lord_finished: state.tripReducer.trip_count_in_lord_finished,
     trip_count_in_lord_failed: state.tripReducer.trip_count_in_lord_failed,
+    trip_list_in_driver: state.tripReducer.trip_list_in_driver,
+    trip_active_list_in_driver: state.tripReducer.trip_active_list_in_driver,
     showMap: state.driverReducer.showMap
   };
 };
@@ -309,14 +320,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(Home));
-
-let myEventsList = [
-  {
-    id: 0,
-    title: "All Day Event very long title",
-    allDay: true,
-    start: new Date(),
-    end: new Date()
-  }
-];
+)(withRouter(Dashboard));
