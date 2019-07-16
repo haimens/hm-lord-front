@@ -118,7 +118,7 @@ const MapWithAMarker = compose(
             elementType: "all",
             stylers: [
               {
-                color: "#2569e3"
+                color: "#5e72e4"
               },
               {
                 visibility: "on"
@@ -130,7 +130,6 @@ const MapWithAMarker = compose(
     >
       {props.markers.map((marker, index) => {
         const onClick = props.onClick.bind(this, marker);
-        console.log(marker);
         return (
           <Marker
             key={index}
