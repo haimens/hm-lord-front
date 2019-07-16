@@ -8,7 +8,9 @@ class Vehicle extends Component {
   state = {
     showVehicleCreationModal: false
   };
-  handlePageChange = start => {};
+  handlePageChange = start => {
+    this.props.findVehicleListInLord({ start });
+  };
   handleAddingVehicle = () => {
     this.setState(state => ({ showVehicleCreationModal: !state.showVehicleCreationModal }));
   };
@@ -51,6 +53,15 @@ class Vehicle extends Component {
             ))}
           </div>
         </section>
+        {vehicle_list_in_lord.count === 0 ? (
+          <section className="fixed-bottom">
+            <Pagination count={vehicle_list_in_lord.count} onPageChange={this.handlePageChange} />
+          </section>
+        ) : (
+          <section>
+            <Pagination count={vehicle_list_in_lord.count} onPageChange={this.handlePageChange} />
+          </section>
+        )}
       </main>
     );
   }
