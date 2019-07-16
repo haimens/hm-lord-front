@@ -133,12 +133,10 @@ const MapWithAMarker = compose(
         return (
           <Marker
             key={index}
-            icon={
-              {
-                // url: marker.img_path,
-                // scaledSize: new window.google.maps.Size(30, 30)
-              }
-            }
+            icon={{
+              url: marker.img_path,
+              scaledSize: new window.google.maps.Size(30, 30)
+            }}
             position={{ lat: marker.lat, lng: marker.lng }}
           >
             {props.selectedMarker === marker && (
