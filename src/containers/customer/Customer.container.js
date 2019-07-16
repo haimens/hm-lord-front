@@ -10,13 +10,19 @@ import { findCustomerListInLord, createACustomerInLord } from "../../actions/cus
 import { createNewAddressInstance } from "../../actions/address.action";
 class Customer extends Component {
   state = {
-    showCustomerAdding: false
+    showCustomerAdding: false,
+    keywords: ""
   };
-  handlePageChange = start => {};
+  handleSubmitSearch = keywords => {
+    this.setState({ keywords });
+    this.props.findCustomerListInLord({ keywords });
+  };
   handleAddingCustomer = () => {
     this.setState(state => ({ showCustomerAdding: !state.showCustomerAdding }));
   };
-  handlePageChange = start => {};
+  handlePageChange = start => {
+    this.props.findCustomerListInLord({ start, keywords: this.state.keywords });
+  };
   componentDidMount() {
     this.props.findCustomerListInLord();
   }
@@ -41,6 +47,8 @@ class Customer extends Component {
               clickFunction={this.handleAddingCustomer}
               clickTitle={"Customer"}
               buttonWidth={"88px"}
+              search={true}
+              handleSubmitSearch={this.handleSubmitSearch}
             />
           </div>
           <div className="row">
@@ -60,6 +68,16 @@ class Customer extends Component {
             ))}
           </div>
         </section>
+
+        {customer_list_in_lord.count === 0 ? (
+          <section className="fixed-bottom">
+            <Pagination count={customer_list_in_lord.count} onPageChange={this.handlePageChange} />
+          </section>
+        ) : (
+          <section>
+            <Pagination count={customer_list_in_lord.count} onPageChange={this.handlePageChange} />
+          </section>
+        )}
       </main>
     );
   }

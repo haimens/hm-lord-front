@@ -318,3 +318,6 @@ color: #32325d !important;
   margin-top: 4px !important;
 }
 
+input, select, textarea{
+  color: #000;
+}

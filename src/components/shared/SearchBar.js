@@ -42,8 +42,8 @@ class IconInput extends React.Component {
     //=====================================================================================================
 
     return (
-      <form className="filter-item-container border " onSubmit={this.handleSubmit}>
-        <div id="filter-item-icon" className="d-flex align-items-center ">
+      <form className="filter-item-container mr-3" onSubmit={this.handleSubmit}>
+        <div id="filter-item-icon" className="d-flex align-items-center text-dark">
           <ImageButton
             image={`${process.env.PUBLIC_URL}/img/search.png`}
             type="submit"
@@ -56,9 +56,18 @@ class IconInput extends React.Component {
           name={this.props.name}
           onChange={this.handleChange}
           value={keyword}
+          style={{
+            height: "28px",
+            borderRadius: "20px",
+            width: "200px"
+          }}
           placeholder={placeholder || "search"}
-          className={this.props.className}
+          type="text"
+          class="form-control"
+          aria-label="Small"
+          aria-describedby="inputGroup-sizing-sm"
         />
+
         <div id="filter-item-icon-reverse" className="d-flex align-items-center">
           <ImageButton icon={<i className="fas fa-times text-muted" />} size={20} onClick={this.handleClear} />
         </div>
