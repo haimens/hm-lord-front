@@ -13,6 +13,7 @@ import { findDriverListInLord, findDriverLocationListInLord } from "../../action
 import { findCustomerListInLord } from "../../actions/customer.action";
 import { findOrderListInLord, findOrderListInLordWithDate } from "../../actions/order.action";
 import { convertLocalToUTC } from "../../actions/utilities.action";
+import { findTripCountInLord } from "../../actions/trip.action";
 
 class Home extends Component {
   constructor(props) {
@@ -36,9 +37,9 @@ class Home extends Component {
       findCustomerListInLord,
       findOrderListInLord,
       findOrderListInLordWithDate,
-      findDriverLocationListInLord
+      findDriverLocationListInLord,
+      findTripCountInLord
     } = this.props;
-    console.log(new Date());
     Promise.all([
       findDriverListInLord(),
       findCustomerListInLord(),
@@ -47,7 +48,8 @@ class Home extends Component {
       findOrderListInLordWithDate({
         date_from: convertLocalToUTC(moment().startOf("day")),
         date_to: convertLocalToUTC(moment().endOf("day"))
-      })
+      }),
+      findTripCountInLord()
     ]);
   }
 
@@ -217,7 +219,8 @@ const mapDispatchToProps = {
   findCustomerListInLord,
   findOrderListInLord,
   findOrderListInLordWithDate,
-  findDriverLocationListInLord
+  findDriverLocationListInLord,
+  findTripCountInLord
 };
 
 export default connect(
