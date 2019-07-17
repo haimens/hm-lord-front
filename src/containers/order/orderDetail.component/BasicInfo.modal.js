@@ -1,20 +1,11 @@
 import React, { Component } from "react";
-import { Modal, ImageLoaderModal, PreviewImageModal, AddingImage } from "../../../components/shared";
-import { parseRate } from "../../../actions/utilities.action";
+import { Modal } from "../../../components/shared";
 import alertify from "alertifyjs";
 
 export default class BasicInfoModal extends Component {
   state = {
-    showImage: false,
-    showPreview: false,
-    name: "",
-    cell: "",
-    email: "",
-    username: "",
-    img_path: "",
-    license_num: "",
-    identifier: "",
-    rate: 70,
+    contact_name: "",
+    contact_cell: "",
     area: "+1"
   };
 
@@ -23,42 +14,17 @@ export default class BasicInfoModal extends Component {
     this.setState({ [id]: value });
   };
 
-  handleShowImage = () => {
-    this.setState(states => ({ showImage: !states.showImage }));
-  };
-  handleShowPreview = () => {
-    this.setState(states => ({ showPreview: !states.showPreview }));
-  };
-
-  handleImageUpload = img_path => {
-    this.setState({ img_path: img_path });
-  };
-
   handleClose = () => {
     this.props.onClose();
   };
 
   handleCreateADriverInLord = () => {
-    const { name, cell, email, username, img_path, area, license_num, identifier, rate } = this.state;
-    if (
-      name !== "" &&
-      cell !== "" &&
-      email !== "" &&
-      username !== "" &&
-      area !== "" &&
-      license_num !== "" &&
-      identifier !== "" &&
-      rate !== ""
-    ) {
-      this.props.createADriverInLord({
-        name,
-        img_path,
-        cell: `${area} ${cell}`,
-        email,
-        username,
-        license_num,
-        identifier,
-        rate: rate * 10
+    const { contact_name, contact_cell, area } = this.state;
+    const { order_token, updateOrderDetailInLord } = this.props;
+    if (contact_name !== "" && contact_cell !== "" && area !== "") {
+      updateOrderDetailInLord(order_token, {
+        contact_name,
+        contact_cell: `${area} ${contact_cell}`
       });
       this.handleClose();
     } else {
@@ -70,151 +36,68 @@ export default class BasicInfoModal extends Component {
     this.setState({ company_address: address });
   };
 
-  async componentDidMount() {}
+  async componentDidMount() {
+    const { contact_cell, contact_name } = this.props.order_info;
+    await this.setState({ area: contact_cell.split(" ")[0], contact_cell: contact_cell.split(" ")[1], contact_name });
+  }
 
   render() {
-    const {
-      img_path,
-      showImage,
-      showPreview,
-      name,
-      cell,
-      email,
-      username,
-      area,
-      license_num,
-      identifier,
-      rate
-    } = this.state;
+    const { contact_name, contact_cell, area } = this.state;
     return (
-      <div>
-        {showImage && (
-          <ImageLoaderModal
-            onClose={() => this.setState({ showImage: false })}
-            onImageUpload={this.handleImageUpload}
-            title="Upload Image"
-          />
-        )}
-        {showPreview && <PreviewImageModal image={img_path} onClose={() => this.setState({ showPreview: false })} />}
+      <Modal
+        title="Update Contact Information"
+        onClose={this.handleClose}
+        position="center"
+        getWidth={"467px"}
+        getHeight={"320px"}
+      >
+        <div className="container">
+          <div className="p-3">
+            <div className="form-group mb-4">
+              <input
+                className="form-control hm-input-height mt-3"
+                name="contact_name"
+                id="contact_name"
+                placeholder={"Contact Name"}
+                value={contact_name}
+                onChange={this.handleInputChange}
+              />
+            </div>
 
-        <Modal title="Add Driver" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"720px"}>
-          <div className="container">
-            <div className="p-3">
-              <div className="form-group mb-4">
-                <input
-                  className="form-control hm-input-height mt-3"
-                  name="name"
-                  id="name"
-                  placeholder={"Name"}
-                  value={name}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-
-              <div className="form-group input-group mb-4 d-flex">
-                <input
-                  type="text"
-                  className="form-control hm-input-height col-2"
-                  id="area"
-                  placeholder="Area"
-                  value={area}
-                  onChange={this.handleInputChange}
-                />
-
-                <input
-                  type="text"
-                  className="form-control hm-input-height "
-                  id="cell"
-                  placeholder="Cell"
-                  value={cell}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-
-              <div className="form-group mb-4">
-                <input
-                  type="email"
-                  className="form-control hm-input-height "
-                  name="email"
-                  id="email"
-                  placeholder={"Email"}
-                  value={email}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-
-              <div className="form-group mb-4">
-                <input
-                  type="text"
-                  className="form-control hm-input-height "
-                  name="license_num"
-                  id="license_num"
-                  placeholder={"License Number"}
-                  value={license_num}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-
-              <div className="form-group mb-4">
-                <input
-                  type="text"
-                  className="form-control hm-input-height "
-                  name="identifier"
-                  id="identifier"
-                  placeholder={"Identifier"}
-                  value={identifier}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-
-              <div className="form-group mb-4">
-                <input
-                  type="text"
-                  className="form-control hm-input-height "
-                  name="username"
-                  id="username"
-                  placeholder={"Username"}
-                  value={username}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-
-              <div className="form-group input-group  mb-4">
-                <input
-                  type="text"
-                  className="form-control hm-input-height border-right-0"
-                  name="rate"
-                  id="rate"
-                  placeholder={"Rate"}
-                  value={rate}
-                  onChange={this.handleInputChange}
-                />
-                <div className="input-group-append bg-white border-left-0">
-                  <span className="input-group-text bg-white border-left-0 ">%</span>
-                </div>
-              </div>
-
-              <AddingImage
-                title={"Logo:"}
-                parentProps={{ img_url: img_path, handleShowPreview: this.handleShowPreview }}
-                handleShowImage={this.handleShowImage}
+            <div className="form-group input-group mb-4 d-flex">
+              <input
+                type="text"
+                className="form-control hm-input-height col-2"
+                id="area"
+                placeholder="Area"
+                value={area}
+                onChange={this.handleInputChange}
               />
 
-              <div className="form-group text-right pt-3">
-                <button
-                  className="button-main-background btn button-main-size px-4 text-white mr-3"
-                  onClick={this.handleCreateADriverInLord}
-                >
-                  Add
-                </button>
-                <button onClick={this.handleClose} className="btn button-main-size btn-outline-secondary px-4">
-                  Cancel
-                </button>
-              </div>
+              <input
+                type="text"
+                className="form-control hm-input-height "
+                id="contact_cell"
+                placeholder="Contact Cell"
+                value={contact_cell}
+                onChange={this.handleInputChange}
+              />
+            </div>
+
+            <div className="form-group text-right pt-3">
+              <button
+                className="button-main-background btn button-main-size px-4 text-white mr-3"
+                onClick={this.handleCreateADriverInLord}
+              >
+                Update
+              </button>
+              <button onClick={this.handleClose} className="btn button-main-size btn-outline-secondary px-4">
+                Cancel
+              </button>
             </div>
           </div>
-        </Modal>
-      </div>
+        </div>
+      </Modal>
     );
   }
 }

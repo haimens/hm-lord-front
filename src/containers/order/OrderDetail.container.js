@@ -7,7 +7,7 @@ import CustomerInfo from "./orderDetail.component/CustomerInfo.card";
 import BasicInfoModal from "./orderDetail.component/BasicInfo.modal";
 import CustomerInfoModal from "./orderDetail.component/CustomerInfo.modal";
 import LogModal from "./orderDetail.component/Log.modal";
-import { findOrderDetailInLord } from "../../actions/order.action";
+import { findOrderDetailInLord, updateOrderDetailInLord } from "../../actions/order.action";
 import { findCouponListInLord } from "../../actions/coupon.action";
 class OrderDetail extends Component {
   state = {
@@ -37,10 +37,19 @@ class OrderDetail extends Component {
 
   render() {
     const { showUpdateBasicInfoModal, showUpdateCustomerInfoModal, showCouponModal, showLogModal } = this.state;
-    const { history, coupon_list_in_lord, order_detail } = this.props;
+    const { history, coupon_list_in_lord, order_detail, updateOrderDetailInLord, match } = this.props;
+    const { order_token } = match.params;
+
     return (
       <main className="container-fluid">
-        {showUpdateBasicInfoModal && <BasicInfoModal onClose={this.handleUpdateBasicInfo} />}
+        {showUpdateBasicInfoModal && (
+          <BasicInfoModal
+            order_token={order_token}
+            updateOrderDetailInLord={updateOrderDetailInLord}
+            order_info={order_detail.order_info}
+            onClose={this.handleUpdateBasicInfo}
+          />
+        )}
         {showUpdateCustomerInfoModal && <CustomerInfoModal onClose={this.handleUpdateCustomerInfo} />}
         {showCouponModal && (
           <CouponModal
@@ -72,7 +81,7 @@ class OrderDetail extends Component {
           <div className="bg-white rounded-custom shadow-sm">
             <div className="row" style={{ padding: "40px" }}>
               <div className="col-lg-6 col-12 mb-4">
-                <BasicInfo handleUpdateBasicInfo={this.handleUpdateBasicInfo} />
+                <BasicInfo order_detail={order_detail} handleUpdateBasicInfo={this.handleUpdateBasicInfo} />
               </div>
               <div className="col-lg-6 col-12 mb-4">
                 <CustomerInfo handleUpdateCustomerInfo={this.handleUpdateCustomerInfo} />
@@ -157,7 +166,7 @@ const mapStateToProps = state => {
     coupon_list_in_lord: state.couponReducer.coupon_list_in_lord
   };
 };
-const mapDispatchToProps = { findOrderDetailInLord, findCouponListInLord };
+const mapDispatchToProps = { findOrderDetailInLord, findCouponListInLord, updateOrderDetailInLord };
 
 export default connect(
   mapStateToProps,

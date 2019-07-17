@@ -127,6 +127,8 @@ export const updateOrderDetailInLord = (order_token, body) => async dispatch => 
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`order/detail/${order_token}`, "PATCH", body);
+    await dispatch(findOrderDetailInLord(order_token));
+    await launchSuccess(dispatch);
     await stopLoader(dispatch);
   } catch (err) {
     await stopLoader(dispatch);

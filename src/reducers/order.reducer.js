@@ -17,7 +17,17 @@ const initialState = {
       email: "",
       cell: ""
     },
-    order_discount_list: []
+    order_discount_list: [],
+    order_info: {
+      receipt: "",
+      order_type: "",
+      cdate: "",
+      amount: "",
+      note: "",
+      status_str: "",
+      contact_name: "",
+      contact_cell: ""
+    }
   },
   current_order: {
     order_token: "ORD-f5764254208ece7dc05b092646d8d19a",

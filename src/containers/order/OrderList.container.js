@@ -1,18 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { OrderCard, Header } from "../../components/shared";
+import { OrderCard, Header, Pagination } from "../../components/shared";
 import { findOrderListInLord } from "../../actions/order.action";
-import { getPageIndex } from "../../actions/utilities.action";
 
 class Order extends Component {
   state = {
     hasMore: true
   };
   handlePageChange = async start => {
-    const { order_list_in_lord } = this.props;
-
-    this.props.findOrderListInLord({ start: order_list_in_lord.end });
+    this.props.findOrderListInLord({ start });
   };
 
   componentDidMount() {
@@ -53,6 +50,15 @@ class Order extends Component {
             ))}
           </div>
         </section>
+        {order_list_in_lord.count === 0 ? (
+          <section className="fixed-bottom">
+            <Pagination count={order_list_in_lord.count} onPageChange={this.handlePageChange} />
+          </section>
+        ) : (
+          <section>
+            <Pagination count={order_list_in_lord.count} onPageChange={this.handlePageChange} />
+          </section>
+        )}
       </main>
     );
   }

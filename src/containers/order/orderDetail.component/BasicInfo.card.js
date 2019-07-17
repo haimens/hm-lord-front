@@ -1,6 +1,18 @@
 import React from "react";
+import { convertLocalToUTC, parseAmount } from "../../../actions/utilities.action";
 
 export default function BasicInfo(props) {
+  const {
+    receipt,
+    order_type,
+    cdate,
+    amount,
+    note,
+    status_str,
+    contact_name,
+    contact_cell
+  } = props.order_detail.order_info;
+  console.log(props.order_detail.order_info);
   return (
     <>
       <div className="purple-border p-3">
@@ -17,28 +29,36 @@ export default function BasicInfo(props) {
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Order ID</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">{receipt ? receipt : "N/A"}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Type</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">{order_type}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Order Placed Time</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">{convertLocalToUTC(cdate)}</div>
+      </div>
+      <div className="mb-4 px-3">
+        <div className="text-secondary-color font-weight-500 hm-text-14">Order Placed By</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">{contact_name}</div>
+      </div>
+      <div className="mb-4 px-3">
+        <div className="text-secondary-color font-weight-500 hm-text-14">Contact Cell</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">{contact_cell}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Order Total Amount</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{"N/A"}</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">{amount ? parseAmount(amount, 2) : "N/A"}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Note</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{123}</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">{note ? note : "N/A"}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Status</div>
         <div className="hm-text-14 text-modal-color font-weight-bold">
-          {false === "DISPATCHED" ? (
+          {status_str === "DISPATCHED" ? (
             <div className="d-flex align-items-center ">
               <i className="fas fa-circle success-text-color mr-3 pl-0" style={{ fontSize: "6px" }} />
               <div className="text-modal-color hm-text-14  font-weight-500">DISPATCHED</div>
@@ -51,7 +71,7 @@ export default function BasicInfo(props) {
           ) : (
             <div className="d-flex align-items-center ">
               <i className="fas fa-circle text-purple mr-3 pl-0" style={{ fontSize: "6px" }} />
-              <div className="text-modal-color hm-text-14  font-weight-500">{123}</div>
+              <div className="text-modal-color hm-text-14  font-weight-500">{status_str}</div>
             </div>
           )}
         </div>
