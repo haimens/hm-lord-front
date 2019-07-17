@@ -43,7 +43,6 @@ export default class EditCustomer extends Component {
 
   handleCreatingCompany = async () => {
     const { name, cell, area, email, img_path, addr_str } = this.state;
-    console.log(addr_str);
     const {
       updateACustomerInLord,
       createNewAddressInstance,
@@ -52,7 +51,6 @@ export default class EditCustomer extends Component {
     } = this.props;
     if (name !== "" && cell !== "" && area !== "" && email !== "") {
       const payload = await createNewAddressInstance({ address_token: addr_str });
-      console.log(payload);
       Promise.all([
         updateACustomerInLord(customer_token, {
           name,
@@ -73,7 +71,6 @@ export default class EditCustomer extends Component {
   async componentDidMount() {
     const { customer_detail_in_lord } = this.props;
     const { name, cell, email, addr_str, img_path } = customer_detail_in_lord;
-    console.log(addr_str);
     await this.setState({ name, cell: cell.split(" ")[1], area: cell.split(" ")[0], email, addr_str, img_path });
   }
 
