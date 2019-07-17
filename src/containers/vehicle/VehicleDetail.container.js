@@ -8,7 +8,8 @@ import {
   findCarDetailInLord,
   findDriverListForACar,
   createCarToADriverInLord,
-  updateACarInLord
+  updateACarInLord,
+  updateADriverForACar
 } from "../../actions/vehicle.action";
 import { findDriverListInLord } from "../../actions/driver.action";
 import EditVehicle from "./vehicleDetail.component/EditVehicle.modal";
@@ -16,6 +17,10 @@ class VehicleDetail extends Component {
   state = {
     showAddingDriverModal: false,
     showEditVehicleModal: false
+  };
+  handleDeleteDriver = driver_car_token => {
+    const { car_token } = this.props.match.params;
+    this.props.updateADriverForACar(car_token, driver_car_token, { status: 0 });
   };
   handleShowAddingDriverModal = () => {
     this.setState(state => ({ showAddingDriverModal: !state.showAddingDriverModal }));
@@ -103,8 +108,10 @@ class VehicleDetail extends Component {
                     driverName: driver.name,
                     driverImage: driver.driver_img_path,
                     driverPhone: driver.cell,
-                    driver_token: driver.driver_token
+                    driver_token: driver.driver_token,
+                    driver_car_token: driver.driver_car_token
                   }}
+                  handleDeleteDriver={this.handleDeleteDriver}
                   history={history}
                   key={index}
                 />
@@ -128,7 +135,8 @@ const mapDispatchToProps = {
   findDriverListForACar,
   findDriverListInLord,
   createCarToADriverInLord,
-  updateACarInLord
+  updateACarInLord,
+  updateADriverForACar
 };
 
 export default connect(
