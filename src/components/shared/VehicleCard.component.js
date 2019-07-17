@@ -43,22 +43,6 @@ export default class VehicleCard extends Component {
                   />
                 </section>
               )}
-              {/* {!showButton &&
-                (isActive ? (
-                  <section className="hm-text-14 my-2">
-                    <div className=" d-flex align-items-center">
-                      <i className="fas fa-circle success-text-color mr-3" style={{ fontSize: "6px" }} />
-                      <div className="font-weight-500">Active</div>
-                    </div>
-                  </section>
-                ) : (
-                  <section className="hm-text-14 my-2">
-                    <div className=" d-flex align-items-center">
-                      <i className="fas fa-circle text-danger mr-3" style={{ fontSize: "6px" }} />
-                      <div className="font-weight-500">Inactive</div>
-                    </div>
-                  </section>
-                ))} */}
             </div>
           </div>
         </div>

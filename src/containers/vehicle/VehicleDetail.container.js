@@ -101,6 +101,7 @@ class VehicleDetail extends Component {
               clickFunction: this.handleShowAddingDriverModal,
               clickTitle: "Driver"
             }}
+            deleteButton={true}
             hideShadow={true}
             buttonWidth={"88px"}
           />
@@ -118,6 +119,7 @@ class VehicleDetail extends Component {
                   handleDeleteDriver={this.handleDeleteDriver}
                   history={history}
                   key={index}
+                  deleteButton={true}
                 />
               ))}
             </div>
