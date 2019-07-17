@@ -70,7 +70,7 @@ class CustomerInformation extends Component {
     const { customer_list_in_lord } = this.props;
     return (
       <div className="row pt-2">
-        <div className="col-8">
+        <div className="col-12 col-lg-8 mb-4">
           <div className="rounded-custom bg-white shadow-sm">
             <div
               className="d-flex justify-content-between align-items-center p-3 border-bottom-custom"
@@ -145,7 +145,7 @@ class CustomerInformation extends Component {
           </div>
         </div>
 
-        <div className="col-4">
+        <div className="col-12 col-lg-4">
           <div className="rounded-custom bg-white shadow-sm">
             <div
               className="d-flex justify-content-between align-items-center p-3 border-bottom-custom"
