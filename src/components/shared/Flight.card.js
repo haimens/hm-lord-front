@@ -64,14 +64,16 @@ export default function Flight(props) {
           </div>
         </div>
       </div>
-      <div className="d-flex justify-content-end">
-        <button
-          className="btn rounded-custom text-white button-main-background shadow-sm hm-text-12"
-          onClick={() => props.handleFlightInfoBeenClicked(props.flight.flight_token)}
-        >
-          Select
-        </button>
-      </div>
+      {!props.hideButton && (
+        <div className="d-flex justify-content-end">
+          <button
+            className="btn rounded-custom text-white button-main-background shadow-sm hm-text-12"
+            onClick={() => props.handleFlightInfoBeenClicked(props.flight.flight_token)}
+          >
+            Select
+          </button>
+        </div>
+      )}
     </div>
   );
 }

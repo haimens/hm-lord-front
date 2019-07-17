@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { GAutoComplete, GMapLocation } from "../../../../components/shared";
+import { GAutoComplete, GMapLocation, FlightDetailModal } from "../../../../components/shared";
 import { TimePicker, DatePicker } from "antd";
 import { convertLocalToUTC } from "../../../../actions/utilities.action";
 import TripCard from "./TripCar.card";
@@ -54,6 +54,20 @@ class TripInfo extends Component {
       to_address: this.props.currentCustomer.addr_str
     });
   };
+  handleFlightDetailBeenClicked = async () => {
+    await this.setState(state => ({ showFlightDetail: !state.showFlightDetail }));
+  };
+
+  handleSearchFlight = async () => {
+    const { date } = this.state;
+    const { airlineCode, flightNumber, findFlightListInLord } = this.props;
+    if (date !== "" && airlineCode !== "" && flightNumber !== "") {
+      await findFlightListInLord({ date: convertLocalToUTC(date), airlineCode, flightNumber });
+      await this.handleFlightDetailBeenClicked();
+    } else {
+      alertify.alert("Error!", "Please Finished Date, Air Line Code, and Flight Number before search!");
+    }
+  };
 
   handleFindQuote = async () => {
     const { from_address, to_address, date, time } = this.state;
@@ -101,6 +115,12 @@ class TripInfo extends Component {
       }
     }
   };
+
+  disabledDate = current => {
+    // Can not select days before today and today
+    return current && current.valueOf() <= moment().subtract(1, "days");
+  };
+
   handleInputHasChanged = async () => {
     await this.props.setMapToFalse();
   };
@@ -117,7 +137,7 @@ class TripInfo extends Component {
   };
 
   render() {
-    const { pickup_location, dropoff_location } = this.state;
+    const { pickup_location, dropoff_location, showFlightDetail } = this.state;
     const {
       airlineCode,
       flightNumber,
@@ -126,11 +146,20 @@ class TripInfo extends Component {
       showMap,
       round_trip,
       flightNumberID,
-      airlineCodeID
+      airlineCodeID,
+      flight_list_in_lord
     } = this.props;
     const { basic_info, quote_list } = quote_in_lord;
     return (
       <div className="row pt-2 mb-4">
+        {showFlightDetail && (
+          <FlightDetailModal
+            hideButton={true}
+            saveFlightToken={this.saveFlightToken}
+            onClose={this.handleFlightDetailBeenClicked}
+            flight_list_in_lord={flight_list_in_lord}
+          />
+        )}
         <div className="col-12 col-lg-8 mb-4">
           <div className="rounded-custom bg-white shadow-sm">
             <div className="d-flex justify-content-between align-items-center px-3 border-bottom-custom h-100">
@@ -180,7 +209,7 @@ class TripInfo extends Component {
               </div>
               <div className="form-group input-group mb-4">
                 <label className="text-main-color hm-text-14 font-weight-bold mb-4">Date</label>
-                <DatePicker onChange={this.handleDatePicker} />
+                <DatePicker disabledDate={this.disabledDate} onChange={this.handleDatePicker} />
               </div>
               <div className="form-group input-group mb-4">
                 <label className="text-main-color hm-text-14 font-weight-bold mb-4">Time</label>
@@ -205,6 +234,11 @@ class TripInfo extends Component {
                     placeholder="Flight Number"
                     value={flightNumber}
                     onChange={handleInputChange}
+                  />
+                  <i
+                    className="fas fa-search d-flex justify-content-center align-items-center rounded-circle button-main-background text-white hm-pointer-cursor ml-3"
+                    style={{ height: "46px", width: "46px" }}
+                    onClick={this.handleSearchFlight}
                   />
                 </div>
               </div>

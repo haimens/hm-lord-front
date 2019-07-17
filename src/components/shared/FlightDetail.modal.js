@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, FlightCard, FlightCardNoRecord } from "../../../../components/shared";
+import { Modal, FlightCard, FlightCardNoRecord } from "./index";
 
 export default class FlightDetail extends Component {
   handleInputChange = e => {
@@ -16,7 +16,7 @@ export default class FlightDetail extends Component {
   };
 
   render() {
-    const { flight_list_in_lord } = this.props;
+    const { flight_list_in_lord, hideButton } = this.props;
     return (
       <Modal
         title="Flight Information"
@@ -30,6 +30,7 @@ export default class FlightDetail extends Component {
             {flight_list_in_lord.record_list.length > 0 &&
               flight_list_in_lord.record_list.map((flight, index) => (
                 <FlightCard
+                  hideButton={hideButton}
                   key={index}
                   handleFlightInfoBeenClicked={this.handleFlightInfoBeenClicked}
                   flight={flight}

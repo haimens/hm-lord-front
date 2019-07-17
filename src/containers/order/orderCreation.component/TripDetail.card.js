@@ -41,7 +41,7 @@ class TripDetail extends Component {
       if (quote_token !== "") {
         await createOrderInLord({
           customer_token: currentCustomer.customer_token,
-          quote_list: [{ flight_str: `${airlineCode}${flightNumber}`, quote_token }]
+          quote_list: [{ flight_str: `${airlineCode} ${flightNumber}`, quote_token }]
         });
         this.props.handleMoveNext(1);
       } else {
@@ -98,11 +98,13 @@ class TripDetail extends Component {
       setMapToFalseAgain,
       showMap,
       showMapAgain,
-      currentCustomer
+      currentCustomer,
+      findFlightListInLord
     } = this.props;
     return (
       <div>
         <TripInfo
+          findFlightListInLord={findFlightListInLord}
           currentCustomer={currentCustomer}
           round_trip={false}
           setMapToFalse={setMapToFalse}
@@ -120,6 +122,7 @@ class TripDetail extends Component {
         />
         {round_trip && (
           <TripInfo
+            findFlightListInLord={findFlightListInLord}
             currentCustomer={currentCustomer}
             round_trip={true}
             setMapToFalse={setMapToFalseAgain}
@@ -132,7 +135,7 @@ class TripDetail extends Component {
             quote_in_lord={quote_in_lord_again}
             findQuoteInLord={this.handleFindQuoteInLordAgain}
             saveFlightToken={this.saveFlightTokenAgain}
-            flight_list_in_lord={flight_list_in_lord_round}
+            flight_list_in_lord={flight_list_in_lord}
             findFlightListInLordAgain={findFlightListInLordAgain}
             handleCarBeenClicked={this.handleCarBeenClickedAgain}
           />
@@ -171,7 +174,8 @@ const mapDispatchToProps = {
   findQuoteInLordAgain,
   createOrderInLord,
   setMapToFalse,
-  setMapToFalseAgain
+  setMapToFalseAgain,
+  findFlightListInLord
 };
 
 export default connect(

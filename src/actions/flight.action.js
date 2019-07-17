@@ -3,6 +3,7 @@ import { callApi, startLoader, stopLoader, launchSuccess } from "./utilities.act
 import { processLogout } from "./auth.action";
 
 export const findFlightListInLord = (body = {}) => async dispatch => {
+  console.log(body);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`flight/search`, "POST", body);

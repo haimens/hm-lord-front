@@ -11,7 +11,7 @@ class PaymentInfo extends Component {
     this.state = {
       round_trip: false,
       loaded: false,
-      nounce: ""
+      nonce: ""
     };
   }
   handleInputChange = e => {
@@ -22,13 +22,13 @@ class PaymentInfo extends Component {
     this.setState(state => ({ round_trip: !state.round_trip }));
   };
 
-  handleNoneReceived = nounce => {
-    this.setState({ nounce });
+  handleNoneReceived = nonce => {
+    this.setState({ nonce });
   };
 
   handleFinishOrder = () => {
     const { current_order, handleSubmitAPaymentInLord } = this.props;
-    this.props.handleSubmitAPaymentInLord(current_order.order_token, { card_nounce: this.state.nounce });
+    this.props.handleSubmitAPaymentInLord(current_order.order_token, { card_nonce: this.state.nonce });
   };
 
   async componentWillMount() {

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { Header, ListHeader, ListView, CouponCard, CouponModal } from "../../../components/shared";
+import { Header, ListHeader, ListView, FlightDetailModal, CouponCard, CouponModal } from "../../../components/shared";
 import { convertLocalToUTC, parseAmount } from "../../../actions/utilities.action";
-import FlightDetailModal from "../orderCreation.component/CompleteOrder.component/FlightDetail.modal";
 import "./TripDetail.card.css";
 import { findFlightListInLord } from "../../../actions/flight.action";
 import {
@@ -377,7 +376,7 @@ class CompleteOrderCard extends Component {
                 <div className="d-flex justify-content-between border-bottom-custom py-2">
                   <div className="text-secondary-color hm-text-14 font-weight-bold">Discount:</div>
                   <div className="hm-text-14 font-weight-bold text-modal-color">
-                    -${total_discount_amount / 100 + total_discount_rate}
+                    -${(total_discount_amount / 100 + total_discount_rate).toFixed(2)}
                   </div>
                 </div>
               </div>
