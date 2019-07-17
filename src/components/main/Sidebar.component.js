@@ -5,7 +5,7 @@ import SubNavItem from "./nav.component/SubNavItem.item";
 export default class Sidebar extends Component {
   handleClick = new_path => {
     const { history } = this.props.parentProps;
-    this.props.handleSideBarBeenOpened();
+    // this.props.handleSideBarBeenOpened();
     history.push(new_path);
   };
   handleClickLogo = e => {
