@@ -56,8 +56,6 @@ class Calendar extends Component {
   }
   render() {
     const { trip_list_in_lord } = this.props;
-
-    console.log(this.props);
     return (
       <Modal
         title="Upcoming trips"

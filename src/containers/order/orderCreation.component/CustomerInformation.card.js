@@ -14,7 +14,8 @@ class CustomerInformation extends Component {
     area: "+1",
     email: "",
     customer: "",
-    address_str: ""
+    address_str: "",
+    keywords: ""
   };
 
   handleInputChange = e => {
@@ -24,6 +25,12 @@ class CustomerInformation extends Component {
 
   saveToAddress = address => {
     this.setState({ address_str: address[0].formatted_address });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const { keywords } = this.state;
+    this.props.findCustomerListInLord({ keywords });
   };
 
   handleInputHasChanged = () => {};
@@ -59,7 +66,7 @@ class CustomerInformation extends Component {
     Promise.all([this.props.findCustomerListInLord(), this.props.setMapToFalse(), this.props.setMapToFalseAgain()]);
   }
   render() {
-    const { name, cell, area, email, customer } = this.state;
+    const { name, cell, area, email, keywords } = this.state;
     const { customer_list_in_lord } = this.props;
     return (
       <div className="row pt-2">
@@ -156,15 +163,17 @@ class CustomerInformation extends Component {
                     <i className="fas fa-search" />
                   </span>
                 </div>
-                <input
-                  className="form-control border-0 hm-text-14"
-                  name="customer"
-                  id="customer"
-                  style={{ height: "63px" }}
-                  value={customer}
-                  placeholder={"Search"}
-                  onChange={this.handleInputChange}
-                />
+                <form className="col" onSubmit={this.handleSubmit}>
+                  <input
+                    className="form-control border-0 hm-text-14"
+                    style={{ height: "58px" }}
+                    name="keywords"
+                    id="keywords"
+                    placeholder={"Search"}
+                    value={keywords}
+                    onChange={this.handleInputChange}
+                  />
+                </form>
               </div>
             </div>
 

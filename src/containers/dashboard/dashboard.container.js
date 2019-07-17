@@ -275,7 +275,6 @@ class Dashboard extends Component {
                 onRangeChange={this.handleOnRangeChange}
                 style={{ height: "800px" }}
                 popup={true}
-                eventLimit={3}
                 onDrillDown={this.handleOnDrillDown}
                 views={["month"]}
                 startAccessor="start"
