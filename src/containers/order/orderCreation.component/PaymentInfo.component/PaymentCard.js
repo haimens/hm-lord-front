@@ -211,24 +211,27 @@ export default class PaymentCard extends Component {
             <div className="px-3 py-4">
               <div
                 className="px-4 py-3 d-flex justify-content-between align-items-center rounded-custom shadow-sm text-white"
-                style={{ backgroundColor: "#12ccef" }}
+                style={{ backgroundColor: "#12ccef", height: "78px" }}
               >
                 <div className="d-flex align-items-center">
                   <img
-                    src={`${process.env.PUBLIC_URL}/img/hd.png`}
-                    style={{ width: "48px", height: "48px" }}
+                    src={`${process.env.PUBLIC_URL}/img/icon_creditcard.svg`}
+                    style={{ width: "30px", height: "20px" }}
                     alt="company"
-                    className="rounded-circle shadow-sm"
                   />
-                  <div className="ml-5 hm-text-15 font-weight-bold">Credit Card</div>
+                  <div className="ml-lg-5 ml-0  hm-text-15 font-weight-bold">Credit Card</div>
                 </div>
                 {!creditCardButton ? (
-                  <button className="btn bg-white shadow-sm text-purple" onClick={this.requestCardNonce}>
+                  <button
+                    className="btn bg-white shadow-sm text-purple hm-text-12"
+                    onClick={this.requestCardNonce}
+                    style={{ width: "56px", height: "28px" }}
+                  >
                     Select
                   </button>
                 ) : (
-                  <button className="btn border-white text-white" disabled>
-                    <i className="fas fa-check mr-3" />
+                  <button className="btn border-white text-white hm-text-12" disabled>
+                    <i className="fas fa-check mr-3 hm-text-12" />
                     Selected
                   </button>
                 )}
@@ -237,24 +240,27 @@ export default class PaymentCard extends Component {
             <div className="px-3 pb-4">
               <div
                 className="px-4 py-3 d-flex justify-content-between align-items-center rounded-custom shadow-sm text-white"
-                style={{ backgroundColor: "#2ece89" }}
+                style={{ backgroundColor: "#2ece89", height: "78px" }}
               >
                 <div className="d-flex align-items-center">
                   <img
-                    src={`${process.env.PUBLIC_URL}/img/hd.png`}
-                    style={{ width: "48px", height: "48px" }}
+                    src={`${process.env.PUBLIC_URL}/img/icon_cash.svg`}
+                    style={{ width: "30px", height: "20px" }}
                     alt="company"
-                    className="rounded-circle shadow-sm"
                   />
-                  <div className="ml-5 hm-text-15 font-weight-bold">Cash</div>
+                  <div className="ml-lg-5 ml-0 hm-text-15 font-weight-bold">Cash</div>
                 </div>
                 {!cashButton ? (
-                  <button className="btn bg-white shadow-sm text-purple" onClick={this.submitCash}>
+                  <button
+                    className="btn bg-white shadow-sm text-purple hm-text-12"
+                    onClick={this.submitCash}
+                    style={{ width: "56px", height: "28px" }}
+                  >
                     Select
                   </button>
                 ) : (
-                  <button className="btn border-white text-white" disabled onClick={this.submitCash}>
-                    <i className="fas fa-check mr-3" />
+                  <button className="btn border-white text-white hm-text-12" disabled onClick={this.submitCash}>
+                    <i className="fas fa-check mr-3 hm-text-12" />
                     Selected
                   </button>
                 )}
