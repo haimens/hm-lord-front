@@ -40,7 +40,7 @@ export default function BasicInfo(props) {
         <div className="hm-text-14 text-modal-color font-weight-bold">{convertLocalToUTC(cdate)}</div>
       </div>
       <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Order Placed By</div>
+        <div className="text-secondary-color font-weight-500 hm-text-14">Contact Name</div>
         <div className="hm-text-14 text-modal-color font-weight-bold">{contact_name}</div>
       </div>
       <div className="mb-4 px-3">
