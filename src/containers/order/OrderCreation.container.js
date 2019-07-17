@@ -7,7 +7,7 @@ class OrderCreation extends Component {
   state = {
     position: 2,
     loaded: false,
-    round_trip: false,
+    round_trip: true,
     currentCustomer: ""
   };
   handleChangePosition = position => {

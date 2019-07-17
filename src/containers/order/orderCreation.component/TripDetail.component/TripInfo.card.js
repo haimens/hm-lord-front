@@ -5,7 +5,6 @@ import { convertLocalToUTC } from "../../../../actions/utilities.action";
 import TripCard from "./TripCar.card";
 import alertify from "alertifyjs";
 import moment from "moment";
-import FlightDetailModal from "./FlightDetail.modal";
 class TripInfo extends Component {
   state = {
     airlineCode: "",
@@ -116,40 +115,23 @@ class TripInfo extends Component {
   saveFlightToken = flight_token => {
     this.props.saveFlightToken(flight_token);
   };
-  handleSearchFlight = async () => {
-    const { date, airlineCode, flightNumber } = this.state;
-    if (date !== "" && airlineCode !== "" && flightNumber !== "") {
-      await this.props.findFlightListInLord({ date: convertLocalToUTC(date), airlineCode, flightNumber });
-      await this.handleFlightDetailBeenClicked();
-    } else {
-      alertify.alert("Error!", "Please Finished Date, Air Line Code, and Flight Number before search!");
-    }
-  };
 
   render() {
-    const { showFlightDetail, pickup_location, dropoff_location } = this.state;
+    const { pickup_location, dropoff_location } = this.state;
     const {
-      currentCustomer,
       airlineCode,
       flightNumber,
-      flight_list_in_lord,
       quote_in_lord,
       handleInputChange,
       showMap,
-      round_trip
+      round_trip,
+      flightNumberID,
+      airlineCodeID
     } = this.props;
     const { basic_info, quote_list } = quote_in_lord;
-    console.log(currentCustomer);
     return (
       <div className="row pt-2 mb-4">
-        {showFlightDetail && (
-          <FlightDetailModal
-            saveFlightToken={this.saveFlightToken}
-            onClose={this.handleFlightDetailBeenClicked}
-            flight_list_in_lord={flight_list_in_lord}
-          />
-        )}
-        <div className="col-8">
+        <div className="col-12 col-lg-8 mb-4">
           <div className="rounded-custom bg-white shadow-sm">
             <div className="d-flex justify-content-between align-items-center px-3 border-bottom-custom h-100">
               <h6
@@ -210,7 +192,7 @@ class TripInfo extends Component {
                   <input
                     type="text"
                     className="form-control hm-input-height col-2"
-                    id="airlineCode"
+                    id={airlineCodeID}
                     placeholder="Airline Code"
                     value={airlineCode}
                     onChange={handleInputChange}
@@ -219,7 +201,7 @@ class TripInfo extends Component {
                   <input
                     type="text"
                     className="form-control hm-input-height "
-                    id="flightNumber"
+                    id={flightNumberID}
                     placeholder="Flight Number"
                     value={flightNumber}
                     onChange={handleInputChange}
@@ -227,20 +209,21 @@ class TripInfo extends Component {
                 </div>
               </div>
 
-              <div className="form-group text-right py-3">
-                <button
-                  className="button-main-background btn button-main-size text-white"
+              <div className="form-group text-right py-3 d-flex justify-content-end ">
+                <div
+                  className="tip-card rounded-custom hm-pointer-cursor"
                   style={{ width: "119px" }}
                   onClick={this.handleFindQuote}
                 >
-                  Get price
-                </button>
+                  <img src={`${process.env.PUBLIC_URL}/img/icon_price.svg`} alt="error404" />
+                  <button className=" btn button-main-size text-white">Get price</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="col-4">
+        <div className="col-12 col-lg-4">
           <div className="rounded-custom bg-white shadow-sm" style={{ height: "737px", overflow: "auto" }}>
             <div
               className="d-flex justify-content-between align-items-center p-3 border-bottom-custom"

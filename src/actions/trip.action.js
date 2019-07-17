@@ -121,11 +121,20 @@ export const createAnAlertForATrip = (trip_token, body = {}) => async dispatch =
   }
 };
 
-export const updateTripOperationInfo = (trip_token, body = {}) => async dispatch => {
+export const updateTripOperationInfo = (trip_token, body = {}, position) => async dispatch => {
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`trip/operation/${trip_token}`, "PATCH", body);
-    await dispatch(findTripDetailInLord(trip_token));
+    if (position) {
+      if (position === "first") {
+        await dispatch(findTripDetailInLord(trip_token));
+      }
+      if (position === "second") {
+        await dispatch(findTripDetailInLordAgain(trip_token));
+      }
+    } else {
+      await dispatch(findTripDetailInLord(trip_token));
+    }
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
   } catch (err) {

@@ -10,6 +10,11 @@ export default class CompleteTop extends Component {
     const { handleAddingAddon, position } = this.props;
     handleAddingAddon(trip_token, type, position);
   };
+  handleFlightButton = () => {
+    const { trip_detail_in_lord, position } = this.props;
+    const { basic_info } = trip_detail_in_lord;
+    this.props.handleFlightButton(basic_info, position);
+  };
   render() {
     const { trip_detail_in_lord, addon_list, deleteAddonItem, position, sum } = this.props;
     const { basic_info, from_address_info, to_address_info } = trip_detail_in_lord;
@@ -22,6 +27,7 @@ export default class CompleteTop extends Component {
                 Trip {position === "first" ? 1 : 2}
               </div>
               <BasicInfo
+                handleFlightButton={this.handleFlightButton}
                 from_address_info={from_address_info}
                 to_address_info={to_address_info}
                 basic_info={basic_info}

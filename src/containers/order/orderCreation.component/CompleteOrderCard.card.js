@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Header, ListHeader, ListView, CouponCard, CouponModal } from "../../../components/shared";
-import { convertUTCtoLocal, parseAmount } from "../../../actions/utilities.action";
-
+import { convertLocalToUTC, parseAmount } from "../../../actions/utilities.action";
+import FlightDetailModal from "../orderCreation.component/CompleteOrder.component/FlightDetail.modal";
 import "./TripDetail.card.css";
-
+import { findFlightListInLord } from "../../../actions/flight.action";
 import {
   findOrderDetailInLord,
   applyOrderDiscountInLord,
@@ -18,7 +18,8 @@ import {
   findTripDetailInLord,
   findTripDetailInLordAgain,
   createAddonToTrip,
-  deleteAddonItem
+  deleteAddonItem,
+  updateTripOperationInfo
 } from "../../../actions/trip.action";
 import CompleteTop from "./CompleteOrder.component/CompleteTop.card";
 import AddonModal from "./CompleteOrder.component/Addon.modal";
@@ -27,6 +28,7 @@ class CompleteOrderCard extends Component {
   state = {
     showCouponModal: false,
     showAddingAddon: false,
+    showFlightDetail: false,
     currPosition: "",
     curr_trip_token: "",
     currButtonItem: "",
@@ -34,7 +36,8 @@ class CompleteOrderCard extends Component {
     cell: "",
     email: "",
     area: "",
-    special_instruction: ""
+    special_instruction: "",
+    currFlightPosition: ""
   };
   handleInputChange = e => {
     const { id, value } = e.target;
@@ -55,6 +58,19 @@ class CompleteOrderCard extends Component {
     this.props.deleteAddonItem(this.props.current_order.order_token, trip_token, addon_token, position);
   };
 
+  handleFlightButton = async (props, position) => {
+    await this.props.findFlightListInLord({
+      date: convertLocalToUTC(props.pickup_time),
+      airlineCode: props.flight_str.split(" ")[0],
+      flightNumber: props.flight_str.split(" ")[1]
+    });
+    this.setState({ currFlightPosition: position, showFlightDetail: true });
+  };
+
+  handleFlightDetailBeenClicked = () => {
+    this.setState({ showFlightDetail: false });
+  };
+
   handleAddingAddon = async (curr_trip_token, currButtonItem, currPosition) => {
     await this.setState(state => ({
       showAddingAddon: !state.showAddingAddon,
@@ -65,7 +81,12 @@ class CompleteOrderCard extends Component {
   };
 
   handleDeleteCouponFromOrder = async order_discount_token => {
-    this.props.updateOrderDiscountInLord(this.props.current_order.order_token, order_discount_token, { status: 0 });
+    this.props.updateOrderDiscountInLord(
+      this.props.current_order.order_token,
+      order_discount_token,
+      { status: 0 },
+      this.state.currFlightPosition
+    );
   };
 
   handleMovingToPayment = () => {
@@ -78,12 +99,22 @@ class CompleteOrderCard extends Component {
 
   getTripTotal = (total, addon_list) => {
     if (addon_list.length === 0) {
-      return 0;
+      return total;
     }
     if (addon_list.length > 0) {
       addon_list.map(addon => (total += addon.amount));
     }
     return total;
+  };
+
+  saveFlightToken = flight_token => {
+    const { updateTripOperationInfo, current_order } = this.props;
+    if (this.state.currFlightPosition === "first") {
+      updateTripOperationInfo(current_order.trip_list[0], { flight_token }, "first");
+    }
+    if (this.state.currFlightPosition === "second") {
+      updateTripOperationInfo(current_order.trip_list[1], { flight_token }, "second");
+    }
   };
 
   async componentDidMount() {
@@ -120,7 +151,8 @@ class CompleteOrderCard extends Component {
       email,
       cell,
       area,
-      special_instruction
+      special_instruction,
+      showFlightDetail
     } = this.state;
     const {
       history,
@@ -130,7 +162,9 @@ class CompleteOrderCard extends Component {
       order_detail,
       current_order,
       round_trip,
-      createAddonToTrip
+      createAddonToTrip,
+      flight_list_in_lord,
+      flight_list_in_lord_again
     } = this.props;
     const { basic_info, addon_list } = trip_detail_in_lord;
 
@@ -158,6 +192,13 @@ class CompleteOrderCard extends Component {
     let total = (sum / 100 - total_discount_rate - total_discount_amount / 100).toFixed(2);
     return (
       <section>
+        {showFlightDetail && (
+          <FlightDetailModal
+            saveFlightToken={this.saveFlightToken}
+            onClose={this.handleFlightDetailBeenClicked}
+            flight_list_in_lord={flight_list_in_lord}
+          />
+        )}
         {showCouponModal && (
           <CouponModal
             amount={basic_info.amount}
@@ -178,6 +219,7 @@ class CompleteOrderCard extends Component {
         )}
         <div className="mb-4">
           <CompleteTop
+            handleFlightButton={this.handleFlightButton}
             sum={first_trip_total}
             deleteAddonItem={this.handleDeleteAddonItem}
             addon_list={addon_list}
@@ -190,6 +232,7 @@ class CompleteOrderCard extends Component {
         {round_trip && (
           <div className="mb-4">
             <CompleteTop
+              handleFlightButton={this.handleFlightButton}
               sum={second_trip_total}
               position={"second"}
               deleteAddonItem={this.handleDeleteAddonItem}
@@ -372,7 +415,8 @@ const mapStateToProps = state => {
     order_detail: state.orderReducer.order_detail,
     trip_detail_in_lord: state.tripReducer.trip_detail_in_lord,
     trip_detail_in_lord_again: state.tripReducer.trip_detail_in_lord_again,
-    coupon_list_in_lord: state.couponReducer.coupon_list_in_lord
+    coupon_list_in_lord: state.couponReducer.coupon_list_in_lord,
+    flight_list_in_lord: state.flightReducer.flight_list_in_lord
   };
 };
 const mapDispatchToProps = {
@@ -385,7 +429,9 @@ const mapDispatchToProps = {
   createAddonToTrip,
   deleteAddonItem,
   applyFinalOrder,
-  updateOrderDetailInLord
+  updateOrderDetailInLord,
+  findFlightListInLord,
+  updateTripOperationInfo
 };
 
 export default connect(

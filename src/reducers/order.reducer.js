@@ -20,8 +20,8 @@ const initialState = {
     order_discount_list: []
   },
   current_order: {
-    order_token: "ORD-b5ce19762203fe4888d2fede5a42d902",
-    trip_list: ["TRIP-b57d377d06e4bcf437e5af88fadb6250", "TRIP-26a70303cd190cf709b300618a9ee642"]
+    order_token: "ORD-f5764254208ece7dc05b092646d8d19a",
+    trip_list: ["TRIP-8dbe9015d47421c346288e9e0e4ce1b3", "TRIP-13f63201b9b37287743ae990c532a61a"]
   }
 };
 

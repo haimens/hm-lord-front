@@ -54,8 +54,8 @@ class TripDetail extends Component {
         await createOrderInLord({
           customer_token: currentCustomer.customer_token,
           quote_list: [
-            { flight_str: `${airlineCode}${flightNumber}`, quote_token },
-            { flight_str: `${airlineCodeAgain}${flightNumberAgain}`, quote_token: quote_token_again }
+            { flight_str: `${airlineCode} ${flightNumber}`, quote_token },
+            { flight_str: `${airlineCodeAgain} ${flightNumberAgain}`, quote_token: quote_token_again }
           ]
         });
         this.props.handleMoveNext(1);
@@ -92,8 +92,6 @@ class TripDetail extends Component {
       round_trip,
       flight_list_in_lord,
       flight_list_in_lord_round,
-      findFlightListInLord,
-      findFlightListInLordAgain,
       quote_in_lord,
       quote_in_lord_again,
       setMapToFalse,
@@ -112,11 +110,12 @@ class TripDetail extends Component {
           handleInputChange={this.handleInputChange}
           flightNumber={flightNumber}
           airlineCode={airlineCode}
+          flightNumberID={"flightNumber"}
+          airlineCodeID={"airlineCode"}
           quote_in_lord={quote_in_lord}
           findQuoteInLord={this.handleFindQuoteInLord}
           saveFlightToken={this.saveFlightToken}
           flight_list_in_lord={flight_list_in_lord}
-          findFlightListInLord={findFlightListInLord}
           handleCarBeenClicked={this.handleCarBeenClicked}
         />
         {round_trip && (
@@ -128,6 +127,8 @@ class TripDetail extends Component {
             handleInputChange={this.handleInputChange}
             flightNumber={flightNumberAgain}
             airlineCode={airlineCodeAgain}
+            flightNumberID={"flightNumberAgain"}
+            airlineCodeID={"airlineCodeAgain"}
             quote_in_lord={quote_in_lord_again}
             findQuoteInLord={this.handleFindQuoteInLordAgain}
             saveFlightToken={this.saveFlightTokenAgain}
@@ -166,8 +167,6 @@ const mapStateToProps = state => {
   };
 };
 const mapDispatchToProps = {
-  findFlightListInLord,
-  findFlightListInLordAgain,
   findQuoteInLord,
   findQuoteInLordAgain,
   createOrderInLord,

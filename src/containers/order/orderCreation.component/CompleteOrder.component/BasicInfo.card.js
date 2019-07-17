@@ -1,7 +1,7 @@
 import React from "react";
-import { convertUTCtoLocal } from "../../../../actions/utilities.action";
+import { convertUTCtoLocal, parseAmount } from "../../../../actions/utilities.action";
 export default function BasicInfoCard(props) {
-  const { showEditButton, basic_info, from_address_info, to_address_info, flight_info } = props;
+  const { showEditButton, basic_info, from_address_info, to_address_info, flight_info, handleFlightButton } = props;
   const { pickup_time } = basic_info;
   return (
     <div>
@@ -29,11 +29,28 @@ export default function BasicInfoCard(props) {
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Flight Information</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{"N/A"}</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold mt-1">
+          <button
+            style={{
+              width: "88px",
+              height: "28px",
+              borderRadius: "5px",
+              border: "solid 1px #32325d"
+            }}
+            onClick={() => handleFlightButton()}
+            className="bg-white"
+          >
+            {basic_info.flight_str ? basic_info.flight_str : "N/A"}
+          </button>
+        </div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Vehicle Type</div>
         <div className="hm-text-14 text-modal-color font-weight-bold">{basic_info.vehicle_type}</div>
+      </div>
+      <div className="mb-4 px-3">
+        <div className="text-secondary-color font-weight-500 hm-text-14">Tip Total</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">{parseAmount(basic_info.amount, 2)}</div>
       </div>
     </div>
   );
