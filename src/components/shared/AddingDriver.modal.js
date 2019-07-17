@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Modal from "./Modal";
 
 export default class AddingDriverModal extends Component {
+  state = {
+    keywords: ""
+  };
   handleInputChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -11,7 +14,11 @@ export default class AddingDriverModal extends Component {
     this.props.handleDriverBeenClicked(driver_token);
     this.handleClose();
   };
-
+  handleSubmit = async e => {
+    if (e) e.preventDefault();
+    const { keywords } = this.state;
+    this.props.onSubmit(keywords);
+  };
   handleClose = () => {
     this.props.onClose();
   };
@@ -27,14 +34,17 @@ export default class AddingDriverModal extends Component {
                   <i className="fas fa-search" />
                 </span>
               </div>
-              <input
-                className="form-control border-0 hm-text-14"
-                style={{ height: "56px" }}
-                name="company_name"
-                id="company_name"
-                placeholder={"Search"}
-                onChange={this.handleInputChange}
-              />
+              <form onSubmit={this.handleSubmit}>
+                <input
+                  className="form-control border-0 hm-text-14"
+                  style={{ height: "56px" }}
+                  name="keywords"
+                  id="keywords"
+                  value={this.state.keywords}
+                  placeholder={"Search"}
+                  onChange={this.handleInputChange}
+                />
+              </form>
             </div>
           </div>
           <div className="container">

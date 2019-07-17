@@ -11,19 +11,19 @@ class IconInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      keyword: ""
+      keywords: ""
     };
   }
 
   handleChange = async e => {
-    const keyword = e.target.value;
-    await this.setState({ keyword });
+    const keywords = e.target.value;
+    await this.setState({ keywords });
   };
 
   handleSubmit = async e => {
     if (e) e.preventDefault();
-    const { keyword } = this.state;
-    this.props.onSubmit(keyword);
+    const { keywords } = this.state;
+    this.props.onSubmit(keywords);
   };
 
   // newHandleEnterSumbit = () => {
@@ -32,12 +32,12 @@ class IconInput extends React.Component {
 
   handleClear = async e => {
     e.preventDefault();
-    await this.setState({ keyword: "" });
+    await this.setState({ keywords: "" });
     this.props.onSubmit("");
   };
 
   render() {
-    const { keyword } = this.state;
+    const { keywords } = this.state;
     const { placeholder } = this.props;
     //=====================================================================================================
 
@@ -55,7 +55,7 @@ class IconInput extends React.Component {
           id={this.props.name}
           name={this.props.name}
           onChange={this.handleChange}
-          value={keyword}
+          value={keywords}
           style={{
             height: "28px",
             borderRadius: "20px",

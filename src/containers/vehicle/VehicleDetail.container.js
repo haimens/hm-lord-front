@@ -37,6 +37,10 @@ class VehicleDetail extends Component {
     } = this.props;
     createCarToADriverInLord(car_token, { driver_token });
   };
+  handleSearchDriverInVehicle = keywords => {
+    const { car_token } = this.props.match.params;
+    this.props.findDriverListForACar(car_token, { keywords });
+  };
   componentDidMount() {
     const { match, findCarDetailInLord, findDriverListForACar, findDriverListInLord } = this.props;
     const { car_token } = match.params;
@@ -58,6 +62,7 @@ class VehicleDetail extends Component {
       <main className="container-fluid">
         {showAddingDriverModal && (
           <AddingDriverModal
+            onSubmit={this.handleSearchDriverInVehicle}
             car_token={car_token}
             handleDriverBeenClicked={this.handleCreateCarToADriverInLord}
             driver_list_in_lord={driver_list_in_lord}

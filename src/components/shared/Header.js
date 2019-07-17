@@ -3,14 +3,14 @@ import { SearchBar } from ".";
 
 export default class Header extends Component {
   handleChange = async e => {
-    const keyword = e.target.value;
-    await this.setState({ keyword });
+    const keywords = e.target.value;
+    await this.setState({ keywords });
   };
 
   handleSubmit = async e => {
     if (e) e.preventDefault();
-    const { keyword } = this.state;
-    this.props.onSubmit(keyword);
+    const { keywords } = this.state;
+    this.props.onSubmit(keywords);
   };
 
   handleSubmitSearch = keywords => {
