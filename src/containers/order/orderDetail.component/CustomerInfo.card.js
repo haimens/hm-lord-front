@@ -1,19 +1,21 @@
 import React from "react";
 
 export default function BasicInfo(props) {
-  const { name, cell, email, img_path } = props.order_detail.customer_info;
+  const { order_detail, history } = props;
+  const { name, cell, email, img_path, addr_str, note, customer_token } = order_detail.customer_info;
   return (
     <>
       <div>
         <div className="purple-border p-3">
           <div className="d-flex justify-content-between align-items-center  ">
             <div className="hm-text-16 font-weight-bold text-modal-color">Customer Information</div>
-            <button
-              className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
-              onClick={() => props.handleUpdateCustomerInfo()}
-            >
-              <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
-            </button>
+            <img
+              src={`${process.env.PUBLIC_URL}/img/icon_detail.svg`}
+              alt="Customer"
+              className="rounded-circle my-3 hm-pointer-cursor"
+              style={{ height: "25px", width: "25px" }}
+              onClick={() => history.push(`/customer/detail/${customer_token}`)}
+            />
           </div>
           <img
             src={img_path}
@@ -36,7 +38,11 @@ export default function BasicInfo(props) {
         </div>
         <div className="mb-4 px-3">
           <div className="text-secondary-color font-weight-500 hm-text-14">Address</div>
-          <div className="hm-text-14 font-weight-bold text-modal-color">{"N/A"}</div>
+          <div className="hm-text-14 font-weight-bold text-modal-color">{addr_str}</div>
+        </div>
+        <div className="mb-4 px-3">
+          <div className="text-secondary-color font-weight-500 hm-text-14">Special Note</div>
+          <div className="hm-text-14 font-weight-bold text-modal-color">{note ? note : "N/A"}</div>
         </div>
         <div className="mb-4 px-3">
           <button
