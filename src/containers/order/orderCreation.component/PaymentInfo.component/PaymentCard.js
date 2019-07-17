@@ -7,22 +7,21 @@ export default class PaymentCard extends Component {
     this.state = {
       nonce: undefined,
       creditCardButton: false,
-      cashdButton: false
+      cashButton: false
     };
     this.requestCardNonce = this.requestCardNonce.bind(this);
   }
 
   requestCardNonce() {
     this.paymentForm.requestCardNonce();
-    this.setState({ creditCardButton: true, cashdButton: false });
   }
 
   submitCash = () => {
-    this.setState({ cashdButton: true, creditCardButton: false, nonce: undefined });
+    this.setState({ cashButton: true, creditCardButton: false, nonce: undefined });
+    this.props.isCreditCard(false);
   };
 
   handleNoneReceived = (nonce, data) => {
-    console.log(nonce);
     this.props.handleNoneReceived(nonce);
   };
   componentDidMount() {
@@ -96,6 +95,9 @@ export default class PaymentCard extends Component {
 
             return;
           }
+          this.setState({ creditCardButton: true, cashButton: false });
+          this.props.isCreditCard(true);
+
           this.handleNoneReceived(nonce, cardData);
           // TODO: Connect to pay back end
         },
@@ -138,7 +140,7 @@ export default class PaymentCard extends Component {
   }
 
   render() {
-    const { creditCardButton, cashdButton } = this.state;
+    const { creditCardButton, cashButton } = this.state;
     return (
       <div className="row pt-2 mb-4" id="sq-ccbox">
         <div className="col-8">
@@ -150,7 +152,14 @@ export default class PaymentCard extends Component {
               >
                 Pay Now
               </h6>
+              <div>
+                <img className="ml-2" src={`${process.env.PUBLIC_URL}/img/logo_visa.png`} alt="visa" />
+                <img className="ml-2" src={`${process.env.PUBLIC_URL}/img/logo_master.png`} alt="master" />
+                <img className="ml-2" src={`${process.env.PUBLIC_URL}/img/logo_ae.png`} alt="ae" />
+                <img className="ml-2" src={`${process.env.PUBLIC_URL}/img/logo_discover.png`} alt="discover" />
+              </div>
             </div>
+
             <div className="p-3">
               <div id="sq-ccbox">
                 <div id="cc-field-wrapper">
@@ -211,14 +220,15 @@ export default class PaymentCard extends Component {
                     alt="company"
                     className="rounded-circle shadow-sm"
                   />
-                  <div className="ml-5 hm-text-15 font-weight-bold">Pay</div>
+                  <div className="ml-5 hm-text-15 font-weight-bold">Credit Card</div>
                 </div>
                 {!creditCardButton ? (
                   <button className="btn bg-white shadow-sm text-purple" onClick={this.requestCardNonce}>
                     Select
                   </button>
                 ) : (
-                  <button className="btn btn-secondary shadow-sm" disabled onClick={this.requestCardNonce}>
+                  <button className="btn border-white text-white" disabled>
+                    <i className="fas fa-check mr-3" />
                     Selected
                   </button>
                 )}
@@ -238,12 +248,13 @@ export default class PaymentCard extends Component {
                   />
                   <div className="ml-5 hm-text-15 font-weight-bold">Cash</div>
                 </div>
-                {!cashdButton ? (
+                {!cashButton ? (
                   <button className="btn bg-white shadow-sm text-purple" onClick={this.submitCash}>
                     Select
                   </button>
                 ) : (
-                  <button className="btn btn-secondary shadow-sm" disabled onClick={this.submitCash}>
+                  <button className="btn border-white text-white" disabled onClick={this.submitCash}>
+                    <i className="fas fa-check mr-3" />
                     Selected
                   </button>
                 )}

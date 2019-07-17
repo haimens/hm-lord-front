@@ -5,9 +5,9 @@ import CompleteOrderCard from "./orderCreation.component/CompleteOrderCard.card"
 import PaymentInfoCard from "./orderCreation.component/PaymentInfo.card";
 class OrderCreation extends Component {
   state = {
-    position: 2,
+    position: 5,
     loaded: false,
-    round_trip: true,
+    round_trip: false,
     currentCustomer: ""
   };
   handleChangePosition = position => {

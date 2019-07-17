@@ -11,7 +11,8 @@ class PaymentInfo extends Component {
     this.state = {
       round_trip: false,
       loaded: false,
-      nonce: ""
+      nonce: "",
+      isCreditCard: true
     };
   }
   handleInputChange = e => {
@@ -28,7 +29,14 @@ class PaymentInfo extends Component {
 
   handleFinishOrder = () => {
     const { current_order, handleSubmitAPaymentInLord } = this.props;
-    this.props.handleSubmitAPaymentInLord(current_order.order_token, { card_nonce: this.state.nonce });
+    const { isCreditCard } = this.state;
+    if (isCreditCard) {
+      handleSubmitAPaymentInLord(current_order.order_token, { card_nonce: this.state.nonce });
+    }
+    this.props.history.push("/order/list");
+  };
+  isCreditCard = bool => {
+    this.setState({ isCreditCard: bool });
   };
 
   async componentWillMount() {
@@ -53,18 +61,13 @@ class PaymentInfo extends Component {
       <div>
         {loaded && (
           <PaymentCard
+            isCreditCard={this.isCreditCard}
             handleNoneReceived={this.handleNoneReceived}
             realm_list_in_lord={realm_list_in_lord}
             paymentForm={window.SqPaymentForm}
           />
         )}
-        <div className="d-flex justify-content-between mt-5">
-          <button
-            className="btn trip-button-width rounded-custom bg-white text-purple shadow-sm hm-text-12"
-            onClick={this.handleRoundTripButton}
-          >
-            Back
-          </button>
+        <div className="d-flex justify-content-end mt-5">
           <button
             className="btn trip-button-width rounded-custom text-white button-main-background shadow-sm hm-text-12"
             onClick={this.handleFinishOrder}
