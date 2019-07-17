@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function BasicInfo(props) {
+  const { name, cell, email, img_path } = props.order_detail.customer_info;
   return (
     <>
       <div>
@@ -15,7 +16,7 @@ export default function BasicInfo(props) {
             </button>
           </div>
           <img
-            src={`${process.env.PUBLIC_URL}/img/hd.png`}
+            src={img_path}
             alt="Customer"
             className="rounded-circle my-3"
             style={{ height: "74px", width: "74px" }}
@@ -23,15 +24,15 @@ export default function BasicInfo(props) {
         </div>
         <div className="mb-4 px-3">
           <div className="text-secondary-color font-weight-500 hm-text-14">Customer Name</div>
-          <div className="hm-text-14 font-weight-bold text-modal-color">{"Asdf"}</div>
+          <div className="hm-text-14 font-weight-bold text-modal-color">{name}</div>
         </div>
         <div className="mb-4 px-3">
           <div className="text-secondary-color font-weight-500 hm-text-14">Cell</div>
-          <div className="hm-text-14 font-weight-bold text-modal-color">{"customer_info.cell"}</div>
+          <div className="hm-text-14 font-weight-bold text-modal-color">{cell}</div>
         </div>
         <div className="mb-4 px-3">
           <div className="text-secondary-color font-weight-500 hm-text-14">Email</div>
-          <div className="hm-text-14 font-weight-bold text-modal-color">{"customer_info.email"}</div>
+          <div className="hm-text-14 font-weight-bold text-modal-color">{email}</div>
         </div>
         <div className="mb-4 px-3">
           <div className="text-secondary-color font-weight-500 hm-text-14">Address</div>

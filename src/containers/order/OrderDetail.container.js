@@ -84,7 +84,7 @@ class OrderDetail extends Component {
                 <BasicInfo order_detail={order_detail} handleUpdateBasicInfo={this.handleUpdateBasicInfo} />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <CustomerInfo handleUpdateCustomerInfo={this.handleUpdateCustomerInfo} />
+                <CustomerInfo order_detail={order_detail} handleUpdateCustomerInfo={this.handleUpdateCustomerInfo} />
               </div>
             </div>
           </div>
