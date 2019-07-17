@@ -14,7 +14,7 @@ class CustomerDetailCard extends Component {
           <div className="col-lg-2 col-12 mb-4 d-flex justify-content-center">
             <img className="rounded-circle" style={{ height: "90px", width: "90px" }} src={img_path} alt="avatar" />
           </div>
-          <div className="col-lg-10 col-12">
+          <div className="col-lg-8 col-12">
             <div className="row text-modal-color">
               <div className="col-lg-6 col-12 mb-4">
                 <div className="d-flex justify-content-between align-items-center px-3 pb-3">

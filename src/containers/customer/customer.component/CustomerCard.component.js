@@ -4,13 +4,13 @@ export default class CustomerCard extends Component {
   render() {
     const { customerName, customerImage, customerPhone, customerUsername, customer_token } = this.props.parentProps;
     return (
-      <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-4 mb-4"}>
+      <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-3 mb-4"}>
         <div
           className="col-12 rounded-custom shadow-sm bg-white hm-pointer-cursor"
           style={{ height: "140px" }}
           onClick={() => this.props.history.push(`/customer/detail/${customer_token}`)}
         >
-          <div className="row h-100 align-items-center">
+          <div className="row h-100 d-flex align-items-center">
             <div className="col-5 d-flex justify-content-center">
               <img
                 src={customerImage}
@@ -20,11 +20,11 @@ export default class CustomerCard extends Component {
               />
             </div>
             <div className="col-7">
-              <div className="font-weight-bold my-2">{customerName}</div>
-              <div className="text-muted">
+              <div className="font-weight-bold hm-text-15 text-modal-color">{customerName}</div>
+              <div className="text-secondary-color hm-text-12">
                 <div>{customerPhone}</div>
               </div>
-              <div className="text-muted">{customerUsername}</div>
+              <div className="text-secondary-color hm-text-12">{customerUsername}</div>
             </div>
           </div>
         </div>

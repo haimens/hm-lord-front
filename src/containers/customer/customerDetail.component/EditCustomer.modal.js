@@ -3,7 +3,7 @@ import { Modal, ImageLoaderModal, PreviewImageModal, AddingImage, GAutoComplete 
 import { parseRate } from "../../../actions/utilities.action";
 import alertify from "alertifyjs";
 
-export default class CustomerEditing extends Component {
+export default class EditCustomer extends Component {
   state = {
     showImage: false,
     showPreview: false,
@@ -12,13 +12,15 @@ export default class CustomerEditing extends Component {
     email: "",
     cell: "",
     img_path: "",
-    address_str: ""
+    addr_str: ""
   };
 
   handleInputChange = e => {
     const { id, value } = e.target;
     this.setState({ [id]: value });
   };
+
+  doNothing = () => {};
 
   handleShowImage = () => {
     this.setState(states => ({ showImage: !states.showImage }));
@@ -36,11 +38,12 @@ export default class CustomerEditing extends Component {
   };
 
   saveToAddress = address => {
-    this.setState({ address_str: address[0].formatted_address });
+    this.setState({ addr_str: address[0].formatted_address });
   };
 
   handleCreatingCompany = async () => {
-    const { name, cell, area, email, img_path, address_str } = this.state;
+    const { name, cell, area, email, img_path, addr_str } = this.state;
+    console.log(addr_str);
     const {
       updateACustomerInLord,
       createNewAddressInstance,
@@ -48,7 +51,8 @@ export default class CustomerEditing extends Component {
       customer_token
     } = this.props;
     if (name !== "" && cell !== "" && area !== "" && email !== "") {
-      const payload = await createNewAddressInstance({ address_str });
+      const payload = await createNewAddressInstance({ address_token: addr_str });
+      console.log(payload);
       Promise.all([
         updateACustomerInLord(customer_token, {
           name,
@@ -66,14 +70,15 @@ export default class CustomerEditing extends Component {
     }
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { customer_detail_in_lord } = this.props;
     const { name, cell, email, addr_str, img_path } = customer_detail_in_lord;
-    this.setState({ name, cell: cell.split(" ")[1], area: cell.split(" ")[0], email, addr_str, img_path });
+    console.log(addr_str);
+    await this.setState({ name, cell: cell.split(" ")[1], area: cell.split(" ")[0], email, addr_str, img_path });
   }
 
   render() {
-    const { img_path, showImage, showPreview, name, cell, area, email, address_str } = this.state;
+    const { img_path, showImage, showPreview, name, cell, area, email, addr_str } = this.state;
     return (
       <div>
         {showImage && (
@@ -85,7 +90,13 @@ export default class CustomerEditing extends Component {
         )}
         {showPreview && <PreviewImageModal image={img_path} onClose={() => this.setState({ showPreview: false })} />}
 
-        <Modal title="Add Customer" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"525px"}>
+        <Modal
+          title="Update A Customer"
+          onClose={this.handleClose}
+          position="center"
+          getWidth={"467px"}
+          getHeight={"525px"}
+        >
           <div className="container">
             <div className="p-3">
               <div className="form-group mb-4">
@@ -131,7 +142,11 @@ export default class CustomerEditing extends Component {
               </div>
 
               <div className="form-group">
-                <GAutoComplete getGoogleAddress={this.saveToAddress} defaultValue={address_str} />
+                <GAutoComplete
+                  handleInputHasChanged={this.doNothing}
+                  getGoogleAddress={this.saveToAddress}
+                  defaultValue={addr_str}
+                />
               </div>
 
               <AddingImage

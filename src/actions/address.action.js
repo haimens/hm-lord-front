@@ -2,6 +2,7 @@ import { callApi, startLoader, stopLoader } from "./utilities.action";
 import { processLogout } from "./auth.action";
 
 export const createNewAddressInstance = (body = {}) => async dispatch => {
+  console.log(body);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`address/detail`, "POST", { ...body });

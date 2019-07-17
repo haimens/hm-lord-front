@@ -16,7 +16,7 @@ export default class DriverCard extends Component {
           style={{ height: "140px" }}
           onClick={() => this.handleButtonClick(driver_token)}
         >
-          <div className="row h-100 align-items-center">
+          <div className="row h-100 d-flex align-items-center">
             <div className="col-5 d-flex justify-content-center">
               <img
                 src={driverImage}

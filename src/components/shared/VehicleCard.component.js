@@ -19,7 +19,7 @@ export default class VehicleCard extends Component {
           style={{ height: "140px" }}
           onClick={() => this.handleButtonClick(vehicleToken)}
         >
-          <div className="row h-100 align-items-center">
+          <div className="row h-100 d-flex align-items-center">
             <div className="col-5 d-flex justify-content-center">
               <img
                 src={vehicleImage}
