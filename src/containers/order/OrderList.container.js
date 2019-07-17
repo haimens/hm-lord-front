@@ -17,7 +17,6 @@ class Order extends Component {
   }
   render() {
     const { history, order_list_in_lord } = this.props;
-    const { hasMore } = this.state;
     return (
       <main className="container-fluid">
         <section>

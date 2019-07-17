@@ -12,7 +12,6 @@ export default function BasicInfo(props) {
     contact_name,
     contact_cell
   } = props.order_detail.order_info;
-  console.log(props.order_detail.order_info);
   return (
     <>
       <div className="purple-border p-3">

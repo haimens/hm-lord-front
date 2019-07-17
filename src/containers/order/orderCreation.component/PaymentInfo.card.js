@@ -33,7 +33,7 @@ class PaymentInfo extends Component {
     if (isCreditCard) {
       handleSubmitAPaymentInLord(current_order.order_token, { card_nonce: this.state.nonce });
     }
-    this.props.history.push("/order/list");
+    this.props.history.push("/order");
   };
   isCreditCard = bool => {
     this.setState({ isCreditCard: bool });

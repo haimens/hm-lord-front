@@ -200,7 +200,7 @@ class CompleteOrderCard extends Component {
         )}
         {showCouponModal && (
           <CouponModal
-            amount={basic_info.amount}
+            amount={sum}
             handleAddingCoupon={this.handleAddingCoupon}
             coupon_list_in_lord={coupon_list_in_lord}
             onClose={this.handleShowCouponModal}

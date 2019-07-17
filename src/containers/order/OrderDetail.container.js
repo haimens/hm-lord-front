@@ -7,7 +7,7 @@ import CustomerInfo from "./orderDetail.component/CustomerInfo.card";
 import BasicInfoModal from "./orderDetail.component/BasicInfo.modal";
 import CustomerInfoModal from "./orderDetail.component/CustomerInfo.modal";
 import LogModal from "./orderDetail.component/Log.modal";
-import { findOrderDetailInLord, updateOrderDetailInLord } from "../../actions/order.action";
+import { findOrderDetailInLord, updateOrderDetailInLord, updateOrderDiscountInLord } from "../../actions/order.action";
 import { findCouponListInLord } from "../../actions/coupon.action";
 class OrderDetail extends Component {
   state = {
@@ -29,6 +29,15 @@ class OrderDetail extends Component {
     this.setState(state => ({ showLogModal: !state.showLogModal }));
   };
   handleAddingCoupon = discount_token => {};
+  handleDeleteCouponFromOrder = async order_discount_token => {
+    const { order_token } = this.props.match.params;
+    this.props.updateOrderDiscountInLord(
+      order_token,
+      order_discount_token,
+      { status: 0 },
+      this.state.currFlightPosition
+    );
+  };
 
   componentDidMount() {
     const { order_token } = this.props.match.params;
@@ -53,6 +62,7 @@ class OrderDetail extends Component {
         {showUpdateCustomerInfoModal && <CustomerInfoModal onClose={this.handleUpdateCustomerInfo} />}
         {showCouponModal && (
           <CouponModal
+            amount={order_detail.order_info.amount}
             handleAddingCoupon={this.handleAddingCoupon}
             coupon_list_in_lord={coupon_list_in_lord}
             onClose={this.handleShowCouponModal}
@@ -170,7 +180,12 @@ const mapStateToProps = state => {
     coupon_list_in_lord: state.couponReducer.coupon_list_in_lord
   };
 };
-const mapDispatchToProps = { findOrderDetailInLord, findCouponListInLord, updateOrderDetailInLord };
+const mapDispatchToProps = {
+  findOrderDetailInLord,
+  findCouponListInLord,
+  updateOrderDetailInLord,
+  updateOrderDiscountInLord
+};
 
 export default connect(
   mapStateToProps,

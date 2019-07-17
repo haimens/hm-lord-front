@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { convertUTCtoLocal } from "../../actions/utilities.action";
 export default class OrderCard extends Component {
+  handleButtonClick = order_token => {
+    this.props.history.push(`/order/detail/${order_token}`);
+  };
   render() {
     const {
       order_token,
@@ -12,11 +15,11 @@ export default class OrderCard extends Component {
       status_str
     } = this.props.parentProps;
     return (
-      <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-4 mb-4 hm-pointer-cursor"} onClick={() => this.props.history.push(`/order/detail/${order_token}`)}>
+      <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-4 mb-4 hm-pointer-cursor"}>
         <div
           className="col-12 rounded-custom shadow-sm bg-white "
           style={{ height: "140px" }}
-          onClick={() => this.props.history.push(`/driver/detail/${order_token}`)}
+          onClick={() => this.handleButtonClick(order_token)}
         >
           <div className="row h-100 align-items-center">
             <div className="col-5 d-flex justify-content-center">
