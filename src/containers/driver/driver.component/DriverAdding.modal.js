@@ -97,7 +97,7 @@ export default class DriverAdding extends Component {
         )}
         {showPreview && <PreviewImageModal image={img_path} onClose={() => this.setState({ showPreview: false })} />}
 
-        <Modal title="Add Driver" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"800px"}>
+        <Modal title="Add Driver" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"785px"}>
           <div className="container">
             <div className="p-3">
               <div className="form-group mb-2 mt-1">
@@ -225,7 +225,7 @@ export default class DriverAdding extends Component {
                 handleShowImage={this.handleShowImage}
               />
 
-              <div className="form-group text-right pt-3">
+              <div className="form-group text-right pt-2">
                 <button
                   className="button-main-background btn button-main-size px-4 text-white mr-3"
                   onClick={this.handleCreateADriverInLord}

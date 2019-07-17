@@ -62,13 +62,16 @@ export default class VehicleAdding extends Component {
         )}
         {showPreview && <PreviewImageModal image={img_path} onClose={() => this.setState({ showPreview: false })} />}
 
-        <Modal title="Add Vehicle" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"449px"}>
+        <Modal title="Add Vehicle" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"460px"}>
           <div className="container">
             <div className="p-3">
-              <div className="form-group mb-4">
+              <div className="form-group mb-2">
+                <label className="text-main-color font-weight-bold hm-text-14" htmlFor="Identifier">
+                  Identifier
+                </label>
                 <input
                   type="text"
-                  className="form-control hm-input-height mt-3"
+                  className="form-control hm-input-height"
                   name="identifier"
                   id="identifier"
                   placeholder={"Identifier"}
@@ -77,7 +80,10 @@ export default class VehicleAdding extends Component {
                 />
               </div>
 
-              <div className="form-group input-group mb-4 d-flex">
+              <div className="form-group mb-2">
+                <label className="text-main-color font-weight-bold hm-text-14" htmlFor="Plate Number">
+                  Plate Number
+                </label>
                 <input
                   type="text"
                   className="form-control hm-input-height "
@@ -88,7 +94,10 @@ export default class VehicleAdding extends Component {
                 />
               </div>
 
-              <div className="form-group mb-4">
+              <div className="form-group mb-2">
+                <label className="text-main-color font-weight-bold hm-text-14" htmlFor="Description">
+                  Description
+                </label>
                 <input
                   type="text"
                   className="form-control hm-input-height "
@@ -106,7 +115,7 @@ export default class VehicleAdding extends Component {
                 handleShowImage={this.handleShowImage}
               />
 
-              <div className="form-group text-right pt-3">
+              <div className="form-group text-right pt-2">
                 <button
                   className="button-main-background btn button-main-size px-4 text-white mr-3"
                   onClick={this.handleCreateAVehicleInLord}
