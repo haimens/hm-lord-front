@@ -15,7 +15,9 @@ class DriverPayable extends Component {
   handlePageChange = start => {
     this.props.findDriverPayableListInLord({ start });
   };
-
+  handlePayableItemClick = driver_token => {
+    this.props.history.push(`driver/detail/${driver_token}`);
+  };
   componentDidMount() {
     this.props.findDriverPayableListInLord();
   }
@@ -49,7 +51,11 @@ class DriverPayable extends Component {
             onPageChange={this.handlePageChange}
           >
             {driver_payable_list_in_lord.record_list.map((payable, index) => (
-              <DriverPayableListItem parentProps={payable} key={index} handlePayableItemClicked={this.handlePayableItemClick} />
+              <DriverPayableListItem
+                parentProps={payable}
+                key={index}
+                handlePayableItemClicked={this.handlePayableItemClick}
+              />
             ))}
           </ListView>
         </section>
