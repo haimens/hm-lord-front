@@ -1,39 +1,45 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { OrderCard, ListView, ListHeader, Header } from "../../components/shared";
+import { OrderCard, ListView, ListHeader, Header, AddingNote } from "../../components/shared";
 
 import CustomerDetailCard from "./customerDetail.component/CustomerDetail.card";
 import LogListItem from "./customerDetail.component/LogList.item";
 import EditCustomerModal from "./customerDetail.component/EditCustomer.modal";
-
 import {
   findCustomerDetailInLord,
   updateACustomerInLord,
   updateACustomerAddressInLord
 } from "../../actions/customer.action";
+import { findCustomerNoteListInLord, createCustomerNoteListInLord } from "../../actions/note.action";
 import { createNewAddressInstance } from "../../actions/address.action";
-class VehicleDetail extends Component {
+class CustomerDetail extends Component {
   state = {
-    showAddingOrderModal: false
+    showAddingOrderModal: false,
+    showAddingLogInCustomer: false
+  };
+  handleAddingLog = () => {
+    this.setState(state => ({ showAddingLogInCustomer: !state.showAddingLogInCustomer }));
   };
   handleEditingCustomerInformation = () => {
     this.setState(state => ({ showEditingCustomerInfo: !state.showEditingCustomerInfo }));
   };
   componentDidMount() {
-    const { match, findCustomerDetailInLord } = this.props;
+    const { match, findCustomerDetailInLord, findCustomerNoteListInLord } = this.props;
     const { customer_token } = match.params;
-    Promise.all([findCustomerDetailInLord(customer_token)]);
+    Promise.all([findCustomerDetailInLord(customer_token), findCustomerNoteListInLord(customer_token)]);
   }
   render() {
-    const { showEditingCustomerInfo } = this.state;
+    const { showEditingCustomerInfo, showAddingLogInCustomer } = this.state;
     const {
       history,
       match,
       customer_detail_in_lord,
       updateACustomerInLord,
       updateACustomerAddressInLord,
-      createNewAddressInstance
+      createNewAddressInstance,
+      createCustomerNoteListInLord,
+      note_list_for_customer
     } = this.props;
     const { customer_token } = match.params;
 
@@ -47,6 +53,14 @@ class VehicleDetail extends Component {
             updateACustomerAddressInLord={updateACustomerAddressInLord}
             updateACustomerInLord={updateACustomerInLord}
             onClose={this.handleEditingCustomerInformation}
+          />
+        )}
+        {showAddingLogInCustomer && (
+          <AddingNote
+            type={2}
+            token={customer_token}
+            createANote={createCustomerNoteListInLord}
+            onClose={this.handleAddingLog}
           />
         )}
         <section className="mb-4">
@@ -96,22 +110,21 @@ class VehicleDetail extends Component {
           <ListHeader
             parentProps={{
               title: "Log History",
-              clickFunction: this.handleShowAddingVehicleModal,
-              clickTitle: "Vehicle"
+              clickFunction: this.handleAddingLog,
+              clickTitle: "Log"
             }}
-            hideButton={true}
-            buttonWidth={"88px"}
+            buttonWidth={"70px"}
           />
           <ListView
-            totalCount={30}
+            totalCount={note_list_for_customer.count}
             title="Log History"
-            fieldNames={["Date", "Admin", "Log Note"]}
+            fieldNames={["Created ON", "Log Note"]}
             hideHeader={true}
             onPageChange={this.handlePageChange}
           >
-            {/* {punch_list_in_puri.record_list.map((punch, index) => (
-              <LogListItem parentProps={punch} key={index} onClick={this.handlePunchItemClick} />
-            ))} */}
+            {note_list_for_customer.record_list.map((note, index) => (
+              <LogListItem parentProps={note} key={index} />
+            ))}
           </ListView>
         </section>
       </main>
@@ -121,17 +134,20 @@ class VehicleDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    customer_detail_in_lord: state.customerReducer.customer_detail_in_lord
+    customer_detail_in_lord: state.customerReducer.customer_detail_in_lord,
+    note_list_for_customer: state.noteReducer.note_list_for_customer
   };
 };
 const mapDispatchToProps = {
   findCustomerDetailInLord,
   updateACustomerInLord,
   createNewAddressInstance,
-  updateACustomerAddressInLord
+  updateACustomerAddressInLord,
+  findCustomerNoteListInLord,
+  createCustomerNoteListInLord
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(VehicleDetail));
+)(withRouter(CustomerDetail));

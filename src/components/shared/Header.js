@@ -66,7 +66,11 @@ export default class Header extends Component {
               ))}
           </div>
           <div className="d-flex">
-            {this.props.search && <SearchBar name="search" onSubmit={this.handleSubmitSearch} />}
+            {this.props.search && (
+              <div className="mr-3">
+                <SearchBar name="search" onSubmit={this.handleSubmitSearch} />
+              </div>
+            )}
             <div>
               {this.props.showButton && (
                 <button

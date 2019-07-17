@@ -25,7 +25,7 @@ export default class AddingDriverModal extends Component {
   render() {
     const { driver_list_in_lord } = this.props;
     return (
-      <Modal title="Vehicle" onClose={this.handleClose} position="center" getWidth={"400px"} getHeight={"550px"}>
+      <Modal title="Add A Driver" onClose={this.handleClose} position="center" getWidth={"400px"} getHeight={"550px"}>
         <div className="rounded-custom">
           <div className="border-bottom-custom  d-flex align-items-center" style={{ height: "60px" }}>
             <div className="input-group pl-4 pr-1">

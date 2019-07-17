@@ -10,6 +10,7 @@ export const findDriverListInLord = (query = {}) => async dispatch => {
       order_direction: "DESC",
       ...query
     });
+    console.log(payload);
     await dispatch({
       type: constant.DRIVER_LIST_IN_LORD,
       payload

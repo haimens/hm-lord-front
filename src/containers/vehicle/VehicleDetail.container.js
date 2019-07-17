@@ -38,8 +38,7 @@ class VehicleDetail extends Component {
     createCarToADriverInLord(car_token, { driver_token });
   };
   handleSearchDriverInVehicle = keywords => {
-    const { car_token } = this.props.match.params;
-    this.props.findDriverListForACar(car_token, { keywords });
+    this.props.findDriverListInLord({ keywords });
   };
   componentDidMount() {
     const { match, findCarDetailInLord, findDriverListForACar, findDriverListInLord } = this.props;
@@ -128,6 +127,7 @@ class VehicleDetail extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     vehicle_detail_in_lord: state.vehicleReducer.vehicle_detail_in_lord,
