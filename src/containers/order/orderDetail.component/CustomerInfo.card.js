@@ -9,13 +9,21 @@ export default function BasicInfo(props) {
         <div className="purple-border p-3">
           <div className="d-flex justify-content-between align-items-center  ">
             <div className="hm-text-16 font-weight-bold text-modal-color">Customer Information</div>
-            <img
-              src={`${process.env.PUBLIC_URL}/img/icon_detail.svg`}
-              alt="Customer"
-              className="rounded-circle my-3 hm-pointer-cursor"
-              style={{ height: "25px", width: "25px" }}
-              onClick={() => history.push(`/customer/detail/${customer_token}`)}
-            />
+            <div className="d-flex">
+              <img
+                src={`${process.env.PUBLIC_URL}/img/icon_chat.svg`}
+                alt="Customer"
+                className="rounded-circle my-3 hm-pointer-cursor mr-2"
+                style={{ height: "25px", width: "25px" }}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/img/icon_detail.svg`}
+                alt="Customer"
+                className="rounded-circle my-3 hm-pointer-cursor"
+                style={{ height: "25px", width: "25px" }}
+                onClick={() => history.push(`/customer/detail/${customer_token}`)}
+              />
+            </div>
           </div>
           <img
             src={img_path}
