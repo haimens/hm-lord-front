@@ -33,7 +33,21 @@ class DriverDetail extends Component {
     showAddingSalaryModal: false,
     showUpdatingDriverModal: false,
     showMap: false,
-    available: 0
+    available: 0,
+    keywords: ""
+  };
+
+  handleSearch = keywords => {
+    const { driver_token } = this.props.match.params;
+    this.props.findTripListInDriver(driver_token, { keywords });
+  };
+  handleUpcomingFilter = () => {
+    const { driver_token } = this.props.match.params;
+    this.props.findTripListInDriver(driver_token, { status: 2 });
+  };
+  handleShowAll = () => {
+    const { driver_token } = this.props.match.params;
+    this.props.findTripListInDriver(driver_token);
   };
   handleShowAddingTripModal = () => {
     this.setState(state => ({ showAddingTripModal: !state.showAddingTripModal }));
@@ -201,6 +215,10 @@ class DriverDetail extends Component {
             hideShadow={true}
             hideButton={true}
             showSearch={true}
+            showExtra={true}
+            handleFirstButton={this.handleUpcomingFilter}
+            handleSecondButton={this.handleShowAll}
+            onSubmit={this.handleSearch}
           />
           <div className="container-fluid">
             <div className="row triplist-scroll p-1">
