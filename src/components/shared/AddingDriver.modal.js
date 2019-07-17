@@ -19,6 +19,7 @@ export default class AddingDriverModal extends Component {
     const { keywords } = this.state;
     this.props.onSubmit(keywords);
   };
+
   handleClose = () => {
     this.props.onClose();
   };
@@ -34,9 +35,9 @@ export default class AddingDriverModal extends Component {
                   <i className="fas fa-search" />
                 </span>
               </div>
-              <form onSubmit={this.handleSubmit}>
+              <form className="col" onSubmit={this.handleSubmit}>
                 <input
-                  className="form-control border-0 hm-text-14"
+                  className="form-control border-0 ml-2 hm-text-14"
                   style={{ height: "56px" }}
                   name="keywords"
                   id="keywords"

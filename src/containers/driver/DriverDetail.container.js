@@ -69,7 +69,9 @@ class DriverDetail extends Component {
       this.handleShowUpdatingDriverModal();
     }
   };
-
+  handleSearchVehicleInDriver = keywords => {
+    this.props.findVehicleListInLord({ keywords });
+  };
   handlePageChange = type => start => {
     const { match, findWageListInDriver, findSalaryListInDriver } = this.props;
     const { driver_token } = match.params;
@@ -160,6 +162,7 @@ class DriverDetail extends Component {
         {showAddingTripModal && <AddingTripModal onClose={this.handleShowAddingTripModal} />}
         {showAddingVehicleModal && (
           <AddingVehicleModal
+            onSubmit={this.handleSearchVehicleInDriver}
             driver_token={driver_token}
             handleCarBeenClicked={this.handleCreateDriverToACarInLord}
             vehicle_list_in_lord={vehicle_list_in_lord}

@@ -51,8 +51,8 @@ export default class ListHeader extends Component {
                   <button
                     className={`mr-3 rounded-custom ${
                       this.state.whichButton === 1
-                        ? "button-main-background text-white"
-                        : "border-0 text-purple shadow-sm "
+                        ? "button-main-background text-white border-0"
+                        : "border-0 bg-white text-purple shadow-sm "
                     }`}
                     style={{ width: "88px", height: "28px" }}
                     onClick={this.handleFirstBeenClicked}
@@ -62,8 +62,8 @@ export default class ListHeader extends Component {
                   <button
                     className={`mr-3 rounded-custom ${
                       this.state.whichButton === 2
-                        ? "button-main-background text-white"
-                        : "border-0 text-purple shadow-sm "
+                        ? "button-main-background text-white border-0"
+                        : "border-0 bg-white text-purple shadow-sm "
                     }`}
                     style={{ width: "88px", height: "28px" }}
                     onClick={this.handleSecondBeenClicked}

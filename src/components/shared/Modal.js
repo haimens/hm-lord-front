@@ -66,7 +66,7 @@ class Modal extends Component {
               this.props.headerContainerClassName ? this.props.headerContainerClassName : "bg-white"
             }`}
           >
-            <header className={`d-flex justify-content-between   align-items-center px-4 `} style={{ height: "74px" }}>
+            <header className={`d-flex justify-content-between align-items-center px-4 `} style={{ height: "60px" }}>
               <h5 className="text-modal-color font-weight-bold text-modal-title">{this.props.title}</h5>
               <ImageButton
                 // image={`${process.env.PUBLIC_URL}/img/forget-password@2x.png`}

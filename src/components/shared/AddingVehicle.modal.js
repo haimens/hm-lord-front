@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Modal from "./Modal";
 
 export default class AddingVehicleModal extends Component {
+  state = {
+    keywords: ""
+  };
   handleInputChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -11,6 +14,12 @@ export default class AddingVehicleModal extends Component {
     const { handleCarBeenClicked } = this.props;
     handleCarBeenClicked(car_token);
     this.handleClose();
+  };
+
+  handleSubmit = async e => {
+    if (e) e.preventDefault();
+    const { keywords } = this.state;
+    this.props.onSubmit(keywords);
   };
 
   handleClose = () => {
@@ -29,14 +38,17 @@ export default class AddingVehicleModal extends Component {
                   <i className="fas fa-search" />
                 </span>
               </div>
-              <input
-                className="form-control border-0 hm-text-14"
-                style={{ height: "56px" }}
-                name="company_name"
-                id="company_name"
-                placeholder={"Search"}
-                onChange={this.handleInputChange}
-              />
+              <form className="col" onSubmit={this.handleSubmit}>
+                <input
+                  className="form-control border-0 ml-2 hm-text-14"
+                  style={{ height: "56px" }}
+                  name="keywords"
+                  id="keywords"
+                  value={this.state.keywords}
+                  placeholder={"Search"}
+                  onChange={this.handleInputChange}
+                />
+              </form>
             </div>
           </div>
           <div className="container-fluid">
