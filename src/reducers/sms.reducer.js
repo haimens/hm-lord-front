@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
         }
       };
     case constant.MESSAGE_DETAIL_WITH_CUSTOMER_RESET:
-      return { ...state, message_detail_with_customer: action.payload };
+      return { ...state, message_detail_with_customer: action.payload, showChat: true };
     case constant.SET_CHAT_TO_FALSE:
       return { ...state, showChat: false };
     default:

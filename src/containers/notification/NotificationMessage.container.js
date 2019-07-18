@@ -9,7 +9,8 @@ import {
   findMessageDetailWithCustomer,
   setChatToFalse,
   createAMessageWithCustomer,
-  updateSmsStatus
+  updateSmsStatus,
+  findMessageAndResetData
 } from "../../actions/message.action";
 class NotificationMessage extends Component {
   state = {
@@ -19,7 +20,7 @@ class NotificationMessage extends Component {
   handleWageSearch = keywords => {};
   handleChatWithCustomer = async customer_token => {
     this.setState({ customer_token });
-    await this.props.findMessageDetailWithCustomer(customer_token);
+    await this.props.findMessageAndResetData(customer_token);
   };
   handlePageChange = start => {
     this.props.findMessageListInLord({ start });
@@ -101,7 +102,8 @@ const mapDispatchToProps = {
   findMessageDetailWithCustomer,
   setChatToFalse,
   createAMessageWithCustomer,
-  updateSmsStatus
+  updateSmsStatus,
+  findMessageAndResetData
 };
 
 export default connect(

@@ -26,7 +26,7 @@ export const findMessageDetailWithCustomer = (customer_token, query = {}) => asy
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`message/all/detail/customer/${customer_token}`, "GET", null, {
-      order_key: "udate",
+      order_key: "cdate",
       order_direction: "DESC",
       ...query
     });
@@ -76,7 +76,7 @@ export const findMessageAndResetData = (customer_token, query = {}) => async dis
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`message/all/detail/customer/${customer_token}`, "GET", null, {
-      order_key: "udate",
+      order_key: "cdate",
       order_direction: "DESC",
       ...query
     });
