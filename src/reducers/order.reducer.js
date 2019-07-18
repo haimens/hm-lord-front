@@ -33,6 +33,11 @@ const initialState = {
   current_order: {
     order_token: "",
     trip_list: ["", ""]
+  },
+  order_list_in_customer: {
+    record_list: [],
+    count: 0,
+    end: 0
   }
 };
 
@@ -46,6 +51,8 @@ export default (state = initialState, action) => {
       return { ...state, order_detail: action.payload };
     case constant.CURRENT_ORDER:
       return { ...state, current_order: action.payload };
+    case constant.ORDER_LIST_IN_CUSTOMER:
+      return { ...state, order_list_in_customer: action.payload };
     default:
       return state;
   }

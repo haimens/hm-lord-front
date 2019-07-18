@@ -22,9 +22,16 @@ export default class OrderCard extends Component {
           onClick={() => this.handleButtonClick(order_token)}
         >
           <div className="row h-100 align-items-center">
-            <div className="col-5 d-flex justify-content-center">
-              <img src={order_img} className="rounded-circle" style={{ height: "74px", width: "74px" }} alt="Driver" />
-            </div>
+            {order_img && (
+              <div className="col-5 d-flex justify-content-center">
+                <img
+                  src={order_img}
+                  className="rounded-circle"
+                  style={{ height: "74px", width: "74px" }}
+                  alt="Driver"
+                />
+              </div>
+            )}
             <div className="col-7">
               <div className="font-weight-bold text-modal-color hm-text-15 my-2">{contact_name}</div>
               <div className="text-secondary-color hm-text-12">{contact_cell}</div>

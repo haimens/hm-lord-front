@@ -10,6 +10,7 @@ import {
   updateACustomerInLord,
   updateACustomerAddressInLord
 } from "../../actions/customer.action";
+import { findCustomerOrderListInLord } from "../../actions/order.action";
 import { findCustomerNoteListInLord, createCustomerNoteListInLord } from "../../actions/note.action";
 import { createNewAddressInstance } from "../../actions/address.action";
 class CustomerDetail extends Component {
@@ -28,9 +29,13 @@ class CustomerDetail extends Component {
     this.props.findCustomerNoteListInLord(customer_token, { start });
   };
   componentDidMount() {
-    const { match, findCustomerDetailInLord, findCustomerNoteListInLord } = this.props;
+    const { match, findCustomerDetailInLord, findCustomerNoteListInLord, findCustomerOrderListInLord } = this.props;
     const { customer_token } = match.params;
-    Promise.all([findCustomerDetailInLord(customer_token), findCustomerNoteListInLord(customer_token)]);
+    Promise.all([
+      findCustomerDetailInLord(customer_token),
+      findCustomerNoteListInLord(customer_token),
+      findCustomerOrderListInLord(customer_token)
+    ]);
   }
   render() {
     const { showEditingCustomerInfo, showAddingLogInCustomer } = this.state;
@@ -42,7 +47,8 @@ class CustomerDetail extends Component {
       updateACustomerAddressInLord,
       createNewAddressInstance,
       createCustomerNoteListInLord,
-      note_list_for_customer
+      note_list_for_customer,
+      order_list_in_customer
     } = this.props;
     const { customer_token } = match.params;
 
@@ -94,17 +100,22 @@ class CustomerDetail extends Component {
             hideShadow={true}
             buttonWidth={"88px"}
           />
-          <div className="container-fluid">
+          <div className="container-fluid" style={{ height: "266px", overflow: "auto" }}>
             <div className="row p-1">
-              <OrderCard
-                parentProps={{
-                  orderId: "1000016",
-                  orderDate: "06/16 16.30",
-                  orderName: "Lebron James",
-                  orderImage: "unnamed.jpg",
-                  orderPhone: "6266266266"
-                }}
-              />
+              {order_list_in_customer.record_list.map((order, index) => (
+                <OrderCard
+                  parentProps={{
+                    cdate: order.cdate,
+                    order_type: order.order_type,
+                    status_str: order.status_str,
+                    contact_cell: order.contact_cell,
+                    contact_name: order.contact_name,
+                    order_token: order.order_token
+                  }}
+                  history={history}
+                  key={index}
+                />
+              ))}
             </div>
           </div>
         </section>
@@ -138,7 +149,8 @@ class CustomerDetail extends Component {
 const mapStateToProps = state => {
   return {
     customer_detail_in_lord: state.customerReducer.customer_detail_in_lord,
-    note_list_for_customer: state.noteReducer.note_list_for_customer
+    note_list_for_customer: state.noteReducer.note_list_for_customer,
+    order_list_in_customer: state.orderReducer.order_list_in_customer
   };
 };
 const mapDispatchToProps = {
@@ -147,7 +159,8 @@ const mapDispatchToProps = {
   createNewAddressInstance,
   updateACustomerAddressInLord,
   findCustomerNoteListInLord,
-  createCustomerNoteListInLord
+  createCustomerNoteListInLord,
+  findCustomerOrderListInLord
 };
 
 export default connect(

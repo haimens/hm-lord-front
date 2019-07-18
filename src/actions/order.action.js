@@ -30,7 +30,7 @@ export const findCustomerOrderListInLord = (customer_token, query = {}) => async
       ...query
     });
     await dispatch({
-      type: constant.ORDER_LIST_IN_LORD,
+      type: constant.ORDER_LIST_IN_CUSTOMER,
       payload
     });
     await stopLoader(dispatch);
