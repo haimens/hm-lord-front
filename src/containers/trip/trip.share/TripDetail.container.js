@@ -33,6 +33,7 @@ import {
 } from "../../../actions/trip.action";
 import { findCarListForADriver, findDriverListInLord } from "../../../actions/driver.action";
 import { editAlertInfoInTrip } from "../../../actions/alert.action";
+import { convertUTCtoLocal } from "../../../actions/utilities.action";
 class TripDetailContainer extends Component {
   state = {
     showEditButton: false,
@@ -278,6 +279,66 @@ class TripDetailContainer extends Component {
                   trip_detail_in_lord={trip_detail_in_lord}
                   showEditButton={false}
                 /> */}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-4">
+          <ListHeader
+            parentProps={{
+              title: "Timeline"
+            }}
+            hideButton={true}
+            buttonWidth={"70px"}
+          />
+          <div className="container-fluid bg-white">
+            <div className="d-flex justify-content-between p-5">
+              <div className="d-flex justify-content-center align-items-center flex-column">
+                <img
+                  src={`${process.env.PUBLIC_URL}/img/start.svg`}
+                  alt="timeline"
+                  style={{ height: "41px", width: "51px" }}
+                />
+                <div className="text-secondary-color hm-text-14 font-weight-500 mt-3">Driver Start Trip</div>
+                <div className="text-modal-color hm-text-14 font-weight-500 mt-2">
+                  {convertUTCtoLocal(trip_detail_in_lord.basic_info.start_time, "HH:mm a")}
+                </div>
+              </div>
+              <div className="d-flex justify-content-center align-items-center flex-column">
+                <img
+                  src={`${process.env.PUBLIC_URL}/img/pickup.svg`}
+                  alt="timeline"
+                  style={{ height: "41px", width: "51px" }}
+                />
+                <div className="text-secondary-color hm-text-14 font-weight-500 mt-3">
+                  Driver Arrival Pickup Location
+                </div>
+                <div className="text-modal-color hm-text-14 font-weight-500 mt-2">
+                  {convertUTCtoLocal(trip_detail_in_lord.basic_info.eta_time, "HH:mm a")}
+                </div>
+              </div>
+              <div className="d-flex justify-content-center align-items-center flex-column">
+                <img
+                  src={`${process.env.PUBLIC_URL}/img/ongoing.svg`}
+                  alt="timeline"
+                  style={{ height: "41px", width: "51px" }}
+                />
+                <div className="text-secondary-color hm-text-14 font-weight-500 mt-3">Customer On Board</div>
+                <div className="text-modal-color hm-text-14 font-weight-500 mt-2">
+                  {convertUTCtoLocal(trip_detail_in_lord.basic_info.cob_time, "HH:mm a")}
+                </div>
+              </div>
+              <div className="d-flex justify-content-center align-items-center flex-column">
+                <img
+                  src={`${process.env.PUBLIC_URL}/img/finish.svg`}
+                  alt="timeline"
+                  style={{ height: "41px", width: "51px" }}
+                />
+                <div className="text-secondary-color hm-text-14 font-weight-500 mt-3">Customer Arrival Destination</div>
+                <div className="text-modal-color hm-text-14 font-weight-500 mt-2">
+                  {convertUTCtoLocal(trip_detail_in_lord.basic_info.arrive_time, "HH:mm a")}
+                </div>
               </div>
             </div>
           </div>
