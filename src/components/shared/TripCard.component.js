@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { convertUTCtoLocal } from "../../actions/utilities.action";
 export default class TripCard extends Component {
   handleTripCardPushed = trip_token => {
+    console.log(trip_token);
     const { history, parentProps } = this.props;
     const { tripStatus } = parentProps;
     if (tripStatus === "CAD") {

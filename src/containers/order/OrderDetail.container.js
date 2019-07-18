@@ -202,8 +202,10 @@ class OrderDetail extends Component {
                   tripPickUp: trip.pickup_time,
                   tripFrom: trip.from_addr_str,
                   tripTo: trip.to_addr_str,
-                  tripStatus: trip.status_str
+                  tripStatus: trip.status_str,
+                  trip_token: trip.trip_token
                 }}
+                history={history}
                 key={index}
                 hideDriver={true}
               />
