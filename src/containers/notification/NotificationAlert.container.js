@@ -5,12 +5,11 @@ import { ListView, Header, ListHeader } from "../../components/shared";
 import { findAlertListInLord } from "../../actions/alert.action";
 import NotificationAlertListItem from "./notificationAlert.component/NotificationAlertList.item";
 class NotificationAlert extends Component {
-  state = {
-    showAddWage: false
-  };
-  handleWageSearch = keywords => {};
   handleAddingWage = () => {
     this.setState(state => ({ showAddWage: !state.showAddWage }));
+  };
+  handlePageChange = start => {
+    this.props.findAlertListInLord({ start });
   };
   componentDidMount() {
     this.props.findAlertListInLord();
@@ -32,14 +31,14 @@ class NotificationAlert extends Component {
             hideButton={true}
           />
           <ListView
-            totalCount={30}
+            totalCount={alert_list_in_lord.count}
             title="Trip Alert"
             fieldNames={["Driver img", "Alert Time", "Driver Name", "Type", "Trip Detail"]}
             hideHeader={true}
             onPageChange={this.handlePageChange}
           >
             {alert_list_in_lord.record_list.map((alert, index) => (
-              <NotificationAlertListItem parentProps={alert} key={index} onClick={this.handlePunchItemClick} />
+              <NotificationAlertListItem parentProps={alert} key={index} history={history} />
             ))}
           </ListView>
         </section>

@@ -126,7 +126,7 @@ function Page404(props) {
         alt="error404"
         className="mt-4"
       />
-      <a className="btn hm-bg-darkblue text-white mt-4" href="/">
+      <a className="btn hm-bg-darkblue text-white mt-4" href="/dashboard">
         返回
       </a>
     </main>
