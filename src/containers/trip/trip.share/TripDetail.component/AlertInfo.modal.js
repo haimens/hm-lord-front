@@ -6,6 +6,11 @@ import { TimePicker } from "antd";
 import "./AlertInfoModal.css";
 import moment from "moment";
 export default class AlertInfo extends Component {
+  state = {
+    eta: "",
+    arrival: "",
+    cob: ""
+  };
   handleETAAlert = time => {
     this.setState({ eta: time._d });
   };
@@ -17,33 +22,22 @@ export default class AlertInfo extends Component {
   };
 
   handleCreateAlerts = async () => {
-    const { createAnAlertForATrip, trip_token, pickup_time } = this.props;
+    const { createAnAlertForATrip, trip_token } = this.props;
+    const { eta, arrival, cob } = this.state;
 
     createAnAlertForATrip(trip_token, {
       alert_list: [
         {
           type: 1,
-          record_time: convertLocalToUTC(
-            moment(pickup_time)
-              .subtract(1, "hour")
-              .format("YYYY-MM-DD HH:mm")
-          )
+          record_time: convertLocalToUTC(eta)
         },
         {
           type: 2,
-          record_time: convertLocalToUTC(
-            moment(pickup_time)
-              .subtract(5, "minute")
-              .format("YYYY-MM-DD HH:mm")
-          )
+          record_time: convertLocalToUTC(arrival)
         },
         {
           type: 3,
-          record_time: convertLocalToUTC(
-            moment(pickup_time)
-              .add(5, "minute")
-              .format("YYYY-MM-DD HH:mm")
-          )
+          record_time: convertLocalToUTC(cob)
         }
       ]
     });
@@ -53,6 +47,33 @@ export default class AlertInfo extends Component {
   handleClose = () => {
     this.props.onClose();
   };
+
+  componentDidMount() {
+    const { pickup_time } = this.props;
+    this.setState({
+      eta: moment(
+        convertUTCtoLocal(
+          moment(pickup_time)
+            .subtract(1, "hour")
+            .format("YYYY-MM-DD HH:mm")
+        )
+      ),
+      arrival: moment(
+        convertUTCtoLocal(
+          moment(pickup_time)
+            .subtract(5, "minute")
+            .format("YYYY-MM-DD HH:mm")
+        )
+      ),
+      cob: moment(
+        convertUTCtoLocal(
+          moment(pickup_time)
+            .add(5, "minute")
+            .format("YYYY-MM-DD HH:mm")
+        )
+      )
+    });
+  }
 
   render() {
     const { pickup_time } = this.props;
@@ -64,47 +85,56 @@ export default class AlertInfo extends Component {
           onClose={this.handleClose}
           position="center"
           getWidth={"467px"}
-          getHeight={"420px"}
+          getHeight={"460px"}
         >
           <div className="container">
             <div className="p-3">
-              <div className="form-group my-4">
+              <div className="form-group mt-2">
                 <label className="font-weight-500 hm-text-14 text-secondary-color" htmlFor="eta">
                   ETA Alert Setting
                 </label>
-                <div className="text-modal-color font-weight-bold hm-text-14">
-                  {convertUTCtoLocal(
-                    moment(pickup_time)
-                      .subtract(1, "hour")
-                      .format("YYYY-MM-DD HH:mm")
+                <TimePicker
+                  defaultValue={moment(
+                    convertUTCtoLocal(
+                      moment(pickup_time)
+                        .subtract(1, "hour")
+                        .format("YYYY-MM-DD HH:mm")
+                    )
                   )}
-                </div>
+                  onChange={this.handleETAAlert}
+                />
               </div>
 
               <div className="form-group mb-4">
                 <label className="font-weight-500 hm-text-14 text-secondary-color" htmlFor="eta">
                   Arrival Alert Setting
                 </label>
-                <div className="text-modal-color font-weight-bold hm-text-14">
-                  {convertUTCtoLocal(
-                    moment(pickup_time)
-                      .subtract(5, "minute")
-                      .format("YYYY-MM-DD HH:mm")
+                <TimePicker
+                  defaultValue={moment(
+                    convertUTCtoLocal(
+                      moment(pickup_time)
+                        .subtract(5, "minute")
+                        .format("YYYY-MM-DD HH:mm")
+                    )
                   )}
-                </div>
+                  onChange={this.handleArrivalAlert}
+                />
               </div>
 
               <div className="form-group mb-4">
                 <label className="font-weight-500 hm-text-14 text-secondary-color" htmlFor="eta">
                   COB Alert Setting
                 </label>
-                <div className="text-modal-color font-weight-bold hm-text-14">
-                  {convertUTCtoLocal(
-                    moment(pickup_time)
-                      .add(5, "minute")
-                      .format("YYYY-MM-DD HH:mm")
+                <TimePicker
+                  defaultValue={moment(
+                    convertUTCtoLocal(
+                      moment(pickup_time)
+                        .add(5, "minute")
+                        .format("YYYY-MM-DD HH:mm")
+                    )
                   )}
-                </div>
+                  onChange={this.handleCOBAlert}
+                />
               </div>
 
               <div className="form-group text-right pt-3">

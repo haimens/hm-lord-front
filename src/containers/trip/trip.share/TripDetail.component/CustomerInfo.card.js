@@ -16,11 +16,17 @@ export default function CustomerInfoCard(props) {
               <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
             </button>
           )}
+          <img
+            src={`${process.env.PUBLIC_URL}/img/icon_chat.svg`}
+            alt="Customer"
+            className="rounded-circle my-3"
+            style={{ height: "25px", width: "25px" }}
+          />
         </div>
         <img
-          src={`${process.env.PUBLIC_URL}/img/hd.png`}
+          src={customer_info.img_path}
           alt="Customer"
-          className="rounded-circle my-3"
+          className="rounded-circle my-3 mr-3"
           style={{ height: "74px", width: "74px" }}
         />
       </div>

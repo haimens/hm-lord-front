@@ -35,9 +35,18 @@ export default class AlertInfo extends Component {
     this.props.onClose();
   };
 
+  async componentDidMount() {
+    const { alert_type, alert_list } = this.props;
+    await alert_list.map(alert => {
+      if (alert_type.includes(alert.type_str)) {
+        this.setState({ currentTime: alert.record_time });
+      }
+      return null;
+    });
+  }
   render() {
-    const { alert_type } = this.props;
-    const { type } = this.state;
+    const { alert_type, alert_list } = this.props;
+    const { type, currentTime } = this.state;
 
     return (
       <div>
@@ -54,7 +63,12 @@ export default class AlertInfo extends Component {
                 <label className="font-weight-500 hm-text-14 text-secondary-color" htmlFor="eta">
                   {alert_type}
                 </label>
-                <TimePicker onChange={this.handleWhenTimeChanged} />
+                {currentTime !== "" && (
+                  <TimePicker
+                    defaultValue={moment(convertUTCtoLocal(currentTime))}
+                    onChange={this.handleWhenTimeChanged}
+                  />
+                )}
               </div>
 
               <div className="form-group  my-4">

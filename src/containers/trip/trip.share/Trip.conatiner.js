@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { TripCard, ListHeader, Header } from "../../../components/shared";
+import { TripCard, ListHeader, Header, Pagination } from "../../../components/shared";
 import { findTripListInLord, findTripActiveListInLord } from "../../../actions/trip.action";
 class TripContainer extends Component {
   state = {
@@ -81,6 +81,15 @@ class TripContainer extends Component {
             />
           ))}
         </section>
+        {trip_list_in_lord.count === 0 ? (
+          <section className="fixed-bottom">
+            <Pagination count={trip_list_in_lord.count} onPageChange={this.handlePageChange} />
+          </section>
+        ) : (
+          <section>
+            <Pagination count={trip_list_in_lord.count} onPageChange={this.handlePageChange} />
+          </section>
+        )}
       </main>
     );
   }

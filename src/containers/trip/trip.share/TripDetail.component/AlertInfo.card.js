@@ -56,7 +56,7 @@ export default function AlertInfoCard(props) {
           {showbutton && (
             <button
               className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
-              onClick={() => handleEditButton("Arrival Alert", alert_list[1].alert_token)}
+              onClick={() => handleEditButton("ARRIVAL Alert", alert_list[1].alert_token)}
             >
               <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
             </button>

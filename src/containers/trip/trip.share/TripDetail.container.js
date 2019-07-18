@@ -8,11 +8,10 @@ import {
   DriverInfo,
   VehicleInfo,
   AlertInfo,
-  TimeStaps,
+  AddonService,
   BasicInfoModal,
   AlertInfoModal,
   CustomerInfoModal,
-  TimeStampsModal,
   AlertEditModal
 } from "./TripDetail.component";
 import { findVehicleListInLord } from "../../../actions/vehicle.action";
@@ -71,7 +70,7 @@ class TripDetailContainer extends Component {
   };
 
   handleEditAlert = (alert_type, alert_token) => {
-    this.setState({ showEditAlertModal: true, alert_type, alert_token });
+    this.setState({ showEditAlertModal: true, alert_type: alert_type, alert_token, alert_token });
   };
 
   handleCloseEditAlert = () => {
@@ -112,7 +111,8 @@ class TripDetailContainer extends Component {
     if (currentPosition === "finished") {
       this.setState({ currentPosition, title: "Recent Finished" });
     }
-    if (this.props.trip_detail_in_lord.driver_info.driver_token !== "") {
+    console.log(this.props.trip_detail_in_lord.driver_info.driver_token);
+    if (this.props.trip_detail_in_lord.driver_info.driver_token) {
       findCarListForADriver(this.props.trip_detail_in_lord.driver_info.driver_token);
     }
   }
@@ -171,16 +171,17 @@ class TripDetailContainer extends Component {
             onClose={() => this.handleInfoModal("alert")}
           />
         )}
-        {showTimeStampInfoModal && (
+        {/* {showTimeStampInfoModal && (
           <TimeStampsModal
             trip_token={trip_token}
             updateTripBasicInfo={updateTripBasicInfo}
             onClose={() => this.handleInfoModal("stamps")}
           />
-        )}
+        )} */}
         {showEditAlertModal && (
           <AlertEditModal
             trip_token={trip_token}
+            alert_list={trip_detail_in_lord.alert_list}
             editAlertInfoInTrip={editAlertInfoInTrip}
             alert_token={alert_token}
             alert_type={alert_type}
@@ -241,10 +242,10 @@ class TripDetailContainer extends Component {
                 />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <TimeStaps
+                <AddonService
                   handleDetailButtonClicked={this.handleInfoModal}
                   trip_detail_in_lord={trip_detail_in_lord}
-                  showEditButton={showEditButton}
+                  showEditButton={false}
                 />
               </div>
             </div>

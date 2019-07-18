@@ -17,25 +17,31 @@ export default function DriverInfoCard(props) {
             </button>
           )}
         </div>
-        <img
-          src={driver_info.img_path}
-          alt="Driver"
-          className="rounded-circle my-3"
-          style={{ height: "74px", width: "74px" }}
-        />
+        {trip_detail_in_lord.driver_info.driver_token && (
+          <img
+            src={driver_info.img_path}
+            alt="Driver"
+            className="rounded-circle my-3"
+            style={{ height: "74px", width: "74px" }}
+          />
+        )}
       </div>
-      <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Driver Name</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">{driver_info.name}</div>
-      </div>
-      <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Cell</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">{driver_info.cell}</div>
-      </div>
-      <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Email</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">{driver_info.email}</div>
-      </div>
+      {trip_detail_in_lord.driver_info.driver_token && (
+        <>
+          <div className="mb-4 px-3">
+            <div className="text-secondary-color font-weight-500 hm-text-14">Driver Name</div>
+            <div className="hm-text-14 font-weight-bold text-modal-color">{driver_info.name}</div>
+          </div>
+          <div className="mb-4 px-3">
+            <div className="text-secondary-color font-weight-500 hm-text-14">Cell</div>
+            <div className="hm-text-14 font-weight-bold text-modal-color">{driver_info.cell}</div>
+          </div>
+          <div className="mb-4 px-3">
+            <div className="text-secondary-color font-weight-500 hm-text-14">Email</div>
+            <div className="hm-text-14 font-weight-bold text-modal-color">{driver_info.email}</div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
