@@ -181,3 +181,16 @@ export const cancelOrder = (order_token, history) => async dispatch => {
     dispatch(processLogout(err));
   }
 };
+
+export const confirmOrder = order_token => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`order/confirm/${order_token}`, "PATCH");
+    await launchSuccess(dispatch);
+    await dispatch(findOrderDetailInLord(order_token));
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};

@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { ListView, Header, ListHeader } from "../../../components/shared";
 import GeneralAdding from "./General.component/GeneralAdding.modal";
 import GeneralListItem from "./General.component/GeneralList.item";
+import { createGeneralSettingInLord, findGeneralSettingListInLord } from "../../../actions/settings.action";
 class General extends Component {
   state = {
     showAddGeneral: false
@@ -12,12 +13,20 @@ class General extends Component {
   handleShowGeneralModal = () => {
     this.setState(state => ({ showAddGeneral: !state.showAddGeneral }));
   };
+  componentDidMount() {
+    this.props.findGeneralSettingListInLord();
+  }
   render() {
-    const { history } = this.props;
+    const { history, createGeneralSettingInLord, general_setting_list_in_lord } = this.props;
     const { showAddGeneral } = this.state;
     return (
       <main className="container-fluid">
-        {showAddGeneral && <GeneralAdding onClose={this.handleShowGeneralModal} />}
+        {showAddGeneral && (
+          <GeneralAdding
+            createGeneralSettingInLord={createGeneralSettingInLord}
+            onClose={this.handleShowGeneralModal}
+          />
+        )}
         <section className="mb-4">
           <Header
             title="Settings"
@@ -39,13 +48,13 @@ class General extends Component {
           <ListView
             totalCount={30}
             title="General"
-            fieldNames={["Created On", "Name", "Amount", "Delete"]}
+            fieldNames={["Created On", "Key", "Value", "Edit", "Delete"]}
             hideHeader={true}
             onPageChange={this.handlePageChange}
           >
-            {/* {punch_list_in_puri.record_list.map((punch, index) => (
-              <WageListItem parentProps={punch} key={index} onClick={this.handlePunchItemClick} />
-            ))} */}
+            {general_setting_list_in_lord.record_list.map((general, index) => (
+              <GeneralListItem general={general} key={index} onClick={this.handlePunchItemClick} />
+            ))}
           </ListView>
         </section>
       </main>
@@ -53,9 +62,12 @@ class General extends Component {
   }
 }
 const mapStateToProps = state => {
-  return {};
+  return { general_setting_list_in_lord: state.settingsReducer.general_setting_list_in_lord };
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  createGeneralSettingInLord,
+  findGeneralSettingListInLord
+};
 
 export default connect(
   mapStateToProps,

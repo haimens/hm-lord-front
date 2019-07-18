@@ -20,6 +20,9 @@ export default function BasicInfo(props) {
   const handleCancelOrder = () => {
     props.cancelOrder(props.order_token, props.history);
   };
+  const handleConfirmOrder = () => {
+    props.confirmOrder(props.order_token);
+  };
   return (
     <>
       <div className="purple-border p-3">
@@ -93,12 +96,21 @@ export default function BasicInfo(props) {
             Cancel Order
           </button>
           <button
-            className="border-0 shadow-sm  hm-text-12 text-white font-weight-bold rounded-custom"
+            className="border-0 shadow-sm  hm-text-12 text-white font-weight-bold rounded-custom mr-3"
             style={{ height: "43px", width: "98px", backgroundColor: "#2ece89" }}
             onClick={handlePayOrderAction}
           >
             Pay Order
           </button>
+          {status_str === "FINALIZED" && (
+            <button
+              className="border-0 shadow-sm hm-text-12 text-white font-weight-bold rounded-custom"
+              style={{ height: "43px", width: "98px", backgroundColor: "#ffd600" }}
+              onClick={handleConfirmOrder}
+            >
+              Confirm
+            </button>
+          )}
         </div>
       )}
     </>

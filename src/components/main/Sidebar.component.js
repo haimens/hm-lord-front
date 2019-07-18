@@ -233,13 +233,13 @@ export default class Sidebar extends Component {
               path="vehicle"
               is_target={parsedLocation[3] === "vehicle"}
             />
-            {/* <SubNavItem
+            <SubNavItem
               onClick={() => this.handleClick("/settings/general")}
               name="General Setting"
               history={this.props.parentProps.history}
               path="general"
               is_target={parsedLocation[3] === "general"}
-            /> */}
+            />
           </NavItem>
         </section>
       </main>

@@ -21,7 +21,8 @@ import {
   updateOrderDiscountInLord,
   applyOrderDiscountInLord,
   applyFinalOrder,
-  cancelOrder
+  cancelOrder,
+  confirmOrder
 } from "../../actions/order.action";
 import { createOrderNoteListInLord, findOrderNoteListInLord } from "../../actions/note.action";
 import { findCouponListInLord } from "../../actions/coupon.action";
@@ -86,7 +87,8 @@ class OrderDetail extends Component {
       note_list_for_order,
       createOrderNoteListInLord,
       applyFinalOrder,
-      cancelOrder
+      cancelOrder,
+      confirmOrder
     } = this.props;
     const { order_token } = match.params;
     const {
@@ -147,6 +149,7 @@ class OrderDetail extends Component {
                   applyFinalOrder={applyFinalOrder}
                   order_detail={order_detail}
                   handleUpdateBasicInfo={this.handleUpdateBasicInfo}
+                  confirmOrder={confirmOrder}
                 />
               </div>
               <div className="col-lg-6 col-12 mb-4">
@@ -248,7 +251,8 @@ const mapDispatchToProps = {
   createOrderNoteListInLord,
   findOrderNoteListInLord,
   applyFinalOrder,
-  cancelOrder
+  cancelOrder,
+  confirmOrder
 };
 
 export default connect(

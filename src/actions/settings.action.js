@@ -169,3 +169,50 @@ export const setPrimaryForResources = body => async dispatch => {
     dispatch(processLogout(err));
   }
 };
+
+//key, value
+export const createGeneralSettingInLord = (body = {}) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`setting/detail`, "POST", body);
+    await dispatch(findGeneralSettingListInLord());
+    await launchSuccess(dispatch);
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
+export const findGeneralSettingListInLord = (query = {}) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`setting/all/detail/realm`, "GET", null, {
+      order_key: "udate",
+      order_direction: "DESC",
+      ...query
+    });
+    console.log(payload);
+    await dispatch({
+      type: constant.GENERAL_SETTING_LIST_IN_LORD,
+      payload
+    });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
+export const updateGeneralSettingListInLord = (setting_token, body = {}) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`setting/detail/${setting_token}`, "PATCH", body);
+    await dispatch(findGeneralSettingListInLord());
+    await launchSuccess(dispatch);
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};

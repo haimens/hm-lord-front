@@ -74,6 +74,11 @@ const initialState = {
     record_list: [],
     count: 0,
     end: 0
+  },
+  general_setting_list_in_lord: {
+    record_list: [],
+    count: 0,
+    end: 0
   }
 };
 
@@ -93,6 +98,8 @@ export default (state = initialState, action) => {
       return { ...state, vehicle_type_list_in_settings: action.payload };
     case constant.GENERAL_LIST_IN_SETTINGS:
       return { ...state, general_list_in_settings: action.payload };
+    case constant.GENERAL_SETTING_LIST_IN_LORD:
+      return { ...state, general_setting_list_in_lord: action.payload };
     default:
       return state;
   }

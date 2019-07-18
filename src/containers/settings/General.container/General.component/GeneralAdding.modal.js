@@ -31,15 +31,11 @@ export default class VehicleAdding extends Component {
   };
 
   handleCreateADriverInLord = () => {
-    const { name, cell, email, username, img_path, capacity, identifier, rate } = this.state;
-    if (name !== "" && cell !== "" && email !== "" && username !== "" && identifier !== "" && rate !== "") {
-      this.props.createADriverInLord({
-        name,
-        img_path,
-        email,
-        username,
-        identifier,
-        rate: rate * 10
+    const { key, value } = this.state;
+    if (key !== "" && value !== "") {
+      this.props.createGeneralSettingInLord({
+        key,
+        value
       });
       this.handleClose();
     } else {

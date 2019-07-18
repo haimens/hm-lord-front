@@ -1,33 +1,26 @@
 import React, { Component } from "react";
+import { convertLocalToUTC } from "../../../../actions/utilities.action";
 
 export default class CouponList extends Component {
   render() {
+    const { key, value, cdate, setting_token } = this.props.general;
+    console.log(this.props);
     return (
-      <tr>
-        <td data-label="Created On" className="st-text-ellipsis">
-          <section className="text-position align-middle text-muted text-sm">
-            <small>{21}</small>
-          </section>
+      <tr className="border-bottom">
+        <td data-label="Created On" className="items-height align-middle">
+          <section className="text-center align-middle ">{convertLocalToUTC(cdate)}</section>
         </td>
-        <td data-label="Admin Name" className="st-text-ellipsis">
-          <section className="text-position align-middle text-muted text-sm">
-            <small>{13}</small>
-          </section>
+        <td data-label="Key" className="items-height align-middle text-center">
+          <section className="text-center align-middle hm-text-14 text-main-color font-weight-bold">{key}</section>
         </td>
-        <td data-label="Call" className="st-text-ellipsis">
-          <section className="text-position align-middle text-muted text-sm">
-            <small>{"N/A"}</small>
-          </section>
+        <td data-label="Value" className="items-height align-middle">
+          <section className="text-center align-middle ">{value}</section>
         </td>
-        <td data-label="Email" className="st-text-ellipsis text-position">
-          <section className="text-position align-middle text-muted text-sm">
-            <small>{"N/A"}</small>
-          </section>
+        <td data-label="Edit" className="items-height align-middle text-center">
+          <section className="text-center align-middle hm-text-14 text-main-color font-weight-bold">{123}</section>
         </td>
-        <td data-label="Username" className="st-text-ellipsis">
-          <section className="text-position align-middle text-muted text-sm">
-            <small>{"N/A"}</small>
-          </section>
+        <td data-label="Delete" className="items-height align-middle">
+          <section className="text-center align-middle ">{123}</section>
         </td>
       </tr>
     );
