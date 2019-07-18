@@ -98,15 +98,18 @@ class Modal extends Component {
           </div>
           <div className="mt-auto">
             <div className="d-flex justify-content-center align-items-center bg-white chat-modal-input">
-              <form className="col" onSubmit={this.handleSubmit}>
+              <form className="col d-flex" onSubmit={this.handleSubmit}>
                 <input
-                  className="chat-input p-3 hm-text-16 font-weight-500"
+                  className="chat-input col p-3 hm-text-16 font-weight-500"
                   type="text"
                   id="chat"
                   value={chat}
                   onChange={this.handleInputChange}
                   placeholder="Type a message here..."
                 />
+                <i className="chat-icon-position hm-pointer-cursor fas fa-paper-plane shadow-sm text-white rounded-circle d-flex justify-content-center align-items-center messenger-green"
+                onClick={this.handleSubmit}
+                style={{ height: "52px", width: "52px" }} />
               </form>
             </div>
           </div>

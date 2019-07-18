@@ -47,7 +47,6 @@
 }
 
 .chat-input{
-  width: 451px;
   height: 48px;
   opacity: 0.4;
   border-radius: 24px;
@@ -72,4 +71,8 @@
   border-bottom-left-radius: 20px;
   box-shadow: 0 2px 3px 0 rgba(151, 151, 151, 0.5);
   background-color: #e6e9ed;
+}
+.chat-icon-position{
+  margin-left:-40px;
+  z-index:3
 }
