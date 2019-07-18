@@ -3,6 +3,7 @@ import { convertUTCtoLocal, parseAmount } from "../../../../actions/utilities.ac
 export default function BasicInfoCard(props) {
   const { showEditButton, basic_info, from_address_info, to_address_info, flight_info, handleFlightButton } = props;
   const { pickup_time } = basic_info;
+  console.log(basic_info.flight_str);
   return (
     <div>
       <div className="purple-border p-3">
@@ -38,9 +39,9 @@ export default function BasicInfoCard(props) {
               border: "solid 1px #32325d"
             }}
             onClick={() => handleFlightButton()}
-            className="bg-white"
+            className="bg-white text-modal-color font-weight-bold"
           >
-            {basic_info.flight_str ? basic_info.flight_str : "N/A"}
+            {basic_info.flight_str !== " " ? basic_info.flight_str : "N/A"}
           </button>
         </div>
       </div>

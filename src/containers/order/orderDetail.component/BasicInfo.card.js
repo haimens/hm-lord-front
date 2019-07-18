@@ -10,8 +10,16 @@ export default function BasicInfo(props) {
     note,
     status_str,
     contact_name,
-    contact_cell
+    contact_cell,
+    is_paid
   } = props.order_detail.order_info;
+  const handlePayOrderAction = () => {
+    props.applyFinalOrder(props.order_token);
+    props.history.push(`/order/creation/${props.order_token}`);
+  };
+  const handleCancelOrder = () => {
+    props.cancelOrder(props.order_token, props.history);
+  };
   return (
     <>
       <div className="purple-border p-3">
@@ -75,6 +83,24 @@ export default function BasicInfo(props) {
           )}
         </div>
       </div>
+      {is_paid === 0 && (
+        <div className="mb-4 px-3">
+          <button
+            className="border-0 shadow-sm  hm-text-12 text-white font-weight-bold rounded-custom mr-3"
+            style={{ height: "43px", width: "98px", backgroundColor: "#f5365d" }}
+            onClick={handleCancelOrder}
+          >
+            Cancel Order
+          </button>
+          <button
+            className="border-0 shadow-sm  hm-text-12 text-white font-weight-bold rounded-custom"
+            style={{ height: "43px", width: "98px", backgroundColor: "#2ece89" }}
+            onClick={handlePayOrderAction}
+          >
+            Pay Order
+          </button>
+        </div>
+      )}
     </>
   );
 }

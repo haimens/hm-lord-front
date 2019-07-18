@@ -27,11 +27,12 @@ const initialState = {
       status_str: "",
       contact_name: "",
       contact_cell: ""
-    }
+    },
+    trip_list: []
   },
   current_order: {
-    order_token: "ORD-f5764254208ece7dc05b092646d8d19a",
-    trip_list: ["TRIP-8dbe9015d47421c346288e9e0e4ce1b3", "TRIP-13f63201b9b37287743ae990c532a61a"]
+    order_token: "",
+    trip_list: ["", ""]
   }
 };
 

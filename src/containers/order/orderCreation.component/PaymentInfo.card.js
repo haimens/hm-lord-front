@@ -12,7 +12,8 @@ class PaymentInfo extends Component {
       round_trip: false,
       loaded: false,
       nonce: "",
-      isCreditCard: true
+      isCreditCard: true,
+      type: ""
     };
   }
   handleInputChange = e => {
@@ -28,12 +29,13 @@ class PaymentInfo extends Component {
   };
 
   handleFinishOrder = () => {
-    const { current_order, handleSubmitAPaymentInLord } = this.props;
+    const { current_order, handleSubmitAPaymentInLord, history } = this.props;
     const { isCreditCard } = this.state;
     if (isCreditCard) {
-      handleSubmitAPaymentInLord(current_order.order_token, { card_nonce: this.state.nonce });
+      handleSubmitAPaymentInLord(current_order.order_token, { card_nonce: this.state.nonce, type: 1 }, history);
+    } else {
+      handleSubmitAPaymentInLord(current_order.order_token, { type: 3 }, history);
     }
-    this.props.history.push("/order");
   };
   isCreditCard = bool => {
     this.setState({ isCreditCard: bool });

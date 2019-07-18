@@ -33,6 +33,7 @@ import FlightCardNoRecord from "./FlightCardNoRecord.modal";
 import CouponModal from "./Coupon.modal";
 import AddingNote from "./AddingNote.modal";
 import FlightDetailModal from "./FlightDetail.modal";
+import LogItem from "./LogList.item";
 export {
   LoaderAlt,
   IconButton,
@@ -68,5 +69,6 @@ export {
   FlightCardNoRecord,
   CouponModal,
   AddingNote,
-  FlightDetailModal
+  FlightDetailModal,
+  LogItem
 };

@@ -2,13 +2,12 @@ import { callApi, startLoader, stopLoader, launchSuccess } from "./utilities.act
 import { processLogout } from "./auth.action";
 import constant from "../constants/constant";
 
-export const handleSubmitAPaymentInLord = (order_token, body = {}) => async dispatch => {
-  console.log(order_token);
-  console.log(body);
+export const handleSubmitAPaymentInLord = (order_token, body = {}, history) => async dispatch => {
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`payment/web/${order_token}`, "POST", body);
     await launchSuccess(dispatch);
+    history.push("/order/list");
     await stopLoader(dispatch);
     return payload;
   } catch (err) {

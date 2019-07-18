@@ -152,7 +152,7 @@ h1,h2,h3,h4,h5,h6,h7 {
 }
 
 .text-modal-color{
-  color: #32325d;
+  color: #32325d !important;
 }
 .text-modal-title{
   font-size: 17px

@@ -20,8 +20,7 @@ export default class CustomerAdding extends Component {
     const { note } = this.state;
     if (note !== "") {
       this.props.createANote(this.props.token, {
-        note,
-        type: this.props.type
+        note
       });
       this.handleClose();
     } else {

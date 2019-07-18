@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { OrderCard, ListView, ListHeader, Header, AddingNote } from "../../components/shared";
+import { OrderCard, ListView, ListHeader, Header, AddingNote, LogItem } from "../../components/shared";
 
 import CustomerDetailCard from "./customerDetail.component/CustomerDetail.card";
-import LogListItem from "./customerDetail.component/LogList.item";
 import EditCustomerModal from "./customerDetail.component/EditCustomer.modal";
 import {
   findCustomerDetailInLord,
@@ -23,6 +22,10 @@ class CustomerDetail extends Component {
   };
   handleEditingCustomerInformation = () => {
     this.setState(state => ({ showEditingCustomerInfo: !state.showEditingCustomerInfo }));
+  };
+  handlePageChange = start => {
+    const { customer_token } = this.props.match.params;
+    this.props.findCustomerNoteListInLord(customer_token, { start });
   };
   componentDidMount() {
     const { match, findCustomerDetailInLord, findCustomerNoteListInLord } = this.props;
@@ -123,7 +126,7 @@ class CustomerDetail extends Component {
             onPageChange={this.handlePageChange}
           >
             {note_list_for_customer.record_list.map((note, index) => (
-              <LogListItem parentProps={note} key={index} />
+              <LogItem parentProps={note} key={index} />
             ))}
           </ListView>
         </section>

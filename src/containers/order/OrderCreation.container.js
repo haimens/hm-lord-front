@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { OrderHeader, CustomerInformationCard } from "./orderCreation.component";
 import TripDetailCard from "./orderCreation.component/TripDetail.card";
 import CompleteOrderCard from "./orderCreation.component/CompleteOrderCard.card";
 import PaymentInfoCard from "./orderCreation.component/PaymentInfo.card";
+import { setCurrentOrderInLord } from "../../actions/order.action";
 class OrderCreation extends Component {
   state = {
     position: 2,
@@ -22,7 +25,13 @@ class OrderCreation extends Component {
   handleSetCurrentCustomer = currentCustomer => {
     this.setState({ currentCustomer });
   };
-  //CTM-202dd4246cfbfd6e5962f136eea83a58
+  async componentDidMount() {
+    const { order_token } = this.props.match.params;
+    this.props.setCurrentOrderInLord(order_token);
+    if (order_token) {
+      await this.setState({ position: 5 });
+    }
+  }
   render() {
     const { position, round_trip, currentCustomer } = this.state;
     return (
@@ -61,4 +70,14 @@ class OrderCreation extends Component {
     );
   }
 }
-export default OrderCreation;
+const mapStateToProps = state => {
+  return {};
+};
+const mapDispatchToProps = {
+  setCurrentOrderInLord
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(withRouter(OrderCreation));

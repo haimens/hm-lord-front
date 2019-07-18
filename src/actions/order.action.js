@@ -44,7 +44,6 @@ export const findOrderListInLordWithDate = (query = {}) => async dispatch => {
 };
 
 export const findOrderDetailInLord = order_token => async dispatch => {
-  console.log(order_token);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`order/detail/${order_token}`, "GET");
@@ -60,13 +59,26 @@ export const findOrderDetailInLord = order_token => async dispatch => {
 };
 
 export const createOrderInLord = (body = {}) => async dispatch => {
-  console.log(body);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`order/detail`, "POST", body);
     await dispatch({
       type: constant.CURRENT_ORDER,
       payload
+    });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
+export const setCurrentOrderInLord = order_token => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    await dispatch({
+      type: constant.CURRENT_ORDER,
+      payload: { order_token }
     });
     await stopLoader(dispatch);
   } catch (err) {
@@ -123,12 +135,27 @@ export const applyFinalOrder = order_token => async dispatch => {
   }
 };
 
-export const updateOrderDetailInLord = (order_token, body) => async dispatch => {
+export const updateOrderDetailInLord = (order_token, body, bool) => async dispatch => {
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`order/detail/${order_token}`, "PATCH", body);
-    await dispatch(findOrderDetailInLord(order_token));
+    if (!bool) {
+      await dispatch(findOrderDetailInLord(order_token));
+      await launchSuccess(dispatch);
+    }
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
+export const cancelOrder = (order_token, history) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`order/cancel/${order_token}`, "PATCH");
     await launchSuccess(dispatch);
+    history.push("/order/list");
     await stopLoader(dispatch);
   } catch (err) {
     await stopLoader(dispatch);

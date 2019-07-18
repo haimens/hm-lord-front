@@ -91,7 +91,7 @@ class CompleteOrderCard extends Component {
   handleMovingToPayment = () => {
     const { current_order, handleMoveNext, applyFinalOrder, updateOrderDetailInLord } = this.props;
     const { name, area, cell } = this.state;
-    updateOrderDetailInLord(current_order.order_token, { contact_name: name, contact_cell: `${area} ${cell}` });
+    updateOrderDetailInLord(current_order.order_token, { contact_name: name, contact_cell: `${area} ${cell}` }, true);
     applyFinalOrder(current_order.order_token);
     handleMoveNext(1);
   };
