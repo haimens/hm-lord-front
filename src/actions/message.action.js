@@ -23,6 +23,7 @@ export const findMessageListInLord = (query = {}) => async dispatch => {
 };
 
 export const findMessageDetailWithCustomer = (customer_token, query = {}) => async dispatch => {
+  console.log(query);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`message/all/detail/customer/${customer_token}`, "GET", null, {

@@ -19,6 +19,7 @@ import quoteReducer from "./reducers/quote.reducer";
 import couponReducer from "./reducers/coupon.reducer";
 import noteReducer from "./reducers/note.reducer";
 import smsReducer from "./reducers/sms.reducer";
+import alertReducer from "./reducers/alert.reducer";
 const store = createStore(
   combineReducers({
     authReducer,
@@ -38,7 +39,8 @@ const store = createStore(
     quoteReducer,
     couponReducer,
     noteReducer,
-    smsReducer
+    smsReducer,
+    alertReducer
   }),
   composeWithDevTools(applyMiddleware(thunk))
 );

@@ -7,16 +7,14 @@ class ChatModalContainer extends Component {
   };
 
   handleOnSubmit = keywords => {
-    alert(keywords);
-    const { customer_token, createAMessageWithCustomer } = this.props;
-    createAMessageWithCustomer(customer_token);
+    const { token, createAMessageWithCustomer } = this.props;
+    createAMessageWithCustomer(token, { keywords });
   };
   findMoreList = (token, start) => {
-    this.props.findMoreList(token, { start });
+    this.props.findMoreList(token, start);
   };
   render() {
     const { token, list } = this.props;
-    console.log(this.props);
     return (
       <ChatModal
         findMoreList={this.findMoreList}

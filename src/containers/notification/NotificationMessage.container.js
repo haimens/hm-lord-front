@@ -24,7 +24,12 @@ class NotificationMessage extends Component {
     this.props.setChatToFalse();
   };
   findMoreList = async (customer_token, start) => {
-    await this.props.findMessageDetailWithCustomer(customer_token, { start });
+    await this.props.findMessageDetailWithCustomer(customer_token, start);
+  };
+  handleCreateAMessageWithCustomer = (customer_token, keywords) => {
+    console.log(customer_token);
+    console.log(keywords);
+    // this.props.createAMessageWithCustomer(customer_token, { message:keywords, title:{`From Admin-${localStorage.getItem("username")}`} );
   };
   componentDidMount() {
     this.props.findMessageListInLord();
@@ -39,7 +44,7 @@ class NotificationMessage extends Component {
             findMoreList={this.findMoreList}
             token={customer_token}
             list={message_detail_with_customer}
-            createAMessageWithCustomer={createAMessageWithCustomer}
+            createAMessageWithCustomer={this.handleCreateAMessageWithCustomer}
             handleClose={this.handleShowChatWithCustomer}
           />
         )}

@@ -19,7 +19,8 @@ import "./ChatModal.css";
 
 class Modal extends Component {
   state = {
-    chat: ""
+    chat: "",
+    count: 0
   };
   targetElement = null;
 

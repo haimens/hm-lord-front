@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { ListView, Header, ListHeader } from "../../components/shared";
+import { findAlertListInLord } from "../../actions/alert.action";
 import NotificationAlertListItem from "./notificationAlert.component/NotificationAlertList.item";
 class NotificationAlert extends Component {
   state = {
@@ -11,8 +12,11 @@ class NotificationAlert extends Component {
   handleAddingWage = () => {
     this.setState(state => ({ showAddWage: !state.showAddWage }));
   };
+  componentDidMount() {
+    this.props.findAlertListInLord();
+  }
   render() {
-    const { history } = this.props;
+    const { history, alert_list_in_lord } = this.props;
     return (
       <main className="container-fluid">
         <section className="mb-4">
@@ -30,13 +34,13 @@ class NotificationAlert extends Component {
           <ListView
             totalCount={30}
             title="Trip Alert"
-            fieldNames={["Created On", "Amount", "Type", "Note"]}
+            fieldNames={["Driver img", "Alert Time", "Driver Name", "Type", "Trip Detail"]}
             hideHeader={true}
             onPageChange={this.handlePageChange}
           >
-            {/* {punch_list_in_puri.record_list.map((punch, index) => (
-              <WageListItem parentProps={punch} key={index} onClick={this.handlePunchItemClick} />
-            ))} */}
+            {alert_list_in_lord.record_list.map((alert, index) => (
+              <NotificationAlertListItem parentProps={alert} key={index} onClick={this.handlePunchItemClick} />
+            ))}
           </ListView>
         </section>
       </main>
@@ -44,9 +48,11 @@ class NotificationAlert extends Component {
   }
 }
 const mapStateToProps = state => {
-  return {};
+  return {
+    alert_list_in_lord: state.alertReducer.alert_list_in_lord
+  };
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = { findAlertListInLord };
 
 export default connect(
   mapStateToProps,
