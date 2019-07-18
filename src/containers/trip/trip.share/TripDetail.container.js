@@ -292,7 +292,7 @@ class TripDetailContainer extends Component {
             hideButton={true}
             buttonWidth={"70px"}
           />
-          <div className="container-fluid bg-white">
+          <div className="container-fluid bg-white rounded-custom-bottom shadowsm">
             <div className="d-flex justify-content-between p-5">
               <div className="d-flex justify-content-center align-items-center flex-column">
                 <img
