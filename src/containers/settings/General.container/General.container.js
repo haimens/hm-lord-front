@@ -4,7 +4,11 @@ import { withRouter } from "react-router-dom";
 import { ListView, Header, ListHeader } from "../../../components/shared";
 import GeneralAdding from "./General.component/GeneralAdding.modal";
 import GeneralListItem from "./General.component/GeneralList.item";
-import { createGeneralSettingInLord, findGeneralSettingListInLord } from "../../../actions/settings.action";
+import {
+  createGeneralSettingInLord,
+  findGeneralSettingListInLord,
+  updateGeneralSettingListInLord
+} from "../../../actions/settings.action";
 class General extends Component {
   state = {
     showAddGeneral: false
@@ -17,7 +21,12 @@ class General extends Component {
     this.props.findGeneralSettingListInLord();
   }
   render() {
-    const { history, createGeneralSettingInLord, general_setting_list_in_lord } = this.props;
+    const {
+      history,
+      createGeneralSettingInLord,
+      general_setting_list_in_lord,
+      updateGeneralSettingListInLord
+    } = this.props;
     const { showAddGeneral } = this.state;
     return (
       <main className="container-fluid">
@@ -53,7 +62,12 @@ class General extends Component {
             onPageChange={this.handlePageChange}
           >
             {general_setting_list_in_lord.record_list.map((general, index) => (
-              <GeneralListItem general={general} key={index} onClick={this.handlePunchItemClick} />
+              <GeneralListItem
+                updateGeneralSettingListInLord={updateGeneralSettingListInLord}
+                general={general}
+                key={index}
+                onClick={this.handlePunchItemClick}
+              />
             ))}
           </ListView>
         </section>
@@ -66,7 +80,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = {
   createGeneralSettingInLord,
-  findGeneralSettingListInLord
+  findGeneralSettingListInLord,
+  updateGeneralSettingListInLord
 };
 
 export default connect(

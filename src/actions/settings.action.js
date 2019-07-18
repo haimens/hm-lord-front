@@ -205,6 +205,8 @@ export const findGeneralSettingListInLord = (query = {}) => async dispatch => {
 };
 
 export const updateGeneralSettingListInLord = (setting_token, body = {}) => async dispatch => {
+  console.log(setting_token);
+  console.log(body);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`setting/detail/${setting_token}`, "PATCH", body);

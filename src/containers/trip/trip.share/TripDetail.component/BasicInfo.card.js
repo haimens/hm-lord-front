@@ -35,7 +35,7 @@ export default function BasicInfoCard(props) {
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Flight Information</div>
         <div className="hm-text-14 text-modal-color font-weight-bold">
-          {basic_info.flight_str ? basic_info.flight_str : "N/A"}
+          {basic_info.flight_str !== " " ? basic_info.flight_str : "N/A"}
         </div>
       </div>
       <div className="mb-4 px-3">

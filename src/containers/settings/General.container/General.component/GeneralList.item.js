@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { convertLocalToUTC } from "../../../../actions/utilities.action";
 
-export default class CouponList extends Component {
+export default class GeneralListItem extends Component {
   render() {
     const { key, value, cdate, setting_token } = this.props.general;
-    console.log(this.props);
     return (
       <tr className="border-bottom">
         <td data-label="Created On" className="items-height align-middle">
@@ -17,10 +16,22 @@ export default class CouponList extends Component {
           <section className="text-center align-middle ">{value}</section>
         </td>
         <td data-label="Edit" className="items-height align-middle text-center">
-          <section className="text-center align-middle hm-text-14 text-main-color font-weight-bold">{123}</section>
+          <img
+            src={`${process.env.PUBLIC_URL}/img/icon_edit.svg`}
+            className="hm-pointer-cursor"
+            alt="delete"
+            style={{ height: "25px", width: "25px" }}
+            onClick={() => this.props.EditGenernalList()}
+          />
         </td>
         <td data-label="Delete" className="items-height align-middle">
-          <section className="text-center align-middle ">{123}</section>
+          <img
+            src={`${process.env.PUBLIC_URL}/img/icon_delete.svg`}
+            className="hm-pointer-cursor"
+            alt="delete"
+            style={{ height: "25px", width: "25px" }}
+            onClick={() => this.props.updateGeneralSettingListInLord(setting_token, { status: 0 })}
+          />
         </td>
       </tr>
     );

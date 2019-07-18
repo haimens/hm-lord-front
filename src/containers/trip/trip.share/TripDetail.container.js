@@ -16,11 +16,11 @@ import {
   DriverInfo,
   VehicleInfo,
   AlertInfo,
-  AddonService,
   BasicInfoModal,
   AlertInfoModal,
   CustomerInfoModal,
-  AlertEditModal
+  AlertEditModal,
+  AddonService
 } from "./TripDetail.component";
 import { findTripNoteListInLord, createTripNoteListInLord } from "../../../actions/note.action";
 import { findVehicleListInLord } from "../../../actions/vehicle.action";
@@ -28,8 +28,7 @@ import {
   findTripDetailInLord,
   createAnAlertForATrip,
   updateTripOperationInfo,
-  updateTripBasicInfo,
-  findAddonInTrip
+  updateTripBasicInfo
 } from "../../../actions/trip.action";
 import { findCarListForADriver, findDriverListInLord } from "../../../actions/driver.action";
 import { editAlertInfoInTrip } from "../../../actions/alert.action";
@@ -117,7 +116,6 @@ class TripDetailContainer extends Component {
       findTripNoteListInLord(trip_token),
       findVehicleListInLord(),
       findDriverListInLord()
-      // findAddonInTrip(trip_token)
     ]);
     const currentPosition = match.path.split("/")[2];
     if (currentPosition === "ongoing") {
@@ -273,12 +271,13 @@ class TripDetailContainer extends Component {
                 />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                {/* <AddonService
-                addon_list={addon_list}
+                <AddonService
+                  hideDelete={true}
+                  addon_list={trip_detail_in_lord.addon_list}
                   handleDetailButtonClicked={this.handleInfoModal}
                   trip_detail_in_lord={trip_detail_in_lord}
                   showEditButton={false}
-                /> */}
+                />
               </div>
             </div>
           </div>
@@ -389,8 +388,7 @@ const mapDispatchToProps = {
   updateTripBasicInfo,
   editAlertInfoInTrip,
   findTripNoteListInLord,
-  createTripNoteListInLord,
-  findAddonInTrip
+  createTripNoteListInLord
 };
 
 export default connect(
