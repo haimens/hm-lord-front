@@ -58,8 +58,16 @@
   outline: none;
 }
 .chat-modal-box{
-  width: 324px;
+  max-width: 324px;
   border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  box-shadow: 0 2px 3px 0 rgba(151, 151, 151, 0.5);
+  background-color: #e6e9ed;
+}
+.chat-modal-box-reverse{
+  max-width: 324px;
+  border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
   box-shadow: 0 2px 3px 0 rgba(151, 151, 151, 0.5);
