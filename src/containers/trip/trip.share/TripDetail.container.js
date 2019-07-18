@@ -28,7 +28,8 @@ import {
   findTripDetailInLord,
   createAnAlertForATrip,
   updateTripOperationInfo,
-  updateTripBasicInfo
+  updateTripBasicInfo,
+  findAddonInTrip
 } from "../../../actions/trip.action";
 import { findCarListForADriver, findDriverListInLord } from "../../../actions/driver.action";
 import { editAlertInfoInTrip } from "../../../actions/alert.action";
@@ -106,7 +107,8 @@ class TripDetailContainer extends Component {
       findVehicleListInLord,
       findCarListForADriver,
       findDriverListInLord,
-      findTripNoteListInLord
+      findTripNoteListInLord,
+      findAddonInTrip
     } = this.props;
     const { trip_token } = match.params;
     await Promise.all([
@@ -114,6 +116,7 @@ class TripDetailContainer extends Component {
       findTripNoteListInLord(trip_token),
       findVehicleListInLord(),
       findDriverListInLord()
+      // findAddonInTrip(trip_token)
     ]);
     const currentPosition = match.path.split("/")[2];
     if (currentPosition === "ongoing") {
@@ -269,11 +272,12 @@ class TripDetailContainer extends Component {
                 />
               </div>
               <div className="col-lg-6 col-12 mb-4">
-                <AddonService
+                {/* <AddonService
+                addon_list={addon_list}
                   handleDetailButtonClicked={this.handleInfoModal}
                   trip_detail_in_lord={trip_detail_in_lord}
                   showEditButton={false}
-                />
+                /> */}
               </div>
             </div>
           </div>
@@ -310,7 +314,8 @@ const mapStateToProps = state => {
     driver_list_in_lord: state.driverReducer.driver_list_in_lord,
     vehicle_list_in_lord: state.vehicleReducer.vehicle_list_in_lord,
     car_list_for_a_driver: state.driverReducer.car_list_for_a_driver,
-    note_list_for_trip: state.noteReducer.note_list_for_trip
+    note_list_for_trip: state.noteReducer.note_list_for_trip,
+    trip_add_on_list: state.tripReducer.trip_add_on_list
   };
 };
 const mapDispatchToProps = {
@@ -323,7 +328,8 @@ const mapDispatchToProps = {
   updateTripBasicInfo,
   editAlertInfoInTrip,
   findTripNoteListInLord,
-  createTripNoteListInLord
+  createTripNoteListInLord,
+  findAddonInTrip
 };
 
 export default connect(

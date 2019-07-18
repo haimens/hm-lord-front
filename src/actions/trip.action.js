@@ -60,15 +60,12 @@ export const findTripListInLord = (query = {}) => async dispatch => {
 };
 export const findTripActiveListInLord = (query = {}) => async dispatch => {
   try {
-    console.log(query);
-
     await startLoader(dispatch);
     const { payload } = await callApi(`trip/all/active/realm`, "GET", null, {
       order_key: "udate",
       order_direction: "DESC",
       ...query
     });
-    console.log(payload);
     await dispatch({
       type: constant.TRIP_ACTIVE_LIST_IN_LORD,
       payload
@@ -224,6 +221,27 @@ export const findTripCountInLord = (query = {}) => async dispatch => {
     await dispatch({
       type: constant.TRIP_COUNT_IN_LORD_FAILED,
       payload: currDate.payload
+    });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
+export const findAddonInTrip = (trip_token, query) => async dispatch => {
+  console.log(trip_token);
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`trip/all/addon/${trip_token}`, "GET", null, {
+      order_key: "udate",
+      order_direction: "DESC",
+      ...query
+    });
+    console.log(payload);
+    await dispatch({
+      type: constant.TRIP_ADD_ON_LIST,
+      payload
     });
     await stopLoader(dispatch);
   } catch (err) {
