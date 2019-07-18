@@ -21,6 +21,25 @@ export const findOrderListInLord = (query = {}) => async dispatch => {
   }
 };
 
+export const findCustomerOrderListInLord = (customer_token, query = {}) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`order/all/detail/customer/${customer_token}`, "GET", null, {
+      order_key: "udate",
+      order_direction: "DESC",
+      ...query
+    });
+    await dispatch({
+      type: constant.ORDER_LIST_IN_LORD,
+      payload
+    });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
 export const findOrderListInLordWithDate = (query = {}) => async dispatch => {
   console.log(query);
   try {

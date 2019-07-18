@@ -71,7 +71,8 @@ class OrderDetail extends Component {
 
   componentDidMount() {
     const { order_token } = this.props.match.params;
-    Promise.all([this.props.findOrderDetailInLord(order_token), this.props.findCouponListInLord()]);
+    const { findOrderDetailInLord, findCouponListInLord, findOrderNoteListInLord } = this.props;
+    Promise.all([findOrderDetailInLord(order_token), findCouponListInLord(), findOrderNoteListInLord(order_token)]);
   }
 
   render() {
@@ -218,7 +219,7 @@ class OrderDetail extends Component {
           <ListView
             totalCount={note_list_for_order.count}
             title="Log History"
-            fieldNames={["Date", "Admin", "Log Note"]}
+            fieldNames={["Created Date", "Log Note"]}
             hideHeader={true}
             onPageChange={this.handlePageChange}
           >
