@@ -1,7 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { ListHeader, ListView, Header, AddingVehicleModal, AddingDriverModal } from "../../../components/shared";
+import {
+  ListHeader,
+  ListView,
+  Header,
+  AddingVehicleModal,
+  AddingDriverModal,
+  LogItem,
+  AddingNote
+} from "../../../components/shared";
 import {
   BasicInfo,
   CustomerInfo,
@@ -14,6 +22,7 @@ import {
   CustomerInfoModal,
   AlertEditModal
 } from "./TripDetail.component";
+import { findTripNoteListInLord, createTripNoteListInLord } from "../../../actions/note.action";
 import { findVehicleListInLord } from "../../../actions/vehicle.action";
 import {
   findTripDetailInLord,
@@ -36,7 +45,8 @@ class TripDetailContainer extends Component {
     showTimeStampInfoModal: false,
     alert_token: "",
     alert_type: "",
-    showEditAlertModal: ""
+    showEditAlertModal: "",
+    showAddingLogInCustomer: ""
   };
 
   handleInfoModal = type => {
@@ -86,17 +96,25 @@ class TripDetailContainer extends Component {
     } = this.props;
     updateTripOperationInfo(trip_token, { driver_token });
   };
-
+  handleAddingLog = () => {
+    this.setState(state => ({ showAddingLogInCustomer: !state.showAddingLogInCustomer }));
+  };
   async componentDidMount() {
     const {
       match,
       findTripDetailInLord,
       findVehicleListInLord,
       findCarListForADriver,
-      findDriverListInLord
+      findDriverListInLord,
+      findTripNoteListInLord
     } = this.props;
     const { trip_token } = match.params;
-    await Promise.all([findTripDetailInLord(trip_token), findVehicleListInLord(), findDriverListInLord()]);
+    await Promise.all([
+      findTripDetailInLord(trip_token),
+      findTripNoteListInLord(trip_token),
+      findVehicleListInLord(),
+      findDriverListInLord()
+    ]);
     const currentPosition = match.path.split("/")[2];
     if (currentPosition === "ongoing") {
       this.setState({ currentPosition, title: "Ongoing", showEditButton: true });
@@ -111,7 +129,6 @@ class TripDetailContainer extends Component {
     if (currentPosition === "finished") {
       this.setState({ currentPosition, title: "Recent Finished" });
     }
-    console.log(this.props.trip_detail_in_lord.driver_info.driver_token);
     if (this.props.trip_detail_in_lord.driver_info.driver_token) {
       findCarListForADriver(this.props.trip_detail_in_lord.driver_info.driver_token);
     }
@@ -126,7 +143,9 @@ class TripDetailContainer extends Component {
       car_list_for_a_driver,
       driver_list_in_lord,
       updateTripBasicInfo,
-      editAlertInfoInTrip
+      editAlertInfoInTrip,
+      note_list_for_trip,
+      createTripNoteListInLord
     } = this.props;
     const { trip_token } = match.params;
 
@@ -139,13 +158,21 @@ class TripDetailContainer extends Component {
       showDriverInfoModal,
       showVehicleInfoModal,
       showAlertInfoModal,
-      showTimeStampInfoModal,
+      showAddingLogInCustomer,
       alert_token,
       alert_type,
       showEditAlertModal
     } = this.state;
     return (
       <main className="container-fluid">
+        {showAddingLogInCustomer && (
+          <AddingNote
+            type={2}
+            token={trip_token}
+            createANote={createTripNoteListInLord}
+            onClose={this.handleAddingLog}
+          />
+        )}
         {showBasicInfoModal && <BasicInfoModal onClose={() => this.handleInfoModal("basic")} />}
         {showCustomerInfoModal && <CustomerInfoModal onClose={() => this.handleInfoModal("customer")} />}
         {showDriverInfoModal && (
@@ -256,22 +283,21 @@ class TripDetailContainer extends Component {
           <ListHeader
             parentProps={{
               title: "Log History",
-              clickFunction: this.handleShowAddingVehicleModal,
-              clickTitle: "Vehicle"
+              clickFunction: this.handleAddingLog,
+              clickTitle: "Log"
             }}
-            hideButton={true}
-            buttonWidth={"88px"}
+            buttonWidth={"70px"}
           />
           <ListView
             totalCount={30}
             title="Log History"
-            fieldNames={["Date", "Admin", "Log Note"]}
+            fieldNames={["Created ON", "Log Note"]}
             hideHeader={true}
             onPageChange={this.handlePageChange}
           >
-            {/* {punch_list_in_puri.record_list.map((punch, index) => (
-              <LogListItem parentProps={punch} key={index} onClick={this.handlePunchItemClick} />
-            ))} */}
+            {note_list_for_trip.record_list.map((note, index) => (
+              <LogItem parentProps={note} key={index} />
+            ))}
           </ListView>
         </section>
       </main>
@@ -283,7 +309,8 @@ const mapStateToProps = state => {
     trip_detail_in_lord: state.tripReducer.trip_detail_in_lord,
     driver_list_in_lord: state.driverReducer.driver_list_in_lord,
     vehicle_list_in_lord: state.vehicleReducer.vehicle_list_in_lord,
-    car_list_for_a_driver: state.driverReducer.car_list_for_a_driver
+    car_list_for_a_driver: state.driverReducer.car_list_for_a_driver,
+    note_list_for_trip: state.noteReducer.note_list_for_trip
   };
 };
 const mapDispatchToProps = {
@@ -294,7 +321,9 @@ const mapDispatchToProps = {
   updateTripOperationInfo,
   findDriverListInLord,
   updateTripBasicInfo,
-  editAlertInfoInTrip
+  editAlertInfoInTrip,
+  findTripNoteListInLord,
+  createTripNoteListInLord
 };
 
 export default connect(
