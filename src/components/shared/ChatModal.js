@@ -25,8 +25,8 @@ class Modal extends Component {
 
   componentDidMount() {
     // 2. Get a target element that you want to persist scrolling for (such as a modal/lightbox/flyout/nav).
-    this.targetElement = document.querySelector("#onlyScroll");
-    disableBodyScroll(this.targetElement);
+    let shoppingListContainer = document.getElementById("scrolldiv");
+    shoppingListContainer.scrollTop = shoppingListContainer.scrollHeight;
   }
   componentWillUnmount() {
     // 5. Useful if we have called disableBodyScroll for multiple target elements,
@@ -56,9 +56,9 @@ class Modal extends Component {
     this.props.onClear();
   };
   handleScroll = e => {
-    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    const top = e.target.scrollTop === 0;
     const { findMoreList, token, list } = this.props;
-    if (bottom) {
+    if (top) {
       if (list.end < list.count) {
         findMoreList(token, { start: list.end });
       }
@@ -91,7 +91,7 @@ class Modal extends Component {
           >
             <h5 className="hm-text-14 text-modal-color font-weight-bold">{this.props.name}</h5>
           </header>
-          <div style={{ height: "409px", overflow: "auto" }} onScroll={this.handleScroll}>
+          <div id="scrolldiv" style={{ height: "409px", overflow: "auto" }} onScroll={this.handleScroll}>
             {this.props.children}
           </div>
           <div className="mt-auto">
