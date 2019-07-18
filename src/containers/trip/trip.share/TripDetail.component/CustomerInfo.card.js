@@ -5,7 +5,7 @@ export default function CustomerInfoCard(props) {
   const { customer_info } = trip_detail_in_lord;
   return (
     <div>
-      <div className="purple-border p-3">
+      <div className="purple-border">
         <div className="d-flex justify-content-between align-items-center  ">
           <div className="hm-text-16 font-weight-bold text-modal-color">Customer Information</div>
           {showEditButton && (

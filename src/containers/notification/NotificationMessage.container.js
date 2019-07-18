@@ -21,6 +21,9 @@ class NotificationMessage extends Component {
     this.setState({ customer_token });
     await this.props.findMessageDetailWithCustomer(customer_token);
   };
+  handlePageChange = start => {
+    this.props.findMessageListInLord({ start });
+  };
   handleShowChatWithCustomer = async () => {
     this.props.setChatToFalse();
   };
@@ -66,7 +69,7 @@ class NotificationMessage extends Component {
             hideButton={true}
           />
           <ListView
-            totalCount={30}
+            totalCount={message_list_in_lord.count}
             title="Message Center"
             fieldNames={["Customer Img", "Message Time", "Customer Name", "Message Detail", "Chat"]}
             hideHeader={true}

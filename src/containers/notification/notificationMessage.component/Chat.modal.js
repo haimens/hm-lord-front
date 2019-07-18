@@ -17,9 +17,6 @@ class ChatModalContainer extends Component {
     this.props.findMoreList(token, start);
   };
   updateSmsStatus = (sms, data) => {
-    console.log("here");
-    console.log(sms);
-    console.log(data);
     this.props.updateSmsStatus(sms, data, this.props.token);
   };
   render() {
