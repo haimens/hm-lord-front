@@ -35,6 +35,7 @@ import AddingNote from "./AddingNote.modal";
 import FlightDetailModal from "./FlightDetail.modal";
 import LogItem from "./LogList.item";
 import ChatModal from "./ChatModal";
+import ChatModalContainer from "./Chat.modal";
 export {
   LoaderAlt,
   IconButton,
@@ -72,5 +73,6 @@ export {
   AddingNote,
   FlightDetailModal,
   LogItem,
-  ChatModal
+  ChatModal,
+  ChatModalContainer
 };

@@ -10,8 +10,9 @@ export default function CustomerInfoCard(props) {
           <div className="hm-text-16 font-weight-bold text-modal-color">Customer Information</div>
           {showEditButton && (
             <button
-              className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
-              onClick={() => handleDetailButtonClicked("customer")}
+              className="hm-pointer-cursor rounded-circle bg-white company-detail-button
+               d-flex justify-content-center align-items-center"
+              onClick={() => handleDetailButtonClicked(customer_info.customer_token)}
             >
               <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
             </button>
@@ -19,8 +20,9 @@ export default function CustomerInfoCard(props) {
           <img
             src={`${process.env.PUBLIC_URL}/img/icon_chat.svg`}
             alt="Customer"
-            className="rounded-circle my-3"
+            className="rounded-circle my-3 hm-pointer-cursor"
             style={{ height: "25px", width: "25px" }}
+            onClick={() => handleDetailButtonClicked(customer_info.customer_token)}
           />
         </div>
         <img

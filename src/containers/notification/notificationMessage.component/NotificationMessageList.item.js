@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { convertLocalToUTC } from "../../../actions/utilities.action";
 export default class WageList extends Component {
-  handleChatWithCustomer = customer_token => {
-    this.props.handleChatWithCustomer(customer_token);
+  handleChatWithCustomer = (customer_token, name) => {
+    this.props.handleChatWithCustomer(customer_token, name);
   };
   render() {
-    const { message, img_path, cdate, username, customer_token, is_read } = this.props.parentProps;
+    const { message, img_path, cdate, customer_token, is_read, name } = this.props.parentProps;
     return (
       <tr className="border-bottom">
         <td data-label="Created On" className={`items-height align-middle p-0`}>
@@ -33,7 +33,7 @@ export default class WageList extends Component {
               is_read === 0 ? "text-purple" : "text-main-color"
             }`}
           >
-            {username}
+            {name}
           </section>
         </td>
         <td data-label="Log Note" className="items-height align-middle test-center">
@@ -51,7 +51,7 @@ export default class WageList extends Component {
             alt="Customer"
             className="rounded-circle my-3 hm-pointer-cursor"
             style={{ height: "25px", width: "25px" }}
-            onClick={() => this.handleChatWithCustomer(customer_token)}
+            onClick={() => this.handleChatWithCustomer(customer_token, name)}
           />
         </td>
       </tr>

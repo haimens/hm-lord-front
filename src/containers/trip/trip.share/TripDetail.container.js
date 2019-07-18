@@ -8,7 +8,8 @@ import {
   AddingVehicleModal,
   AddingDriverModal,
   LogItem,
-  AddingNote
+  AddingNote,
+  ChatModalContainer
 } from "../../../components/shared";
 import {
   BasicInfo,
@@ -30,6 +31,13 @@ import {
   updateTripOperationInfo,
   updateTripBasicInfo
 } from "../../../actions/trip.action";
+import {
+  findMessageDetailWithCustomer,
+  setChatToFalse,
+  createAMessageWithCustomer,
+  updateSmsStatus,
+  findMessageAndResetData
+} from "../../../actions/message.action";
 import { findCarListForADriver, findDriverListInLord } from "../../../actions/driver.action";
 import { editAlertInfoInTrip } from "../../../actions/alert.action";
 import { convertUTCtoLocal } from "../../../actions/utilities.action";
@@ -47,7 +55,8 @@ class TripDetailContainer extends Component {
     alert_token: "",
     alert_type: "",
     showEditAlertModal: "",
-    showAddingLogInCustomer: ""
+    showAddingLogInCustomer: "",
+    customer_token: ""
   };
 
   handleInfoModal = type => {
@@ -100,6 +109,17 @@ class TripDetailContainer extends Component {
   handleAddingLog = () => {
     this.setState(state => ({ showAddingLogInCustomer: !state.showAddingLogInCustomer }));
   };
+  findMoreList = async (customer_token, start) => {
+    await this.props.findMessageDetailWithCustomer(customer_token, start);
+  };
+  handleShowChatWithCustomer = async () => {
+    this.props.setChatToFalse();
+  };
+  handleChatWithCustomer = async customer_token => {
+    console.log(customer_token);
+    this.setState({ customer_token });
+    await this.props.findMessageAndResetData(customer_token);
+  };
   async componentDidMount() {
     const {
       match,
@@ -147,7 +167,11 @@ class TripDetailContainer extends Component {
       updateTripBasicInfo,
       editAlertInfoInTrip,
       note_list_for_trip,
-      createTripNoteListInLord
+      createTripNoteListInLord,
+      message_detail_with_customer,
+      showChat,
+      createAMessageWithCustomer,
+      updateSmsStatus
     } = this.props;
     const { trip_token } = match.params;
 
@@ -163,7 +187,8 @@ class TripDetailContainer extends Component {
       showAddingLogInCustomer,
       alert_token,
       alert_type,
-      showEditAlertModal
+      showEditAlertModal,
+      customer_token
     } = this.state;
     return (
       <main className="container-fluid">
@@ -217,6 +242,17 @@ class TripDetailContainer extends Component {
             onClose={this.handleCloseEditAlert}
           />
         )}
+        {showChat && (
+          <ChatModalContainer
+            updateSmsStatus={updateSmsStatus}
+            name={trip_detail_in_lord.customer_info.name}
+            findMoreList={this.findMoreList}
+            token={customer_token}
+            list={message_detail_with_customer}
+            createAMessageWithCustomer={createAMessageWithCustomer}
+            handleClose={this.handleShowChatWithCustomer}
+          />
+        )}
         <section className="mb-4">
           <div>
             <Header
@@ -244,7 +280,7 @@ class TripDetailContainer extends Component {
               <div className="col-lg-6 col-12 mb-4">
                 <CustomerInfo
                   trip_detail_in_lord={trip_detail_in_lord}
-                  handleDetailButtonClicked={this.handleInfoModal}
+                  handleDetailButtonClicked={this.handleChatWithCustomer}
                   showEditButton={false}
                 />
               </div>
@@ -375,7 +411,9 @@ const mapStateToProps = state => {
     vehicle_list_in_lord: state.vehicleReducer.vehicle_list_in_lord,
     car_list_for_a_driver: state.driverReducer.car_list_for_a_driver,
     note_list_for_trip: state.noteReducer.note_list_for_trip,
-    trip_add_on_list: state.tripReducer.trip_add_on_list
+    trip_add_on_list: state.tripReducer.trip_add_on_list,
+    message_detail_with_customer: state.smsReducer.message_detail_with_customer,
+    showChat: state.smsReducer.showChat
   };
 };
 const mapDispatchToProps = {
@@ -388,7 +426,12 @@ const mapDispatchToProps = {
   updateTripBasicInfo,
   editAlertInfoInTrip,
   findTripNoteListInLord,
-  createTripNoteListInLord
+  createTripNoteListInLord,
+  findMessageDetailWithCustomer,
+  setChatToFalse,
+  createAMessageWithCustomer,
+  updateSmsStatus,
+  findMessageAndResetData
 };
 
 export default connect(

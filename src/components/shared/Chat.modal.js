@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { convertUTCtoLocal } from "../../../actions/utilities.action";
-import { ChatModal } from "../../../components/shared";
+import { convertUTCtoLocal } from "../../actions/utilities.action";
+import { ChatModal } from "./index";
 class ChatModalContainer extends Component {
   handleClose = () => {
     this.props.handleClose();
@@ -20,13 +20,13 @@ class ChatModalContainer extends Component {
     this.props.updateSmsStatus(sms, data, this.props.token);
   };
   render() {
-    const { token, list } = this.props;
+    const { token, list, name } = this.props;
     return (
       <ChatModal
         findMoreList={this.findMoreList}
         token={token}
         list={list}
-        name={list.record_list[0].name}
+        name={name}
         title="Add Driver"
         onClose={this.handleClose}
         position="right"

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { ListView, Header, ListHeader } from "../../components/shared";
+import { ListView, Header, ListHeader, ChatModalContainer } from "../../components/shared";
 import NotificationMessageListItem from "./notificationMessage.component/NotificationMessageList.item";
-import ChatModal from "./notificationMessage.component/Chat.modal";
 import {
   findMessageListInLord,
   findMessageDetailWithCustomer,
@@ -15,11 +14,11 @@ import {
 class NotificationMessage extends Component {
   state = {
     customer_token: "",
-    showChatWithCustomer: false
+    showChatWithCustomer: false,
+    current_name: ""
   };
-  handleWageSearch = keywords => {};
-  handleChatWithCustomer = async customer_token => {
-    this.setState({ customer_token });
+  handleChatWithCustomer = async (customer_token, current_name) => {
+    this.setState({ customer_token, current_name });
     await this.props.findMessageAndResetData(customer_token);
   };
   handlePageChange = start => {
@@ -44,11 +43,12 @@ class NotificationMessage extends Component {
       showChat,
       updateSmsStatus
     } = this.props;
-    const { customer_token } = this.state;
+    const { customer_token, current_name } = this.state;
     return (
       <main className="container-fluid">
         {showChat && (
-          <ChatModal
+          <ChatModalContainer
+            name={current_name}
             updateSmsStatus={updateSmsStatus}
             findMoreList={this.findMoreList}
             token={customer_token}
@@ -81,7 +81,6 @@ class NotificationMessage extends Component {
                 handleChatWithCustomer={this.handleChatWithCustomer}
                 parentProps={message}
                 key={index}
-                onClick={this.handlePunchItemClick}
               />
             ))}
           </ListView>
