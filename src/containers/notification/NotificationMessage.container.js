@@ -23,6 +23,9 @@ class NotificationMessage extends Component {
   handleShowChatWithCustomer = async () => {
     this.props.setChatToFalse();
   };
+  findMoreList = async (customer_token, start) => {
+    await this.props.findMessageDetailWithCustomer(customer_token, { start });
+  };
   componentDidMount() {
     this.props.findMessageListInLord();
   }
@@ -33,9 +36,10 @@ class NotificationMessage extends Component {
       <main className="container-fluid">
         {showChat && (
           <ChatModal
-            customer_token={customer_token}
+            findMoreList={this.findMoreList}
+            token={customer_token}
+            list={message_detail_with_customer}
             createAMessageWithCustomer={createAMessageWithCustomer}
-            message_detail_with_customer={message_detail_with_customer}
             handleClose={this.handleShowChatWithCustomer}
           />
         )}

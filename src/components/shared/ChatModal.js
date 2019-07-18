@@ -55,7 +55,15 @@ class Modal extends Component {
   clearSearch = () => {
     this.props.onClear();
   };
-
+  handleScroll = e => {
+    const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    const { findMoreList, token, list } = this.props;
+    if (bottom) {
+      if (list.end < list.count) {
+        findMoreList(token, { start: list.end });
+      }
+    }
+  };
   render() {
     let curr = "center";
     if (this.props.position == "right") {
@@ -83,7 +91,9 @@ class Modal extends Component {
           >
             <h5 className="hm-text-14 text-modal-color font-weight-bold">{this.props.name}</h5>
           </header>
-          <div style={{ height: "409px", overflow: "auto" }}>{this.props.children}</div>
+          <div style={{ height: "409px", overflow: "auto" }} onScroll={this.handleScroll}>
+            {this.props.children}
+          </div>
           <div className="mt-auto">
             <div className="d-flex justify-content-center align-items-center bg-white chat-modal-input">
               <form className="col" onSubmit={this.handleSubmit}>

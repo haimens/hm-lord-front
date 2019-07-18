@@ -3,6 +3,7 @@ import { callApi, startLoader, stopLoader, launchSuccess } from "./utilities.act
 import { processLogout } from "./auth.action";
 
 export const findMessageListInLord = (query = {}) => async dispatch => {
+  console.log(query);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`message/all/detail/realm`, "GET", null, {
@@ -21,10 +22,14 @@ export const findMessageListInLord = (query = {}) => async dispatch => {
   }
 };
 
-export const findMessageDetailWithCustomer = customer_token => async dispatch => {
+export const findMessageDetailWithCustomer = (customer_token, query = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`message/all/detail/customer/${customer_token}`, "GET");
+    const { payload } = await callApi(`message/all/detail/customer/${customer_token}`, "GET", null, {
+      order_key: "udate",
+      order_direction: "DESC",
+      ...query
+    });
     await dispatch({
       type: constant.MESSAGE_DETAIL_WITH_CUSTOMER,
       payload,

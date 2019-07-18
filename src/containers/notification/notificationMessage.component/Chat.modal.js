@@ -11,13 +11,18 @@ class ChatModalContainer extends Component {
     const { customer_token, createAMessageWithCustomer } = this.props;
     createAMessageWithCustomer(customer_token);
   };
-
+  findMoreList = (token, start) => {
+    this.props.findMoreList(token, { start });
+  };
   render() {
-    const { message_detail_with_customer } = this.props;
-
+    const { token, list } = this.props;
+    console.log(this.props);
     return (
       <ChatModal
-        name={message_detail_with_customer.record_list[0].name}
+        findMoreList={this.findMoreList}
+        token={token}
+        list={list}
+        name={list.record_list[0].name}
         title="Add Driver"
         onClose={this.handleClose}
         position="right"
@@ -25,7 +30,7 @@ class ChatModalContainer extends Component {
         getHeight={"534px"}
         onSubmit={this.handleOnSubmit}
       >
-        {message_detail_with_customer.record_list.map((message, index) => (
+        {list.record_list.map((message, index) => (
           <div className="mb-4" key={index}>
             <div className="text-center my-2 hm-text-10 font-weight-bold" style={{ color: "#8785ab" }}>
               {convertUTCtoLocal(message.cdate)}
