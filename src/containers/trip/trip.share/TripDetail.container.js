@@ -116,7 +116,6 @@ class TripDetailContainer extends Component {
     this.props.setChatToFalse();
   };
   handleChatWithCustomer = async customer_token => {
-    console.log(customer_token);
     this.setState({ customer_token });
     await this.props.findMessageAndResetData(customer_token);
   };
