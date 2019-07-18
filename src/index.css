@@ -112,6 +112,9 @@ h1,h2,h3,h4,h5,h6,h7 {
 .hm-h-xl{
   height:40.5px;
 }
+.hm-text-10{
+  font-size: 10px !important;
+}
 .hm-text-12{
   font-size: 12px !important;
 }

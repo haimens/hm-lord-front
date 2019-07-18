@@ -18,6 +18,7 @@ import flightReducer from "./reducers/flight.reducer";
 import quoteReducer from "./reducers/quote.reducer";
 import couponReducer from "./reducers/coupon.reducer";
 import noteReducer from "./reducers/note.reducer";
+import smsReducer from "./reducers/sms.reducer";
 const store = createStore(
   combineReducers({
     authReducer,
@@ -36,7 +37,8 @@ const store = createStore(
     flightReducer,
     quoteReducer,
     couponReducer,
-    noteReducer
+    noteReducer,
+    smsReducer
   }),
   composeWithDevTools(applyMiddleware(thunk))
 );

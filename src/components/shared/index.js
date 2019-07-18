@@ -34,6 +34,7 @@ import CouponModal from "./Coupon.modal";
 import AddingNote from "./AddingNote.modal";
 import FlightDetailModal from "./FlightDetail.modal";
 import LogItem from "./LogList.item";
+import ChatModal from "./ChatModal";
 export {
   LoaderAlt,
   IconButton,
@@ -70,5 +71,6 @@ export {
   CouponModal,
   AddingNote,
   FlightDetailModal,
-  LogItem
+  LogItem,
+  ChatModal
 };
