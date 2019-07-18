@@ -52,6 +52,7 @@ class Modal extends Component {
     if (e) e.preventDefault();
     const { chat } = this.state;
     this.props.onSubmit(chat);
+    this.setState({ chat: "" });
   };
   clearSearch = () => {
     this.props.onClear();

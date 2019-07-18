@@ -27,9 +27,10 @@ class NotificationMessage extends Component {
     await this.props.findMessageDetailWithCustomer(customer_token, start);
   };
   handleCreateAMessageWithCustomer = (customer_token, keywords) => {
-    console.log(customer_token);
-    console.log(keywords);
-    // this.props.createAMessageWithCustomer(customer_token, { message:keywords, title:{`From Admin-${localStorage.getItem("username")}`} );
+    this.props.createAMessageWithCustomer(customer_token, {
+      message: keywords,
+      title: `From Admin-${localStorage.getItem("username")}`
+    });
   };
   componentDidMount() {
     this.props.findMessageListInLord();

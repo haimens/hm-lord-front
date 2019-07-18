@@ -23,15 +23,21 @@ export const findMessageListInLord = (query = {}) => async dispatch => {
 };
 
 export const findMessageDetailWithCustomer = (customer_token, query = {}) => async dispatch => {
-  console.log(query);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`message/all/detail/customer/${customer_token}`, "GET", null, {
+      order_key: "udate",
+      order_direction: "DESC",
       ...query
     });
+    let currDate = {
+      record_list: payload.record_list.reverse(),
+      count: payload.count,
+      end: payload.end
+    };
     await dispatch({
       type: constant.MESSAGE_DETAIL_WITH_CUSTOMER,
-      payload,
+      payload: currDate,
       showChat: true
     });
     await stopLoader(dispatch);
@@ -58,8 +64,32 @@ export const createAMessageWithCustomer = (customer_token, body) => async dispat
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`message/send/customer/${customer_token}`, "POST", body);
-    await dispatch(findMessageDetailWithCustomer(customer_token));
-    await launchSuccess(dispatch);
+    await dispatch(findMessageAndResetData(customer_token));
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
+
+export const findMessageAndResetData = (customer_token, query = {}) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`message/all/detail/customer/${customer_token}`, "GET", null, {
+      order_key: "udate",
+      order_direction: "DESC",
+      ...query
+    });
+    let currDate = {
+      record_list: payload.record_list.reverse(),
+      count: payload.count,
+      end: payload.end
+    };
+    await dispatch({
+      type: constant.MESSAGE_DETAIL_WITH_CUSTOMER_RESET,
+      payload: currDate,
+      showChat: true
+    });
     await stopLoader(dispatch);
   } catch (err) {
     await stopLoader(dispatch);

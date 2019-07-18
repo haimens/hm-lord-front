@@ -324,3 +324,11 @@ color: #32325d !important;
 input, select, textarea{
   color: #000;
 }
+
+.messenger-green{
+  background-color: #2ece89 !important
+}
+.messenger-purple {
+  background-color: #5e72e4 !important
+
+}

@@ -23,11 +23,13 @@ export default (state = initialState, action) => {
         ...state,
         showChat: action.showChat,
         message_detail_with_customer: {
-          record_list: [...state.message_detail_with_customer.record_list, ...action.payload.record_list],
+          record_list: [...action.payload.record_list, ...state.message_detail_with_customer.record_list],
           count: action.payload.count,
           end: action.payload.end
         }
       };
+    case constant.MESSAGE_DETAIL_WITH_CUSTOMER_RESET:
+      return { ...state, message_detail_with_customer: action.payload };
     case constant.SET_CHAT_TO_FALSE:
       return { ...state, showChat: false };
     default:
