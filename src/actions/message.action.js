@@ -96,3 +96,16 @@ export const findMessageAndResetData = (customer_token, query = {}) => async dis
     dispatch(processLogout(err));
   }
 };
+
+export const updateSmsStatus = (sms_token, body = {}, customer_token) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`message/detail/${sms_token}`, "PATCH", body);
+    await dispatch(findMessageAndResetData(customer_token));
+    await dispatch(findMessageListInLord());
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};

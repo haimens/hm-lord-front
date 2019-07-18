@@ -5,27 +5,45 @@ export default class WageList extends Component {
     this.props.handleChatWithCustomer(customer_token);
   };
   render() {
-    const { message, img_path, cdate, username, customer_token } = this.props.parentProps;
+    const { message, img_path, cdate, username, customer_token, is_read } = this.props.parentProps;
     return (
       <tr className="border-bottom">
-        <td data-label="Created On" className="items-height align-middle">
-          <img
-            src={img_path}
-            alt="Customer"
-            className="rounded-circle my-3"
-            style={{ height: "36px", width: "36px" }}
-          />
+        <td data-label="Created On" className={`items-height align-middle p-0`}>
+          <div className={` pl-0 ${is_read === 0 && "border-left-purple"}`}>
+            <img
+              src={img_path}
+              alt="Customer"
+              className="rounded-circle my-3 "
+              style={{ height: "36px", width: "36px" }}
+            />
+          </div>
         </td>
         <td data-label="Log Note" className="items-height align-middle test-center">
-          <section className="test-center align-middle hm-text-14 text-main-color font-weight-bold">
+          <section
+            className={`test-center align-middle hm-text-14 text-main-color font-weight-bold ${
+              is_read === 0 ? "text-purple" : "text-main-color"
+            }`}
+          >
             {convertLocalToUTC(cdate)}
           </section>
         </td>
         <td data-label="Log Note" className="items-height align-middle test-center">
-          <section className="test-center align-middle hm-text-14 text-main-color font-weight-bold">{username}</section>
+          <section
+            className={`test-center align-middle hm-text-14 text-main-color font-weight-bold ${
+              is_read === 0 ? "text-purple" : "text-main-color"
+            }`}
+          >
+            {username}
+          </section>
         </td>
         <td data-label="Log Note" className="items-height align-middle test-center">
-          <section className="test-center align-middle hm-text-14 text-main-color font-weight-bold">{message}</section>
+          <section
+            className={`test-center align-middle hm-text-14 text-main-color font-weight-bold ${
+              is_read === 0 ? "text-purple" : "text-main-color"
+            }`}
+          >
+            {message}
+          </section>
         </td>
         <td data-label="Log Note" className="items-height align-middle test-center">
           <img

@@ -8,10 +8,19 @@ class ChatModalContainer extends Component {
 
   handleOnSubmit = keywords => {
     const { token, createAMessageWithCustomer } = this.props;
-    createAMessageWithCustomer(token, keywords);
+    this.props.createAMessageWithCustomer(token, {
+      message: keywords,
+      title: `From Admin-${localStorage.getItem("username")}`
+    });
   };
   findMoreList = (token, start) => {
     this.props.findMoreList(token, start);
+  };
+  updateSmsStatus = (sms, data) => {
+    console.log("here");
+    console.log(sms);
+    console.log(data);
+    this.props.updateSmsStatus(sms, data, this.props.token);
   };
   render() {
     const { token, list } = this.props;
@@ -29,19 +38,27 @@ class ChatModalContainer extends Component {
         onSubmit={this.handleOnSubmit}
       >
         {list.record_list.map((message, index) => {
+          let img = "";
           if (message.type === 1) {
-            console.log("hi");
+            img = message.lord_img_path;
+          } else if (message.type === 2) {
+            img = message.driver_img_path;
+          } else if (message.type === 4) {
+            img = message.img_path;
+          }
+          if (message.is_read === 0) {
+            this.updateSmsStatus(message.sms_token, { is_read: 1 });
           }
           return (
             <div className="mb-4" key={index}>
               <div className="text-center my-2 hm-text-10 font-weight-bold" style={{ color: "#8785ab" }}>
                 {convertUTCtoLocal(message.cdate)}
               </div>
-              <div className={`d-flex ${message.type === 1 ? "flex-row-reverse col-12" : "ml-4"}`}>
+              <div className={`d-flex ${message.type === 1 ? "flex-row-reverse col" : "ml-4"}`}>
                 <img
                   style={{ height: "48px", width: "48px" }}
-                  src={message.img_path}
-                  alt={"customer_img"}
+                  src={img}
+                  alt={"img"}
                   className={`rounded-circle ${message.type === 1 ? "ml-4" : "mr-4"} `}
                 />
                 <div

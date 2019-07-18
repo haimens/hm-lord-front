@@ -330,5 +330,7 @@ input, select, textarea{
 }
 .messenger-purple {
   background-color: #5e72e4 !important
-
+}
+.border-left-purple{
+  border-left: 3px solid #5e72e4 !important;
 }

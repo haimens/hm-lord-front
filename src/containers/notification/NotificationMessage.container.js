@@ -8,7 +8,8 @@ import {
   findMessageListInLord,
   findMessageDetailWithCustomer,
   setChatToFalse,
-  createAMessageWithCustomer
+  createAMessageWithCustomer,
+  updateSmsStatus
 } from "../../actions/message.action";
 class NotificationMessage extends Component {
   state = {
@@ -26,26 +27,29 @@ class NotificationMessage extends Component {
   findMoreList = async (customer_token, start) => {
     await this.props.findMessageDetailWithCustomer(customer_token, start);
   };
-  handleCreateAMessageWithCustomer = (customer_token, keywords) => {
-    this.props.createAMessageWithCustomer(customer_token, {
-      message: keywords,
-      title: `From Admin-${localStorage.getItem("username")}`
-    });
-  };
+
   componentDidMount() {
     this.props.findMessageListInLord();
   }
   render() {
-    const { history, message_list_in_lord, message_detail_with_customer, showChat } = this.props;
+    const {
+      history,
+      message_list_in_lord,
+      message_detail_with_customer,
+      createAMessageWithCustomer,
+      showChat,
+      updateSmsStatus
+    } = this.props;
     const { customer_token } = this.state;
     return (
       <main className="container-fluid">
         {showChat && (
           <ChatModal
+            updateSmsStatus={updateSmsStatus}
             findMoreList={this.findMoreList}
             token={customer_token}
             list={message_detail_with_customer}
-            createAMessageWithCustomer={this.handleCreateAMessageWithCustomer}
+            createAMessageWithCustomer={createAMessageWithCustomer}
             handleClose={this.handleShowChatWithCustomer}
           />
         )}
@@ -93,7 +97,8 @@ const mapDispatchToProps = {
   findMessageListInLord,
   findMessageDetailWithCustomer,
   setChatToFalse,
-  createAMessageWithCustomer
+  createAMessageWithCustomer,
+  updateSmsStatus
 };
 
 export default connect(
