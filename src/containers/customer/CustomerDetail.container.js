@@ -28,6 +28,10 @@ class CustomerDetail extends Component {
     const { customer_token } = this.props.match.params;
     this.props.findCustomerNoteListInLord(customer_token, { start });
   };
+  handleJumpToOrder = () => {
+    this.props.history.push("/order/creation");
+  };
+
   componentDidMount() {
     const { match, findCustomerDetailInLord, findCustomerNoteListInLord, findCustomerOrderListInLord } = this.props;
     const { customer_token } = match.params;
@@ -94,7 +98,7 @@ class CustomerDetail extends Component {
           <ListHeader
             parentProps={{
               title: "Related Order List",
-              clickFunction: this.handleShowAddingVehicleModal,
+              clickFunction: this.handleJumpToOrder,
               clickTitle: "Order"
             }}
             hideShadow={true}
