@@ -120,7 +120,10 @@ export default class CustomerAdding extends Component {
               </div>
 
               <div className="form-group">
-                <GAutoComplete getGoogleAddress={this.saveToAddress} />
+                <GAutoComplete
+                  handleInputHasChanged={this.props.handleInputHasChanged}
+                  getGoogleAddress={this.saveToAddress}
+                />
               </div>
 
               <AddingImage

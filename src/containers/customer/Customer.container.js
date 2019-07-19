@@ -23,6 +23,7 @@ class Customer extends Component {
   handlePageChange = start => {
     this.props.findCustomerListInLord({ start, keywords: this.state.keywords });
   };
+  handleInputHasChanged = () => {};
   componentDidMount() {
     this.props.findCustomerListInLord();
   }
@@ -36,6 +37,7 @@ class Customer extends Component {
             createACustomerInLord={createACustomerInLord}
             createNewAddressInstance={createNewAddressInstance}
             onClose={this.handleAddingCustomer}
+            handleInputHasChanged={this.handleInputHasChanged}
           />
         )}
         <section className="container-fluid">

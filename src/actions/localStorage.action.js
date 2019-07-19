@@ -21,7 +21,8 @@ export const saveUserInfo = user_info => {
       logo_path,
       lord_key,
       lord_token,
-      realm_token
+      realm_token,
+      company_name
     } = user_info;
     localStorage.setItem("instance_token", instance_token);
     localStorage.setItem("user_token", user_token);
@@ -33,6 +34,7 @@ export const saveUserInfo = user_info => {
     localStorage.setItem("lord_key", lord_key);
     localStorage.setItem("lord_token", lord_token);
     localStorage.setItem("realm_token", realm_token);
+    localStorage.setItem("company_name", company_name);
   } catch (e) {
     console.log("save auth token error");
     throw e;

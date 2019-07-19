@@ -57,7 +57,7 @@ export default function BasicInfo(props) {
           <button
             className="btn shadow-sm rounded-custom button-main-background text-white"
             style={{ height: "43px", width: "168px" }}
-            onClick={() => props.handleShowEmailModal()}
+            onClick={() => props.handleShowEmailModal(order_detail.order_info.status_str)}
           >
             <i className="fas fa-envelope mr-2" />
             Email confirmation

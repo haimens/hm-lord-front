@@ -10,6 +10,9 @@ import "./EmailPreviewModa.modal.css";
  * InvoicePreviewModal
  */
 export default class InvoicePreviewModal extends Component {
+  state = {
+    address: ""
+  };
   handleClose = () => {
     if (this.props.onClose) this.props.onClose();
   };
@@ -17,49 +20,77 @@ export default class InvoicePreviewModal extends Component {
   handleEmailSend = async () => {
     const { customer_info, order_info } = this.props.order_detail;
 
-    await this.props.sendEmailToConfirm(
-      customer_info.customer_token,
-      {
-        msg: this.html
-      },
-      this.props.history,
-      order_info.order_token
-    );
+    await this.props.sendEmailToConfirm(customer_info.customer_token, {
+      title: "order_confirmation",
+      msg: this.html
+    });
+    this.handleClose();
   };
+
+  componentDidMount() {
+    if (this.props.general_setting_list_in_lord) {
+      this.props.general_setting_list_in_lord.record_list.map(setting => {
+        if (setting.key === "company_address") {
+          this.setState({ address: setting.value });
+        }
+      });
+    }
+  }
 
   renderHTML = () => {
     const { customer_info, order_info, addon_list, trip_list } = this.props.order_detail;
 
-    const renderAddonInfo = () => {
-      if (addon_list.length > 0) {
-        const addon_list_html = addon_list
-          .map((order, idx) => {
-            return `<tr>
-          <td align="left">
-          ${order.note}
-        </td>
-        <td align="right">${parseAmount(order.amount, 2)}</td>
+    const renderAddressInfo = () => {
+      if (trip_list.length > 0) {
+        const addon_list_html = trip_list.map((trip, idx) => {
+          return `<tr>
+          <th class="purchase_heading">
+            <p>${trip.from_addr_str}</p>
+          </th>
+          <th class="purchase_heading">
+            <p class="align-right">${trip.to_addr_str}</p>
+          </th>
         </tr>`;
-          })
-          .join("");
+        });
+
         return addon_list_html;
       } else {
-        return `<tr></tr>`;
+        return `<div></div>`;
+      }
+    };
+
+    const renderAddonInfo = () => {
+      if (addon_list.length > 0) {
+        const addon_list_html = addon_list.map((order, idx) => {
+          return `<tr>
+          <th class="purchase_heading">
+            <p>${order.note}</p>
+          </th>
+          <th class="purchase_heading">
+            <p class="align-right">${parseAmount(order.amount, 2)}</p>
+          </th>
+        </tr>`;
+        });
+
+        return addon_list_html;
+      } else {
+        return `<div></div>`;
       }
     };
 
     const renderTripInfo = () => {
       if (trip_list.length > 0) {
-        const addon_list_html = trip_list
-          .map((trip, idx) => {
-            return `<tr>
-          <td align="left">
-          Trip #${idx + 1}
-        </td>
-        <td align="right">${parseAmount(trip.amount, 2)}</td>
+        const addon_list_html = trip_list.map((trip, idx) => {
+          return `<tr>
+          <th class="purchase_heading">
+            <p>Trip #${idx + 1}</p>
+          </th>
+          <th class="purchase_heading">
+            <p class="align-right">${parseAmount(trip.amount, 2)}</p>
+          </th>
         </tr>`;
-          })
-          .join("");
+        });
+
         return addon_list_html;
       } else {
         return `<tr></tr>`;
@@ -106,15 +137,29 @@ export default class InvoicePreviewModal extends Component {
                   <tr>
                     <td class="content-cell">
                       <h1 class="hm-text-20">Hi ${customer_info.name},</h1>
-                      <p>Thanks for using Sunshire. This email is to confirm for your purchase.</p>
-                     
+                      <p>Thanks for using ${localStorage.getItem(
+                        "company_name"
+                      )}. This email is to confirm for your purchase.</p>
+                    
                       <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
-                        <tr>
-                          <td>
-                            <h3 class="hm-text-16">Created Date</h3></td>
-                          <td>
-                            <h3 class="align-right hm-text-16">${convertUTCtoLocal(order_info.cdate)}</h3></td>
-                        </tr>
+                      <tr>
+                        <td colspan="2">
+                          <table class="purchase_content" width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <th class="purchase_heading">
+                                <p>From Address</p>
+                              </th>
+                              <th class="purchase_heading">
+                                <p class="align-right">To Address</p>
+                              </th>
+                            </tr>
+                            ${renderAddressInfo()}
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+
+                      <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
                         <tr>
                           <td colspan="2">
                             <table class="purchase_content" width="100%" cellpadding="0" cellspacing="0">
@@ -128,21 +173,23 @@ export default class InvoicePreviewModal extends Component {
                               </tr>
                               ${renderAddonInfo()}
                               ${renderTripInfo()}
+
                               <tr>
-                                <td width="80%" class="purchase_footer" valign="middle">
-                                  <p class="purchase_total purchase_total--label">Total</p>
-                                </td>
-                                <td width="20%" class="purchase_footer" valign="middle">
-                                  <p class="purchase_total">${parseAmount(order_info.amount, 2)}</p>
-                                </td>
-                              </tr>
+                              <th class="purchase_heading">
+                                <p>Total</p>
+                              </th>
+                              <th class="purchase_heading">
+                                <p class="align-right">${parseAmount(order_info.amount, 2)}</p>
+                              </th>
+                            </tr>
+
                             </table>
                           </td>
                         </tr>
                       </table>
                       <p>If you have any questions about this receipt, simply reply to this email or reach out to our support team for help.</p>
                       <p>Cheers,
-                        <br>The Sunshire Team</p>
+                        <br>The ${localStorage.getItem("company_name")} Team</p>
                     </td>
                   </tr>
                 </table>
@@ -153,11 +200,12 @@ export default class InvoicePreviewModal extends Component {
                 <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0">
                   <tr>
                     <td class="content-cell" align="center">
-                      <p class="sub align-center">&copy; 2019 [Product Name]. All rights reserved.</p>
+                      <p class="sub align-center">&copy; 2019 ${localStorage.getItem(
+                        "company_name"
+                      )}. All rights reserved.</p>
                       <p class="sub align-center">
-                        Sunshire, LLC
-                        <br>1234 Street Rd.
-                        <br>Suite 1234
+                      ${localStorage.getItem("company_name")}, LLC
+                        <br>${this.state.address}
                       </p>
                     </td>
                   </tr>

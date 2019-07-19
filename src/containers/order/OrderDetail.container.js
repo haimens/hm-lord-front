@@ -36,6 +36,8 @@ import {
 import { createOrderNoteListInLord, findOrderNoteListInLord } from "../../actions/note.action";
 import { findCouponListInLord } from "../../actions/coupon.action";
 import { sendEmailToConfirm } from "../../actions/email.action";
+import { findGeneralSettingListInLord } from "../../actions/settings.action";
+import alertify from "alertifyjs";
 class OrderDetail extends Component {
   state = {
     showUpdateBasicInfoModal: false,
@@ -94,14 +96,42 @@ class OrderDetail extends Component {
     this.setState({ customer_token, name });
     await this.props.findMessageAndResetData(customer_token);
   };
-  handleShowEmailModal = () => {
-    this.setState(state => ({ showEmailModal: !state.showEmailModal }));
+  handleShowEmailModal = status_str => {
+    const { order_token } = this.props.match.params;
+    if (status_str === "CONFIRMED") {
+      this.setState(state => ({ showEmailModal: !state.showEmailModal }));
+    } else {
+      alertify.confirm(
+        "This action will confirm this order",
+        () => {
+          this.props.confirmOrder(order_token);
+          this.setState(state => ({ showEmailModal: !state.showEmailModal }));
+        },
+        function() {
+          alertify.error("Cancel");
+        }
+      );
+    }
+  };
+
+  cancelEmailModal = () => {
+    this.setState({ showEmailModal: false });
   };
 
   componentDidMount() {
     const { order_token } = this.props.match.params;
-    const { findOrderDetailInLord, findCouponListInLord, findOrderNoteListInLord } = this.props;
-    Promise.all([findOrderDetailInLord(order_token), findCouponListInLord(), findOrderNoteListInLord(order_token)]);
+    const {
+      findOrderDetailInLord,
+      findCouponListInLord,
+      findOrderNoteListInLord,
+      findGeneralSettingListInLord
+    } = this.props;
+    Promise.all([
+      findOrderDetailInLord(order_token),
+      findCouponListInLord(),
+      findOrderNoteListInLord(order_token),
+      findGeneralSettingListInLord()
+    ]);
   }
 
   render() {
@@ -130,7 +160,8 @@ class OrderDetail extends Component {
       createAMessageWithCustomer,
       updateSmsStatus,
       message_detail_with_customer,
-      sendEmailToConfirm
+      sendEmailToConfirm,
+      general_setting_list_in_lord
     } = this.props;
     const { order_token } = match.params;
     const {
@@ -178,7 +209,8 @@ class OrderDetail extends Component {
             history={history}
             sendEmailToConfirm={sendEmailToConfirm}
             order_detail={order_detail}
-            onClose={this.handleShowEmailModal}
+            onClose={this.cancelEmailModal}
+            general_setting_list_in_lord={general_setting_list_in_lord}
           />
         )}
         <section>
@@ -305,7 +337,8 @@ const mapStateToProps = state => {
     coupon_list_in_lord: state.couponReducer.coupon_list_in_lord,
     note_list_for_order: state.noteReducer.note_list_for_order,
     message_detail_with_customer: state.smsReducer.message_detail_with_customer,
-    showChat: state.smsReducer.showChat
+    showChat: state.smsReducer.showChat,
+    general_setting_list_in_lord: state.settingsReducer.general_setting_list_in_lord
   };
 };
 const mapDispatchToProps = {
@@ -324,7 +357,8 @@ const mapDispatchToProps = {
   createAMessageWithCustomer,
   updateSmsStatus,
   findMessageAndResetData,
-  sendEmailToConfirm
+  sendEmailToConfirm,
+  findGeneralSettingListInLord
 };
 
 export default connect(
