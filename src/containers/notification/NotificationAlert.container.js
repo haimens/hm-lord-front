@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { ListView, Header, ListHeader } from "../../components/shared";
-import { findAlertListInLord } from "../../actions/alert.action";
+import { findAlertListInLord, muteAlertInfoInTrip } from "../../actions/alert.action";
 import NotificationAlertListItem from "./notificationAlert.component/NotificationAlertList.item";
 class NotificationAlert extends Component {
   handleAddingWage = () => {
@@ -12,10 +12,10 @@ class NotificationAlert extends Component {
     this.props.findAlertListInLord({ start });
   };
   componentDidMount() {
-    this.props.findAlertListInLord();
+    this.props.findAlertListInLord({ status: 3 });
   }
   render() {
-    const { history, alert_list_in_lord } = this.props;
+    const { history, alert_list_in_lord, muteAlertInfoInTrip } = this.props;
     return (
       <main className="container-fluid">
         <section className="mb-4">
@@ -33,12 +33,17 @@ class NotificationAlert extends Component {
           <ListView
             totalCount={alert_list_in_lord.count}
             title="Trip Alert"
-            fieldNames={["Driver img", "Alert Time", "Driver Name", "Type", "Trip Detail"]}
+            fieldNames={["Driver img", "Alert Time", "Driver Name", "Type", "Trip Detail", "Mute"]}
             hideHeader={true}
             onPageChange={this.handlePageChange}
           >
             {alert_list_in_lord.record_list.map((alert, index) => (
-              <NotificationAlertListItem parentProps={alert} key={index} history={history} />
+              <NotificationAlertListItem
+                muteAlertInfoInTrip={muteAlertInfoInTrip}
+                parentProps={alert}
+                key={index}
+                history={history}
+              />
             ))}
           </ListView>
         </section>
@@ -51,7 +56,7 @@ const mapStateToProps = state => {
     alert_list_in_lord: state.alertReducer.alert_list_in_lord
   };
 };
-const mapDispatchToProps = { findAlertListInLord };
+const mapDispatchToProps = { findAlertListInLord, muteAlertInfoInTrip };
 
 export default connect(
   mapStateToProps,

@@ -5,8 +5,11 @@ export default class NotifficationAlertItem extends Component {
   handleTripAlert = trip_token => {
     this.props.history.push(`/trip/ongoing/detail/${trip_token}`);
   };
+  muteAlertInfoInTrip = alert_token => {
+    this.props.muteAlertInfoInTrip(alert_token, { status: 4 });
+  };
   render() {
-    const { driver_img_path, record_time, driver_name, status_str, trip_token } = this.props.parentProps;
+    const { driver_img_path, record_time, driver_name, type_str, trip_token, alert_token } = this.props.parentProps;
 
     return (
       <tr className="border-bottom">
@@ -29,9 +32,7 @@ export default class NotifficationAlertItem extends Component {
           </section>
         </td>
         <td data-label="Type" className="items-height align-middle test-center">
-          <section className="test-center align-middle hm-text-14 text-main-color font-weight-bold">
-            {status_str}
-          </section>
+          <section className="test-center align-middle hm-text-14 text-main-color font-weight-bold">{type_str}</section>
         </td>
         <td data-label="Trip Detail" className="items-height align-middle test-center">
           <img
@@ -41,6 +42,11 @@ export default class NotifficationAlertItem extends Component {
             style={{ height: "25px", width: "25px" }}
             onClick={() => this.handleTripAlert(trip_token)}
           />
+        </td>
+        <td data-label="Trip Detail" className="items-height align-middle test-center">
+          <button className="btn messenger-purple text-white" onClick={() => this.muteAlertInfoInTrip(alert_token)}>
+            Mute
+          </button>
         </td>
       </tr>
     );

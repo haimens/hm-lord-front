@@ -35,3 +35,16 @@ export const findAlertListInLord = (query = {}) => async dispatch => {
     dispatch(processLogout(err));
   }
 };
+
+export const muteAlertInfoInTrip = (alert_token, body = {}) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    const { payload } = await callApi(`alert/detail/${alert_token}`, "PATCH", body);
+    await dispatch(findAlertListInLord({ status: 3 }));
+    await launchSuccess(dispatch);
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
