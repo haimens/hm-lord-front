@@ -204,7 +204,7 @@ export default class InvoicePreviewModal extends Component {
                         "company_name"
                       )}. All rights reserved.</p>
                       <p class="sub align-center">
-                      ${localStorage.getItem("company_name")}, LLC
+                      ${localStorage.getItem("company_name")}
                         <br>${this.state.address}
                       </p>
                     </td>
