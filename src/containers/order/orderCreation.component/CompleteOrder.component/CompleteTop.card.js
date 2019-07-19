@@ -15,6 +15,10 @@ export default class CompleteTop extends Component {
     const { basic_info } = trip_detail_in_lord;
     this.props.handleFlightButton(basic_info, position);
   };
+  handleIconBeenClicked = trip_token => {
+    const { basic_info } = this.props.trip_detail_in_lord;
+    this.props.handleIconBeenClicked(trip_token, basic_info.amount, this.props.position);
+  };
   render() {
     const { trip_detail_in_lord, addon_list, deleteAddonItem, position, sum } = this.props;
     const { basic_info, from_address_info, to_address_info } = trip_detail_in_lord;
@@ -32,6 +36,7 @@ export default class CompleteTop extends Component {
                 to_address_info={to_address_info}
                 basic_info={basic_info}
                 showEditButton={true}
+                handleIconBeenClicked={this.handleIconBeenClicked}
               />
             </div>
             <div className="col-lg-6 col-12 mb-4">

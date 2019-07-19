@@ -10,7 +10,10 @@ export default function BasicInfoCard(props) {
         <div className="d-flex justify-content-between align-items-center  ">
           <div className="hm-text-16 font-weight-bold text-modal-color">Basic Information</div>
           {showEditButton && (
-            <button className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center">
+            <button
+              className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
+              onClick={() => props.handleIconBeenClicked(basic_info.trip_token)}
+            >
               <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
             </button>
           )}
@@ -50,7 +53,7 @@ export default function BasicInfoCard(props) {
         <div className="hm-text-14 text-modal-color font-weight-bold">{basic_info.vehicle_type}</div>
       </div>
       <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Tip Total</div>
+        <div className="text-secondary-color font-weight-500 hm-text-14">Trip Total</div>
         <div className="hm-text-14 text-modal-color font-weight-bold">{parseAmount(basic_info.amount, 2)}</div>
       </div>
     </div>

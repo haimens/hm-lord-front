@@ -18,11 +18,12 @@ import {
   findTripDetailInLordAgain,
   createAddonToTrip,
   deleteAddonItem,
-  updateTripOperationInfo
+  updateTripOperationInfo,
+  updateTripBasicInfo
 } from "../../../actions/trip.action";
 import CompleteTop from "./CompleteOrder.component/CompleteTop.card";
 import AddonModal from "./CompleteOrder.component/Addon.modal";
-
+import EditAmountModal from "./CompleteOrder.component/EditAmount.card";
 class CompleteOrderCard extends Component {
   state = {
     showCouponModal: false,
@@ -36,7 +37,10 @@ class CompleteOrderCard extends Component {
     email: "",
     area: "",
     special_instruction: "",
-    currFlightPosition: ""
+    currFlightPosition: "",
+    showEditingAmountInOrder: false,
+    position: "",
+    currAmount: ""
   };
   handleInputChange = e => {
     const { id, value } = e.target;
@@ -116,6 +120,14 @@ class CompleteOrderCard extends Component {
     }
   };
 
+  handleUpdateTripAmount = (trip_token, amount, position) => {
+    this.setState({ curr_trip_token: trip_token, currAmount: amount, showEditingAmountInOrder: true, position });
+  };
+
+  setShowEditingAmountInOrderToFalse = () => {
+    this.setState({ showEditingAmountInOrder: false });
+  };
+
   async componentDidMount() {
     const {
       current_order,
@@ -151,7 +163,10 @@ class CompleteOrderCard extends Component {
       cell,
       area,
       special_instruction,
-      showFlightDetail
+      showFlightDetail,
+      showEditingAmountInOrder,
+      currAmount,
+      position
     } = this.state;
     const {
       history,
@@ -163,7 +178,8 @@ class CompleteOrderCard extends Component {
       round_trip,
       createAddonToTrip,
       flight_list_in_lord,
-      flight_list_in_lord_again
+      flight_list_in_lord_again,
+      updateTripBasicInfo
     } = this.props;
     const { basic_info, addon_list } = trip_detail_in_lord;
 
@@ -198,6 +214,15 @@ class CompleteOrderCard extends Component {
             flight_list_in_lord={flight_list_in_lord}
           />
         )}
+        {showEditingAmountInOrder && (
+          <EditAmountModal
+            position={position}
+            updateTripBasicInfo={updateTripBasicInfo}
+            onClose={this.setShowEditingAmountInOrderToFalse}
+            currAmount={currAmount}
+            trip_token={curr_trip_token}
+          />
+        )}
         {showCouponModal && (
           <CouponModal
             amount={sum}
@@ -213,31 +238,32 @@ class CompleteOrderCard extends Component {
             position={this.state.currPosition}
             createAddonToTrip={createAddonToTrip}
             order_token={order_token}
-            trip_token={curr_trip_token}
           />
         )}
         <div className="mb-4">
           <CompleteTop
+            position={"first"}
             handleFlightButton={this.handleFlightButton}
             sum={first_trip_total}
             deleteAddonItem={this.handleDeleteAddonItem}
             addon_list={addon_list}
-            position={"first"}
             handleAddingAddon={this.handleAddingAddon}
             trip_detail_in_lord={trip_detail_in_lord}
+            handleIconBeenClicked={this.handleUpdateTripAmount}
           />
         </div>
 
         {round_trip && (
           <div className="mb-4">
             <CompleteTop
+              position={"second"}
               handleFlightButton={this.handleFlightButton}
               sum={second_trip_total}
-              position={"second"}
               deleteAddonItem={this.handleDeleteAddonItem}
               addon_list={trip_detail_in_lord_again.addon_list}
               handleAddingAddon={this.handleAddingAddon}
               trip_detail_in_lord={trip_detail_in_lord_again}
+              handleIconBeenClicked={this.handleUpdateTripAmount}
             />
           </div>
         )}
@@ -430,7 +456,8 @@ const mapDispatchToProps = {
   applyFinalOrder,
   updateOrderDetailInLord,
   findFlightListInLord,
-  updateTripOperationInfo
+  updateTripOperationInfo,
+  updateTripBasicInfo
 };
 
 export default connect(
