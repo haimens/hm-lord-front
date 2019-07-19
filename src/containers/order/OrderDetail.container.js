@@ -100,7 +100,7 @@ class OrderDetail extends Component {
     const { order_token } = this.props.match.params;
     if (status_str === "CONFIRMED") {
       this.setState(state => ({ showEmailModal: !state.showEmailModal }));
-    } else {
+    } else if (status_str === "FINALIZED") {
       alertify.confirm(
         "This action will confirm this order",
         () => {
@@ -111,6 +111,8 @@ class OrderDetail extends Component {
           alertify.error("Cancel");
         }
       );
+    } else {
+      alertify.alert("Please wait for Order to be Finalized");
     }
   };
 

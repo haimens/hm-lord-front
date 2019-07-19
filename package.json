@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",
-    "@react-pdf/renderer": "^1.6.3",
     "alertifyjs": "^1.11.2",
     "antd": "^3.19.8",
     "body-scroll-lock": "^2.6.1",
