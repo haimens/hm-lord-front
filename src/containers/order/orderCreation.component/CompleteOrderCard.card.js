@@ -234,6 +234,7 @@ class CompleteOrderCard extends Component {
         {showAddingAddon && (
           <AddonModal
             title={this.state.currButtonItem}
+            trip_token={curr_trip_token}
             onClose={this.handleAddingAddon}
             position={this.state.currPosition}
             createAddonToTrip={createAddonToTrip}

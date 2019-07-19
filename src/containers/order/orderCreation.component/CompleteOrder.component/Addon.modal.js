@@ -19,15 +19,28 @@ export default class AddonModal extends Component {
   handleAddingAddon = async () => {
     const { amount, note } = this.state;
     const { createAddonToTrip, order_token, trip_token, position, title } = this.props;
-    if (amount !== "" && note !== "") {
-      createAddonToTrip(order_token, trip_token, position, {
-        amount: amount * 100,
-        note,
-        type: title === "An Add-on" ? 2 : 1
-      });
-      this.handleClose();
+    if (title === "An Add-on") {
+      if (amount !== "" && note !== "") {
+        createAddonToTrip(order_token, trip_token, position, {
+          amount: amount * 100,
+          note,
+          type: title === "An Add-on" ? 2 : 1
+        });
+        this.handleClose();
+      } else {
+        alertify.alert("Error!", "Please Finish The Form!");
+      }
     } else {
-      alertify.alert("Error!", "Please Finish The Form!");
+      if (amount !== "") {
+        createAddonToTrip(order_token, trip_token, position, {
+          amount: amount * 100,
+          note: "Tip",
+          type: title === "An Add-on" ? 2 : 1
+        });
+        this.handleClose();
+      } else {
+        alertify.alert("Error!", "Please Finish The Form!");
+      }
     }
   };
 
@@ -39,7 +52,7 @@ export default class AddonModal extends Component {
         onClose={this.handleClose}
         position="center"
         getWidth={"467px"}
-        getHeight={"350px"}
+        getHeight={this.props.title === `An Add-on` ? "350px" : "250px"}
       >
         <div className="container">
           <div className="p-3">
@@ -59,16 +72,18 @@ export default class AddonModal extends Component {
                 <span className="input-group-text bg-white border-left-0">.00</span>
               </div>
             </div>
-            <div className="form-group mb-4">
-              <input
-                className="form-control hm-input-height mt-3"
-                name="note"
-                id="note"
-                placeholder={"Note"}
-                value={note}
-                onChange={this.handleInputChange}
-              />
-            </div>
+            {this.props.title === `An Add-on` && (
+              <div className="form-group mb-4">
+                <input
+                  className="form-control hm-input-height mt-3"
+                  name="note"
+                  id="note"
+                  placeholder={"Note"}
+                  value={note}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+            )}
 
             <div className="form-group text-right pt-3">
               <button
