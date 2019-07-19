@@ -42,6 +42,8 @@ class ChatModalContainer extends Component {
             img = message.driver_img_path;
           } else if (message.type === 4) {
             img = message.img_path;
+          } else {
+            img = localStorage.getItem("icon_path");
           }
           if (message.is_read === 0) {
             this.updateSmsStatus(message.sms_token, { is_read: 1 });

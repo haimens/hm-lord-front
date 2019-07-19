@@ -122,18 +122,18 @@ export default class Sidebar extends Component {
             showArrow={true}
           >
             <SubNavItem
-              onClick={() => this.handleClick("/trip/ongoing")}
-              name="Ongoing"
-              history={this.props.parentProps.history}
-              path="ongoing"
-              is_target={parsedLocation[3] === "ongoing"}
-            />
-            <SubNavItem
               onClick={() => this.handleClick("/trip/upcoming")}
               name="Upcoming"
               history={this.props.parentProps.history}
               path="upcoming"
               is_target={parsedLocation[3] === "upcoming"}
+            />
+            <SubNavItem
+              onClick={() => this.handleClick("/trip/ongoing")}
+              name="Ongoing"
+              history={this.props.parentProps.history}
+              path="ongoing"
+              is_target={parsedLocation[3] === "ongoing"}
             />
             <SubNavItem
               onClick={() => this.handleClick("/trip/finished")}
