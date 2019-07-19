@@ -36,8 +36,8 @@ export const parseAmount = (amount, decimal = 0) => {
   return `$${parseFloat(amount / 100).toFixed(decimal)}`;
 };
 
-export const parseAmountNoSign = (amount, decimal = 0) => {
-  return parseFloat(amount / 100).toFixed(decimal);
+export const parseAmountNoSymbol = (amount, decimal = 0) => {
+  return `${parseFloat(Number(amount) / 100).toFixed(decimal)}`;
 };
 
 export const parsePrice = (amount, decimal = 0) => {

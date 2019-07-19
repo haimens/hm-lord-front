@@ -10,7 +10,8 @@ import {
   TripCard,
   AddingNote,
   LogItem,
-  ChatModalContainer
+  ChatModalContainer,
+  EmailPreviewModal
 } from "../../components/shared";
 import BasicInfo from "./orderDetail.component/BasicInfo.card";
 import CustomerInfo from "./orderDetail.component/CustomerInfo.card";
@@ -34,6 +35,7 @@ import {
 } from "../../actions/message.action";
 import { createOrderNoteListInLord, findOrderNoteListInLord } from "../../actions/note.action";
 import { findCouponListInLord } from "../../actions/coupon.action";
+import { sendEmailToConfirm } from "../../actions/email.action";
 class OrderDetail extends Component {
   state = {
     showUpdateBasicInfoModal: false,
@@ -42,7 +44,8 @@ class OrderDetail extends Component {
     showLogModal: false,
     showAddingLogInOrder: false,
     customer_token: "",
-    name: ""
+    name: "",
+    showEmailModal: false
   };
   handleAddingLog = () => {
     this.setState(state => ({ showAddingLogInOrder: !state.showAddingLogInOrder }));
@@ -73,7 +76,9 @@ class OrderDetail extends Component {
       this.state.currFlightPosition
     );
   };
-
+  handlePreview = () => {
+    this.setState({ showPreviewModal: !this.state.showPreviewModal });
+  };
   handleAddingCoupon = code => {
     const { order_token } = this.props.match.params;
     this.props.applyOrderDiscountInLord(order_token, { code });
@@ -89,6 +94,10 @@ class OrderDetail extends Component {
     this.setState({ customer_token, name });
     await this.props.findMessageAndResetData(customer_token);
   };
+  handleShowEmailModal = () => {
+    this.setState(state => ({ showEmailModal: !state.showEmailModal }));
+  };
+
   componentDidMount() {
     const { order_token } = this.props.match.params;
     const { findOrderDetailInLord, findCouponListInLord, findOrderNoteListInLord } = this.props;
@@ -103,7 +112,8 @@ class OrderDetail extends Component {
       showUpdateCustomerInfoModal,
       showCouponModal,
       showAddingLogInOrder,
-      name
+      name,
+      showEmailModal
     } = this.state;
     const {
       history,
@@ -119,7 +129,8 @@ class OrderDetail extends Component {
       showChat,
       createAMessageWithCustomer,
       updateSmsStatus,
-      message_detail_with_customer
+      message_detail_with_customer,
+      sendEmailToConfirm
     } = this.props;
     const { order_token } = match.params;
     const {
@@ -162,6 +173,14 @@ class OrderDetail extends Component {
             handleClose={this.handleShowChatWithCustomer}
           />
         )}
+        {showEmailModal && (
+          <EmailPreviewModal
+            history={history}
+            sendEmailToConfirm={sendEmailToConfirm}
+            order_detail={order_detail}
+            onClose={this.handleShowEmailModal}
+          />
+        )}
         <section>
           <div className="mb-4">
             <Header
@@ -199,6 +218,7 @@ class OrderDetail extends Component {
                   order_detail={order_detail}
                   handleDetailButtonClicked={this.handleChatWithCustomer}
                   handleUpdateCustomerInfo={this.handleUpdateCustomerInfo}
+                  handleShowEmailModal={this.handleShowEmailModal}
                 />
               </div>
             </div>
@@ -303,7 +323,8 @@ const mapDispatchToProps = {
   setChatToFalse,
   createAMessageWithCustomer,
   updateSmsStatus,
-  findMessageAndResetData
+  findMessageAndResetData,
+  sendEmailToConfirm
 };
 
 export default connect(

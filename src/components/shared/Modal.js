@@ -62,19 +62,21 @@ class Modal extends Component {
         />
         <section className={`${curr} ${this.props.className} rounded-custom`} id="onlyScroll" style={widthHeight}>
           <div
-            className={`sticky-top w-100 md-2 p-2 border-bottom ${
+            className={`sticky-top w-100 md-2 border-bottom ${
               this.props.headerContainerClassName ? this.props.headerContainerClassName : "bg-white"
             }`}
           >
-            <header className={`d-flex justify-content-between align-items-center px-4 `} style={{ height: "60px" }}>
-              <h5 className="text-modal-color font-weight-bold text-modal-title">{this.props.title}</h5>
-              <ImageButton
-                // image={`${process.env.PUBLIC_URL}/img/forget-password@2x.png`}
-                icon={<i className="fas fa-times" />}
-                onClick={() => this.handleClose()}
-                outerClassName="text-dark"
-              />
-            </header>
+            {!this.props.hideHeader && (
+              <header className={`d-flex justify-content-between align-items-center px-4 `} style={{ height: "60px" }}>
+                <h5 className="text-modal-color font-weight-bold text-modal-title">{this.props.title}</h5>
+                <ImageButton
+                  // image={`${process.env.PUBLIC_URL}/img/forget-password@2x.png`}
+                  icon={<i className="fas fa-times" />}
+                  onClick={() => this.handleClose()}
+                  outerClassName="text-dark"
+                />
+              </header>
+            )}
             {this.props.showSearchBar && (
               <section className="mt-2 border">
                 <SearchButton onSubmit={this.handleSearch} name="search" placeholder="search for ..." />

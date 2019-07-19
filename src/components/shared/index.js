@@ -36,6 +36,7 @@ import FlightDetailModal from "./FlightDetail.modal";
 import LogItem from "./LogList.item";
 import ChatModal from "./ChatModal";
 import ChatModalContainer from "./Chat.modal";
+import EmailPreviewModal from "./EmailPreviewModal.modal";
 export {
   LoaderAlt,
   IconButton,
@@ -74,5 +75,6 @@ export {
   FlightDetailModal,
   LogItem,
   ChatModal,
-  ChatModalContainer
+  ChatModalContainer,
+  EmailPreviewModal
 };
