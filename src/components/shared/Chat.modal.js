@@ -10,7 +10,7 @@ class ChatModalContainer extends Component {
     const { token, createAMessageWithCustomer } = this.props;
     this.props.createAMessageWithCustomer(token, {
       message: keywords,
-      title: `From Admin-${localStorage.getItem("username")}`
+      title: `From Admin-${localStorage.getItem("name")}`
     });
   };
   findMoreList = (token, start) => {
