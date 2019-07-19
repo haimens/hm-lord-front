@@ -1,6 +1,21 @@
 import React from "react";
+import { convertUTCtoLocal } from "../../../actions/utilities.action";
 
 export default function BasicInfo(props) {
+  const handleSentConfirmButton = () => {
+    let message = `There are total of ${props.order_detail.trip_list.length} trip. `;
+    props.order_detail.trip_list.map(
+      (trip, index) =>
+        (message += ` Trip #${index + 1},  From ${trip.from_addr_str}, To: ${
+          trip.to_addr_str
+        }, and Pickup Time is ${convertUTCtoLocal(trip.pickup_time)}`)
+    );
+
+    props.createAMessageWithCustomer(customer_token, {
+      message: `Your Trip has been confirmed. ${message}`,
+      title: `From Admin-${localStorage.getItem("name")}`
+    });
+  };
   const { order_detail, history, handleDetailButtonClicked } = props;
   const { name, cell, email, img_path, addr_str, note, customer_token } = order_detail.customer_info;
   return (
@@ -65,6 +80,7 @@ export default function BasicInfo(props) {
           <button
             className="btn shadow-sm rounded-custom button-main-background text-white ml-4"
             style={{ height: "43px", width: "168px" }}
+            onClick={handleSentConfirmButton}
           >
             <i className="fas fa-sms mr-2" />
             Send confirmation

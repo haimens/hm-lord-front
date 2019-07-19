@@ -138,7 +138,6 @@ class OrderDetail extends Component {
 
   render() {
     const {
-      showEditAlertModal,
       customer_token,
       showUpdateBasicInfoModal,
       showUpdateCustomerInfoModal,
@@ -253,6 +252,7 @@ class OrderDetail extends Component {
                   handleDetailButtonClicked={this.handleChatWithCustomer}
                   handleUpdateCustomerInfo={this.handleUpdateCustomerInfo}
                   handleShowEmailModal={this.handleShowEmailModal}
+                  createAMessageWithCustomer={createAMessageWithCustomer}
                 />
               </div>
             </div>
