@@ -21,7 +21,7 @@ export default class GeneralListItem extends Component {
             className="hm-pointer-cursor"
             alt="delete"
             style={{ height: "25px", width: "25px" }}
-            onClick={() => this.props.EditGenernalList()}
+            onClick={() => this.props.editGeneralListItem(this.props.general)}
           />
         </td>
         <td data-label="Delete" className="items-height align-middle">

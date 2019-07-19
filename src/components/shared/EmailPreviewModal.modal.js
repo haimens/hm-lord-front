@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import Modal from "./Modal";
 import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from "@react-pdf/renderer";
-import { parseAmountNoSymbol, convertUTCtoLocal, parseRate, parseAmount } from "../../actions/utilities.action";
+import {
+  parseAmountNoSymbol,
+  convertUTCtoLocal,
+  parseRate,
+  parseAmount,
+  convertLocalToUTC
+} from "../../actions/utilities.action";
 import alertify from "alertifyjs";
 import moment from "moment";
 import Paragraph from "antd/lib/skeleton/Paragraph";
@@ -43,14 +49,46 @@ export default class InvoicePreviewModal extends Component {
     const renderAddressInfo = () => {
       if (trip_list.length > 0) {
         const addon_list_html = trip_list.map((trip, idx) => {
-          return `<tr>
+          return `
+
+          <table class="email-footer pb-0" align="center" width="570" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="content-cell purchase_heading" align="center">
+              <p class="sub align-center font-weight-bold pb-3 border-bottom">Trip #${idx + 1}</p>
+            </td>
+          </tr>
+        </table>
+                      <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td colspan="2">
+          <tr>
           <th class="purchase_heading">
-            <p>${trip.from_addr_str}</p>
+            <p>From Address</p>
+          </th>
+          <th class="purchase_heading">
+            <p class="align-right">${trip.from_addr_str}</p>
+          </th>
+        </tr>
+        <tr>
+          <th class="purchase_heading">
+            <p>To Address</p>
           </th>
           <th class="purchase_heading">
             <p class="align-right">${trip.to_addr_str}</p>
           </th>
-        </tr>`;
+        </tr>
+        <tr >
+        <th class="purchase_heading">
+          <p>Pickup Time</p>
+        </th>
+        <th class="purchase_heading">
+          <p class="align-right">${convertUTCtoLocal(trip.pickup_time)}</p>
+        </th>
+      </tr>
+      </td>
+      </tr>
+    </table>
+  `;
         });
 
         return addon_list_html;
@@ -140,25 +178,17 @@ export default class InvoicePreviewModal extends Component {
                       <p>Thanks for using ${localStorage.getItem(
                         "company_name"
                       )}. This email is to confirm for your purchase.</p>
-                    
-                      <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td colspan="2">
-                          <table class="purchase_content" width="100%" cellpadding="0" cellspacing="0">
-                            <tr>
-                              <th class="purchase_heading">
-                                <p>From Address</p>
-                              </th>
-                              <th class="purchase_heading">
-                                <p class="align-right">To Address</p>
-                              </th>
-                            </tr>
+                            
                             ${renderAddressInfo()}
+                   
+       
+                            <table class="email-footer pb-0" align="center" width="570" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td class="content-cell purchase_heading" align="center">
+                                <p class="sub align-center font-weight-bold pb-3 border-bottom">Detail</p>
+                              </td>
+                            </tr>
                           </table>
-                        </td>
-                      </tr>
-                    </table>
-
                       <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
                         <tr>
                           <td colspan="2">

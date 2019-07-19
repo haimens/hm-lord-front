@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { ListView, Header, ListHeader } from "../../../components/shared";
 import GeneralAdding from "./General.component/GeneralAdding.modal";
+import GeneralEditing from "./General.component/GeneralEditing.Modal";
 import GeneralListItem from "./General.component/GeneralList.item";
 import {
   createGeneralSettingInLord,
@@ -11,9 +12,13 @@ import {
 } from "../../../actions/settings.action";
 class General extends Component {
   state = {
-    showAddGeneral: false
+    showAddGeneral: false,
+    showEditGeneral: false,
+    currSetting: ""
   };
-  handleGeneralSearch = keywords => {};
+  editGeneralListItem = currSetting => {
+    this.setState(state => ({ showEditGeneral: !state.showEditGeneral, currSetting }));
+  };
   handleShowGeneralModal = () => {
     this.setState(state => ({ showAddGeneral: !state.showAddGeneral }));
   };
@@ -27,7 +32,7 @@ class General extends Component {
       general_setting_list_in_lord,
       updateGeneralSettingListInLord
     } = this.props;
-    const { showAddGeneral } = this.state;
+    const { showAddGeneral, showEditGeneral, currSetting } = this.state;
     return (
       <main className="container-fluid">
         {showAddGeneral && (
@@ -36,6 +41,14 @@ class General extends Component {
             onClose={this.handleShowGeneralModal}
           />
         )}
+        {showEditGeneral && (
+          <GeneralEditing
+            updateGeneralSettingListInLord={updateGeneralSettingListInLord}
+            currSetting={currSetting}
+            onClose={this.editGeneralListItem}
+          />
+        )}
+
         <section className="mb-4">
           <Header
             title="Settings"
@@ -63,7 +76,7 @@ class General extends Component {
           >
             {general_setting_list_in_lord.record_list.map((general, index) => (
               <GeneralListItem
-                updateGeneralSettingListInLord={updateGeneralSettingListInLord}
+                editGeneralListItem={this.editGeneralListItem}
                 general={general}
                 key={index}
                 onClick={this.handlePunchItemClick}
