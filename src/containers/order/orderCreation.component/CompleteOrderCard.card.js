@@ -40,7 +40,8 @@ class CompleteOrderCard extends Component {
     currFlightPosition: "",
     showEditingAmountInOrder: false,
     position: "",
-    currAmount: ""
+    currAmount: "",
+    currFlightStr: ""
   };
   handleInputChange = e => {
     const { id, value } = e.target;
@@ -120,8 +121,14 @@ class CompleteOrderCard extends Component {
     }
   };
 
-  handleUpdateTripAmount = (trip_token, amount, position) => {
-    this.setState({ curr_trip_token: trip_token, currAmount: amount, showEditingAmountInOrder: true, position });
+  handleUpdateTripAmount = (trip_token, amount, position, currFlightStr) => {
+    this.setState({
+      curr_trip_token: trip_token,
+      currAmount: amount,
+      showEditingAmountInOrder: true,
+      position,
+      currFlightStr
+    });
   };
 
   setShowEditingAmountInOrderToFalse = () => {
@@ -166,7 +173,8 @@ class CompleteOrderCard extends Component {
       showFlightDetail,
       showEditingAmountInOrder,
       currAmount,
-      position
+      position,
+      currFlightStr
     } = this.state;
     const {
       history,
@@ -220,6 +228,7 @@ class CompleteOrderCard extends Component {
             updateTripBasicInfo={updateTripBasicInfo}
             onClose={this.setShowEditingAmountInOrderToFalse}
             currAmount={currAmount}
+            currFlightStr={currFlightStr}
             trip_token={curr_trip_token}
           />
         )}

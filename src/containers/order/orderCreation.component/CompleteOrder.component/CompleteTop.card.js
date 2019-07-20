@@ -15,9 +15,9 @@ export default class CompleteTop extends Component {
     const { basic_info } = trip_detail_in_lord;
     this.props.handleFlightButton(basic_info, position);
   };
-  handleIconBeenClicked = trip_token => {
+  handleIconBeenClicked = (trip_token, currFlightStr) => {
     const { basic_info } = this.props.trip_detail_in_lord;
-    this.props.handleIconBeenClicked(trip_token, basic_info.amount, this.props.position);
+    this.props.handleIconBeenClicked(trip_token, basic_info.amount, this.props.position, currFlightStr);
   };
   render() {
     const { trip_detail_in_lord, addon_list, deleteAddonItem, position, sum } = this.props;
