@@ -186,7 +186,7 @@ class CompleteOrderCard extends Component {
       round_trip,
       createAddonToTrip,
       flight_list_in_lord,
-      flight_list_in_lord_again,
+      findCouponListInLord,
       updateTripBasicInfo
     } = this.props;
     const { basic_info, addon_list } = trip_detail_in_lord;
@@ -234,6 +234,7 @@ class CompleteOrderCard extends Component {
         )}
         {showCouponModal && (
           <CouponModal
+            findCouponListInLord={findCouponListInLord}
             amount={sum}
             handleAddingCoupon={this.handleAddingCoupon}
             coupon_list_in_lord={coupon_list_in_lord}

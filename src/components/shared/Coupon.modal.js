@@ -4,6 +4,9 @@ import { parseRate, parseAmount } from "../../actions/utilities.action";
 import alertify from "alertifyjs";
 
 export default class CouponModal extends Component {
+  state = {
+    keywords: ""
+  };
   handleInputChange = e => {
     const { id, value } = e.target;
     this.setState({ [id]: value });
@@ -11,12 +14,37 @@ export default class CouponModal extends Component {
   handleClose = () => {
     this.props.onClose();
   };
+  handleSubmit = e => {
+    if (e) e.preventDefault();
+    const { keywords } = this.state;
+    this.props.findCouponListInLord({ keywords });
+  };
   async componentDidMount() {}
 
   render() {
     return (
       <div>
         <Modal title="Add Coupon" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"500px"}>
+          <div className="border-bottom-custom " style={{ height: "60px" }}>
+            <div className="input-group px-1">
+              <div className="input-group-prepend col-1 p-0 d-flex justify-content-center">
+                <span className="input-group-text border-0 bg-white">
+                  <i className="fas fa-search" />
+                </span>
+              </div>
+              <form className="col" onSubmit={this.handleSubmit}>
+                <input
+                  className="form-control border-0 hm-text-14"
+                  style={{ height: "58px" }}
+                  name="keywords"
+                  id="keywords"
+                  value={this.state.keywords}
+                  placeholder={"Search"}
+                  onChange={this.handleInputChange}
+                />
+              </form>
+            </div>
+          </div>
           <div className="p-2 py-4">
             {this.props.coupon_list_in_lord.record_list.map(
               (coupon, index) =>
