@@ -13,7 +13,6 @@ class Calendar extends Component {
   };
   componentDidMount() {
     const { curr_date, findTripActiveListInLord, findTripListInLord } = this.props;
-    console.log(curr_date);
     if (curr_date.title.includes("Ongoing")) {
       findTripActiveListInLord({
         date_from: moment(curr_date.start)
@@ -67,7 +66,7 @@ class Calendar extends Component {
       >
         <div className="container-fluid">
           {trip_list_in_lord.record_list.map((trip, index) => (
-            <div className="py-3 bg-white border-bottom-custom">
+            <div className="py-3 bg-white border-bottom-custom" key={index}>
               <div className="row pb-3">
                 <div className="col-2 px-0  d-flex justify-content-center ">
                   <div
