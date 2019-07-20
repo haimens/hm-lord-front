@@ -52,6 +52,7 @@ export default class NavItem extends Component {
 
   handleToggle = () => {
     if (this.props.onToggle) this.props.onToggle();
+    this.setState(state => ({ collapse: !state.collapse }));
   };
 
   render() {

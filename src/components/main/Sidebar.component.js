@@ -5,7 +5,7 @@ import SubNavItem from "./nav.component/SubNavItem.item";
 export default class Sidebar extends Component {
   handleClick = new_path => {
     const { history } = this.props.parentProps;
-    // this.props.handleSideBarBeenOpened();
+    this.props.handleSideBarBeenOpened();
     history.push(new_path);
   };
   handleClickLogo = e => {
@@ -87,7 +87,6 @@ export default class Sidebar extends Component {
 
         <section className="accordion">
           <NavItem
-            onToggle={() => this.handleClick("/order/list")}
             image={`${process.env.PUBLIC_URL}/img/tabicon_order.svg`}
             name="Order"
             path="order"
@@ -114,7 +113,6 @@ export default class Sidebar extends Component {
 
         <section className="accordion">
           <NavItem
-            onToggle={() => this.handleClick("/trip/ongoing")}
             image={`${process.env.PUBLIC_URL}/img/tabicon_trip.svg`}
             name="Trip"
             path="trip"
@@ -165,7 +163,6 @@ export default class Sidebar extends Component {
 
         <section className="accordion">
           <NavItem
-            onToggle={() => this.handleClick("/notification/alert")}
             image={`${process.env.PUBLIC_URL}/img/tabicon_notification.svg`}
             name="Notification"
             path="notification"
@@ -191,7 +188,6 @@ export default class Sidebar extends Component {
 
         <section className="accordion  pb-4">
           <NavItem
-            onToggle={() => this.handleClick("/settings/payment")}
             image={`${process.env.PUBLIC_URL}/img/tabicon_settings.svg`}
             name="Settings"
             path="settings"
