@@ -10,7 +10,6 @@ export const findDriverListInLord = (query = {}) => async dispatch => {
       order_direction: "DESC",
       ...query
     });
-    console.log(payload);
     await dispatch({
       type: constant.DRIVER_LIST_IN_LORD,
       payload
@@ -64,7 +63,6 @@ export const updateADriverInLord = (driver_token, body = {}) => async dispatch =
 };
 
 export const findDriverLocationListInLord = (query = {}) => async dispatch => {
-  console.log(query);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`driver/all/location/realm`, "GET", null, {

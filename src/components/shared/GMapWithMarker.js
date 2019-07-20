@@ -12,7 +12,6 @@ class GMapWithMarker extends Component {
     this.setState({ shelters: this.props.driver_location_list_in_lord.record_list });
   }
   handleClick = (marker, event) => {
-    // console.log({ marker })
     this.setState({ selectedMarker: marker });
   };
   render() {

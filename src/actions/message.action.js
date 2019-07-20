@@ -3,7 +3,6 @@ import { callApi, startLoader, stopLoader, launchSuccess } from "./utilities.act
 import { processLogout } from "./auth.action";
 
 export const findMessageListInLord = (query = {}) => async dispatch => {
-  console.log(query);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`message/all/detail/realm`, "GET", null, {

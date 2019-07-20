@@ -51,7 +51,6 @@ export const processLogin = (user_login_nfo, history) => async dispatch => {
   try {
     await startLoader(dispatch);
     const { payload, verify_info } = await callApi("login", "POST", user_login_nfo);
-    console.log(verify_info);
     saveUserInfo({ ...payload, ...verify_info });
     await dispatch(loginSuccess());
     await stopLoader(dispatch);

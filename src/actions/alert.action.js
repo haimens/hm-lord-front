@@ -24,7 +24,6 @@ export const findAlertListInLord = (query = {}) => async dispatch => {
       order_direction: "DESC",
       ...query
     });
-    console.log(payload);
     await dispatch({
       type: constant.ALERT_LIST_IN_CUSTOMER,
       payload

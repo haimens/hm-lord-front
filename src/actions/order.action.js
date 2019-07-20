@@ -41,7 +41,6 @@ export const findCustomerOrderListInLord = (customer_token, query = {}) => async
 };
 
 export const findOrderListInLordWithDate = (query = {}) => async dispatch => {
-  console.log(query);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`order/all/detail/realm`, "GET", null, {

@@ -3,7 +3,6 @@ import { callApi, startLoader, stopLoader, launchSuccess } from "./utilities.act
 import { processLogout } from "./auth.action";
 
 export const findCustomerNoteListInLord = (customer_token, query = {}) => async dispatch => {
-  console.log(customer_token);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`note/all/detail/customer/${customer_token}`, "GET", null, {
@@ -23,8 +22,6 @@ export const findCustomerNoteListInLord = (customer_token, query = {}) => async 
 };
 
 export const createCustomerNoteListInLord = (customer_token, body = {}) => async dispatch => {
-  console.log(customer_token);
-  console.log(body);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`note/detail/customer/${customer_token}`, "POST", body);

@@ -192,7 +192,6 @@ export const findGeneralSettingListInLord = (query = {}) => async dispatch => {
       order_direction: "DESC",
       ...query
     });
-    console.log(payload);
     await dispatch({
       type: constant.GENERAL_SETTING_LIST_IN_LORD,
       payload
@@ -205,8 +204,6 @@ export const findGeneralSettingListInLord = (query = {}) => async dispatch => {
 };
 
 export const updateGeneralSettingListInLord = (setting_token, body = {}) => async dispatch => {
-  console.log(setting_token);
-  console.log(body);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`setting/detail/${setting_token}`, "PATCH", body);

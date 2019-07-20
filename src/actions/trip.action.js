@@ -239,7 +239,6 @@ export const findTripCountInLord = (query = {}) => async dispatch => {
 };
 
 export const findAddonInTrip = (trip_token, query) => async dispatch => {
-  console.log(trip_token);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`trip/all/addon/${trip_token}`, "GET", null, {
@@ -247,7 +246,6 @@ export const findAddonInTrip = (trip_token, query) => async dispatch => {
       order_direction: "DESC",
       ...query
     });
-    console.log(payload);
     await dispatch({
       type: constant.TRIP_ADD_ON_LIST,
       payload

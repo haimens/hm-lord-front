@@ -34,7 +34,6 @@ export default class VehicleAdding extends Component {
   };
 
   async componentDidMount() {
-    console.log(this.props);
     this.setState({ value: this.props.currSetting.value });
   }
 

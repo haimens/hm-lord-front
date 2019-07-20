@@ -100,7 +100,6 @@ export default class EmailPreviewModal extends Component {
             1}</td><td class="align-right" width="20%" class="purchase_item">${parseAmount(trip.amount, 2)}</td></tr>
         `;
         });
-        console.log(addon_list_html);
         return string;
       } else {
         return `<tr></tr>`;

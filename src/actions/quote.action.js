@@ -11,7 +11,6 @@ export const findQuoteInLord = (body = {}) => async dispatch => {
       payload
     });
     await stopLoader(dispatch);
-    console.log("here");
     return true;
   } catch (err) {
     await stopLoader(dispatch);
@@ -44,7 +43,6 @@ export const setMapToFalseAgain = () => async dispatch => {
 };
 
 export const findQuoteInLordAgain = (body = {}) => async dispatch => {
-  console.log(body);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`quote/detail`, "POST", body);
