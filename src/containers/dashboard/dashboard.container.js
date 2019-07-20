@@ -157,6 +157,7 @@ class Dashboard extends Component {
       customer_list_in_lord,
       order_list_in_lord,
       order_list_in_lord_with_date,
+
       showMap
     } = this.props;
     const { curr_select, showCalendarInfo, curr_date, keywords } = this.state;
