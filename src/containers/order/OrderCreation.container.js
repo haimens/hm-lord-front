@@ -5,13 +5,12 @@ import { OrderHeader, CustomerInformationCard } from "./orderCreation.component"
 import TripDetailCard from "./orderCreation.component/TripDetail.card";
 import CompleteOrderCard from "./orderCreation.component/CompleteOrderCard.card";
 import PaymentInfoCard from "./orderCreation.component/PaymentInfo.card";
-import { setCurrentOrderInLord } from "../../actions/order.action";
+import { setCurrentOrderInLord, setCurrentCustomerInLord } from "../../actions/order.action";
 class OrderCreation extends Component {
   state = {
-    position: 4,
+    position: 2,
     loaded: false,
-    round_trip: true,
-    currentCustomer: ""
+    round_trip: false
   };
   handleChangePosition = position => {
     this.setState(states => ({ position: states.position + position }));
@@ -23,9 +22,12 @@ class OrderCreation extends Component {
   };
 
   handleSetCurrentCustomer = currentCustomer => {
-    this.setState({ currentCustomer });
+    this.props.setCurrentCustomerInLord(currentCustomer);
   };
   async componentDidMount() {
+    if (this.props.history.location.pathname.includes("withCustomer")) {
+      await this.setState({ position: 3 });
+    }
     const { order_token } = this.props.match.params;
     this.props.setCurrentOrderInLord(order_token);
     if (order_token) {
@@ -33,7 +35,9 @@ class OrderCreation extends Component {
     }
   }
   render() {
-    const { position, round_trip, currentCustomer } = this.state;
+    const { position, round_trip } = this.state;
+    const { curr_customer } = this.props;
+
     return (
       <main className="container-fluid">
         <section>
@@ -57,7 +61,7 @@ class OrderCreation extends Component {
             <TripDetailCard
               round_trip={round_trip}
               handleRoundTrip={this.handleRoundTrip}
-              currentCustomer={currentCustomer}
+              currentCustomer={curr_customer}
               handleMoveNext={this.handleChangePosition}
             />
           )}
@@ -71,13 +75,14 @@ class OrderCreation extends Component {
   }
 }
 const mapStateToProps = state => {
-  return {};
+  return { curr_customer: state.orderReducer.curr_customer };
 };
 const mapDispatchToProps = {
-  setCurrentOrderInLord
+  setCurrentOrderInLord,
+  setCurrentCustomerInLord
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withRouter(OrderCreation));

@@ -79,6 +79,7 @@ class App extends Component {
               <ProtectedRoute exact path="/order/detail/:order_token" component={OrderDetail} />
               <ProtectedRoute exact path="/order/creation" component={OrderCreation} />
               <ProtectedRoute exact path="/order/creation/:order_token" component={OrderCreation} />
+              <ProtectedRoute exact path="/order/withCustomer" component={OrderCreation} />
 
               <ProtectedRoute exact path="/trip/ongoing" component={TripContainer} />
               <ProtectedRoute exact path="/trip/ongoing/detail/:trip_token" component={TripDetailContainer} />

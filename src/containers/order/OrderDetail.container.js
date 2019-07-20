@@ -222,10 +222,7 @@ class OrderDetail extends Component {
               subTitle={"Order List"}
               thirdTitle={"Order Detail"}
               toSubLocation={"/order/list"}
-              showButton={true}
               history={history}
-              clickTitle={"Order"}
-              buttonWidth={"88px"}
               clickFunction={() => this.props.history.push("/order/creation")}
             />
           </div>

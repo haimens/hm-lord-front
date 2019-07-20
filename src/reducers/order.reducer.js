@@ -38,7 +38,8 @@ const initialState = {
     record_list: [],
     count: 0,
     end: 0
-  }
+  },
+  curr_customer: ""
 };
 
 export default (state = initialState, action) => {
@@ -53,6 +54,8 @@ export default (state = initialState, action) => {
       return { ...state, current_order: action.payload };
     case constant.ORDER_LIST_IN_CUSTOMER:
       return { ...state, order_list_in_customer: action.payload };
+    case constant.SET_CURRENT_CUSTOMER:
+      return { ...state, curr_customer: action.payload };
     default:
       return state;
   }

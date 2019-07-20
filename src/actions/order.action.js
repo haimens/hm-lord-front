@@ -194,3 +194,17 @@ export const confirmOrder = order_token => async dispatch => {
     dispatch(processLogout(err));
   }
 };
+
+export const setCurrentCustomerInLord = payload => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    await dispatch({
+      type: constant.SET_CURRENT_CUSTOMER,
+      payload
+    });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};

@@ -7,7 +7,7 @@ export default class DriverCard extends Component {
     }
   };
   render() {
-    const { handleDeleteDriver, parentProps, deleteButton } = this.props;
+    const { handleDeleteDriver, parentProps, deleteButton, history } = this.props;
     const { driverName, driverImage, driverPhone, driverUsername, driver_token, driver_car_token } = parentProps;
     return (
       <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-3 mb-4"}>
@@ -23,6 +23,7 @@ export default class DriverCard extends Component {
                 className="rounded-circle  hm-pointer-cursor"
                 style={{ height: "74px", width: "74px" }}
                 alt="Driver"
+                onClick={() => history.push(`/driver/detail/${driver_token}`)}
               />
             </div>
             <div className="col-7">

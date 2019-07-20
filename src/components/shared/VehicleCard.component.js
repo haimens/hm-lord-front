@@ -10,8 +10,8 @@ export default class VehicleCard extends Component {
     this.props.updateACarForADriver(this.props.driver_token, driver_car_token, { status: 0 });
   };
   render() {
-    const { showButton, deleteButton } = this.props;
-    const { vehicleId, vehicleName, vehicleImage, vehicleToken, driver_car_token } = this.props.parentProps;
+    const { showButton, deleteButton, history } = this.props;
+    const { vehicleId, vehicleName, vehicleImage, vehicleToken, car_token, driver_car_token } = this.props.parentProps;
     return (
       <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 col-lg-3 mb-4"}>
         <div
@@ -23,9 +23,10 @@ export default class VehicleCard extends Component {
             <div className="col-5 d-flex justify-content-center">
               <img
                 src={vehicleImage}
-                className="rounded-circle"
+                className="rounded-circle hm-pointer-cursor"
                 style={{ height: "74px", width: "74px" }}
                 alt="Driver"
+                onClick={() => history.push(`/vehicle/detail/${car_token}`)}
               />
             </div>
             <div className="col-7">

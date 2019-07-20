@@ -16,7 +16,7 @@ class CustomerDetailCard extends Component {
           </div>
           <div className="col-lg-8 col-12">
             <div className="row text-modal-color">
-              <div className="col-lg-6 col-12 mb-4">
+              <div className="col-lg-8 col-12 mb-4">
                 <div className="d-flex justify-content-between align-items-center px-3 pb-3">
                   <div className="hm-text-16 font-weight-bold">Basic Information</div>
                   <button

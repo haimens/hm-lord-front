@@ -10,7 +10,7 @@ import {
   updateACustomerInLord,
   updateACustomerAddressInLord
 } from "../../actions/customer.action";
-import { findCustomerOrderListInLord } from "../../actions/order.action";
+import { findCustomerOrderListInLord, setCurrentCustomerInLord } from "../../actions/order.action";
 import { findCustomerNoteListInLord, createCustomerNoteListInLord } from "../../actions/note.action";
 import { createNewAddressInstance } from "../../actions/address.action";
 class CustomerDetail extends Component {
@@ -29,7 +29,9 @@ class CustomerDetail extends Component {
     this.props.findCustomerNoteListInLord(customer_token, { start });
   };
   handleJumpToOrder = () => {
-    this.props.history.push("/order/creation");
+    const { history, setCurrentCustomerInLord, customer_detail_in_lord } = this.props;
+    setCurrentCustomerInLord(customer_detail_in_lord);
+    history.push("/order/withCustomer");
   };
 
   componentDidMount() {
@@ -164,7 +166,8 @@ const mapDispatchToProps = {
   updateACustomerAddressInLord,
   findCustomerNoteListInLord,
   createCustomerNoteListInLord,
-  findCustomerOrderListInLord
+  findCustomerOrderListInLord,
+  setCurrentCustomerInLord
 };
 
 export default connect(

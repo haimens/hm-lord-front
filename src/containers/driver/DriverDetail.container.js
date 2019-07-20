@@ -261,12 +261,14 @@ class DriverDetail extends Component {
                     vehicleId: car.plate_num,
                     vehicleName: car.identifier,
                     vehicleImage: car.img_path,
-                    driver_car_token: car.driver_car_token
+                    driver_car_token: car.driver_car_token,
+                    car_token: car.car_token
                   }}
                   driver_token={driver_token}
                   updateACarForADriver={updateACarForADriver}
                   key={index}
                   showButton={true}
+                  history={history}
                   deleteButton={true}
                 />
               ))}
