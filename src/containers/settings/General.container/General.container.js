@@ -26,12 +26,7 @@ class General extends Component {
     this.props.findGeneralSettingListInLord();
   }
   render() {
-    const {
-      history,
-      createGeneralSettingInLord,
-      general_setting_list_in_lord,
-      updateGeneralSettingListInLord
-    } = this.props;
+    const { createGeneralSettingInLord, general_setting_list_in_lord, updateGeneralSettingListInLord } = this.props;
     const { showAddGeneral, showEditGeneral, currSetting } = this.state;
     return (
       <main className="container-fluid">

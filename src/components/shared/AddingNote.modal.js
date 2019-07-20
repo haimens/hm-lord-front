@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, ImageLoaderModal, PreviewImageModal, AddingImage, GAutoComplete } from "./index";
+import { Modal } from "./index";
 import alertify from "alertifyjs";
 
 export default class CustomerAdding extends Component {

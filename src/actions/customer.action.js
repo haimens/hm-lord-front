@@ -38,7 +38,7 @@ export const createACustomerInLord = (body = {}) => async dispatch => {
 export const updateACustomerInLord = (customer_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`customer/detail/${customer_token}`, "PATCH", body);
+    await callApi(`customer/detail/${customer_token}`, "PATCH", body);
     await dispatch(findCustomerDetailInLord(customer_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -66,7 +66,7 @@ export const findCustomerDetailInLord = customer_token => async dispatch => {
 export const updateACustomerAddressInLord = (customer_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`customer/info/${customer_token}`, "PATCH", body);
+    await callApi(`customer/info/${customer_token}`, "PATCH", body);
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
   } catch (err) {

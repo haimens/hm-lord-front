@@ -36,7 +36,6 @@ class NotificationMessage extends Component {
   }
   render() {
     const {
-      history,
       message_list_in_lord,
       message_detail_with_customer,
       createAMessageWithCustomer,

@@ -128,7 +128,7 @@ const MapWithAMarker = compose(
       }}
     >
       {props.markers.map((marker, index) => {
-        const onClick = props.onClick.bind(this, marker);
+        props.onClick.bind(this, marker);
         return (
           <Marker
             key={index}

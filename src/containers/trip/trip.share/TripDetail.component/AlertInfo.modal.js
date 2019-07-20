@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Modal } from "../../../../components/shared";
 import { convertLocalToUTC, convertUTCtoLocal } from "../../../../actions/utilities.action";
-import alertify from "alertifyjs";
 import { TimePicker } from "antd";
 import "./AlertInfoModal.css";
 import moment from "moment";

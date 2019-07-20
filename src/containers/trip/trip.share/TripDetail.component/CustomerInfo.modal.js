@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Modal, ImageLoaderModal, PreviewImageModal, AddingImage, GAutoComplete } from "../../../../components/shared";
-import { parseRate } from "../../../../actions/utilities.action";
 import alertify from "alertifyjs";
 
 export default class BasicInfo extends Component {

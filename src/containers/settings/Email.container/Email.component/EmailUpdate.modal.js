@@ -25,7 +25,6 @@ export default class EmailUpdate extends Component {
   handleUpdateEmailResource = () => {
     const { sendgrid_api_key, sendgrid_from_email } = this.state;
     const {
-      realm_token,
       updateAEmailMethod,
       currEmailResource: { email_resource_token }
     } = this.props;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { TripCard, ListHeader, Header, Pagination } from "../../../components/shared";
+import { TripCard, Header, Pagination } from "../../../components/shared";
 import { findTripListInLord, findTripActiveListInLord } from "../../../actions/trip.action";
 class TripContainer extends Component {
   state = {

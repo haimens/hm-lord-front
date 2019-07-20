@@ -45,7 +45,7 @@ export default class AlertInfo extends Component {
     });
   }
   render() {
-    const { alert_type, alert_list } = this.props;
+    const { alert_type } = this.props;
     const { type, currentTime } = this.state;
 
     return (

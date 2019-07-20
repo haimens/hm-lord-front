@@ -18,7 +18,7 @@ export default class VehicleAdding extends Component {
   };
 
   handleCreateADriverInLord = () => {
-    const { key, value } = this.state;
+    const { value } = this.state;
     if (value !== "") {
       this.props.updateGeneralSettingListInLord(this.props.currSetting.setting_token, {
         value

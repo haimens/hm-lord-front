@@ -8,7 +8,7 @@ class ChatModalContainer extends Component {
 
   handleOnSubmit = keywords => {
     const { token, createAMessageWithCustomer } = this.props;
-    this.props.createAMessageWithCustomer(token, {
+    createAMessageWithCustomer(token, {
       message: keywords,
       title: `From Admin-${localStorage.getItem("name")}`
     });

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Modal } from "../../../../components/shared";
 import alertify from "alertifyjs";
-import { parseAmount } from "../../../../actions/utilities.action";
 
 export default class EditAmountModal extends Component {
   state = {

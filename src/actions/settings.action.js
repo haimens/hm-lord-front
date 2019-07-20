@@ -24,7 +24,7 @@ export const findRealmDetailInLord = (query = {}) => async dispatch => {
 export const createRealmPaymentInLord = (body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`realm/payment`, "POST", body);
+    await callApi(`realm/payment`, "POST", body);
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
   } catch (err) {
@@ -55,7 +55,7 @@ export const findPaymentListInLord = (query = {}) => async dispatch => {
 export const updateAPaymentMethod = (payment_resource_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`realm/payment/${payment_resource_token}`, "PATCH", body);
+    await callApi(`realm/payment/${payment_resource_token}`, "PATCH", body);
     await dispatch(findPaymentListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -68,7 +68,7 @@ export const updateAPaymentMethod = (payment_resource_token, body = {}) => async
 export const createRealmMessageInLord = (body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`realm/message`, "POST", body);
+    await callApi(`realm/message`, "POST", body);
     await dispatch(findMessageListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -100,7 +100,7 @@ export const findMessageListInLord = (query = {}) => async dispatch => {
 export const updateMessageMethod = (message_resource_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`realm/message/${message_resource_token}`, "PATCH", body);
+    await callApi(`realm/message/${message_resource_token}`, "PATCH", body);
     await dispatch(findMessageListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -113,7 +113,7 @@ export const updateMessageMethod = (message_resource_token, body = {}) => async 
 export const createRealmEmailInLord = (body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`realm/email`, "POST", body);
+    await callApi(`realm/email`, "POST", body);
     await dispatch(findEmailListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -145,7 +145,7 @@ export const findEmailListInLord = (query = {}) => async dispatch => {
 export const updateAEmailMethod = (email_resource_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`realm/email/${email_resource_token}`, "PATCH", body);
+    await callApi(`realm/email/${email_resource_token}`, "PATCH", body);
     await dispatch(findEmailListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -174,7 +174,7 @@ export const setPrimaryForResources = body => async dispatch => {
 export const createGeneralSettingInLord = (body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`setting/detail`, "POST", body);
+    await callApi(`setting/detail`, "POST", body);
     await dispatch(findGeneralSettingListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -206,7 +206,7 @@ export const findGeneralSettingListInLord = (query = {}) => async dispatch => {
 export const updateGeneralSettingListInLord = (setting_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`setting/detail/${setting_token}`, "PATCH", body);
+    await callApi(`setting/detail/${setting_token}`, "PATCH", body);
     await dispatch(findGeneralSettingListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);

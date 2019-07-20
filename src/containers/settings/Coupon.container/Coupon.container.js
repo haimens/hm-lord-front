@@ -20,7 +20,7 @@ class Coupon extends Component {
     this.props.findCouponListInLord();
   }
   render() {
-    const { history, createACouponInLord, coupon_list_in_lord } = this.props;
+    const { createACouponInLord, coupon_list_in_lord } = this.props;
     const { showAddCouponModal } = this.state;
     return (
       <main className="container-fluid">

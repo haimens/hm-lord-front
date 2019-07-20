@@ -1,6 +1,5 @@
 import { callApi, startLoader, stopLoader, launchSuccess } from "./utilities.action";
 import { processLogout } from "./auth.action";
-import constant from "../constants/constant";
 
 export const handleSubmitAPaymentInLord = (order_token, body = {}, history) => async dispatch => {
   try {

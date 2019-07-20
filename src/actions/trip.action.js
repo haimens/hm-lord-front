@@ -108,7 +108,7 @@ export const findTripDetailInLordAgain = trip_token => async dispatch => {
 export const createAnAlertForATrip = (trip_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`trip/alerts/${trip_token}`, "POST", body);
+    await callApi(`trip/alerts/${trip_token}`, "POST", body);
     await dispatch(findTripDetailInLord(trip_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -121,7 +121,7 @@ export const createAnAlertForATrip = (trip_token, body = {}) => async dispatch =
 export const updateTripOperationInfo = (trip_token, body = {}, position) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`trip/operation/${trip_token}`, "PATCH", body);
+    await callApi(`trip/operation/${trip_token}`, "PATCH", body);
     if (position) {
       if (position === "first") {
         await dispatch(findTripDetailInLord(trip_token));
@@ -143,7 +143,7 @@ export const updateTripOperationInfo = (trip_token, body = {}, position) => asyn
 export const updateTripBasicInfo = (trip_token, body = {}, position) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`trip/detail/${trip_token}`, "PATCH", body);
+    await callApi(`trip/detail/${trip_token}`, "PATCH", body);
     if (position) {
       if (position === "first") {
         await dispatch(findTripDetailInLord(trip_token));
@@ -165,7 +165,7 @@ export const updateTripBasicInfo = (trip_token, body = {}, position) => async di
 export const createAddonToTrip = (order_token, trip_token, position, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`trip/addon/${order_token}/${trip_token}`, "POST", body);
+    await callApi(`trip/addon/${order_token}/${trip_token}`, "POST", body);
     if (position === "first") {
       await dispatch(findTripDetailInLord(trip_token));
     }
@@ -183,7 +183,7 @@ export const createAddonToTrip = (order_token, trip_token, position, body = {}) 
 export const deleteAddonItem = (order_token, trip_token, addon_token, position) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`trip/addon/${order_token}/${trip_token}/${addon_token}`, "PATCH", { status: 0 });
+    await callApi(`trip/addon/${order_token}/${trip_token}/${addon_token}`, "PATCH", { status: 0 });
     if (position === "first") {
       await dispatch(findTripDetailInLord(trip_token));
     }

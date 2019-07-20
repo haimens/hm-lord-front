@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { GMapFlag } from "../../../components/shared";
-import { parseRate, parseAmount } from "../../../actions/utilities.action";
 class VehicleDetailCard extends Component {
   handleDetailButtonClicked = () => {
     this.props.handleDetailButtonClicked();

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ImageButton, ImageLoaderModal, PreviewImageModal } from "../shared";
+import { ImageButton } from "../shared";
 import alertify from "alertifyjs";
 export default class ImageInModal extends Component {
   handleClose = e => {

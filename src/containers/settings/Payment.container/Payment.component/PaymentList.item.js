@@ -11,7 +11,7 @@ export default function CompanyAdminList(props) {
   const handleSetPaymentPrimary = payment_resource_token => {
     props.setPrimaryForResources({ payment_resource_token });
   };
-  const { isPrimary, realm_token, parentProps } = props;
+  const { isPrimary, parentProps } = props;
   const { square_application_id, square_location_id, square_access_token, payment_resource_token } = parentProps;
   return (
     <tr className="border-bottom">

@@ -14,7 +14,7 @@ export default class EmailPreviewModal extends Component {
   };
 
   handleEmailSend = async () => {
-    const { customer_info, order_info } = this.props.order_detail;
+    const { customer_info } = this.props.order_detail;
 
     await this.props.sendEmailToConfirm(customer_info.customer_token, {
       title: "order_confirmation",
@@ -29,6 +29,7 @@ export default class EmailPreviewModal extends Component {
         if (setting.key === "company_address") {
           this.setState({ address: setting.value });
         }
+        return null;
       });
     }
   }
@@ -39,7 +40,7 @@ export default class EmailPreviewModal extends Component {
     const renderAddressInfo = () => {
       if (trip_list.length > 0) {
         let string = "";
-        const addon_list_html = trip_list.map((trip, idx) => {
+        trip_list.map((trip, idx) => {
           string += `             <tr>
           <th class="purchase_heading align-left">
             <p>Trip #${idx + 1}</p>
@@ -70,7 +71,7 @@ export default class EmailPreviewModal extends Component {
     const renderAddonInfo = () => {
       if (addon_list.length > 0) {
         let string = "";
-        const addon_list_html = trip_list.map((order, idx) => {
+        trip_list.map(order => {
           string += `<tr><td width="80%" class="purchase_item align-left" >Trip #${
             order.note
           }</td><td class="align-right" width="20%" class="purchase_item" align="middle">${parseAmount(
@@ -78,7 +79,7 @@ export default class EmailPreviewModal extends Component {
             2
           )}</td></tr>
       `;
-          return addon_list_html;
+          return null;
         });
         return string;
       } else {
@@ -89,20 +90,18 @@ export default class EmailPreviewModal extends Component {
     const renderTripInfo = () => {
       if (trip_list.length > 0) {
         let string = "";
-        const addon_list_html = trip_list.map((trip, idx) => {
+        trip_list.map((trip, idx) => {
           string += `<tr><td width="80%" class="purchase_item align-left" >Trip #${idx +
             1}</td><td class="align-right" width="20%" class="purchase_item" align="middle">${parseAmount(
             trip.amount,
             2
           )}</td></tr>
         `;
-          return `<tr><td width="80%" class="purchase_item">Trip #${idx +
-            1}</td><td class="align-right" width="20%" class="purchase_item">${parseAmount(trip.amount, 2)}</td></tr>
-        `;
+          return null;
         });
         return string;
       } else {
-        return `<tr></tr>`;
+        return `<div></div>`;
       }
     };
 

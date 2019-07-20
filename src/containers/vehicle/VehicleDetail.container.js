@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { DriverCard, Header, ListHeader, ListView } from "../../components/shared";
+import { DriverCard, Header, ListHeader } from "../../components/shared";
 import VehicleDetailCard from "./vehicleDetail.component/VehicleDetail.card";
 import AddingDriverModal from "../../components/shared/AddingDriver.modal";
 import {

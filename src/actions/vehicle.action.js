@@ -24,7 +24,7 @@ export const findVehicleListInLord = (query = {}) => async dispatch => {
 export const createAVehicleInLord = (body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`car/detail`, "POST", body);
+    await callApi(`car/detail`, "POST", body);
     await dispatch(findVehicleListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -37,7 +37,7 @@ export const createAVehicleInLord = (body = {}) => async dispatch => {
 export const updateACarInLord = (car_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`car/detail/${car_token}`, "PATCH", body);
+    await callApi(`car/detail/${car_token}`, "PATCH", body);
     await dispatch(findCarDetailInLord(car_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -84,7 +84,7 @@ export const findDriverListForACar = (car_token, query = {}) => async dispatch =
 export const createCarToADriverInLord = (car_token, body) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`car/driver/${car_token}`, "POST", body);
+    await callApi(`car/driver/${car_token}`, "POST", body);
     await dispatch(findDriverListForACar(car_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -97,7 +97,7 @@ export const createCarToADriverInLord = (car_token, body) => async dispatch => {
 export const updateADriverForACar = (car_token, driver_car_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`car/driver/${driver_car_token}`, "PATCH", body);
+    await callApi(`car/driver/${driver_car_token}`, "PATCH", body);
     await dispatch(findDriverListForACar(car_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -129,7 +129,7 @@ export const findVehicleTypeListInLord = (query = {}) => async dispatch => {
 export const createACarTypeInLord = (body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`car/type`, "POST", body);
+    await callApi(`car/type`, "POST", body);
     await dispatch(findVehicleTypeListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -142,7 +142,7 @@ export const createACarTypeInLord = (body = {}) => async dispatch => {
 export const updateACarTypeInLord = (car_type_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`car/type/${car_type_token}`, "PATCH", body);
+    await callApi(`car/type/${car_type_token}`, "PATCH", body);
     await dispatch(findVehicleTypeListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);

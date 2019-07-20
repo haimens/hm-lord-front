@@ -1,5 +1,5 @@
 import constant from "../constants/constant";
-import { callApi, startLoader, stopLoader, launchSuccess } from "./utilities.action";
+import { callApi, startLoader, stopLoader } from "./utilities.action";
 import { processLogout } from "./auth.action";
 
 export const findMessageListInLord = (query = {}) => async dispatch => {
@@ -62,7 +62,7 @@ export const setChatToFalse = customer_token => async dispatch => {
 export const createAMessageWithCustomer = (customer_token, body) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`message/send/customer/${customer_token}`, "POST", body);
+    await callApi(`message/send/customer/${customer_token}`, "POST", body);
     await dispatch(findMessageAndResetData(customer_token));
     await stopLoader(dispatch);
   } catch (err) {
@@ -99,7 +99,7 @@ export const findMessageAndResetData = (customer_token, query = {}) => async dis
 export const updateSmsStatus = (sms_token, body = {}, customer_token) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`message/detail/${sms_token}`, "PATCH", body);
+    await callApi(`message/detail/${sms_token}`, "PATCH", body);
     await dispatch(findMessageAndResetData(customer_token));
     await dispatch(findMessageListInLord());
     await stopLoader(dispatch);

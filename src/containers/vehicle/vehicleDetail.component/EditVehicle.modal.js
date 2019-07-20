@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Modal, ImageLoaderModal, PreviewImageModal, AddingImage } from "../../../components/shared";
-import { parseRate } from "../../../actions/utilities.action";
 import alertify from "alertifyjs";
 
 export default class EditVehicle extends Component {

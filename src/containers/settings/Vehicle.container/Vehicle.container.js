@@ -10,7 +10,6 @@ class Vehicle extends Component {
   state = {
     showAddWage: false
   };
-  handleWageSearch = keywords => {};
   handleAddingVehicle = () => {
     this.setState(state => ({ showAddVehicle: !state.showAddVehicle }));
   };
@@ -21,7 +20,7 @@ class Vehicle extends Component {
     this.props.findVehicleTypeListInLord();
   }
   render() {
-    const { history, createACarTypeInLord, vehicle_type_list_in_lord } = this.props;
+    const { createACarTypeInLord, vehicle_type_list_in_lord } = this.props;
     const { showAddVehicle } = this.state;
     return (
       <main className="container-fluid">

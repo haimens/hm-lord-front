@@ -25,11 +25,7 @@ export default class PaymentCard extends Component {
     this.props.handleNoneReceived(nonce);
   };
   componentDidMount() {
-    const {
-      square_application_id,
-      square_location_id,
-      square_access_token
-    } = this.props.realm_list_in_lord.payment_resource_info;
+    const { square_application_id, square_access_token } = this.props.realm_list_in_lord.payment_resource_info;
     const config = {
       applicationId: square_application_id,
       locationId: square_access_token,

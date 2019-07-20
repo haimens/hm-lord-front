@@ -24,7 +24,7 @@ export const findCustomerNoteListInLord = (customer_token, query = {}) => async 
 export const createCustomerNoteListInLord = (customer_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`note/detail/customer/${customer_token}`, "POST", body);
+    await callApi(`note/detail/customer/${customer_token}`, "POST", body);
     await dispatch(findCustomerNoteListInLord(customer_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -55,7 +55,7 @@ export const findTripNoteListInLord = (trip_token, query = {}) => async dispatch
 export const createTripNoteListInLord = (trip_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`note/detail/trip/${trip_token}`, "POST", body);
+    await callApi(`note/detail/trip/${trip_token}`, "POST", body);
     await dispatch(findTripNoteListInLord(trip_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -87,7 +87,7 @@ export const findOrderNoteListInLord = (order_token, query = {}) => async dispat
 export const createOrderNoteListInLord = (order_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`note/detail/order/${order_token}`, "POST", body);
+    await callApi(`note/detail/order/${order_token}`, "POST", body);
     await dispatch(findOrderNoteListInLord(order_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Modal from "./Modal";
 import { parseRate, parseAmount } from "../../actions/utilities.action";
-import alertify from "alertifyjs";
 
 export default class CouponModal extends Component {
   state = {

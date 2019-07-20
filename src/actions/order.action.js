@@ -108,7 +108,7 @@ export const setCurrentOrderInLord = order_token => async dispatch => {
 export const createOrderDiscountInLord = (order_token, body) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`order/discount/${order_token}`, "POST", body);
+    await callApi(`order/discount/${order_token}`, "POST", body);
     await stopLoader(dispatch);
   } catch (err) {
     await stopLoader(dispatch);
@@ -119,7 +119,7 @@ export const createOrderDiscountInLord = (order_token, body) => async dispatch =
 export const updateOrderDiscountInLord = (order_token, order_discount_token, body) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`order/discount/${order_token}/${order_discount_token}`, "PATCH", body);
+    await callApi(`order/discount/${order_token}/${order_discount_token}`, "PATCH", body);
     await dispatch(findOrderDetailInLord(order_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -132,7 +132,7 @@ export const updateOrderDiscountInLord = (order_token, order_discount_token, bod
 export const applyOrderDiscountInLord = (order_token, body) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`order/discount/${order_token}`, "POST", body);
+    await callApi(`order/discount/${order_token}`, "POST", body);
     await dispatch(findOrderDetailInLord(order_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -145,7 +145,7 @@ export const applyOrderDiscountInLord = (order_token, body) => async dispatch =>
 export const applyFinalOrder = order_token => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`order/finalize/${order_token}`, "PATCH");
+    await callApi(`order/finalize/${order_token}`, "PATCH");
     await stopLoader(dispatch);
   } catch (err) {
     await stopLoader(dispatch);
@@ -156,7 +156,7 @@ export const applyFinalOrder = order_token => async dispatch => {
 export const updateOrderDetailInLord = (order_token, body, bool) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`order/detail/${order_token}`, "PATCH", body);
+    await callApi(`order/detail/${order_token}`, "PATCH", body);
     if (!bool) {
       await dispatch(findOrderDetailInLord(order_token));
       await launchSuccess(dispatch);
@@ -171,7 +171,7 @@ export const updateOrderDetailInLord = (order_token, body, bool) => async dispat
 export const cancelOrder = (order_token, history) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`order/cancel/${order_token}`, "PATCH");
+    await callApi(`order/cancel/${order_token}`, "PATCH");
     await launchSuccess(dispatch);
     history.push("/order/list");
     await stopLoader(dispatch);
@@ -184,7 +184,7 @@ export const cancelOrder = (order_token, history) => async dispatch => {
 export const confirmOrder = order_token => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`order/confirm/${order_token}`, "PATCH");
+    await callApi(`order/confirm/${order_token}`, "PATCH");
     await launchSuccess(dispatch);
     await dispatch(findOrderDetailInLord(order_token));
     await stopLoader(dispatch);

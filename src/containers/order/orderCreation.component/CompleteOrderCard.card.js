@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { Header, ListHeader, ListView, FlightDetailModal, CouponCard, CouponModal } from "../../../components/shared";
+import { ListHeader, FlightDetailModal, CouponCard, CouponModal } from "../../../components/shared";
 import { convertLocalToUTC, parseAmount } from "../../../actions/utilities.action";
 import "./TripDetail.card.css";
 import { findFlightListInLord } from "../../../actions/flight.action";
@@ -177,7 +177,6 @@ class CompleteOrderCard extends Component {
       currFlightStr
     } = this.state;
     const {
-      history,
       coupon_list_in_lord,
       trip_detail_in_lord,
       trip_detail_in_lord_again,
@@ -209,6 +208,7 @@ class CompleteOrderCard extends Component {
         if (discount.type === 2) {
           total_discount_rate += discount.rate;
         }
+        return null;
       });
     }
     total_discount_rate = ((total_discount_rate / 1000) * sum) / 100;

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
-import ImageButton from "../../components/shared/ImageButton";
+import { clearAllBodyScrollLocks } from "body-scroll-lock";
 import "./ChatModal.css";
 
 /**
@@ -107,9 +106,11 @@ class Modal extends Component {
                   onChange={this.handleInputChange}
                   placeholder="Type a message here..."
                 />
-                <i className="chat-icon-position hm-pointer-cursor fas fa-paper-plane shadow-sm text-white rounded-circle d-flex justify-content-center align-items-center messenger-green"
-                onClick={this.handleSubmit}
-                style={{ height: "52px", width: "52px" }} />
+                <i
+                  className="chat-icon-position hm-pointer-cursor fas fa-paper-plane shadow-sm text-white rounded-circle d-flex justify-content-center align-items-center messenger-green"
+                  onClick={this.handleSubmit}
+                  style={{ height: "52px", width: "52px" }}
+                />
               </form>
             </div>
           </div>

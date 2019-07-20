@@ -11,7 +11,6 @@ export default class BasicInfo extends Component {
       basic_info,
       from_address_info,
       to_address_info,
-      flight_info,
       handleFlightButton,
       handleIconBeenClicked
     } = this.props;
