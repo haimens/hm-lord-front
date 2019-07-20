@@ -67,16 +67,15 @@ class Modal extends Component {
   };
   render() {
     let curr = "center";
-    if (this.props.position == "right") {
+    if (this.props.position === "right") {
       curr = "modal-right-chat";
-    } else if (this.props.position == "left") {
+    } else if (this.props.position === "left") {
       curr = "modal-left";
     }
     const widthHeight = {
       width: this.props.getWidth,
       height: this.props.getHeight
     };
-    let closeIcon = "bg-dark";
     const { chat } = this.state;
     return (
       <main>

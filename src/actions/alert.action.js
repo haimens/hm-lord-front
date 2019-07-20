@@ -6,7 +6,7 @@ import { findTripDetailInLord } from "./trip.action";
 export const editAlertInfoInTrip = (trip_token, alert_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`alert/detail/${alert_token}`, "PATCH", body);
+    await callApi(`alert/detail/${alert_token}`, "PATCH", body);
     await dispatch(findTripDetailInLord(trip_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -38,7 +38,7 @@ export const findAlertListInLord = (query = {}) => async dispatch => {
 export const muteAlertInfoInTrip = (alert_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`alert/detail/${alert_token}`, "PATCH", body);
+    await callApi(`alert/detail/${alert_token}`, "PATCH", body);
     await dispatch(findAlertListInLord({ status: 3 }));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);

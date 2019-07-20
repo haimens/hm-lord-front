@@ -90,7 +90,7 @@ class TripDetailContainer extends Component {
   };
 
   handleEditAlert = (alert_type, alert_token) => {
-    this.setState({ showEditAlertModal: true, alert_type: alert_type, alert_token, alert_token });
+    this.setState({ showEditAlertModal: true, alert_type: alert_type, alert_token });
   };
 
   handleCloseEditAlert = () => {
@@ -126,8 +126,7 @@ class TripDetailContainer extends Component {
       findVehicleListInLord,
       findCarListForADriver,
       findDriverListInLord,
-      findTripNoteListInLord,
-      findAddonInTrip
+      findTripNoteListInLord
     } = this.props;
     const { trip_token } = match.params;
     await Promise.all([
@@ -163,7 +162,6 @@ class TripDetailContainer extends Component {
       vehicle_list_in_lord,
       car_list_for_a_driver,
       driver_list_in_lord,
-      updateTripBasicInfo,
       editAlertInfoInTrip,
       note_list_for_trip,
       createTripNoteListInLord,

@@ -3,11 +3,9 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import DisplayCard from "./dashboard.components/display.card";
 import { GMapWithMarker, Header, ListHeader } from "../../components/shared";
-import DriversMap from "./dashboard.components/DriversMap.component";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "./dashboard.container.css";
-import CalendarDailyList from "./dashboard.components/CalendarDailyList.component";
 import CalendarModal from "./dashboard.components/Calendar.modal";
 import {
   findDriverListInLord,

@@ -91,7 +91,6 @@ class TripDetail extends Component {
     const {
       round_trip,
       flight_list_in_lord,
-      flight_list_in_lord_round,
       quote_in_lord,
       quote_in_lord_again,
       setMapToFalse,

@@ -58,7 +58,7 @@ class PaymentInfo extends Component {
 
   render() {
     const { realm_list_in_lord } = this.props;
-    const { round_trip, loaded } = this.state;
+    const { loaded } = this.state;
     return (
       <div>
         {loaded && (

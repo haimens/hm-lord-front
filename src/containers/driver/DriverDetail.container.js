@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import DriverDetailCard from "./driverDetail.component/DriverDetail.card";
-import GMapFlag from "../../components/shared/GMapFlag";
 import { VehicleCard, TripCard, ListView, ListHeader, Header } from "../../components/shared";
 import WageListItem from "./driverDetail.component/WageList.item";
 import SalaryListItem from "./driverDetail.component/SalaryList.item";

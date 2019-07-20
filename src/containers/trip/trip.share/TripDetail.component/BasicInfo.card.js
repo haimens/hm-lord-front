@@ -2,7 +2,7 @@ import React from "react";
 import { convertUTCtoLocal, parseAmount } from "../../../../actions/utilities.action";
 export default function BasicInfoCard(props) {
   const { showEditButton, handleDetailButtonClicked, trip_detail_in_lord } = props;
-  const { basic_info, from_address_info, to_address_info, flight_info } = trip_detail_in_lord;
+  const { basic_info, from_address_info, to_address_info } = trip_detail_in_lord;
   return (
     <div>
       <div className="purple-border p-3">

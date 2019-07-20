@@ -2,7 +2,6 @@ import React from "react";
 import { parseAmount } from "../../../../actions/utilities.action";
 export default function TimeStapsCard(props) {
   const { showEditButton, addon_list } = props;
-  const { start_time, arrive_time, cob_time, cad_time } = props.trip_detail_in_lord.basic_info;
   return (
     <div>
       <div className="purple-border p-3">

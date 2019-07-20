@@ -2,7 +2,6 @@ import React from "react";
 import { GMapLocation } from "../../../../components/shared";
 export default function TripSubtotal(props) {
   const { showEditButton, from_address_info, to_address_info } = props;
-  const saveToAddress = () => {};
   return (
     <div>
       <div className="purple-border p-3">

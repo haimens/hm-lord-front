@@ -6,9 +6,6 @@ import { convertUTCtoLocal } from "../../actions/utilities.action";
  * @onCorrect
  */
 export default function LogListItem(props) {
-  const handleDetailLink = trans_token => {
-    if (props.onClick) props.onClick(trans_token);
-  };
   const { note, cdate } = props.parentProps;
   return (
     <tr className="border-bottom">
