@@ -60,6 +60,12 @@ class Dashboard extends Component {
     this.props.findDriverLocationListInLord({ keywords });
   };
 
+  handleClearSearch = () => {
+    this.setState({ keywords: "" });
+    this.props.setDriverLocationMapToFalse();
+    this.props.findDriverLocationListInLord();
+  };
+
   handleOnRangeChange = date => {
     this.props.findTripCountInLord({
       date_from: convertLocalToUTC(date.start),
@@ -242,12 +248,15 @@ class Dashboard extends Component {
 
                       <div className="border-bottom-custom " style={{ height: "60px" }}>
                         <div className="input-group px-1">
-                          <div className="input-group-prepend col-1 p-0 d-flex justify-content-center">
+                          <div
+                            className="input-group-prepend col-1 p-0 d-flex justify-content-center hm-pointer-cursor"
+                            onClick={this.handleSubmit}
+                          >
                             <span className="input-group-text border-0 bg-white">
                               <i className="fas fa-search" />
                             </span>
                           </div>
-                          <form className="col" onSubmit={this.handleSubmit}>
+                          <form className="col px-0" onSubmit={this.handleSubmit}>
                             <input
                               className="form-control border-0 hm-text-14"
                               style={{ height: "58px" }}
@@ -258,6 +267,14 @@ class Dashboard extends Component {
                               onChange={this.handleInputChange}
                             />
                           </form>
+                          <div
+                            className="input-group-prepend col-1 p-0 d-flex justify-content-center hm-pointer-cursor"
+                            onClick={this.handleClearSearch}
+                          >
+                            <span className="input-group-text border-0 bg-white">
+                              <i className="fas fa-times" />
+                            </span>
+                          </div>
                         </div>
                       </div>
                       <div style={{ overflow: "auto", height: "367px" }}>
