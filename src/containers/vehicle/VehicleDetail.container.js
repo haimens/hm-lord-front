@@ -28,6 +28,12 @@ class VehicleDetail extends Component {
   handleShowEditingDriverModal = () => {
     this.setState(state => ({ showEditVehicleModal: !state.showEditVehicleModal }));
   };
+
+  handleDeleteButtonClicked = () => {
+    const { car_token } = this.props.match.params;
+    this.props.updateACarInLord(car_token, { status: 0 });
+    this.props.history.push("/vehicle");
+  };
   handleCreateCarToADriverInLord = driver_token => {
     const {
       match: {
@@ -89,6 +95,7 @@ class VehicleDetail extends Component {
           </div>
           <div>
             <VehicleDetailCard
+              handleDeleteButtonClicked={this.handleDeleteButtonClicked}
               handleDetailButtonClicked={this.handleShowEditingDriverModal}
               vehicle_detail_in_lord={vehicle_detail_in_lord}
             />

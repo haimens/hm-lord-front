@@ -95,7 +95,6 @@ export const createCarToADriverInLord = (car_token, body) => async dispatch => {
 };
 
 export const updateADriverForACar = (car_token, driver_car_token, body = {}) => async dispatch => {
-  console.log(body);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`car/driver/${driver_car_token}`, "PATCH", body);
