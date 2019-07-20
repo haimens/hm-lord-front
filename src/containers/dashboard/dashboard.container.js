@@ -210,7 +210,8 @@ class Dashboard extends Component {
               parentProps={{
                 title: "Driver Map",
                 clickFunction: this.handleRefreshDriverLocation,
-                clickTitle: "Refresh"
+                clickTitle: "Refresh",
+                icon: "icon_refresh.svg"
               }}
               hideShadow={false}
               buttonWidth={"88px"}

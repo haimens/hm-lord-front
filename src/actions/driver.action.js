@@ -82,7 +82,7 @@ export const findDriverLocationListInLord = (query = {}) => async dispatch => {
   }
 };
 
-export const setDriverLocationMapToFalse = (query = {}) => async dispatch => {
+export const setDriverLocationMapToFalse = () => async dispatch => {
   try {
     await dispatch({
       type: constant.DRIVER_LOCATION_LIST_IN_LORD_MAP_FALSE,
@@ -97,7 +97,7 @@ export const setDriverLocationMapToFalse = (query = {}) => async dispatch => {
 export const createDriverToACarInLord = (driver_token, body) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`driver/car/${driver_token}`, "POST", body);
+    await callApi(`driver/car/${driver_token}`, "POST", body);
     await dispatch(findCarListForADriver(driver_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
@@ -129,7 +129,7 @@ export const findCarListForADriver = (driver_token, query = {}) => async dispatc
 export const updateACarForADriver = (driver_token, driver_car_token, body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    const { payload } = await callApi(`driver/car/${driver_car_token}`, "PATCH", { ...body });
+    await callApi(`driver/car/${driver_car_token}`, "PATCH", { ...body });
     await dispatch(findCarListForADriver(driver_token));
     await launchSuccess(dispatch);
     await stopLoader(dispatch);

@@ -19,7 +19,7 @@ export default class LoaderAlt extends React.Component {
             <div className="sk-cube sk-cube8" />
             <div className="sk-cube sk-cube9" />
           </div>
-          <div className="text-center">{this.props.message || "加载中..."}</div>
+          <div className="text-center">{this.props.message || "Loading..."}</div>
         </section>
       </main>
     );

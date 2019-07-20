@@ -36,7 +36,15 @@ export default class ListHeader extends Component {
                 width: buttonWidth
               }}
             >
-              <i className="fas fa-plus mr-2" />
+              {this.props.parentProps.icon ? (
+                <img
+                  src={`${process.env.PUBLIC_URL}/img/${this.props.parentProps.icon}`}
+                  alt="refresh"
+                  className="mr-2"
+                />
+              ) : (
+                <i className="fas fa-plus mr-2" />
+              )}
               <div className="font-weight-bold hm-text-12 "> {this.props.parentProps.clickTitle}</div>
             </button>
           )}
