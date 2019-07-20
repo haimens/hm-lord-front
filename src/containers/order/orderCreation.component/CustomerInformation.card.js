@@ -163,10 +163,10 @@ class CustomerInformation extends Component {
                     <i className="fas fa-search" />
                   </span>
                 </div>
-                <form className="col" onSubmit={this.handleSubmit}>
+                <form className="col p-0" onSubmit={this.handleSubmit}>
                   <input
                     className="form-control border-0 hm-text-14"
-                    style={{ height: "58px" }}
+                    style={{ height: "60px" }}
                     name="keywords"
                     id="keywords"
                     placeholder={"Search"}
