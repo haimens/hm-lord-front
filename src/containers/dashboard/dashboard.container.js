@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import DisplayCard from "./dashboard.components/display.card";
-import { GMapWithMarker, Header, ListHeader } from "../../components/shared";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
-import "./dashboard.container.css";
+import DisplayCard from "./dashboard.components/display.card";
 import CalendarModal from "./dashboard.components/Calendar.modal";
+import { GMapWithMarker, Header, ListHeader } from "../../components/shared";
 import {
   findDriverListInLord,
   findDriverLocationListInLord,
@@ -16,6 +15,7 @@ import { findCustomerListInLord } from "../../actions/customer.action";
 import { findOrderListInLord, findOrderListInLordWithDate } from "../../actions/order.action";
 import { convertLocalToUTC } from "../../actions/utilities.action";
 import { findTripCountInLord } from "../../actions/trip.action";
+import "./dashboard.container.css";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -115,23 +115,29 @@ class Dashboard extends Component {
   componentDidMount() {
     const {
       findDriverListInLord,
+      findDriverLocationListInLord,
+      setDriverLocationMapToFalse,
+
       findCustomerListInLord,
+
       findOrderListInLord,
       findOrderListInLordWithDate,
-      findDriverLocationListInLord,
-      findTripCountInLord,
-      setDriverLocationMapToFalse
+
+      findTripCountInLord
     } = this.props;
     Promise.all([
       findDriverListInLord(),
       setDriverLocationMapToFalse(),
-      findCustomerListInLord(),
-      findOrderListInLord(),
       findDriverLocationListInLord(),
+
+      findCustomerListInLord(),
+
+      findOrderListInLord(),
       findOrderListInLordWithDate({
         date_from: convertLocalToUTC(moment().startOf("day")),
         date_to: convertLocalToUTC(moment().endOf("day"))
       }),
+
       findTripCountInLord({
         date_from: convertLocalToUTC(moment().startOf("month")),
         date_to: convertLocalToUTC(moment().endOf("month")),
@@ -143,13 +149,15 @@ class Dashboard extends Component {
   render() {
     const localizer = momentLocalizer(moment);
     const {
+      history,
+
+      driver_list_in_lord,
+      driver_location_list_in_lord,
+
       customer_list_in_lord,
       order_list_in_lord,
-      driver_list_in_lord,
       order_list_in_lord_with_date,
-      driver_location_list_in_lord,
-      showMap,
-      history
+      showMap
     } = this.props;
     const { curr_select, showCalendarInfo, curr_date, keywords } = this.state;
     let tripArray = this.handleGenerateDateItems();
@@ -217,7 +225,7 @@ class Dashboard extends Component {
             <div className="bg-white rounded-custom-bottom shadow-sm">
               <div className="container-fluid">
                 <div className="row p-1">
-                  <div className="col-7 py-3" style={{ height: "512px" }}>
+                  <div className="col-12 col-md-7 py-3" style={{ height: "512px" }}>
                     {showMap && driver_location_list_in_lord.record_list.length > 0 && (
                       <GMapWithMarker
                         selected={curr_select}
@@ -225,7 +233,7 @@ class Dashboard extends Component {
                       />
                     )}
                   </div>
-                  <div className="col-5 py-3">
+                  <div className="col-12 col-md-5 py-3">
                     <div className="shadow-sm rounded-custom">
                       <div className="border-bottom-custom px-3 d-flex align-items-center" style={{ height: "59px" }}>
                         <div className="hm-title-sub-size text-main-color font-weight-bold">Drivers</div>
@@ -322,25 +330,32 @@ const mapStateToProps = state => {
   return {
     driver_list_in_lord: state.driverReducer.driver_list_in_lord,
     driver_location_list_in_lord: state.driverReducer.driver_location_list_in_lord,
+
     order_list_in_lord: state.orderReducer.order_list_in_lord,
     order_list_in_lord_with_date: state.orderReducer.order_list_in_lord_with_date,
+
     customer_list_in_lord: state.customerReducer.customer_list_in_lord,
+
     trip_count_in_lord_active: state.tripReducer.trip_count_in_lord_active,
     trip_count_in_lord_finished: state.tripReducer.trip_count_in_lord_finished,
     trip_count_in_lord_failed: state.tripReducer.trip_count_in_lord_failed,
     trip_list_in_driver: state.tripReducer.trip_list_in_driver,
     trip_active_list_in_driver: state.tripReducer.trip_active_list_in_driver,
+
     showMap: state.driverReducer.showMap
   };
 };
 const mapDispatchToProps = {
   findDriverListInLord,
+  findDriverLocationListInLord,
+  setDriverLocationMapToFalse,
+
   findCustomerListInLord,
+
   findOrderListInLord,
   findOrderListInLordWithDate,
-  findDriverLocationListInLord,
-  findTripCountInLord,
-  setDriverLocationMapToFalse
+
+  findTripCountInLord
 };
 
 export default connect(
