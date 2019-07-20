@@ -209,11 +209,11 @@ class TripInfo extends Component {
               </div>
               <div className="form-group input-group mb-4">
                 <label className="text-main-color hm-text-14 font-weight-bold mb-4">Date</label>
-                <DatePicker disabledDate={this.disabledDate} onChange={this.handleDatePicker} />
+                <DatePicker defaultValue={moment()} disabledDate={this.disabledDate} onChange={this.handleDatePicker} />
               </div>
               <div className="form-group input-group mb-4">
                 <label className="text-main-color hm-text-14 font-weight-bold mb-4">Time</label>
-                <TimePicker onChange={this.handleTimePicker} />
+                <TimePicker defaultValue={moment().add(8, "hours")} onChange={this.handleTimePicker} />
               </div>
               <div className="form-group my-4 ">
                 <label className="text-main-color hm-text-14 font-weight-bold">Flight Number</label>
