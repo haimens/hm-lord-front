@@ -334,3 +334,18 @@ input, select, textarea{
 .border-left-purple{
   border-left: 3px solid #5e72e4 !important;
 }
+.modal-right-alert{
+  height: 100%;
+  background-color: white;
+  float: right;
+  overflow: auto !important;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  right:200px;
+  top:77px;
+  border-radius: 6px;
+  box-shadow: 0 3px 8px 1px rgba(14, 95, 195, 0.4);
+  background-color: #ffffff;
+}

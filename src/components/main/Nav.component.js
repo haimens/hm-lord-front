@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import alertify from "alertifyjs";
 import "./Nav.component.css";
+import AlertNotificationModal from "../shared/AlertNotification.modal";
+import {  findAlertListInLord} from './'
 class Nav extends Component {
+  state = {
+    showAlertNotification: false
+  };
   handleClick = type => {
     if (type === "notification") alertify.alert("Bell", "click");
     if (type === "sidebar") {
@@ -22,81 +27,108 @@ class Nav extends Component {
     this.props.handleSideBarBeenOpened();
   };
 
-  render() {
-    return (
-      <nav
-        className="navbar navbar-expand-lg border-bottom  background-linear navbar-light d-flex 
-    justify-content-between align-items-center"
-        style={{ height: "77px" }}
-      >
-        <div className="d-flex align-items-center">
-          <i
-            className="fas fa-bars p-3 hm-pointer-cursor text-white"
-            style={{ fontSize: "18px" }}
-            onClick={this.handleSideBarBeenOpened}
-          />
-        </div>
-        <div className="d-flex flex-row align-items-center">
-          <div className="btn-group mr-2">
-            <img
-              src={`${process.env.PUBLIC_URL}/img/haimenslogo.svg`}
-              style={{ height: "36px", width: "36px" }}
-              alt="error404"
-            />
-            <button
-              type="button"
-              className="btn dropdown-toggle text-white ml-2 d-flex align-items-center"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              {localStorage.getItem("username").toUpperCase()}
-              <i className="fas fa-sort-down ml-1" />
-            </button>
+  handleShowAlert = () => {
+    this.setState(state => ({ showAlertNotification: !state.showAlertNotification }));
+  };
 
-            <div className="dropdown-menu shadow-sm p-3">
-              <div className="pb-2">Welcome!</div>
-              <div>
-                <button
-                  className="dropdown-item px-0"
-                  type="button"
-                  onClick={() => {
-                    this.handleChangePassword();
-                  }}
-                >
-                  <small>
-                    <i className="fas fa-cog mr-3" />
-                  </small>
-                  Change Password
-                </button>
-              </div>
-              <div>
-                <hr />
-                <button
-                  className="dropdown-item p-0"
-                  type="button"
-                  onClick={() => {
-                    this.handleLogOut();
-                  }}
-                >
-                  <div className="d-flex align-items-center">
+  componentDidMount() {
+    Promise.all([findAlertListInLord(), findMessageListInLord()])
+  }
+
+  render() {
+    const { showAlertNotification } = this.state;
+    return (
+      <div>
+        {showAlertNotification && <AlertNotificationModal />}
+
+        <nav
+          className="navbar fixed-top navbar-expand-lg border-bottom  background-linear navbar-light d-flex 
+    justify-content-between align-items-center"
+          style={{ height: "77px" }}
+        >
+          <div className="d-flex align-items-center">
+            <i
+              className="fas fa-bars p-3 hm-pointer-cursor text-white"
+              style={{ fontSize: "18px" }}
+              onClick={this.handleSideBarBeenOpened}
+            />
+          </div>
+          <div className="d-flex flex-row align-items-center">
+            <i className="fas fa-bell text-white hm-pointer-cursor mr-4" style={{ fontSize: "18px" }} onClick={this.handleShowAlert}/>
+            <div className="btn-group mr-2">
+              <img
+                src={`${process.env.PUBLIC_URL}/img/haimenslogo.svg`}
+                style={{ height: "36px", width: "36px" }}
+                alt="error404"
+              />
+              <button
+                type="button"
+                className="btn dropdown-toggle text-white ml-2 d-flex align-items-center"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                {localStorage.getItem("username").toUpperCase()}
+                <i className="fas fa-sort-down ml-1" />
+              </button>
+
+              <div className="dropdown-menu shadow-sm p-3">
+                <div className="pb-2">Welcome!</div>
+                <div>
+                  <button
+                    className="dropdown-item px-0"
+                    type="button"
+                    onClick={() => {
+                      this.handleChangePassword();
+                    }}
+                  >
                     <small>
-                      <img
-                        src={`${process.env.PUBLIC_URL}/img/icon_logout.svg`}
-                        alt={`${process.env.PUBLIC_URL}/img/icon_logout.svg`}
-                        className="mr-3"
-                      />
+                      <i className="fas fa-cog mr-3" />
                     </small>
-                    Log Out
-                  </div>
-                </button>
+                    Change Password
+                  </button>
+                </div>
+                <div>
+                  <hr />
+                  <button
+                    className="dropdown-item p-0"
+                    type="button"
+                    onClick={() => {
+                      this.handleLogOut();
+                    }}
+                  >
+                    <div className="d-flex align-items-center">
+                      <small>
+                        <img
+                          src={`${process.env.PUBLIC_URL}/img/icon_logout.svg`}
+                          alt={`${process.env.PUBLIC_URL}/img/icon_logout.svg`}
+                          className="mr-3"
+                        />
+                      </small>
+                      Log Out
+                    </div>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </div>
     );
   }
 }
 
-export default Nav;
+const mapStateToProps = state => {
+  return {
+    driver_list_in_lord: state.driverReducer.driver_list_in_lord
+  };
+};
+const mapDispatchToProps = {
+  findAlertListInLord,
+  findMessageListInLord
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Nav));

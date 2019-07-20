@@ -33,7 +33,6 @@ import EmailResource from "./containers/settings/Email.container/Email.container
 import CouponResource from "./containers/settings/Coupon.container/Coupon.container";
 import VehicleResource from "./containers/settings/Vehicle.container/Vehicle.container";
 import GeneralSetting from "./containers/settings/General.container/General.container";
-
 const Login = React.lazy(() => import("./containers/login/Login.container"));
 const ResetPassword = React.lazy(() => import("./containers/resetPassword/ResetPassword.container"));
 
