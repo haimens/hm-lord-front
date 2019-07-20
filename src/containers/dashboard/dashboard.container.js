@@ -121,10 +121,12 @@ class Dashboard extends Component {
       findOrderListInLord,
       findOrderListInLordWithDate,
       findDriverLocationListInLord,
-      findTripCountInLord
+      findTripCountInLord,
+      setDriverLocationMapToFalse
     } = this.props;
     Promise.all([
       findDriverListInLord(),
+      setDriverLocationMapToFalse(),
       findCustomerListInLord(),
       findOrderListInLord(),
       findDriverLocationListInLord(),
@@ -148,7 +150,8 @@ class Dashboard extends Component {
       driver_list_in_lord,
       order_list_in_lord_with_date,
       driver_location_list_in_lord,
-      showMap
+      showMap,
+      history
     } = this.props;
     const { curr_select, showCalendarInfo, curr_date, keywords } = this.state;
     let tripArray = this.handleGenerateDateItems();
@@ -261,9 +264,16 @@ class Dashboard extends Component {
                               <div className="col-3 d-flex justify-content-end">
                                 <img src={driver.img_path} alt="driver-avatar" className="avatar-md rounded-circle " />
                               </div>
-                              <div className="col-9">
+                              <div className="col-7">
                                 <div className="text-modal-color font-weight-bold hm-text-15">{driver.name}</div>
                                 <div className="text-modal-color hm-text-13">{driver.cell}</div>
+                              </div>
+                              <div className="col-2 d-flex justify-content-end align-items-center">
+                                <img
+                                  src={`${process.env.PUBLIC_URL}/img/icon_detail.svg`}
+                                  alt="error404"
+                                  onClick={() => history.push(`/driver/detail/${driver.driver_token}`)}
+                                />
                               </div>
                             </div>
                           </div>
