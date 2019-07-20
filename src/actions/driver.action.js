@@ -63,7 +63,8 @@ export const updateADriverInLord = (driver_token, body = {}) => async dispatch =
   }
 };
 
-export const findDriverLocationListInLord = (realm_token, query = {}) => async dispatch => {
+export const findDriverLocationListInLord = (query = {}) => async dispatch => {
+  console.log(query);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`driver/all/location/realm`, "GET", null, {
@@ -83,7 +84,7 @@ export const findDriverLocationListInLord = (realm_token, query = {}) => async d
   }
 };
 
-export const setDriverLocationMapToFalse = (realm_token, query = {}) => async dispatch => {
+export const setDriverLocationMapToFalse = (query = {}) => async dispatch => {
   try {
     await dispatch({
       type: constant.DRIVER_LOCATION_LIST_IN_LORD_MAP_FALSE,

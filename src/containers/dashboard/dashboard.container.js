@@ -25,10 +25,14 @@ class Dashboard extends Component {
     this.state = {
       curr_select: "",
       showCalendarInfo: false,
-      curr_date: ""
+      curr_date: "",
+      keywords: ""
     };
   }
-
+  handleInputChange = e => {
+    const { id, value } = e.target;
+    this.setState({ [id]: value });
+  };
   handleCalendarBeenClicked = date => {
     this.setState({ showCalendarInfo: true, curr_date: date });
   };
@@ -37,9 +41,7 @@ class Dashboard extends Component {
     this.setState({ showCalendarInfo: false, curr_date: "" });
   };
 
-  handleOnDrillDown = date => {
-    console.log(date);
-  };
+  handleOnDrillDown = date => {};
 
   handleEventPropGetter = (event, start, end, isSelected) => {
     if (event.title.includes("Abnormal")) {
@@ -51,6 +53,13 @@ class Dashboard extends Component {
     if (event.title.includes("Ongoing")) {
       return { style: { backgroundColor: "#2ece89", fontColor: "12px" } };
     }
+  };
+
+  handleSubmit = e => {
+    if (e) e.preventDefault();
+    const { keywords } = this.state;
+    this.props.setDriverLocationMapToFalse();
+    this.props.findDriverLocationListInLord({ keywords });
   };
 
   handleOnRangeChange = date => {
@@ -141,7 +150,7 @@ class Dashboard extends Component {
       driver_location_list_in_lord,
       showMap
     } = this.props;
-    const { curr_select, showCalendarInfo, curr_date } = this.state;
+    const { curr_select, showCalendarInfo, curr_date, keywords } = this.state;
     let tripArray = this.handleGenerateDateItems();
     return (
       <main>
@@ -227,14 +236,17 @@ class Dashboard extends Component {
                               <i className="fas fa-search" />
                             </span>
                           </div>
-                          <input
-                            className="form-control border-0 hm-text-14"
-                            style={{ height: "58px" }}
-                            name="company_name"
-                            id="company_name"
-                            placeholder={"Search"}
-                            onChange={this.handleInputChange}
-                          />
+                          <form className="col" onSubmit={this.handleSubmit}>
+                            <input
+                              className="form-control border-0 hm-text-14"
+                              style={{ height: "58px" }}
+                              name="keywords"
+                              id="keywords"
+                              value={keywords}
+                              placeholder={"Search"}
+                              onChange={this.handleInputChange}
+                            />
+                          </form>
                         </div>
                       </div>
                       {driver_location_list_in_lord.record_list.map((driver, index) => (
