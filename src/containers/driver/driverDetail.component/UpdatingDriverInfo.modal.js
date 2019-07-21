@@ -99,13 +99,16 @@ export default class UpdatingDriverInfo extends Component {
           onClose={this.handleClose}
           position="center"
           getWidth={"467px"}
-          getHeight={"630px"}
+          getHeight={"660px"}
         >
           <div className="container">
             <div className="p-3">
-              <div className="form-group mb-4">
+              <div className="form-group mb-2">
+                <label className="text-main-color font-weight-bold hm-text-14" htmlFor="Name">
+                  Name
+                </label>
                 <input
-                  className="form-control hm-input-height mt-3"
+                  className="form-control hm-input-height"
                   name="name"
                   id="name"
                   placeholder={"Name"}
@@ -114,27 +117,37 @@ export default class UpdatingDriverInfo extends Component {
                 />
               </div>
 
-              <div className="form-group input-group mb-4 d-flex">
-                <input
-                  type="text"
-                  className="form-control hm-input-height col-2"
-                  id="area"
-                  placeholder="Area"
-                  value={area}
-                  onChange={this.handleInputChange}
-                />
+              <div className="form-group input-group mb-2">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Cell">
+                  Cell
+                </label>
+                <div className="container-fluid">
+                  <div className="row">
+                    <input
+                      type="text"
+                      className="form-control hm-input-height col-2"
+                      id="area"
+                      placeholder="Area"
+                      value={area}
+                      onChange={this.handleInputChange}
+                    />
 
-                <input
-                  type="text"
-                  className="form-control hm-input-height "
-                  id="cell"
-                  placeholder="Cell"
-                  value={cell}
-                  onChange={this.handleInputChange}
-                />
+                    <input
+                      type="text"
+                      className="form-control hm-input-height col-10"
+                      id="cell"
+                      placeholder="Cell"
+                      value={cell}
+                      onChange={this.handleInputChange}
+                    />
+                  </div>
+                </div>
               </div>
 
-              <div className="form-group mb-4">
+              <div className="form-group mb-2">
+                <label className="text-main-color font-weight-bold hm-text-14" htmlFor="Name">
+                  Email
+                </label>
                 <input
                   type="email"
                   className="form-control hm-input-height "
@@ -146,7 +159,10 @@ export default class UpdatingDriverInfo extends Component {
                 />
               </div>
 
-              <div className="form-group mb-4">
+              <div className="form-group mb-2">
+                <label className="text-main-color font-weight-bold hm-text-14" htmlFor="Name">
+                  License Number
+                </label>
                 <input
                   type="text"
                   className="form-control hm-input-height "
@@ -158,9 +174,12 @@ export default class UpdatingDriverInfo extends Component {
                 />
               </div>
 
-              <div className="form-group mb-4">
+              <div className="form-group mb-2">
+                <label className="text-main-color font-weight-bold hm-text-14" htmlFor="Name">
+                  Identifier
+                </label>
                 <input
-                  type="cell"
+                  type="text"
                   className="form-control hm-input-height "
                   name="identifier"
                   id="identifier"

@@ -9,7 +9,9 @@ export default function WageListItem(props) {
   return (
     <tr className="border-bottom">
       <td data-label="Created On" className="items-height align-middle">
-        <section className="text-center align-middle ">{convertUTCtoLocal(cdate, "YYYY-MM-DD HH:mm")}</section>
+        <section className="text-center align-middle text-main-color">
+          {convertUTCtoLocal(cdate, "YYYY-MM-DD HH:mm")}
+        </section>
       </td>
       <td data-label="Amount" className="items-height align-middle">
         <section className="text-center align-middle  hm-text-14 text-main-color font-weight-bold">

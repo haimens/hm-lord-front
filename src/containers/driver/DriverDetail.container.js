@@ -279,9 +279,9 @@ class DriverDetail extends Component {
             parentProps={{
               title: "Transaction List",
               clickFunction: this.handleShowAddingWageModal,
-              clickTitle: "Wage"
+              clickTitle: "Transaction"
             }}
-            buttonWidth={"88px"}
+            buttonWidth={"110px"}
           />
           <ListView
             totalCount={wage_list_in_driver.count}
@@ -301,7 +301,7 @@ class DriverDetail extends Component {
             parentProps={{
               title: "Earning List",
               clickFunction: this.handleShowAddingSalaryModal,
-              clickTitle: "Salary"
+              clickTitle: "Earning"
             }}
             buttonWidth={"88px"}
           />
