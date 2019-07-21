@@ -1,8 +1,12 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import alertify from "alertifyjs";
 import "./Nav.component.css";
 import AlertNotificationModal from "../shared/AlertNotification.modal";
-import {  findAlertListInLord} from './'
+import { findAlertListInLord } from "../../actions/alert.action";
+import { findMessageListInLord } from "../../actions/message.action";
+
 class Nav extends Component {
   state = {
     showAlertNotification: false
@@ -28,18 +32,31 @@ class Nav extends Component {
   };
 
   handleShowAlert = () => {
+    console.log("here");
     this.setState(state => ({ showAlertNotification: !state.showAlertNotification }));
   };
 
-  componentDidMount() {
-    Promise.all([findAlertListInLord(), findMessageListInLord()])
-  }
-
   render() {
     const { showAlertNotification } = this.state;
+    const {
+      history,
+      message_list_in_lord,
+      alert_list_in_lord,
+      findAlertListInLord,
+      findMessageListInLord
+    } = this.props;
     return (
       <div>
-        {showAlertNotification && <AlertNotificationModal />}
+        {showAlertNotification && (
+          <AlertNotificationModal
+            history={history}
+            onClose={this.handleShowAlert}
+            findAlertListInLord={findAlertListInLord}
+            findMessageListInLord={findMessageListInLord}
+            message_list_in_lord={message_list_in_lord}
+            alert_list_in_lord={alert_list_in_lord}
+          />
+        )}
 
         <nav
           className="navbar fixed-top navbar-expand-lg border-bottom  background-linear navbar-light d-flex 
@@ -54,7 +71,11 @@ class Nav extends Component {
             />
           </div>
           <div className="d-flex flex-row align-items-center">
-            <i className="fas fa-bell text-white hm-pointer-cursor mr-4" style={{ fontSize: "18px" }} onClick={this.handleShowAlert}/>
+            <i
+              className="fas fa-bell text-white hm-pointer-cursor mr-4"
+              style={{ fontSize: "18px" }}
+              onClick={this.handleShowAlert}
+            />
             <div className="btn-group mr-2">
               <img
                 src={`${process.env.PUBLIC_URL}/img/haimenslogo.svg`}
@@ -120,7 +141,8 @@ class Nav extends Component {
 
 const mapStateToProps = state => {
   return {
-    driver_list_in_lord: state.driverReducer.driver_list_in_lord
+    alert_list_in_lord: state.alertReducer.alert_list_in_lord,
+    message_list_in_lord: state.smsReducer.message_list_in_lord
   };
 };
 const mapDispatchToProps = {
