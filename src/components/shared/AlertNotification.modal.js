@@ -18,6 +18,9 @@ import { convertUTCtoLocal } from "../../actions/utilities.action";
  */
 
 class AlertNotificationModal extends Component {
+  state = {
+    read: 0
+  };
   handleClose = e => {
     if (e) e.preventDefault();
     if (this.props.onClose) this.props.onClose();
@@ -25,6 +28,10 @@ class AlertNotificationModal extends Component {
   handleJumpLocation = type => {
     this.props.history.push(`/notification/${type}`);
     this.handleClose();
+  };
+
+  handleAddDidntRead = async () => {
+    await this.setState(state => ({ read: state.read++ }));
   };
 
   componentDidMount() {
@@ -91,12 +98,17 @@ class AlertNotificationModal extends Component {
             className={`sticky-top d-flex justify-content-between align-items-center px-4`}
             style={{ backgroundColor: "#f7f9fc", height: "53px" }}
           >
-            <div className="text-modal-color hm-text-14 font-weight-bold">Message</div>
+            <div className="text-modal-color hm-text-14 font-weight-bold">{`Message ${this.state.read > 0 && (
+              <span style={{ color: "#12ccef" }}>({this.state.read})</span>
+            )}`}</div>
             <div className="text-purple hm-pointer-cursor" onClick={() => this.handleJumpLocation("message")}>
               View All
             </div>
           </header>
           {message_list_in_lord.record_list.map((message, index) => {
+            if (message.is_read === 0) {
+              this.handleAddDidntRead();
+            }
             if (index < 3) {
               return (
                 <div
