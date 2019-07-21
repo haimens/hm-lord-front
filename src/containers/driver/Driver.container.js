@@ -19,6 +19,10 @@ class Driver extends Component {
     const { findDriverListInLord } = this.props;
     findDriverListInLord({ start });
   };
+  handleSubmitSearch = keywords => {
+    const { findDriverListInLord } = this.props;
+    findDriverListInLord({ keywords });
+  };
   render() {
     const { showDriverCreationModal } = this.state;
     const { history, driver_list_in_lord, createADriverInLord } = this.props;
@@ -36,6 +40,8 @@ class Driver extends Component {
               clickTitle={"Driver"}
               buttonWidth={"88px"}
               clickFunction={this.handleAddingDriver}
+              search={true}
+              handleSubmitSearch={this.handleSubmitSearch}
             />
           </div>
           <div className="row">
