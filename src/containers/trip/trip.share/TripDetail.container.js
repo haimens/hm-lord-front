@@ -56,12 +56,13 @@ class TripDetailContainer extends Component {
     alert_type: "",
     showEditAlertModal: "",
     showAddingLogInCustomer: "",
-    customer_token: ""
+    customer_token: "",
+    curr_trip_detail_in_lord: ""
   };
 
-  handleInfoModal = type => {
+  handleInfoModal = (type, info) => {
     if (type === "basic") {
-      this.setState(state => ({ showBasicInfoModal: !state.showBasicInfoModal }));
+      this.setState(state => ({ showBasicInfoModal: !state.showBasicInfoModal, curr_trip_detail_in_lord: info }));
     }
     if (type === "customer") {
       this.setState(state => ({ showCustomerInfoModal: !state.showCustomerInfoModal }));
@@ -185,7 +186,8 @@ class TripDetailContainer extends Component {
       alert_token,
       alert_type,
       showEditAlertModal,
-      customer_token
+      customer_token,
+      curr_trip_detail_in_lord
     } = this.state;
     return (
       <main className="container-fluid">
@@ -197,7 +199,12 @@ class TripDetailContainer extends Component {
             onClose={this.handleAddingLog}
           />
         )}
-        {showBasicInfoModal && <BasicInfoModal onClose={() => this.handleInfoModal("basic")} />}
+        {showBasicInfoModal && (
+          <BasicInfoModal
+            curr_trip_detail_in_lord={curr_trip_detail_in_lord}
+            onClose={() => this.handleInfoModal("basic")}
+          />
+        )}
         {showCustomerInfoModal && <CustomerInfoModal onClose={() => this.handleInfoModal("customer")} />}
         {showDriverInfoModal && (
           <AddingDriverModal
@@ -271,7 +278,7 @@ class TripDetailContainer extends Component {
                 <BasicInfo
                   trip_detail_in_lord={trip_detail_in_lord}
                   handleDetailButtonClicked={this.handleInfoModal}
-                  showEditButton={showEditButton}
+                  showEditButton={false}
                 />
               </div>
               <div className="col-lg-6 col-12 mb-4">

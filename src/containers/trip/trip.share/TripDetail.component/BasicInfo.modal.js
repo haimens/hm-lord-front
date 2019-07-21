@@ -60,6 +60,10 @@ export default class BasicInfo extends Component {
     }
   };
 
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   render() {
     const { img_path, showImage, showPreview, name, cell, area, email } = this.state;
     return (

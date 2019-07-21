@@ -11,7 +11,7 @@ export default function BasicInfoCard(props) {
           {showEditButton && (
             <button
               className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
-              onClick={() => handleDetailButtonClicked("basic")}
+              onClick={() => handleDetailButtonClicked("basic", trip_detail_in_lord)}
             >
               <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
             </button>
