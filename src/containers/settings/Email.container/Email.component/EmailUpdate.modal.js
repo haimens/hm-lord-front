@@ -47,11 +47,11 @@ export default class EmailUpdate extends Component {
     return (
       <div>
         <Modal
-          title="Add Email Information"
+          title="Update Email Information"
           onClose={this.handleClose}
           position="center"
           getWidth={"467px"}
-          getHeight={"350px"}
+          getHeight={"320px"}
           zIndex="3"
         >
           <div className="container">

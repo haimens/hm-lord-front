@@ -44,7 +44,7 @@ class DriverPayable extends Component {
             hideButton={true}
           />
           <ListView
-            totalCount={30}
+            totalCount={driver_payable_list_in_lord.count}
             title="Driver Payable"
             fieldNames={["Driver IMG", "Driver Name", "amount", "Driver Detail"]}
             hideHeader={true}

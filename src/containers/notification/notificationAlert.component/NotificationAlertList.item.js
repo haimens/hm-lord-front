@@ -44,9 +44,11 @@ export default class NotifficationAlertItem extends Component {
           />
         </td>
         <td data-label="Trip Detail" className="items-height align-middle test-center">
-          <button className="btn messenger-purple text-white" onClick={() => this.muteAlertInfoInTrip(alert_token)}>
-            Mute
-          </button>
+          <i
+            className="far fa-bell-slash purple-text hm-pointer-cursor"
+            style={{ height: "25px", width: "25px" }}
+            onClick={() => this.muteAlertInfoInTrip(alert_token)}
+          />
         </td>
       </tr>
     );

@@ -94,8 +94,8 @@ class Payment extends Component {
               buttonWidth={"146px"}
             />
             <ListView
-              totalCount={30}
-              title=" Admin List"
+              totalCount={payment_list_in_lord.count}
+              title="Payment List"
               fieldNames={["Square Application Id", "Square location id", "square access token", "Status", "edit"]}
               hideHeader={true}
               onPageChange={this.handlePageChange}

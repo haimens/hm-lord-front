@@ -43,6 +43,7 @@ import { findCarListForADriver, findDriverListInLord } from "../../../actions/dr
 import { editAlertInfoInTrip } from "../../../actions/alert.action";
 import { convertUTCtoLocal } from "../../../actions/utilities.action";
 import { findFlightListInLord } from "../../../actions/flight.action";
+import alertify from "alertifyjs";
 class TripDetailContainer extends Component {
   state = {
     showEditButton: false,
@@ -97,12 +98,16 @@ class TripDetailContainer extends Component {
     this.setState({ showEditAlertModal: true, alert_type: alert_type, alert_token });
   };
   handleFlightButton = async props => {
-    await this.props.findFlightListInLord({
-      date: convertUTCtoLocal(props.pickup_time),
-      airlineCode: props.flight_str.split(" ")[0],
-      flightNumber: props.flight_str.split(" ")[1]
-    });
-    this.setState({ showFlightDetail: true });
+    if (props.flight_str) {
+      await this.props.findFlightListInLord({
+        date: convertUTCtoLocal(props.pickup_time),
+        airlineCode: props.flight_str.split(" ")[0],
+        flightNumber: props.flight_str.split(" ")[1]
+      });
+      this.setState({ showFlightDetail: true });
+    } else {
+      alertify.alert("Warning!", "Please update flight string before search.");
+    }
   };
   handleCloseEditAlert = () => {
     this.setState({ showEditAlertModal: false });

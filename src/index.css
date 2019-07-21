@@ -237,6 +237,7 @@ border-radius: 6px;
    border:1px solid #5e72e4 !important; 
    background-color: white;
    color:#5e72e4; 
+   border-radius: 5px
 }
 
 .input-addon-width{

@@ -6,7 +6,7 @@ export default class WageList extends Component {
     const { payable, img_path, name, driver_token } = parentProps;
     return (
       <tr className="border-bottom">
-        <td data-label="Driver Img" className="items-height align-middle">
+        <td data-label="Driver Img" className="items-height align-middle text-center">
           <img className="rounded-circle" style={{ height: "36px", width: "36px" }} src={img_path} alt="avatar" />
         </td>
         <td data-label="Driver Name" className="items-height align-middle">
@@ -16,7 +16,7 @@ export default class WageList extends Component {
         <td data-label="Amount" className="items-height align-middle text-center">
           <section className="text-center align-middle hm-text-14 text-main-color">{parseAmount(payable, 2)}</section>
         </td>
-        <td data-label="Driver Detail" className="items-height align-middle ">
+        <td data-label="Driver Detail" className="items-height align-middle text-center">
           <img
             className="rounded-circle hm-pointer-cursor"
             style={{ height: "25px", width: "25px" }}

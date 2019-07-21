@@ -50,7 +50,13 @@ export default function CompanyAdminList(props) {
         )}
       </td>
       <td className="items-height align-middle text-lg-center text-right " data-label="Edit">
-        <EditButton clickFunction={() => handleEditPaymentResource(payment_resource_token)} />
+        <img
+          src={`${process.env.PUBLIC_URL}/img/icon_edit.svg`}
+          alt="Customer"
+          className="rounded-circle hm-pointer-cursor"
+          style={{ height: "25px", width: "25px" }}
+          onClick={() => handleEditPaymentResource(payment_resource_token)}
+        />
       </td>
     </tr>
   );

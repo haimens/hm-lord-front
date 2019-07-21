@@ -49,11 +49,11 @@ export default class MessageUpdate extends Component {
     return (
       <div>
         <Modal
-          title="Add Message Information"
+          title="Update Message Information"
           onClose={this.handleClose}
           position="center"
           getWidth={"467px"}
-          getHeight={"430px"}
+          getHeight={"400px"}
           zIndex="3"
         >
           <div className="container">

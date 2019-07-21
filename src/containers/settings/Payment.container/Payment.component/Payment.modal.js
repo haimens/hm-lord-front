@@ -47,7 +47,7 @@ export default class CompanyAdmin extends Component {
           onClose={this.handleClose}
           position="center"
           getWidth={"467px"}
-          getHeight={"430px"}
+          getHeight={"400px"}
           zIndex="3"
         >
           <div className="container">

@@ -25,6 +25,7 @@ export const createRealmPaymentInLord = (body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
     await callApi(`realm/payment`, "POST", body);
+    await dispatch(findPaymentListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
   } catch (err) {
