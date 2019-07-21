@@ -14,6 +14,9 @@ class Vehicle extends Component {
   handleAddingVehicle = () => {
     this.setState(state => ({ showVehicleCreationModal: !state.showVehicleCreationModal }));
   };
+  handleSubmitSearch = keywords => {
+    this.props.findVehicleListInLord({ keywords });
+  };
   componentDidMount() {
     this.props.findVehicleListInLord();
   }
@@ -35,6 +38,8 @@ class Vehicle extends Component {
               clickFunction={this.handleAddingVehicle}
               clickTitle={"Vehicle"}
               buttonWidth={"88px"}
+              search={true}
+              handleSubmitSearch={this.handleSubmitSearch}
             />
           </div>
           <div className="row">

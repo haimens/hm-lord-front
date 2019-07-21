@@ -23,10 +23,11 @@ export default class AddingDriverModal extends Component {
   handleClose = () => {
     this.props.onClose();
   };
+
   render() {
     const { driver_list_in_lord } = this.props;
     return (
-      <Modal title="Add A Driver" onClose={this.handleClose} position="center" getWidth={"400px"} getHeight={"550px"}>
+      <Modal title="Add Driver" onClose={this.handleClose} position="center" getWidth={"400px"} getHeight={"550px"}>
         <div className="rounded-custom">
           <div className="border-bottom-custom  d-flex align-items-center" style={{ height: "60px" }}>
             <div className="input-group pl-4 pr-1">
@@ -58,7 +59,7 @@ export default class AddingDriverModal extends Component {
                   <div className="d-flex justify-content-between align-items-center">
                     <div>
                       <div className="font-weight-bold hm-text-16 text-modal-color">{driver.name}</div>
-                      <div className=" hm-text-14 text-modal-color">{driver.plate_num}</div>
+                      <div className=" hm-text-14 text-modal-color">{driver.cell}</div>
                     </div>
                     <div>
                       <button

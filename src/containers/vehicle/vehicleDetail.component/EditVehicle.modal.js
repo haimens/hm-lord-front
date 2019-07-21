@@ -64,7 +64,7 @@ export default class EditVehicle extends Component {
         )}
         {showPreview && <PreviewImageModal image={img_path} onClose={() => this.setState({ showPreview: false })} />}
 
-        <Modal title="Edit Vehicle" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"449px"}>
+        <Modal title="Edit Vehicle" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"420px"}>
           <div className="container">
             <div className="p-3">
               <div className="form-group mb-4">

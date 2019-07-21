@@ -336,11 +336,13 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   findDriverDetailInLord,
   findDriverLocationListInLord,
-  findCarListForADriver,
-  updateADriverInLord,
-  findVehicleListInLord,
   createDriverToACarInLord,
+  updateADriverInLord,
+
+  findCarListForADriver,
+  findVehicleListInLord,
   updateACarForADriver,
+
   findTripListInDriver,
   findActiveTripListInDriver,
   findWageListInDriver,

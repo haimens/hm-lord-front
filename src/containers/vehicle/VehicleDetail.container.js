@@ -13,6 +13,7 @@ import {
 } from "../../actions/vehicle.action";
 import { findDriverListInLord } from "../../actions/driver.action";
 import EditVehicle from "./vehicleDetail.component/EditVehicle.modal";
+
 class VehicleDetail extends Component {
   state = {
     showAddingDriverModal: false,
