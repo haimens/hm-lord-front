@@ -139,6 +139,12 @@ class TripDetailContainer extends Component {
   handleFlightDetailBeenClicked = () => {
     this.setState({ showFlightDetail: false });
   };
+  handleSearchVehicle = keywords => {
+    this.props.findVehicleListInLord({ keywords });
+  };
+  handleSearchDriver = keywords => {
+    this.props.findDriverListInLord({ keywords });
+  };
   async componentDidMount() {
     const {
       match,
@@ -240,6 +246,7 @@ class TripDetailContainer extends Component {
         {showCustomerInfoModal && <CustomerInfoModal onClose={() => this.handleInfoModal("customer")} />}
         {showDriverInfoModal && (
           <AddingDriverModal
+            onSubmit={this.handleSearchDriver}
             handleDriverBeenClicked={this.handleUpdatingDriver}
             driver_list_in_lord={driver_list_in_lord}
             onClose={() => this.handleInfoModal("driver")}
@@ -247,6 +254,7 @@ class TripDetailContainer extends Component {
         )}
         {showVehicleInfoModal && (
           <AddingVehicleModal
+            onSubmit={this.handleSearchVehicle}
             handleCarBeenClicked={this.handleUpdatingVehicle}
             vehicle_list_in_lord={vehicle_list_in_lord}
             car_list_for_a_driver={car_list_for_a_driver}

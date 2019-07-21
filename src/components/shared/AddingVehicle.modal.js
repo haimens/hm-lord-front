@@ -33,7 +33,7 @@ export default class AddingVehicleModal extends Component {
   render() {
     const { vehicle_list_in_lord, car_list_for_a_driver } = this.props;
     return (
-      <Modal title="Vehicle" onClose={this.handleClose} position="center" getWidth={"400px"} getHeight={"512px"}>
+      <Modal title="Add Vehicle" onClose={this.handleClose} position="center" getWidth={"400px"} getHeight={"512px"}>
         <div className="rounded-custom">
           <div className="border-bottom-custom  d-flex align-items-center" style={{ height: "60px" }}>
             <div className="input-group pl-4 pr-1">
@@ -76,10 +76,10 @@ export default class AddingVehicleModal extends Component {
                         </div>
                         <div>
                           <button
-                            className="btn button-main-background text-dark shadow-sm"
+                            className="btn button-main-background text-white shadow-sm"
                             onClick={() => this.handleCarBeenClicked(vehicle.car_token)}
                           >
-                            Add
+                            Select
                           </button>
                         </div>
                       </div>
@@ -102,7 +102,7 @@ export default class AddingVehicleModal extends Component {
                           className="btn button-main-background text-white shadow-sm"
                           onClick={() => this.handleCarBeenClicked(vehicle.car_token)}
                         >
-                          Add
+                          Select
                         </button>
                       </div>
                     </div>
