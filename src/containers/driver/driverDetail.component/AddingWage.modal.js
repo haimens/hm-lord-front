@@ -32,7 +32,13 @@ export default class AddingWageModal extends Component {
     const { amount, type, note } = this.state;
     const { driver_name } = this.props;
     return (
-      <Modal title="Add Wage" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"473px"}>
+      <Modal
+        title="Add Transaction"
+        onClose={this.handleClose}
+        position="center"
+        getWidth={"467px"}
+        getHeight={"440px"}
+      >
         <div className="container">
           <div className="p-3">
             <div className="form-group mb-4">

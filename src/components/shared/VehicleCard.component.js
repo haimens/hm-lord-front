@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import alertify from "alertifyjs";
 export default class VehicleCard extends Component {
   handleButtonClick = vehicleToken => {
     if (!this.props.deleteButton) {
@@ -7,7 +7,18 @@ export default class VehicleCard extends Component {
     }
   };
   handleDeleteACar = driver_car_token => {
-    this.props.updateACarForADriver(this.props.driver_token, driver_car_token, { status: 0 });
+    alertify.confirm(
+      "Warning!",
+      "Are you sure to delete this vehicle?",
+      () => {
+        this.props.updateACarForADriver(this.props.driver_token, driver_car_token, { status: 0 });
+        alertify.success("Ok");
+      },
+
+      function() {
+        alertify.error("Cancel");
+      }
+    );
   };
   render() {
     const { showButton, deleteButton, history } = this.props;
