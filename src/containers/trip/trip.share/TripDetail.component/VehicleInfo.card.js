@@ -9,15 +9,23 @@ export default function VehicleInfoCard(props) {
         <div className="d-flex justify-content-between align-items-center  ">
           <div className="hm-text-16 font-weight-bold text-modal-color">Vehicle Information</div>
           {showEditButton && (
-            <button
-              className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
+            <img
+              src={`${process.env.PUBLIC_URL}/img/icon_edit.svg`}
+              alt="Customer"
+              className="rounded-circle hm-pointer-cursor"
+              style={{ height: "25px", width: "25px" }}
               onClick={() => handleDetailButtonClicked("vehicle")}
-            >
-              <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
-            </button>
+            />
           )}
         </div>
-        {img_path && <img src={img_path} alt="Customer" className="rounded-circle my-3" style={{ height: "74px", width: "74px" }} />}
+        {img_path && (
+          <img
+            src={img_path}
+            alt="Customer"
+            className="rounded-circle my-3"
+            style={{ height: "74px", width: "74px" }}
+          />
+        )}
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Identifier</div>

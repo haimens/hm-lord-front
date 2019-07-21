@@ -9,7 +9,8 @@ import {
   AddingDriverModal,
   LogItem,
   AddingNote,
-  ChatModalContainer
+  ChatModalContainer,
+  FlightDetailModal
 } from "../../../components/shared";
 import {
   BasicInfo,
@@ -41,6 +42,7 @@ import {
 import { findCarListForADriver, findDriverListInLord } from "../../../actions/driver.action";
 import { editAlertInfoInTrip } from "../../../actions/alert.action";
 import { convertUTCtoLocal } from "../../../actions/utilities.action";
+import { findFlightListInLord } from "../../../actions/flight.action";
 class TripDetailContainer extends Component {
   state = {
     showEditButton: false,
@@ -57,7 +59,8 @@ class TripDetailContainer extends Component {
     showEditAlertModal: "",
     showAddingLogInCustomer: "",
     customer_token: "",
-    curr_trip_detail_in_lord: ""
+    curr_trip_detail_in_lord: "",
+    showFlightDetail: false
   };
 
   handleInfoModal = (type, info) => {
@@ -93,7 +96,14 @@ class TripDetailContainer extends Component {
   handleEditAlert = (alert_type, alert_token) => {
     this.setState({ showEditAlertModal: true, alert_type: alert_type, alert_token });
   };
-
+  handleFlightButton = async props => {
+    await this.props.findFlightListInLord({
+      date: convertUTCtoLocal(props.pickup_time),
+      airlineCode: props.flight_str.split(" ")[0],
+      flightNumber: props.flight_str.split(" ")[1]
+    });
+    this.setState({ showFlightDetail: true });
+  };
   handleCloseEditAlert = () => {
     this.setState({ showEditAlertModal: false });
   };
@@ -119,6 +129,15 @@ class TripDetailContainer extends Component {
   handleChatWithCustomer = async customer_token => {
     this.setState({ customer_token });
     await this.props.findMessageAndResetData(customer_token);
+  };
+
+  saveFlightToken = flight_token => {
+    const { trip_token } = this.props.match.params;
+    this.props.updateTripOperationInfo(trip_token, { flight_token });
+    this.handleFlightDetailBeenClicked();
+  };
+  handleFlightDetailBeenClicked = () => {
+    this.setState({ showFlightDetail: false });
   };
   async componentDidMount() {
     const {
@@ -169,7 +188,9 @@ class TripDetailContainer extends Component {
       message_detail_with_customer,
       showChat,
       createAMessageWithCustomer,
-      updateSmsStatus
+      updateSmsStatus,
+      flight_list_in_lord,
+      updateTripBasicInfo
     } = this.props;
     const { trip_token } = match.params;
 
@@ -187,7 +208,8 @@ class TripDetailContainer extends Component {
       alert_type,
       showEditAlertModal,
       customer_token,
-      curr_trip_detail_in_lord
+      curr_trip_detail_in_lord,
+      showFlightDetail
     } = this.state;
     return (
       <main className="container-fluid">
@@ -199,8 +221,18 @@ class TripDetailContainer extends Component {
             onClose={this.handleAddingLog}
           />
         )}
+        {showFlightDetail && (
+          <FlightDetailModal
+            saveFlightToken={this.saveFlightToken}
+            onClose={this.handleFlightDetailBeenClicked}
+            flight_list_in_lord={flight_list_in_lord}
+          />
+        )}
         {showBasicInfoModal && (
           <BasicInfoModal
+            trip_token={trip_token}
+            currFlightStr={trip_detail_in_lord.basic_info.flight_str}
+            updateTripBasicInfo={updateTripBasicInfo}
             curr_trip_detail_in_lord={curr_trip_detail_in_lord}
             onClose={() => this.handleInfoModal("basic")}
           />
@@ -276,9 +308,10 @@ class TripDetailContainer extends Component {
             <div className="row" style={{ padding: "40px" }}>
               <div className="col-lg-6 col-12 mb-4">
                 <BasicInfo
+                  handleFlightButton={this.handleFlightButton}
                   trip_detail_in_lord={trip_detail_in_lord}
                   handleDetailButtonClicked={this.handleInfoModal}
-                  showEditButton={false}
+                  showEditButton={showEditButton}
                 />
               </div>
               <div className="col-lg-6 col-12 mb-4">
@@ -341,7 +374,9 @@ class TripDetailContainer extends Component {
                 />
                 <div className="text-secondary-color hm-text-14 font-weight-500 mt-3">Driver Start Trip</div>
                 <div className="text-modal-color hm-text-14 font-weight-500 mt-2">
-                  {convertUTCtoLocal(trip_detail_in_lord.basic_info.start_time, "HH:mm a")}
+                  {trip_detail_in_lord.basic_info.start_time
+                    ? convertUTCtoLocal(trip_detail_in_lord.basic_info.start_time, "HH:mm a")
+                    : "N/A"}
                 </div>
               </div>
               <div className="d-flex justify-content-center align-items-center flex-column">
@@ -354,7 +389,9 @@ class TripDetailContainer extends Component {
                   Driver Arrival Pickup Location
                 </div>
                 <div className="text-modal-color hm-text-14 font-weight-500 mt-2">
-                  {convertUTCtoLocal(trip_detail_in_lord.basic_info.eta_time, "HH:mm a")}
+                  {trip_detail_in_lord.basic_info.eta_time
+                    ? convertUTCtoLocal(trip_detail_in_lord.basic_info.eta_time, "HH:mm a")
+                    : "N/A"}
                 </div>
               </div>
               <div className="d-flex justify-content-center align-items-center flex-column">
@@ -365,7 +402,9 @@ class TripDetailContainer extends Component {
                 />
                 <div className="text-secondary-color hm-text-14 font-weight-500 mt-3">Customer On Board</div>
                 <div className="text-modal-color hm-text-14 font-weight-500 mt-2">
-                  {convertUTCtoLocal(trip_detail_in_lord.basic_info.cob_time, "HH:mm a")}
+                  {trip_detail_in_lord.basic_info.cob_time
+                    ? convertUTCtoLocal(trip_detail_in_lord.basic_info.cob_time, "HH:mm a")
+                    : "N/A"}
                 </div>
               </div>
               <div className="d-flex justify-content-center align-items-center flex-column">
@@ -376,7 +415,9 @@ class TripDetailContainer extends Component {
                 />
                 <div className="text-secondary-color hm-text-14 font-weight-500 mt-3">Customer Arrival Destination</div>
                 <div className="text-modal-color hm-text-14 font-weight-500 mt-2">
-                  {convertUTCtoLocal(trip_detail_in_lord.basic_info.arrive_time, "HH:mm a")}
+                  {trip_detail_in_lord.basic_info.arrive_time
+                    ? convertUTCtoLocal(trip_detail_in_lord.basic_info.arrive_time, "HH:mm a")
+                    : "N/A"}
                 </div>
               </div>
             </div>
@@ -417,7 +458,8 @@ const mapStateToProps = state => {
     note_list_for_trip: state.noteReducer.note_list_for_trip,
     trip_add_on_list: state.tripReducer.trip_add_on_list,
     message_detail_with_customer: state.smsReducer.message_detail_with_customer,
-    showChat: state.smsReducer.showChat
+    showChat: state.smsReducer.showChat,
+    flight_list_in_lord: state.flightReducer.flight_list_in_lord
   };
 };
 const mapDispatchToProps = {
@@ -435,7 +477,8 @@ const mapDispatchToProps = {
   setChatToFalse,
   createAMessageWithCustomer,
   updateSmsStatus,
-  findMessageAndResetData
+  findMessageAndResetData,
+  findFlightListInLord
 };
 
 export default connect(

@@ -19,12 +19,13 @@ export default function AlertInfoCard(props) {
         <div className="d-flex justify-content-between align-items-center  ">
           <div className="hm-text-16 font-weight-bold text-modal-color">Alert Information</div>
           {showEditButton && alert_list.length === 0 && (
-            <button
-              className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
+            <img
+              src={`${process.env.PUBLIC_URL}/img/icon_edit.svg`}
+              alt="Customer"
+              className="rounded-circle hm-pointer-cursor"
+              style={{ height: "25px", width: "25px" }}
               onClick={() => handleDetailButtonClicked("alert")}
-            >
-              <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
-            </button>
+            />
           )}
         </div>
       </div>

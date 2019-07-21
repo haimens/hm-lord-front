@@ -86,7 +86,7 @@ export default class EditAmountModal extends Component {
               <div className="input-group mt-2">
                 <input
                   type="text"
-                  className="form-control hm-input-height col-2"
+                  className="form-control hm-input-height col-6 mr-3"
                   id="airlineCodeID"
                   placeholder="Airline Code"
                   value={airlineCodeID}
@@ -95,7 +95,7 @@ export default class EditAmountModal extends Component {
 
                 <input
                   type="text"
-                  className="form-control hm-input-height "
+                  className="form-control hm-input-height ml-3"
                   id="flightNumber"
                   placeholder="Flight Number"
                   value={flightNumber}
