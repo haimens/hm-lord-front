@@ -62,6 +62,7 @@ class AlertNotificationModal extends Component {
             </div>
           </header>
           {alert_list_in_lord.record_list.map((alert, index) => {
+            var timestamp = moment(convertUTCtoLocal(alert.record_time), "HH:mm:ss");
             if (index < 3) {
               return (
                 <div
@@ -83,9 +84,10 @@ class AlertNotificationModal extends Component {
                         <div className="font-weight-bold hm-text-14 text-modal-color">{alert.customer_name}</div>
                         <div className=" hm-text-14 text-modal-color">{alert.status_str}</div>
                       </div>
-                      {/* <div className="ext-secondary-color hm-text-13">{`${moment
-                        .utc(moment().diff(moment(alert.record_time)))
-                        .format("mm")} min ago`}</div>*/}
+                      <div className="ext-secondary-color hm-text-13">{`${timestamp.diff(
+                        moment(),
+                        "hours"
+                      )} hours ago`}</div>
                     </div>
                   </div>
                 </div>
@@ -109,6 +111,8 @@ class AlertNotificationModal extends Component {
             if (message.is_read === 0) {
               this.handleAddDidntRead();
             }
+            var timestamp = moment(convertUTCtoLocal(message.udate), "HH:mm:ss");
+
             if (index < 3) {
               return (
                 <div
@@ -141,9 +145,10 @@ class AlertNotificationModal extends Component {
                           {message.message}
                         </div>
                       </div>
-                      {/* <div className="ext-secondary-color hm-text-13">{`${moment.utc(
-                        moment(new Date()).diff(moment(message.udate))
-                      )} Hours ago`}</div> */}
+                      <div className="ext-secondary-color hm-text-13">{`${timestamp.diff(
+                        moment(),
+                        "hours"
+                      )} hours ago`}</div>
                     </div>
                   </div>
                 </div>
