@@ -49,18 +49,29 @@ export default class EditCustomer extends Component {
       customer_token
     } = this.props;
     if (name !== "" && cell !== "" && area !== "" && email !== "") {
-      const payload = await createNewAddressInstance({ address_str: addr_str });
-      Promise.all([
-        updateACustomerInLord(customer_token, {
-          name,
-          img_path,
-          cell: `${area} ${cell}`,
-          email
-        }),
-        updateACustomerAddressInLord(customer_token, {
-          address_token: payload.address_token
-        })
-      ]);
+      if (addr_str) {
+        const payload = await createNewAddressInstance({ address_str: addr_str });
+        Promise.all([
+          updateACustomerInLord(customer_token, {
+            name,
+            img_path,
+            cell: `${area} ${cell}`,
+            email
+          }),
+          updateACustomerAddressInLord(customer_token, {
+            address_token: payload.address_token
+          })
+        ]);
+      } else {
+        Promise.all([
+          updateACustomerInLord(customer_token, {
+            name,
+            img_path,
+            cell: `${area} ${cell}`,
+            email
+          })
+        ]);
+      }
       this.handleClose();
     } else {
       alertify.alert("Error!", "Please Finish The Form!");
@@ -87,17 +98,20 @@ export default class EditCustomer extends Component {
         {showPreview && <PreviewImageModal image={img_path} onClose={() => this.setState({ showPreview: false })} />}
 
         <Modal
-          title="Update A Customer"
+          title="Update Customer"
           onClose={this.handleClose}
           position="center"
           getWidth={"467px"}
-          getHeight={"525px"}
+          getHeight={"580px"}
         >
           <div className="container">
             <div className="p-3">
               <div className="form-group mb-4">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Cell">
+                  Name
+                </label>
                 <input
-                  className="form-control hm-input-height mt-3"
+                  className="form-control hm-input-height"
                   name="name"
                   id="name"
                   placeholder={"Name"}
@@ -105,30 +119,39 @@ export default class EditCustomer extends Component {
                   onChange={this.handleInputChange}
                 />
               </div>
+              <div className="form-group input-group mb-4">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Cell">
+                  Cell
+                </label>
+                <div className="container-fluid">
+                  <div className="row">
+                    <input
+                      type="text"
+                      className="form-control hm-input-height col-2"
+                      id="area"
+                      placeholder="Area"
+                      value={area}
+                      onChange={this.handleInputChange}
+                    />
 
-              <div className="form-group input-group mb-4 d-flex">
-                <input
-                  type="text"
-                  className="form-control hm-input-height col-2"
-                  id="area"
-                  placeholder="Area"
-                  value={area}
-                  onChange={this.handleInputChange}
-                />
-
-                <input
-                  type="text"
-                  className="form-control hm-input-height "
-                  id="cell"
-                  placeholder="Cell"
-                  value={cell}
-                  onChange={this.handleInputChange}
-                />
+                    <input
+                      type="text"
+                      className="form-control hm-input-height col-10"
+                      id="cell"
+                      placeholder="Cell"
+                      value={cell}
+                      onChange={this.handleInputChange}
+                    />
+                  </div>
+                </div>
               </div>
 
               <div className="form-group mb-4">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Cell">
+                  Email
+                </label>
                 <input
-                  className="form-control hm-input-height mt-3"
+                  className="form-control hm-input-height"
                   name="email"
                   id="email"
                   placeholder={"Email"}
@@ -138,6 +161,9 @@ export default class EditCustomer extends Component {
               </div>
 
               <div className="form-group">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Cell">
+                  Address
+                </label>
                 <GAutoComplete
                   handleInputHasChanged={this.doNothing}
                   getGoogleAddress={this.saveToAddress}
