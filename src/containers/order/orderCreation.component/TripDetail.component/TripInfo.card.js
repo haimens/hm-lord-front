@@ -9,8 +9,8 @@ class TripInfo extends Component {
   state = {
     airlineCode: "",
     flightNumber: "",
-    date: "",
-    time: "",
+    date: moment(),
+    time: moment().add(8, "hours"),
     from_address: "",
     to_address: "",
     blueCardBeenClicked: false,

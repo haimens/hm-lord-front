@@ -31,7 +31,7 @@ export default class CustomerAdding extends Component {
   render() {
     const { note } = this.state;
     return (
-      <Modal title="Add Note" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"280px"}>
+      <Modal title="Add Note" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"250px"}>
         <div className="container">
           <div className="p-3">
             <div className="form-group mb-4">

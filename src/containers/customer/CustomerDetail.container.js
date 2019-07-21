@@ -106,7 +106,7 @@ class CustomerDetail extends Component {
             hideShadow={true}
             buttonWidth={"88px"}
           />
-          <div className="container-fluid" style={{ height: "266px", overflow: "auto" }}>
+          <div className="container-fluid" style={{ height: "200px", overflow: "auto" }}>
             <div className="row p-1">
               {order_list_in_customer.record_list.map((order, index) => (
                 <OrderCard
@@ -116,7 +116,8 @@ class CustomerDetail extends Component {
                     status_str: order.status_str,
                     contact_cell: order.contact_cell,
                     contact_name: order.contact_name,
-                    order_token: order.order_token
+                    order_token: order.order_token,
+                    order_img: order.img_path
                   }}
                   history={history}
                   key={index}
