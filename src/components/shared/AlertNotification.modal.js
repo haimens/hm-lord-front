@@ -30,8 +30,8 @@ class AlertNotificationModal extends Component {
     this.handleClose();
   };
 
-  handleAddDidntRead = async () => {
-    await this.setState(state => ({ read: state.read++ }));
+  handleAddDidntRead = () => {
+    this.setState(state => ({ read: state.read + 1 }));
   };
 
   componentDidMount() {
@@ -62,7 +62,7 @@ class AlertNotificationModal extends Component {
             </div>
           </header>
           {alert_list_in_lord.record_list.map((alert, index) => {
-            var timestamp = moment(convertUTCtoLocal(alert.record_time), "HH:mm:ss");
+            const timestamp = moment(convertUTCtoLocal(alert.record_time), "HH:mm:ss");
             if (index < 3) {
               return (
                 <div
@@ -100,20 +100,16 @@ class AlertNotificationModal extends Component {
             className={`sticky-top d-flex justify-content-between align-items-center px-4`}
             style={{ backgroundColor: "#f7f9fc", height: "53px" }}
           >
-            <div className="text-modal-color hm-text-14 font-weight-bold">{`Message ${this.state.read > 0 && (
-              <span style={{ color: "#12ccef" }}>({this.state.read})</span>
-            )}`}</div>
+            <div className="text-modal-color hm-text-14 font-weight-bold">{`Message`}</div>
             <div className="text-purple hm-pointer-cursor" onClick={() => this.handleJumpLocation("message")}>
               View All
             </div>
           </header>
           {message_list_in_lord.record_list.map((message, index) => {
-            if (message.is_read === 0) {
-              this.handleAddDidntRead();
-            }
-            var timestamp = moment(convertUTCtoLocal(message.udate), "HH:mm:ss");
-
             if (index < 3) {
+              console.log(convertUTCtoLocal(message.udate));
+              let timestamp = moment(convertUTCtoLocal(message.udate), "HH:mm:ss");
+
               return (
                 <div
                   className="border-bottom-custom d-flex align-items-center px-2"

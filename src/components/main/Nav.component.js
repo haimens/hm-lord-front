@@ -32,7 +32,6 @@ class Nav extends Component {
   };
 
   handleShowAlert = () => {
-    console.log("here");
     this.setState(state => ({ showAlertNotification: !state.showAlertNotification }));
   };
 
