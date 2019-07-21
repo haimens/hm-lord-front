@@ -103,9 +103,6 @@ class AlertNotificationModal extends Component {
           </header>
           {message_list_in_lord.record_list.map((message, index) => {
             if (index < 3) {
-              let timestamp = moment(message.udate, "HH:mm:ss");
-              console.log();
-
               return (
                 <div
                   className="border-bottom-custom d-flex align-items-center px-2"

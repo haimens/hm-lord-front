@@ -58,8 +58,8 @@ class Nav extends Component {
         )}
 
         <nav
-          className="navbar fixed-top navbar-expand-lg border-bottom  background-linear navbar-light d-flex 
-    justify-content-between align-items-center"
+          className={`navbar  navbar-expand-lg border-bottom  background-linear navbar-light d-flex 
+    justify-content-between align-items-center ${showAlertNotification && "fixed-top"}`}
           style={{ height: "77px" }}
         >
           <div className="d-flex align-items-center">
