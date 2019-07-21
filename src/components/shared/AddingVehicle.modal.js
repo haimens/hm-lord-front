@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Modal from "./Modal";
-
+import Pagination from "./Pagination";
 export default class AddingVehicleModal extends Component {
   state = {
     keywords: ""
@@ -26,10 +26,14 @@ export default class AddingVehicleModal extends Component {
     this.props.onClose();
   };
 
+  handlePageChange = start => {
+    this.props.findVehicleListInLord({ start });
+  };
+
   render() {
     const { vehicle_list_in_lord, car_list_for_a_driver } = this.props;
     return (
-      <Modal title="Vehicle" onClose={this.handleClose} position="center" getWidth={"300px"} getHeight={"512px"}>
+      <Modal title="Vehicle" onClose={this.handleClose} position="center" getWidth={"400px"} getHeight={"512px"}>
         <div className="rounded-custom">
           <div className="border-bottom-custom  d-flex align-items-center" style={{ height: "60px" }}>
             <div className="input-group pl-4 pr-1">
@@ -106,6 +110,7 @@ export default class AddingVehicleModal extends Component {
                 </div>
               ))}
             </div>
+            <Pagination range={3} count={vehicle_list_in_lord.count} onPageChange={this.handlePageChange} />
           </div>
         </div>
       </Modal>

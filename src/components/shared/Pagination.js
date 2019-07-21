@@ -31,7 +31,7 @@ export default class ANPagination extends Component {
           activePage={this.state.activePage}
           itemsCountPerPage={30}
           totalItemsCount={this.props.count}
-          pageRangeDisplayed={6}
+          pageRangeDisplayed={this.props.range ? this.props.range : 6}
           onChange={this.handlePageChange}
           activeClass={"pagination-active"}
         />

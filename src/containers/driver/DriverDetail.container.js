@@ -146,7 +146,8 @@ class DriverDetail extends Component {
       createWageInDriver,
       createSalaryInDriver,
       wage_sum_list_in_driver,
-      salary_sum_list_in_driver
+      salary_sum_list_in_driver,
+      findVehicleListInLord
     } = this.props;
     return (
       <main className="container-fluid">
@@ -161,6 +162,7 @@ class DriverDetail extends Component {
         {showAddingTripModal && <AddingTripModal onClose={this.handleShowAddingTripModal} />}
         {showAddingVehicleModal && (
           <AddingVehicleModal
+            findVehicleListInLord={findVehicleListInLord}
             onSubmit={this.handleSearchVehicleInDriver}
             driver_token={driver_token}
             handleCarBeenClicked={this.handleCreateDriverToACarInLord}

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Modal from "./Modal";
+import Pagination from "./Pagination";
 
 export default class AddingDriverModal extends Component {
   state = {
@@ -22,6 +23,10 @@ export default class AddingDriverModal extends Component {
 
   handleClose = () => {
     this.props.onClose();
+  };
+
+  handlePageChange = start => {
+    this.props.findDriverListInLord({ start });
   };
 
   render() {
@@ -74,6 +79,8 @@ export default class AddingDriverModal extends Component {
               </div>
             ))}
           </div>
+
+          <Pagination range={3} count={driver_list_in_lord.count} onPageChange={this.handlePageChange} />
         </div>
       </Modal>
     );

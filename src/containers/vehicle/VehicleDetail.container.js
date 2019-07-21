@@ -62,12 +62,14 @@ class VehicleDetail extends Component {
       },
       driver_list_in_lord,
       updateACarInLord,
-      driver_list_for_a_car
+      driver_list_for_a_car,
+      findDriverListInLord
     } = this.props;
     return (
       <main className="container-fluid">
         {showAddingDriverModal && (
           <AddingDriverModal
+            findDriverListInLord={findDriverListInLord}
             onSubmit={this.handleSearchDriverInVehicle}
             car_token={car_token}
             handleDriverBeenClicked={this.handleCreateCarToADriverInLord}
