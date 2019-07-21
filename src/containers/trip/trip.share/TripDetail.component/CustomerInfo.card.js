@@ -32,19 +32,19 @@ export default function CustomerInfoCard(props) {
           style={{ height: "74px", width: "74px" }}
         />
       </div>
-      <div className="mb-4 px-3">
+      <div className="mb-4">
         <div className="text-secondary-color font-weight-500 hm-text-14">Customer Name</div>
         <div className="hm-text-14 font-weight-bold text-modal-color">{customer_info.name}</div>
       </div>
-      <div className="mb-4 px-3">
+      <div className="mb-4">
         <div className="text-secondary-color font-weight-500 hm-text-14">Cell</div>
         <div className="hm-text-14 font-weight-bold text-modal-color">{customer_info.cell}</div>
       </div>
-      <div className="mb-4 px-3">
+      <div className="mb-4">
         <div className="text-secondary-color font-weight-500 hm-text-14">Email</div>
         <div className="hm-text-14 font-weight-bold text-modal-color">{customer_info.email}</div>
       </div>
-      <div className="mb-4 px-3">
+      <div className="mb-4">
         <div className="text-secondary-color font-weight-500 hm-text-14">Address</div>
         <div className="hm-text-14 font-weight-bold text-modal-color">{"N/A"}</div>
       </div>
