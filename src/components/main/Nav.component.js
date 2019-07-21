@@ -34,7 +34,10 @@ class Nav extends Component {
   handleShowAlert = () => {
     this.setState(state => ({ showAlertNotification: !state.showAlertNotification }));
   };
-
+  componentDidMount() {
+    const { findAlertListInLord, findMessageListInLord } = this.props;
+    Promise.all([findAlertListInLord({ status: 3 }), findMessageListInLord()]);
+  }
   render() {
     const { showAlertNotification } = this.state;
     const {
@@ -44,6 +47,13 @@ class Nav extends Component {
       findAlertListInLord,
       findMessageListInLord
     } = this.props;
+    let unRead = 0;
+    message_list_in_lord.record_list.map(message => {
+      if (message.is_read === 0) {
+        unRead++;
+      }
+      return null;
+    });
     return (
       <div>
         {showAlertNotification && (
@@ -71,15 +81,30 @@ class Nav extends Component {
           </div>
           <div className="d-flex flex-row align-items-center">
             <i
-              className="fas fa-bell text-white hm-pointer-cursor mr-4"
+              className="fas fa-bell text-white hm-pointer-cursor mr-4 d-flex"
               style={{ fontSize: "18px" }}
               onClick={this.handleShowAlert}
-            />
+            >
+              {unRead > 0 && (
+                <div
+                  className="rounded-circle d-flex justify-content-center align-items-center p-2"
+                  style={{
+                    backgroundColor: "#12ccef",
+                    height: "16px",
+                    width: "16px",
+                    marginLeft: "-10px",
+                    marginTop: "-5px"
+                  }}
+                >
+                  {unRead}
+                </div>
+              )}
+            </i>
             <div className="btn-group mr-2">
               <img
                 src={`${process.env.PUBLIC_URL}/img/haimenslogo.svg`}
                 style={{ height: "36px", width: "36px" }}
-                alt="error404"
+                alt="logo"
               />
               <button
                 type="button"
