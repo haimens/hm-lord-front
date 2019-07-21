@@ -65,7 +65,8 @@ export default class AddingVehicleModal extends Component {
                     key={index}
                     style={{ height: "92px" }}
                   >
-                    <div className="col-3">
+                    <div className="col-3" style={{ marginTop: "-15px" }}>
+                      <img src={`${process.env.PUBLIC_URL}/img/recommended.png`} alt="recommend" />
                       <img src={vehicle.img_path} alt="driver-avatar" className="avatar-md rounded-circle " />
                     </div>
                     <div className="col-9">
