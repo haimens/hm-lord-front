@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import moment from "moment";
 import "./ChatModal.css";
-import { convertUTCtoLocal } from "../../actions/utilities.action";
 
 /**
  * Modal
