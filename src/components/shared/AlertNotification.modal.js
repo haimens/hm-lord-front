@@ -84,6 +84,7 @@ class AlertNotificationModal extends Component {
                 </div>
               );
             }
+            return null;
           })}
 
           <header
@@ -136,6 +137,7 @@ class AlertNotificationModal extends Component {
                 </div>
               );
             }
+            return null;
           })}
         </section>
       </main>
