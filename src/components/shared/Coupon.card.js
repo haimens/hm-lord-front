@@ -18,7 +18,7 @@ export default function CouponCard(props) {
           )}
           <div className="hm-text-16 text-danger mt-3">
             <img
-              src={`${process.env.PUBLIC_URL}/img/icon_delete.svg`}
+              src={`${process.env.PUBLIC_URL}/img/icon_delete_white.svg`}
               className="hm-pointer-cursor"
               alt="delete"
               style={{ height: "25px", width: "25px" }}

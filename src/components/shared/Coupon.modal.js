@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Modal from "./Modal";
+import Pagination from "./Pagination";
 import { parseRate, parseAmount } from "../../actions/utilities.action";
 
 export default class CouponModal extends Component {
@@ -9,6 +10,13 @@ export default class CouponModal extends Component {
   handleInputChange = e => {
     const { id, value } = e.target;
     this.setState({ [id]: value });
+  };
+  handlePageChange = start => {
+    if (this.state.keywords !== "") {
+      this.props.findCouponListInLord({ start, keywords: this.state.keywords });
+    } else {
+      this.props.findCouponListInLord({ start });
+    }
   };
   handleClose = () => {
     this.props.onClose();
@@ -74,6 +82,7 @@ export default class CouponModal extends Component {
                 )
             )}
           </div>
+          <Pagination count={this.props.coupon_list_in_lord.count} onPageChange={this.handlePageChange} />
         </Modal>
       </div>
     );

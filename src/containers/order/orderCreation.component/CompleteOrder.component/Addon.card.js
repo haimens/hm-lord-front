@@ -35,7 +35,7 @@ export default function AddonCard(props) {
                       <div className="d-flex align-items-center mt-auto">
                         <div className="hm-text-16 font-weight-500"> {parseAmount(addon.amount, 2)}</div>
                         <img
-                          src={`${process.env.PUBLIC_URL}/img/icon_delete.svg`}
+                          src={`${process.env.PUBLIC_URL}/img/icon_delete_white.svg`}
                           className="hm-pointer-cursor ml-auto"
                           alt="delete"
                           style={{ height: "25px", width: "25px" }}

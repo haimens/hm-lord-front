@@ -625,7 +625,7 @@ export default class EmailPreviewModal extends Component {
           <div dangerouslySetInnerHTML={{ __html: this.renderHTML() }} id="capture_it" className="rounded" />
           <div className="d-flex text-right justify-content-end">
             <div
-              className="text-white btn btn-lg text-white mt-3"
+              className="text-white btn btn-md text-white mt-3 hm-pointer-cursor"
               style={{ backgroundColor: "#5e72e4" }}
               onClick={this.handleEmailSend}
             >

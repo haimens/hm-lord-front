@@ -12,6 +12,10 @@ class Order extends Component {
     this.props.findOrderListInLord({ start });
   };
 
+  handleSubmitSearch = keywords => {
+    this.props.findOrderListInLord({ keywords });
+  };
+
   componentDidMount() {
     this.props.findOrderListInLord();
   }
@@ -28,6 +32,8 @@ class Order extends Component {
               clickTitle={"Order"}
               buttonWidth={"88px"}
               clickFunction={() => this.props.history.push("/order/creation")}
+              search={true}
+              handleSubmitSearch={this.handleSubmitSearch}
             />
           </div>
 

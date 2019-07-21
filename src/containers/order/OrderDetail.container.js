@@ -162,7 +162,8 @@ class OrderDetail extends Component {
       updateSmsStatus,
       message_detail_with_customer,
       sendEmailToConfirm,
-      general_setting_list_in_lord
+      general_setting_list_in_lord,
+      findCouponListInLord
     } = this.props;
     const { order_token } = match.params;
     const {
@@ -189,6 +190,7 @@ class OrderDetail extends Component {
         {showCouponModal && (
           <CouponModal
             amount={sum}
+            findCouponListInLord={findCouponListInLord}
             handleAddingCoupon={this.handleAddingCoupon}
             coupon_list_in_lord={coupon_list_in_lord}
             onClose={this.handleShowCouponModal}

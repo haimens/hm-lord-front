@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { GAutoComplete } from "../../../components/shared";
+import { GAutoComplete, Pagination } from "../../../components/shared";
 import { findCustomerListInLord, createACustomerInLord } from "../../../actions/customer.action";
 import { createNewAddressInstance } from "../../../actions/address.action";
 import { setMapToFalse, setMapToFalseAgain } from "../../../actions/quote.action";
@@ -39,17 +39,29 @@ class CustomerInformation extends Component {
     const { name, cell, area, email, address_str } = this.state;
     const { createNewAddressInstance, createACustomerInLord } = this.props;
     if (name !== "" && cell !== "" && area !== "" && email !== "") {
-      const payload = await createNewAddressInstance({ address_str });
-      let customer = await createACustomerInLord({
-        customer_info: {
-          name,
-          cell: `${area} ${cell}`,
-          email
-        },
-        address_info: {
-          address_token: payload.address_token
-        }
-      });
+      let customer = "";
+
+      if (address_str) {
+        const payload = await createNewAddressInstance({ address_str });
+        customer = await createACustomerInLord({
+          customer_info: {
+            name,
+            cell: `${area} ${cell}`,
+            email
+          },
+          address_info: {
+            address_token: payload.address_token
+          }
+        });
+      } else {
+        customer = await createACustomerInLord({
+          customer_info: {
+            name,
+            cell: `${area} ${cell}`,
+            email
+          }
+        });
+      }
       this.props.handleSetCurrentCustomer({ ...this.state, customer_token: customer.customer_token });
       this.props.handleMoveNext(1);
     } else {
@@ -60,6 +72,10 @@ class CustomerInformation extends Component {
   handleSetCurrentCustomer = customer => {
     this.props.handleSetCurrentCustomer(customer);
     this.props.handleMoveNext(1);
+  };
+
+  handlePageChange = start => {
+    this.props.findCustomerListInLord({ start });
   };
 
   componentDidMount() {
@@ -205,6 +221,7 @@ class CustomerInformation extends Component {
                   </div>
                 </div>
               ))}
+              <Pagination count={customer_list_in_lord.count} onPageChange={this.handlePageChange} />
             </div>
           </div>
         </div>

@@ -216,20 +216,22 @@ class TripInfo extends Component {
                 <TimePicker defaultValue={moment().add(8, "hours")} onChange={this.handleTimePicker} />
               </div>
               <div className="form-group my-4 ">
-                <label className="text-main-color hm-text-14 font-weight-bold">Flight Number</label>
+                <label className="text-main-color hm-text-14 font-weight-bold">
+                  Flight Number
+                  <i className="far fa-question-circle ml-2 hm-pointer-cursor" style={{ color: "#aeb5bd" }} />
+                </label>
                 <div className="input-group mt-2">
                   <input
                     type="text"
-                    className="form-control hm-input-height col-2"
+                    className="form-control hm-input-height col-6 mr-3"
                     id={airlineCodeID}
                     placeholder="Airline Code"
                     value={airlineCode}
                     onChange={handleInputChange}
                   />
-
                   <input
                     type="text"
-                    className="form-control hm-input-height "
+                    className="form-control hm-input-height col-6 ml-3 col "
                     id={flightNumberID}
                     placeholder="Flight Number"
                     value={flightNumber}
