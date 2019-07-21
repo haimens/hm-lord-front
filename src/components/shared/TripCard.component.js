@@ -13,7 +13,8 @@ export default class TripCard extends Component {
       tripStatus === "DISPATCHED" ||
       tripStatus === "ARRIVED" ||
       tripStatus === "COB" ||
-      tripStatus === "ON-THE-WAY"
+      tripStatus === "ON-THE-WAY" ||
+      tripStatus === "PENDING"
     ) {
       history.push(`/trip/ongoing/detail/${trip_token}`);
     }
