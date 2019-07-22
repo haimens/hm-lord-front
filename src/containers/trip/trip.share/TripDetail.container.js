@@ -25,7 +25,7 @@ import {
   AddonService
 } from "./TripDetail.component";
 import { findTripNoteListInLord, createTripNoteListInLord } from "../../../actions/note.action";
-import { findVehicleListInLord } from "../../../actions/vehicle.action";
+import { findVehicleListInLord, findDriverListForACar } from "../../../actions/vehicle.action";
 import {
   findTripDetailInLord,
   createAnAlertForATrip,
@@ -157,7 +157,8 @@ class TripDetailContainer extends Component {
       findVehicleListInLord,
       findCarListForADriver,
       findDriverListInLord,
-      findTripNoteListInLord
+      findTripNoteListInLord,
+      findDriverListForACar
     } = this.props;
     const { trip_token } = match.params;
     await Promise.all([
@@ -183,6 +184,9 @@ class TripDetailContainer extends Component {
     if (this.props.trip_detail_in_lord.driver_info.driver_token) {
       findCarListForADriver(this.props.trip_detail_in_lord.driver_info.driver_token);
     }
+    if (this.props.trip_detail_in_lord.car_info.car_token) {
+      findDriverListForACar(this.props.trip_detail_in_lord.car_info.car_token);
+    }
   }
   render() {
     const {
@@ -201,7 +205,8 @@ class TripDetailContainer extends Component {
       createAMessageWithCustomer,
       updateSmsStatus,
       flight_list_in_lord,
-      updateTripBasicInfo
+      updateTripBasicInfo,
+      driver_list_for_a_car
     } = this.props;
     const { trip_token } = match.params;
 
@@ -253,6 +258,7 @@ class TripDetailContainer extends Component {
           <AddingDriverModal
             onSubmit={this.handleSearchDriver}
             handleDriverBeenClicked={this.handleUpdatingDriver}
+            driver_list_for_a_car={driver_list_for_a_car}
             driver_list_in_lord={driver_list_in_lord}
             onClose={() => this.handleInfoModal("driver")}
           />
@@ -472,7 +478,8 @@ const mapStateToProps = state => {
     trip_add_on_list: state.tripReducer.trip_add_on_list,
     message_detail_with_customer: state.smsReducer.message_detail_with_customer,
     showChat: state.smsReducer.showChat,
-    flight_list_in_lord: state.flightReducer.flight_list_in_lord
+    flight_list_in_lord: state.flightReducer.flight_list_in_lord,
+    driver_list_for_a_car: state.vehicleReducer.driver_list_for_a_car
   };
 };
 const mapDispatchToProps = {
@@ -491,7 +498,8 @@ const mapDispatchToProps = {
   createAMessageWithCustomer,
   updateSmsStatus,
   findMessageAndResetData,
-  findFlightListInLord
+  findFlightListInLord,
+  findDriverListForACar
 };
 
 export default connect(

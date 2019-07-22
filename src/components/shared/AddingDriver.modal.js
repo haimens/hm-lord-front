@@ -30,7 +30,7 @@ export default class AddingDriverModal extends Component {
   };
 
   render() {
-    const { driver_list_in_lord } = this.props;
+    const { driver_list_in_lord, driver_list_for_a_car } = this.props;
     return (
       <Modal title="Add Driver" onClose={this.handleClose} position="center" getWidth={"400px"} getHeight={"550px"}>
         <div className="rounded-custom">
@@ -55,31 +55,62 @@ export default class AddingDriverModal extends Component {
             </div>
           </div>
           <div className="container">
-            {driver_list_in_lord.record_list.map((driver, index) => (
-              <div className="col-12 border-bottom d-flex align-items-center" key={index} style={{ height: "92px" }}>
-                <div className="col-3">
-                  <img src={driver.img_path} alt="driver-avatar" className="avatar-md rounded-circle " />
-                </div>
-                <div className="col-9">
-                  <div className="d-flex justify-content-between align-items-center">
-                    <div>
-                      <div className="font-weight-bold hm-text-16 text-modal-color">{driver.name}</div>
-                      <div className=" hm-text-14 text-modal-color">{driver.cell}</div>
+            <div className="row">
+              {driver_list_for_a_car &&
+                driver_list_for_a_car.record_list.length > 0 &&
+                driver_list_for_a_car.record_list.map((driver, index) => (
+                  <div
+                    className="col-12 border-bottom d-flex align-items-center"
+                    key={index}
+                    style={{ height: "92px" }}
+                  >
+                    <div className="col-3" style={{ marginTop: "-15px" }}>
+                      <img src={`${process.env.PUBLIC_URL}/img/recommended.png`} alt="recommend" />
+                      <img src={driver.driver_img_path} alt="driver-avatar" className="avatar-md rounded-circle " />
                     </div>
-                    <div>
-                      <button
-                        className="btn button-main-background text-white shadow-sm"
-                        onClick={() => this.handleDriverBeenClicked(driver.driver_token)}
-                      >
-                        Add
-                      </button>
+                    <div className="col-9">
+                      <div className="d-flex justify-content-between align-items-center">
+                        <div>
+                          <div className="font-weight-bold hm-text-15 text-modal-color">{driver.name}</div>
+                          <div className=" hm-text-13 text-modal-color">{driver.cell}</div>
+                        </div>
+                        <div>
+                          <button
+                            className="btn button-main-background text-white shadow-sm"
+                            onClick={() => this.handleDriverBeenClicked(driver.driver_token)}
+                          >
+                            Select
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              {driver_list_in_lord.record_list.map((driver, index) => (
+                <div className="col-12 border-bottom d-flex align-items-center" key={index} style={{ height: "92px" }}>
+                  <div className="col-3">
+                    <img src={driver.img_path} alt="driver-avatar" className="avatar-md rounded-circle " />
+                  </div>
+                  <div className="col-9">
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div>
+                        <div className="font-weight-bold hm-text-16 text-modal-color">{driver.name}</div>
+                        <div className=" hm-text-14 text-modal-color">{driver.cell}</div>
+                      </div>
+                      <div>
+                        <button
+                          className="btn button-main-background text-white shadow-sm"
+                          onClick={() => this.handleDriverBeenClicked(driver.driver_token)}
+                        >
+                          Select
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-
           <Pagination range={3} count={driver_list_in_lord.count} onPageChange={this.handlePageChange} />
         </div>
       </Modal>
