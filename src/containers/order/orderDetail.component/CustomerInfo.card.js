@@ -48,27 +48,27 @@ export default function BasicInfo(props) {
             style={{ height: "74px", width: "74px" }}
           />
         </div>
-        <div className="mb-4 px-3">
+        <div className="mb-4">
           <div className="text-secondary-color font-weight-500 hm-text-14">Customer Name</div>
           <div className="hm-text-14 font-weight-bold text-modal-color">{name}</div>
         </div>
-        <div className="mb-4 px-3">
+        <div className="mb-4">
           <div className="text-secondary-color font-weight-500 hm-text-14">Cell</div>
           <div className="hm-text-14 font-weight-bold text-modal-color">{cell}</div>
         </div>
-        <div className="mb-4 px-3">
+        <div className="mb-4">
           <div className="text-secondary-color font-weight-500 hm-text-14">Email</div>
           <div className="hm-text-14 font-weight-bold text-modal-color">{email}</div>
         </div>
-        <div className="mb-4 px-3">
+        <div className="mb-4">
           <div className="text-secondary-color font-weight-500 hm-text-14">Address</div>
           <div className="hm-text-14 font-weight-bold text-modal-color">{addr_str}</div>
         </div>
-        <div className="mb-4 px-3">
+        <div className="mb-4">
           <div className="text-secondary-color font-weight-500 hm-text-14">Special Note</div>
           <div className="hm-text-14 font-weight-bold text-modal-color">{note ? note : "N/A"}</div>
         </div>
-        <div className="mb-4 px-3">
+        <div className="mb-4">
           <button
             className="btn shadow-sm rounded-custom button-main-background text-white"
             style={{ height: "43px", width: "168px" }}
