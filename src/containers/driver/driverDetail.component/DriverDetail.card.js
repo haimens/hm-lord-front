@@ -5,7 +5,9 @@ class DriverDetailCard extends Component {
   handleDetailButtonClicked = type => {
     this.props.handleDetailButtonClicked(type);
   };
-
+  handleRequestDriverShareLocation = () => {
+    this.props.requestDriverShareLocation(this.props.driver_token);
+  };
   render() {
     const { sum, driver_detail_in_lord } = this.props;
     const { basic_info, location_info } = driver_detail_in_lord;
@@ -66,6 +68,15 @@ class DriverDetailCard extends Component {
                         <div>Inactive</div>
                       </div>
                     )}
+                  </div>
+                </div>
+                <div className="mb-4 px-3">
+                  <div
+                    className="text-white btn btn-md text-white mt-3 hm-pointer-cursor"
+                    style={{ backgroundColor: "#5e72e4" }}
+                    onClick={this.handleRequestDriverShareLocation}
+                  >
+                    Send Location Sharing Request
                   </div>
                 </div>
               </div>

@@ -16,7 +16,8 @@ import {
   findCarListForADriver,
   updateADriverInLord,
   createDriverToACarInLord,
-  updateACarForADriver
+  updateACarForADriver,
+  requestDriverShareLocation
 } from "../../actions/driver.action";
 import { findTripListInDriver, findActiveTripListInDriver } from "../../actions/trip.action";
 import { findVehicleListInLord } from "../../actions/vehicle.action";
@@ -147,7 +148,8 @@ class DriverDetail extends Component {
       createSalaryInDriver,
       wage_sum_list_in_driver,
       salary_sum_list_in_driver,
-      findVehicleListInLord
+      findVehicleListInLord,
+      requestDriverShareLocation
     } = this.props;
     return (
       <main className="container-fluid">
@@ -201,10 +203,12 @@ class DriverDetail extends Component {
           </div>
           <div>
             <DriverDetailCard
+              driver_token={driver_token}
               sum={wage_sum_list_in_driver.sum - salary_sum_list_in_driver.sum}
               handleDetailButtonClicked={this.handleDetailButtonClicked}
               driver_detail_in_lord={driver_detail_in_lord}
               showMap={showMap}
+              requestDriverShareLocation={requestDriverShareLocation}
             />
           </div>
         </section>
@@ -340,6 +344,7 @@ const mapDispatchToProps = {
   findDriverLocationListInLord,
   createDriverToACarInLord,
   updateADriverInLord,
+  requestDriverShareLocation,
 
   findCarListForADriver,
   findVehicleListInLord,

@@ -4,9 +4,7 @@ export default class TripCard extends Component {
   handleTripCardPushed = trip_token => {
     const { history, parentProps } = this.props;
     const { tripStatus } = parentProps;
-    if (tripStatus === "CAD") {
-      history.push(`/trip/finished/detail/${trip_token}`);
-    } else if (tripStatus === "CONFIRMED") {
+    if (tripStatus === "CONFIRMED") {
       history.push(`/trip/upcoming/detail/${trip_token}`);
     } else if (
       tripStatus === "COB" ||
@@ -17,6 +15,8 @@ export default class TripCard extends Component {
       tripStatus === "PENDING"
     ) {
       history.push(`/trip/ongoing/detail/${trip_token}`);
+    } else {
+      history.push(`/trip/finished/detail/${trip_token}`);
     }
   };
   render() {
