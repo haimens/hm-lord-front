@@ -8,7 +8,7 @@ import PaymentInfoCard from "./orderCreation.component/PaymentInfo.card";
 import { setCurrentOrderInLord, setCurrentCustomerInLord } from "../../actions/order.action";
 class OrderCreation extends Component {
   state = {
-    position: 5,
+    position: 2,
     loaded: false,
     round_trip: false
   };
