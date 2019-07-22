@@ -59,9 +59,9 @@ export default class TripCar extends Component {
                 </div>
               </div>
 
-              <div className="form-group text-right px-3 mt-3 d-flex justify-content-end">
-                <button className="border-white btn button-main-size text-white d-flex align-items-center">
-                  <i className="fas fa-check mr-2" />
+              <div className="form-group text-right px-3 mt-3 d-flex align-items-cneter justify-content-end">
+                <button className="btn border-white text-white hm-text-12" onClick={this.submitCash}>
+                  <i className="fas fa-check mr-3 hm-text-12" />
                   Selected
                 </button>
               </div>
