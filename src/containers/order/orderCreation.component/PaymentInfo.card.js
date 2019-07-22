@@ -12,7 +12,6 @@ class PaymentInfo extends Component {
       round_trip: false,
       loaded: false,
       nonce: "",
-      isCreditCard: true,
       type: ""
     };
   }
@@ -28,10 +27,9 @@ class PaymentInfo extends Component {
     this.setState({ nonce });
   };
 
-  handleFinishOrder = () => {
+  handleFinishOrder = type => {
     const { current_order, handleSubmitAPaymentInLord, history } = this.props;
-    const { isCreditCard } = this.state;
-    if (isCreditCard) {
+    if (type === "card") {
       handleSubmitAPaymentInLord(current_order.order_token, { card_nonce: this.state.nonce, type: 1 }, history);
     } else {
       handleSubmitAPaymentInLord(current_order.order_token, { type: 3 }, history);
@@ -63,20 +61,12 @@ class PaymentInfo extends Component {
       <div>
         {loaded && (
           <PaymentCard
-            isCreditCard={this.isCreditCard}
+            handleFinishOrder={this.handleFinishOrder}
             handleNoneReceived={this.handleNoneReceived}
             realm_list_in_lord={realm_list_in_lord}
             paymentForm={window.SqPaymentForm}
           />
         )}
-        <div className="d-flex justify-content-end mt-5">
-          <button
-            className="btn trip-button-width rounded-custom text-white button-main-background shadow-sm hm-text-12"
-            onClick={this.handleFinishOrder}
-          >
-            Finished
-          </button>
-        </div>
       </div>
     );
   }

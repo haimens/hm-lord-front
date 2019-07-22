@@ -15,10 +15,15 @@ export default class PaymentCard extends Component {
   requestCardNonce() {
     this.paymentForm.requestCardNonce();
   }
-
+  handleFinishOrder = () => {
+    if (this.state.cashButton) {
+      this.props.handleFinishOrder("cash");
+    } else {
+      this.requestCardNonce();
+    }
+  };
   submitCash = () => {
-    this.setState({ cashButton: true, creditCardButton: false, nonce: undefined });
-    this.props.isCreditCard(false);
+    this.setState(state => ({ cashButton: !state.cashButton, nonce: undefined }));
   };
 
   handleNoneReceived = (nonce, data) => {
@@ -92,9 +97,10 @@ export default class PaymentCard extends Component {
             return;
           }
           this.setState({ creditCardButton: true, cashButton: false });
-          this.props.isCreditCard(true);
 
           this.handleNoneReceived(nonce, cardData);
+          this.props.handleFinishOrder("card");
+
           // TODO: Connect to pay back end
         },
         unsupportedBrowserDetected: () => {},
@@ -204,7 +210,7 @@ export default class PaymentCard extends Component {
                 Pay Upon Arrival
               </h6>
             </div>
-            <div className="px-3 py-4">
+            {/* <div className="px-3 py-4">
               <div
                 className="px-4 py-3 d-flex justify-content-between align-items-center rounded-custom shadow-sm text-white"
                 style={{ backgroundColor: "#12ccef", height: "78px" }}
@@ -232,8 +238,8 @@ export default class PaymentCard extends Component {
                   </button>
                 )}
               </div>
-            </div>
-            <div className="px-3 pb-4">
+            </div> */}
+            <div className="px-3 mt-4 pb-4">
               <div
                 className="px-4 py-3 d-flex justify-content-between align-items-center rounded-custom shadow-sm text-white"
                 style={{ backgroundColor: "#2ece89", height: "78px" }}
@@ -255,13 +261,21 @@ export default class PaymentCard extends Component {
                     Select
                   </button>
                 ) : (
-                  <button className="btn border-white text-white hm-text-12" disabled onClick={this.submitCash}>
+                  <button className="btn border-white text-white hm-text-12" onClick={this.submitCash}>
                     <i className="fas fa-check mr-3 hm-text-12" />
                     Selected
                   </button>
                 )}
               </div>
             </div>
+          </div>
+          <div className="d-flex justify-content-end mt-5">
+            <button
+              className="btn trip-button-width rounded-custom text-white button-main-background shadow-sm hm-text-12"
+              onClick={this.handleFinishOrder}
+            >
+              Finished
+            </button>
           </div>
         </div>
       </div>
