@@ -5,7 +5,7 @@ class CustomerDetailCard extends Component {
     this.props.handleDetailButtonClicked();
   };
   render() {
-    const { name, cell, email, username, img_path, addr_str } = this.props.customer_detail_in_lord;
+    const { name, cell, email, username, img_path, addr_str, note } = this.props.customer_detail_in_lord;
     return (
       <div className="bg-white rounded-custom shadow-sm">
         <div className="row" style={{ padding: "40px" }}>
@@ -39,6 +39,10 @@ class CustomerDetailCard extends Component {
                 <div className="mb-4 px-3">
                   <div className="text-secondary-color font-weight-500 hm-text-14">Username</div>
                   <div className="hm-text-14 font-weight-bold">{username}</div>
+                </div>
+                <div className="mb-4 px-3">
+                  <div className="text-secondary-color font-weight-500 hm-text-14">Note</div>
+                  <div className="hm-text-14 font-weight-bold">{note ? note : "N/A"}</div>
                 </div>
                 <div className="mb-4 px-3">
                   <div className="text-secondary-color font-weight-500 hm-text-14">Address</div>

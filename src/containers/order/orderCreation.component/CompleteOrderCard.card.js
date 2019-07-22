@@ -21,7 +21,7 @@ import {
   updateTripOperationInfo,
   updateTripBasicInfo
 } from "../../../actions/trip.action";
-import { createCustomerNoteListInLord } from "../../../actions/note.action";
+import { createOrderNoteListInLord } from "../../../actions/note.action";
 import CompleteTop from "./CompleteOrder.component/CompleteTop.card";
 import AddonModal from "./CompleteOrder.component/Addon.modal";
 import EditAmountModal from "./CompleteOrder.component/EditAmount.card";
@@ -100,12 +100,13 @@ class CompleteOrderCard extends Component {
       handleMoveNext,
       applyFinalOrder,
       updateOrderDetailInLord,
-      createCustomerNoteListInLord,
-      order_detail
+      createOrderNoteListInLord
     } = this.props;
     const { name, area, cell, special_instruction } = this.state;
     updateOrderDetailInLord(current_order.order_token, { contact_name: name, contact_cell: `${area} ${cell}` }, true);
-    createCustomerNoteListInLord(order_detail.customer_info.customer_token, { status: 1, note: special_instruction });
+    if (special_instruction) {
+      createOrderNoteListInLord(current_order.order_token, { type: 1, note: special_instruction });
+    }
     applyFinalOrder(current_order.order_token);
     handleMoveNext(1);
   };
@@ -478,7 +479,7 @@ const mapDispatchToProps = {
   findFlightListInLord,
   updateTripOperationInfo,
   updateTripBasicInfo,
-  createCustomerNoteListInLord
+  createOrderNoteListInLord
 };
 
 export default connect(

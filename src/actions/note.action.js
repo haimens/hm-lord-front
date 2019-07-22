@@ -22,8 +22,6 @@ export const findCustomerNoteListInLord = (customer_token, query = {}) => async 
 };
 
 export const createCustomerNoteListInLord = (customer_token, body = {}) => async dispatch => {
-  console.log(customer_token);
-  console.log(body);
   try {
     await startLoader(dispatch);
     await callApi(`note/detail/customer/${customer_token}`, "POST", body);
@@ -87,6 +85,8 @@ export const findOrderNoteListInLord = (order_token, query = {}) => async dispat
 };
 
 export const createOrderNoteListInLord = (order_token, body = {}) => async dispatch => {
+  console.log(order_token);
+  console.log(body);
   try {
     await startLoader(dispatch);
     await callApi(`note/detail/order/${order_token}`, "POST", body);

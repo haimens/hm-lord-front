@@ -11,7 +11,8 @@ export default class EditCustomer extends Component {
     email: "",
     cell: "",
     img_path: "",
-    addr_str: ""
+    addr_str: "",
+    note: ""
   };
 
   handleInputChange = e => {
@@ -41,7 +42,7 @@ export default class EditCustomer extends Component {
   };
 
   handleCreatingCompany = async () => {
-    const { name, cell, area, email, img_path, addr_str } = this.state;
+    const { name, cell, area, email, img_path, addr_str, note } = this.state;
     const {
       updateACustomerInLord,
       createNewAddressInstance,
@@ -56,7 +57,8 @@ export default class EditCustomer extends Component {
             name,
             img_path,
             cell: `${area} ${cell}`,
-            email
+            email,
+            note
           }),
           updateACustomerAddressInLord(customer_token, {
             address_token: payload.address_token
@@ -68,7 +70,8 @@ export default class EditCustomer extends Component {
             name,
             img_path,
             cell: `${area} ${cell}`,
-            email
+            email,
+            note
           })
         ]);
       }
@@ -80,12 +83,12 @@ export default class EditCustomer extends Component {
 
   async componentDidMount() {
     const { customer_detail_in_lord } = this.props;
-    const { name, cell, email, addr_str, img_path } = customer_detail_in_lord;
-    await this.setState({ name, cell: cell.split(" ")[1], area: cell.split(" ")[0], email, addr_str, img_path });
+    const { name, cell, email, addr_str, img_path, note } = customer_detail_in_lord;
+    await this.setState({ name, cell: cell.split(" ")[1], area: cell.split(" ")[0], email, addr_str, img_path, note });
   }
 
   render() {
-    const { img_path, showImage, showPreview, name, cell, area, email, addr_str } = this.state;
+    const { img_path, showImage, showPreview, name, cell, area, email, addr_str, note } = this.state;
     return (
       <div>
         {showImage && (
@@ -102,7 +105,7 @@ export default class EditCustomer extends Component {
           onClose={this.handleClose}
           position="center"
           getWidth={"467px"}
-          getHeight={"580px"}
+          getHeight={"680px"}
         >
           <div className="container">
             <div className="p-3">
@@ -156,6 +159,20 @@ export default class EditCustomer extends Component {
                   id="email"
                   placeholder={"Email"}
                   value={email}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+
+              <div className="form-group mb-4">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Cell">
+                  Special Instruction
+                </label>
+                <textarea
+                  className="form-control hm-input-height"
+                  name="note"
+                  id="note"
+                  placeholder={"note"}
+                  value={note}
                   onChange={this.handleInputChange}
                 />
               </div>
