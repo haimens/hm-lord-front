@@ -59,7 +59,16 @@ export default class AlertInfo extends Component {
         >
           <div className="container">
             <div className="p-3">
-              <div className="form-group my-4">
+              <div className="form-group  mb-4">
+                <label className="font-weight-500 hm-text-14 text-secondary-color" htmlFor="eta">
+                  Date
+                </label>
+                <div className="font-weight-500 hm-text-14 text-secondary-color font-weight-bold">
+                  {convertUTCtoLocal(currentTime, "YYYY-MM-DD")}
+                </div>
+              </div>
+
+              <div className="form-group mb-4">
                 <label className="font-weight-500 hm-text-14 text-secondary-color" htmlFor="eta">
                   {alert_type}
                 </label>
