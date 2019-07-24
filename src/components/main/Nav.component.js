@@ -5,7 +5,7 @@ import alertify from "alertifyjs";
 import "./Nav.component.css";
 import AlertNotificationModal from "../shared/AlertNotification.modal";
 import { findAlertListInLord } from "../../actions/alert.action";
-import { findMessageListInLord } from "../../actions/message.action";
+import { findMessageListInLord, setCustomerChat } from "../../actions/message.action";
 
 class Nav extends Component {
   state = {
@@ -45,7 +45,8 @@ class Nav extends Component {
       message_list_in_lord,
       alert_list_in_lord,
       findAlertListInLord,
-      findMessageListInLord
+      findMessageListInLord,
+      setCustomerChat
     } = this.props;
     let unRead = 0;
     message_list_in_lord.record_list.map(message => {
@@ -59,6 +60,7 @@ class Nav extends Component {
         {showAlertNotification && (
           <AlertNotificationModal
             history={history}
+            setCustomerChat={setCustomerChat}
             onClose={this.handleShowAlert}
             findAlertListInLord={findAlertListInLord}
             findMessageListInLord={findMessageListInLord}
@@ -171,7 +173,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = {
   findAlertListInLord,
-  findMessageListInLord
+  findMessageListInLord,
+  setCustomerChat
 };
 
 export default connect(

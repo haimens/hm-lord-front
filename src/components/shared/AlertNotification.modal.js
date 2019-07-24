@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import moment from "moment";
-import "./ChatModal.css";
 
 /**
  * Modal
@@ -42,14 +41,10 @@ class AlertNotificationModal extends Component {
       width: "420px",
       height: "607px"
     };
-    const { alert_list_in_lord, message_list_in_lord } = this.props;
+    const { alert_list_in_lord, message_list_in_lord, setCustomerChat } = this.props;
     return (
       <main>
-        <div
-          className="modal-over-lay-chat"
-          onClick={this.handleClose}
-          style={{ zIndex: `${this.props.zIndex || 9}` }}
-        />
+        <div className="modal-over-lay-chat" onClick={this.handleClose} />
         <section className={`modal-right-alert rounded d-flex flex-column`} style={widthHeight}>
           <header
             className={`sticky-top d-flex justify-content-between align-items-center px-4`}
@@ -104,9 +99,16 @@ class AlertNotificationModal extends Component {
             if (index < 3) {
               return (
                 <div
-                  className="border-bottom-custom d-flex align-items-center px-2"
+                  className="border-bottom-custom d-flex align-items-center px-2 hm-pointer-cursor"
                   key={index}
                   style={{ height: "83px" }}
+                  onClick={() => {
+                    this.handleClose();
+                    setCustomerChat({
+                      customer_token: message.customer_token,
+                      customer_name: message.name
+                    });
+                  }}
                 >
                   <div className="col-3">
                     <img

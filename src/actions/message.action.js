@@ -110,7 +110,6 @@ export const updateSmsStatus = (sms_token, body = {}, customer_token) => async d
 };
 
 export const setCustomerChat = payload => async dispatch => {
-  console.log(payload);
   try {
     await startLoader(dispatch);
     await dispatch(findMessageAndResetData(payload.customer_token));
