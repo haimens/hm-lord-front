@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { SearchBar } from ".";
 
 export default class Header extends Component {
+  state = {
+    selected: 0
+  };
   handleChange = async e => {
     const keywords = e.target.value;
     await this.setState({ keywords });
@@ -13,11 +16,18 @@ export default class Header extends Component {
     this.props.onSubmit(keywords);
   };
 
+  handleOrderButtonClicked = status => {
+    this.setState({ selected: status });
+    this.props.handleOrderButtonClicked(status);
+  };
+
   handleSubmitSearch = keywords => {
     this.props.handleSubmitSearch(keywords);
   };
 
   render() {
+    const { selected } = this.state;
+    const { showOrderButton } = this.props;
     return (
       <div>
         <div
@@ -65,6 +75,55 @@ export default class Header extends Component {
                 </div>
               ))}
           </div>
+          {showOrderButton && (
+            <div>
+              <button
+                className={`mr-3 btn ${
+                  selected === 0 ? "button-main-background text-white" : "text-purple bg-white"
+                } border-0 rounded`}
+                onClick={() => this.handleOrderButtonClicked(0)}
+                style={{ width: "90px" }}
+              >
+                All
+              </button>
+              <button
+                className={`mr-3 btn ${
+                  selected === 1 ? "button-main-background text-white" : "text-purple bg-white"
+                } border-0 rounded`}
+                onClick={() => this.handleOrderButtonClicked(1)}
+                style={{ width: "90px" }}
+              >
+                Pending
+              </button>
+              <button
+                className={`mr-3 btn ${
+                  selected === 2 ? "button-main-background text-white" : "text-purple bg-white"
+                } border-0 rounded`}
+                onClick={() => this.handleOrderButtonClicked(2)}
+                style={{ width: "90px" }}
+              >
+                Finalize
+              </button>
+              <button
+                className={`mr-3 btn ${
+                  selected === 3 ? "button-main-background text-white" : "text-purple bg-white"
+                } border-0 rounded`}
+                onClick={() => this.handleOrderButtonClicked(3)}
+                style={{ width: "90px" }}
+              >
+                Confirm
+              </button>
+              <button
+                className={`mr-3 btn ${
+                  selected === 4 ? "button-main-background text-white" : "text-purple bg-white"
+                } border-0 rounded`}
+                onClick={() => this.handleOrderButtonClicked(4)}
+                style={{ width: "90px" }}
+              >
+                Completed
+              </button>
+            </div>
+          )}
           <div className="d-flex">
             {this.props.search && (
               <div className="mr-3">

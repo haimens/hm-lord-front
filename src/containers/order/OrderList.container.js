@@ -15,7 +15,13 @@ class Order extends Component {
   handleSubmitSearch = keywords => {
     this.props.findOrderListInLord({ keywords });
   };
-
+  handleOrderButtonClicked = status => {
+    if (status === 0) {
+      this.props.findOrderListInLord();
+    } else {
+      this.props.findOrderListInLord({ status });
+    }
+  };
   componentDidMount() {
     this.props.findOrderListInLord();
   }
@@ -28,6 +34,8 @@ class Order extends Component {
             <Header
               title="Order List"
               tabicon={"icon_order_white.svg"}
+              handleOrderButtonClicked={this.handleOrderButtonClicked}
+              showOrderButton={true}
               showButton={true}
               clickTitle={"Order"}
               buttonWidth={"88px"}
