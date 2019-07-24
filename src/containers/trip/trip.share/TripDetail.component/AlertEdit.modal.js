@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Modal } from "../../../../components/shared";
 import { convertLocalToUTC, convertUTCtoLocal } from "../../../../actions/utilities.action";
 import alertify from "alertifyjs";
-import { TimePicker } from "antd";
+import { DatePicker } from "antd";
 import "./AlertInfoModal.css";
 import moment from "moment";
 export default class AlertInfo extends Component {
@@ -73,7 +73,8 @@ export default class AlertInfo extends Component {
                   {alert_type}
                 </label>
                 {currentTime !== "" && (
-                  <TimePicker
+                  <DatePicker
+                    showTime
                     defaultValue={moment(convertUTCtoLocal(currentTime))}
                     onChange={this.handleWhenTimeChanged}
                   />

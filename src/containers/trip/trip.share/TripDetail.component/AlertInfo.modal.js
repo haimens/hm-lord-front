@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Modal } from "../../../../components/shared";
 import { convertLocalToUTC, convertUTCtoLocal } from "../../../../actions/utilities.action";
-import { TimePicker } from "antd";
+import { DatePicker } from "antd";
 import "./AlertInfoModal.css";
 import moment from "moment";
 export default class AlertInfo extends Component {
@@ -92,7 +92,8 @@ export default class AlertInfo extends Component {
                 <label className="font-weight-500 hm-text-14 text-secondary-color" htmlFor="eta">
                   ETA Alert Setting
                 </label>
-                <TimePicker
+                <DatePicker
+                  showTime
                   defaultValue={moment(
                     convertUTCtoLocal(
                       moment(pickup_time)
@@ -108,7 +109,8 @@ export default class AlertInfo extends Component {
                 <label className="font-weight-500 hm-text-14 text-secondary-color" htmlFor="eta">
                   Arrival Alert Setting
                 </label>
-                <TimePicker
+                <DatePicker
+                  showTime
                   defaultValue={moment(
                     convertUTCtoLocal(
                       moment(pickup_time)
@@ -124,7 +126,8 @@ export default class AlertInfo extends Component {
                 <label className="font-weight-500 hm-text-14 text-secondary-color" htmlFor="eta">
                   COB Alert Setting
                 </label>
-                <TimePicker
+                <DatePicker
+                  showTime
                   defaultValue={moment(
                     convertUTCtoLocal(
                       moment(pickup_time)
