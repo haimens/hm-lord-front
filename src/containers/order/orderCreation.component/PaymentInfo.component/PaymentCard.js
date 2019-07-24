@@ -142,7 +142,7 @@ export default class PaymentCard extends Component {
   }
 
   render() {
-    const { creditCardButton, cashButton } = this.state;
+    const { cashButton } = this.state;
     return (
       <div className="row pt-2 mb-4" id="sq-ccbox">
         <div className="col-8">

@@ -10,7 +10,6 @@ import {
   TripCard,
   AddingNote,
   LogItem,
-  ChatModalContainer,
   EmailPreviewModal
 } from "../../components/shared";
 import BasicInfo from "./orderDetail.component/BasicInfo.card";
