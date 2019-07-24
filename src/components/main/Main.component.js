@@ -7,9 +7,14 @@ import Sidebar from "./Sidebar.component";
 import { push as Menu } from "react-burger-menu";
 
 import "./Main.component.css";
-
+import { ChatModalContainer } from "../shared";
 import { resetPassword } from "../../actions/auth.action";
-
+import {
+  updateSmsStatus,
+  createAMessageWithCustomer,
+  setChatToFalse,
+  findMessageDetailWithCustomer
+} from "../../actions/message.action";
 export class Main extends Component {
   state = {
     opened: false
@@ -17,11 +22,18 @@ export class Main extends Component {
   handleSideBarBeenOpened = async () => {
     await this.setState(states => ({ opened: !states.opened }));
   };
+  findMoreList = async (customer_token, start) => {
+    await this.props.findMessageDetailWithCustomer(customer_token, start);
+  };
   isMenuOpen = state => {
     if (this.state.opened !== state.isOpen) {
       this.setState({ opened: state.isOpen });
     }
     return;
+  };
+
+  handleShowChatWithCustomer = () => {
+    this.props.setChatToFalse();
   };
 
   render() {
@@ -32,8 +44,26 @@ export class Main extends Component {
       location: this.props.location
     };
     const { opened } = this.state;
+    const {
+      showChat,
+      updateSmsStatus,
+      message_detail_with_customer,
+      current_customer,
+      createAMessageWithCustomer
+    } = this.props;
     return (
       <main>
+        {showChat && (
+          <ChatModalContainer
+            updateSmsStatus={updateSmsStatus}
+            name={current_customer.customer_name}
+            findMoreList={this.findMoreList}
+            token={current_customer.customer_token}
+            list={message_detail_with_customer}
+            createAMessageWithCustomer={createAMessageWithCustomer}
+            handleClose={this.handleShowChatWithCustomer}
+          />
+        )}
         <Menu isOpen={opened} onStateChange={this.isMenuOpen} customBurgerIcon={false} customCrossIcon={false}>
           <Sidebar parentProps={parentProps} handleSideBarBeenOpened={this.handleSideBarBeenOpened} />
         </Menu>
@@ -52,11 +82,21 @@ export class Main extends Component {
 
 const mapStateToProps = state => {
   return {
-    is_open: state.navReducer.is_open
+    is_open: state.navReducer.is_open,
+    showChat: state.smsReducer.showChat,
+    message_detail_with_customer: state.smsReducer.message_detail_with_customer,
+    current_customer: state.smsReducer.current_customer
   };
 };
 
 export default connect(
   mapStateToProps,
-  { toggleSideBar, resetPassword }
+  {
+    toggleSideBar,
+    resetPassword,
+    updateSmsStatus,
+    createAMessageWithCustomer,
+    setChatToFalse,
+    findMessageDetailWithCustomer
+  }
 )(withRouter(Main));

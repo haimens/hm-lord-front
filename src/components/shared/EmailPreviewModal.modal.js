@@ -46,7 +46,7 @@ export default class EmailPreviewModal extends Component {
             <p>Trip #${idx + 1}</p>
           </th>
           <th class="purchase_heading">
-            <p class="align-right">Address</p>
+            <p class="align-right">Detail</p>
           </th>
         </tr><tr><td width="20%" class="purchase_item align-left" >From Address</td><td class="align-right" width="80%" class="purchase_item" align="middle">${
           trip.from_addr_str

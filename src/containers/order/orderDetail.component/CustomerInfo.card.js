@@ -16,7 +16,7 @@ export default function BasicInfo(props) {
       title: `From Admin-${localStorage.getItem("name")}`
     });
   };
-  const { order_detail, history, handleDetailButtonClicked } = props;
+  const { order_detail, history, setCustomerChat } = props;
   const { name, cell, email, img_path, addr_str, note, customer_token } = order_detail.customer_info;
   return (
     <>
@@ -30,7 +30,7 @@ export default function BasicInfo(props) {
                 alt="Customer"
                 className="rounded-circle my-3 hm-pointer-cursor"
                 style={{ height: "25px", width: "25px" }}
-                onClick={() => handleDetailButtonClicked(customer_token, name)}
+                onClick={() => setCustomerChat({ customer_name: name, customer_token })}
               />
               <img
                 src={`${process.env.PUBLIC_URL}/img/icon_detail.svg`}

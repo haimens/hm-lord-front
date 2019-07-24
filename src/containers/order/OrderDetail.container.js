@@ -31,7 +31,8 @@ import {
   setChatToFalse,
   createAMessageWithCustomer,
   updateSmsStatus,
-  findMessageAndResetData
+  findMessageAndResetData,
+  setCustomerChat
 } from "../../actions/message.action";
 import { createOrderNoteListInLord, findOrderNoteListInLord } from "../../actions/note.action";
 import { findCouponListInLord } from "../../actions/coupon.action";
@@ -138,12 +139,10 @@ class OrderDetail extends Component {
 
   render() {
     const {
-      customer_token,
       showUpdateBasicInfoModal,
       showUpdateCustomerInfoModal,
       showCouponModal,
       showAddingLogInOrder,
-      name,
       showEmailModal
     } = this.state;
     const {
@@ -157,13 +156,11 @@ class OrderDetail extends Component {
       applyFinalOrder,
       cancelOrder,
       confirmOrder,
-      showChat,
       createAMessageWithCustomer,
-      updateSmsStatus,
-      message_detail_with_customer,
       sendEmailToConfirm,
       general_setting_list_in_lord,
-      findCouponListInLord
+      findCouponListInLord,
+      setCustomerChat
     } = this.props;
     const { order_token } = match.params;
     const {
@@ -194,17 +191,6 @@ class OrderDetail extends Component {
             handleAddingCoupon={this.handleAddingCoupon}
             coupon_list_in_lord={coupon_list_in_lord}
             onClose={this.handleShowCouponModal}
-          />
-        )}
-        {showChat && (
-          <ChatModalContainer
-            updateSmsStatus={updateSmsStatus}
-            name={name}
-            findMoreList={this.findMoreList}
-            token={customer_token}
-            list={message_detail_with_customer}
-            createAMessageWithCustomer={createAMessageWithCustomer}
-            handleClose={this.handleShowChatWithCustomer}
           />
         )}
         {showEmailModal && (
@@ -247,6 +233,7 @@ class OrderDetail extends Component {
               <div className="col-lg-6 col-12 mb-4">
                 <CustomerInfo
                   history={history}
+                  setCustomerChat={setCustomerChat}
                   order_detail={order_detail}
                   handleDetailButtonClicked={this.handleChatWithCustomer}
                   handleUpdateCustomerInfo={this.handleUpdateCustomerInfo}
@@ -338,7 +325,6 @@ const mapStateToProps = state => {
     coupon_list_in_lord: state.couponReducer.coupon_list_in_lord,
     note_list_for_order: state.noteReducer.note_list_for_order,
     message_detail_with_customer: state.smsReducer.message_detail_with_customer,
-    showChat: state.smsReducer.showChat,
     general_setting_list_in_lord: state.settingsReducer.general_setting_list_in_lord
   };
 };
@@ -359,7 +345,8 @@ const mapDispatchToProps = {
   updateSmsStatus,
   findMessageAndResetData,
   sendEmailToConfirm,
-  findGeneralSettingListInLord
+  findGeneralSettingListInLord,
+  setCustomerChat
 };
 
 export default connect(

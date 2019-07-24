@@ -9,7 +9,6 @@ import {
   AddingDriverModal,
   LogItem,
   AddingNote,
-  ChatModalContainer,
   FlightDetailModal
 } from "../../../components/shared";
 import {
@@ -37,7 +36,8 @@ import {
   setChatToFalse,
   createAMessageWithCustomer,
   updateSmsStatus,
-  findMessageAndResetData
+  findMessageAndResetData,
+  setCustomerChat
 } from "../../../actions/message.action";
 import { findCarListForADriver, findDriverListInLord } from "../../../actions/driver.action";
 import { editAlertInfoInTrip } from "../../../actions/alert.action";
@@ -200,13 +200,10 @@ class TripDetailContainer extends Component {
       editAlertInfoInTrip,
       note_list_for_trip,
       createTripNoteListInLord,
-      message_detail_with_customer,
-      showChat,
-      createAMessageWithCustomer,
-      updateSmsStatus,
       flight_list_in_lord,
       updateTripBasicInfo,
-      driver_list_for_a_car
+      driver_list_for_a_car,
+      setCustomerChat
     } = this.props;
     const { trip_token } = match.params;
 
@@ -223,7 +220,6 @@ class TripDetailContainer extends Component {
       alert_token,
       alert_type,
       showEditAlertModal,
-      customer_token,
       curr_trip_detail_in_lord,
       showFlightDetail
     } = this.state;
@@ -297,17 +293,6 @@ class TripDetailContainer extends Component {
             onClose={this.handleCloseEditAlert}
           />
         )}
-        {showChat && (
-          <ChatModalContainer
-            updateSmsStatus={updateSmsStatus}
-            name={trip_detail_in_lord.customer_info.name}
-            findMoreList={this.findMoreList}
-            token={customer_token}
-            list={message_detail_with_customer}
-            createAMessageWithCustomer={createAMessageWithCustomer}
-            handleClose={this.handleShowChatWithCustomer}
-          />
-        )}
         <section className="mb-4">
           <div>
             <Header
@@ -335,6 +320,7 @@ class TripDetailContainer extends Component {
               </div>
               <div className="col-lg-6 col-12 mb-4">
                 <CustomerInfo
+                  setCustomerChat={setCustomerChat}
                   trip_detail_in_lord={trip_detail_in_lord}
                   handleDetailButtonClicked={this.handleChatWithCustomer}
                   showEditButton={false}
@@ -477,7 +463,6 @@ const mapStateToProps = state => {
     note_list_for_trip: state.noteReducer.note_list_for_trip,
     trip_add_on_list: state.tripReducer.trip_add_on_list,
     message_detail_with_customer: state.smsReducer.message_detail_with_customer,
-    showChat: state.smsReducer.showChat,
     flight_list_in_lord: state.flightReducer.flight_list_in_lord,
     driver_list_for_a_car: state.vehicleReducer.driver_list_for_a_car
   };
@@ -499,7 +484,8 @@ const mapDispatchToProps = {
   updateSmsStatus,
   findMessageAndResetData,
   findFlightListInLord,
-  findDriverListForACar
+  findDriverListForACar,
+  setCustomerChat
 };
 
 export default connect(

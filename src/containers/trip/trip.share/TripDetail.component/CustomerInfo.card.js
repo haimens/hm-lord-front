@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function CustomerInfoCard(props) {
-  const { showEditButton, handleDetailButtonClicked, trip_detail_in_lord } = props;
+  const { showEditButton, handleDetailButtonClicked, setCustomerChat, trip_detail_in_lord } = props;
   const { customer_info } = trip_detail_in_lord;
   return (
     <div>
@@ -22,7 +22,12 @@ export default function CustomerInfoCard(props) {
             alt="Customer"
             className="rounded-circle my-3 hm-pointer-cursor"
             style={{ height: "25px", width: "25px" }}
-            onClick={() => handleDetailButtonClicked(customer_info.customer_token)}
+            onClick={() =>
+              setCustomerChat({
+                customer_name: customer_info.name,
+                customer_token: customer_info.customer_token
+              })
+            }
           />
         </div>
         <img

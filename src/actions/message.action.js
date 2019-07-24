@@ -108,3 +108,19 @@ export const updateSmsStatus = (sms_token, body = {}, customer_token) => async d
     dispatch(processLogout(err));
   }
 };
+
+export const setCustomerChat = payload => async dispatch => {
+  console.log(payload);
+  try {
+    await startLoader(dispatch);
+    await dispatch(findMessageAndResetData(payload.customer_token));
+    await dispatch({
+      type: constant.SET_CHAT_USER,
+      payload
+    });
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};

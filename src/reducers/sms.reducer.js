@@ -11,7 +11,11 @@ const initialState = {
     count: 0,
     end: 0
   },
-  showChat: false
+  showChat: false,
+  current_customer: {
+    customer_name: "",
+    customer_token: ""
+  }
 };
 
 export default (state = initialState, action) => {
@@ -32,6 +36,10 @@ export default (state = initialState, action) => {
       return { ...state, message_detail_with_customer: action.payload, showChat: true };
     case constant.SET_CHAT_TO_FALSE:
       return { ...state, showChat: false };
+    case constant.SET_CHAT_TO_TRUE:
+      return { ...state, showChat: true };
+    case constant.SET_CHAT_USER:
+      return { ...state, current_customer: action.payload, showChat: true };
     default:
       return state;
   }
