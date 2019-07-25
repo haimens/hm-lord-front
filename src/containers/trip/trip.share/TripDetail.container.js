@@ -243,6 +243,7 @@ class TripDetailContainer extends Component {
         {showBasicInfoModal && (
           <BasicInfoModal
             trip_token={trip_token}
+            note={trip_detail_in_lord.basic_info.note}
             currFlightStr={trip_detail_in_lord.basic_info.flight_str}
             updateTripBasicInfo={updateTripBasicInfo}
             curr_trip_detail_in_lord={curr_trip_detail_in_lord}

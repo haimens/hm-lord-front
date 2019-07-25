@@ -5,7 +5,8 @@ import alertify from "alertifyjs";
 export default class BasicInfo extends Component {
   state = {
     airlineCodeID: "",
-    flightNumber: ""
+    flightNumber: "",
+    note: ""
   };
 
   handleInputChange = e => {
@@ -17,11 +18,12 @@ export default class BasicInfo extends Component {
   };
 
   handleAddingAddon = async () => {
-    const { airlineCodeID, flightNumber } = this.state;
+    const { airlineCodeID, flightNumber, note } = this.state;
     const { updateTripBasicInfo, trip_token } = this.props;
     if (airlineCodeID !== "" && flightNumber !== "") {
       updateTripBasicInfo(trip_token, {
-        flight_str: `${airlineCodeID} ${flightNumber}`
+        flight_str: `${airlineCodeID} ${flightNumber}`,
+        note
       });
       this.handleClose();
     } else {
@@ -30,24 +32,27 @@ export default class BasicInfo extends Component {
   };
 
   componentDidMount() {
-    const { currFlightStr } = this.props;
+    const { currFlightStr, note } = this.props;
     if (currFlightStr !== "" && currFlightStr !== " " && currFlightStr) {
       this.setState({
         airlineCodeID: currFlightStr.split(" ")[0],
         flightNumber: currFlightStr.split(" ")[1]
       });
     }
+    if (note) {
+      this.setState({ note });
+    }
   }
 
   render() {
-    const { airlineCodeID, flightNumber } = this.state;
+    const { airlineCodeID, flightNumber, note } = this.state;
     return (
       <Modal
         title={`Update Flight Info`}
         onClose={this.handleClose}
         position="center"
         getWidth={"467px"}
-        getHeight={"300px"}
+        getHeight={"400px"}
       >
         <div className="container">
           <div className="p-3">
@@ -69,6 +74,19 @@ export default class BasicInfo extends Component {
                   id="flightNumber"
                   placeholder="Flight Number"
                   value={flightNumber}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+            </div>
+            <div className="form-group my-4 ">
+              <label className="text-main-color hm-text-14 font-weight-bold">Note</label>
+              <div className="input-group mt-2">
+                <input
+                  type="text"
+                  className="form-control hm-input-height"
+                  id="note"
+                  placeholder="Note"
+                  value={note}
                   onChange={this.handleInputChange}
                 />
               </div>
