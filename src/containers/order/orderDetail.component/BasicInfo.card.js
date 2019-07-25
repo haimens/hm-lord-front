@@ -90,17 +90,17 @@ export default function BasicInfo(props) {
         <div className="mb-4 px-3">
           <button
             className="border-0 shadow-sm  hm-text-12 text-white font-weight-bold rounded-custom mr-3"
-            style={{ height: "43px", width: "98px", backgroundColor: "#f5365d" }}
+            style={{ height: "43px", backgroundColor: "#f5365d" }}
             onClick={handleCancelOrder}
           >
-            Cancel Order
+            Cancel
           </button>
           <button
             className="border-0 shadow-sm  hm-text-12 text-white font-weight-bold rounded-custom mr-3"
-            style={{ height: "43px", width: "98px", backgroundColor: "#2ece89" }}
+            style={{ height: "43px", backgroundColor: "#2ece89" }}
             onClick={handlePayOrderAction}
           >
-            Pay Order
+            Finalize & Pay
           </button>
           {status_str === "FINALIZED" && (
             <button

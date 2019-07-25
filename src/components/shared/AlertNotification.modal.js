@@ -41,7 +41,7 @@ class AlertNotificationModal extends Component {
       width: "420px",
       height: "607px"
     };
-    const { alert_list_in_lord, message_list_in_lord, setCustomerChat } = this.props;
+    const { alert_list_in_lord, message_list_in_lord, setCustomerChat, history } = this.props;
     return (
       <main>
         <div className="modal-over-lay-chat" onClick={this.handleClose} />
@@ -59,9 +59,10 @@ class AlertNotificationModal extends Component {
             if (index < 3) {
               return (
                 <div
-                  className="border-bottom-custom d-flex align-items-center px-2"
+                  className="border-bottom-custom d-flex align-items-center px-2 hm-pointer-cursor"
                   key={index}
                   style={{ height: "83px" }}
+                  onClick={() => history.push("/notification/alert")}
                 >
                   <div className="col-3">
                     <img
@@ -75,7 +76,7 @@ class AlertNotificationModal extends Component {
                     <div className="d-flex justify-content-between align-items-center">
                       <div>
                         <div className="font-weight-bold hm-text-14 text-modal-color">{alert.customer_name}</div>
-                        <div className=" hm-text-14 text-modal-color">{alert.status_str}</div>
+                        <div className=" hm-text-14 text-modal-color">{alert.type_str}</div>
                       </div>
                       <div className="ext-secondary-color hm-text-13">{`${moment(alert.record_time).fromNow()}`}</div>
                     </div>

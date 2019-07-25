@@ -31,7 +31,7 @@ export default class BasicInfo extends Component {
 
   componentDidMount() {
     const { currFlightStr } = this.props;
-    if (currFlightStr !== "") {
+    if (currFlightStr !== "" && currFlightStr !== " " && currFlightStr) {
       this.setState({
         airlineCodeID: currFlightStr.split(" ")[0],
         flightNumber: currFlightStr.split(" ")[1]
