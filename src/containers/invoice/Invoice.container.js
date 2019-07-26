@@ -8,16 +8,10 @@ class Invoice extends Component {
   state = {
     showAddWage: false
   };
-  handleAddingWage = () => {
-    this.setState(state => ({ showAddWage: !state.showAddWage }));
-  };
-
   handlePageChange = start => {
     this.props.findInvoiceListInLord({ start });
   };
-  handlePayableItemClick = driver_token => {
-    this.props.history.push(`driver/detail/${driver_token}`);
-  };
+
   componentDidMount() {
     this.props.findInvoiceListInLord();
   }
