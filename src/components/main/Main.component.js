@@ -44,21 +44,16 @@ export class Main extends Component {
       location: this.props.location
     };
     const { opened } = this.state;
-    const {
-      showChat,
-      updateSmsStatus,
-      message_detail_with_customer,
-      current_customer,
-      createAMessageWithCustomer
-    } = this.props;
+    const { showChat, updateSmsStatus, message_detail_with_customer, createAMessageWithCustomer } = this.props;
+    console.log(this.props.current_customer.customer_token);
     return (
       <main>
         {showChat && (
           <ChatModalContainer
             updateSmsStatus={updateSmsStatus}
-            name={current_customer.customer_name}
+            name={this.props.current_customer.customer_name}
             findMoreList={this.findMoreList}
-            token={current_customer.customer_token}
+            token={this.props.current_customer.customer_token}
             list={message_detail_with_customer}
             createAMessageWithCustomer={createAMessageWithCustomer}
             handleClose={this.handleShowChatWithCustomer}

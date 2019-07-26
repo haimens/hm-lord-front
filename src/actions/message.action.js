@@ -72,6 +72,7 @@ export const createAMessageWithCustomer = (customer_token, body) => async dispat
 };
 
 export const findMessageAndResetData = (customer_token, query = {}) => async dispatch => {
+  console.log(customer_token);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`message/all/detail/customer/${customer_token}`, "GET", null, {
@@ -97,6 +98,7 @@ export const findMessageAndResetData = (customer_token, query = {}) => async dis
 };
 
 export const updateSmsStatus = (sms_token, body = {}, customer_token) => async dispatch => {
+  console.log(sms_token, body, customer_token);
   try {
     await startLoader(dispatch);
     await callApi(`message/detail/${sms_token}`, "PATCH", body);
