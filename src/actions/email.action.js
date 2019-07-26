@@ -187,7 +187,7 @@ export const sendEmailToCustomer = (customer_token, name) => async dispatch => {
             <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
               <p style="margin: 0;">Welcome to ${localStorage.getItem(
                 "company_name"
-              )}. We have received your registration. THank you again for registration. If you have any questions, please let us know!
+              )}. We have received your registration. Thank you again for registration. If you have any questions, please let us know!
             </td>
           </tr>
           <!-- end copy -->
