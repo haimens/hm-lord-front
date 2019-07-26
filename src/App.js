@@ -35,6 +35,7 @@ import VehicleResource from "./containers/settings/Vehicle.container/Vehicle.con
 import GeneralSetting from "./containers/settings/General.container/General.container";
 
 import InvoiceContainer from "./containers/invoice/Invoice.container";
+import FeeContainer from "./containers/tribute/tribute.container";
 
 const Login = React.lazy(() => import("./containers/login/Login.container"));
 const ResetPassword = React.lazy(() => import("./containers/resetPassword/ResetPassword.container"));
@@ -92,6 +93,7 @@ class App extends Component {
               <ProtectedRoute exact path="/trip/abnormal" component={TripContainer} />
 
               <ProtectedRoute exact path="/invoice" component={InvoiceContainer} />
+              <ProtectedRoute exact path="/fee" component={FeeContainer} />
 
               <ProtectedRoute exact path="/payable" component={DriverPayable} />
 

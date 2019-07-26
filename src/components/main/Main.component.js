@@ -45,7 +45,6 @@ export class Main extends Component {
     };
     const { opened } = this.state;
     const { showChat, updateSmsStatus, message_detail_with_customer, createAMessageWithCustomer } = this.props;
-    console.log(this.props.current_customer.customer_token);
     return (
       <main>
         {showChat && (

@@ -9,23 +9,23 @@ class Tribute extends Component {
     showAddWage: false
   };
   handlePageChange = start => {
-    this.props.findInvoiceListInLord({ start });
+    this.props.findTributeListInLord({ start });
   };
 
   componentDidMount() {
-    this.props.findInvoiceListInLord();
+    this.props.findTributeListInLord();
   }
   render() {
     const { tribute_list_in_lord } = this.props;
     return (
       <main className="container-fluid">
         <section className="mb-4">
-          <Header title="Invoice" tabicon={"icon_invoice.svg"} clickTitle={"Driver"} buttonWidth={"88px"} />
+          <Header title="Fee" tabicon={"icon_invoice.svg"} clickTitle={"Driver"} buttonWidth={"88px"} />
         </section>
         <section className="mb-4">
           <ListHeader
             parentProps={{
-              title: "Invoice List",
+              title: "Fee List",
               clickFunction: this.handleShowAddingWageModal,
               clickTitle: "Wage"
             }}
@@ -34,12 +34,12 @@ class Tribute extends Component {
           <ListView
             totalCount={tribute_list_in_lord.count}
             title="Invoice List"
-            fieldNames={["Created On", "Company Name", "Invoice Number", "Amount", "Status"]}
+            fieldNames={["Created On", "Amount", "Note"]}
             hideHeader={true}
             onPageChange={this.handlePageChange}
           >
-            {tribute_list_in_lord.record_list.map((payable, index) => (
-              <TributeListItem parentProps={payable} key={index} />
+            {tribute_list_in_lord.record_list.map((tribute, index) => (
+              <TributeListItem parentProps={tribute} key={index} />
             ))}
           </ListView>
         </section>
