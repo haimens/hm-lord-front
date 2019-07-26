@@ -1,7 +1,7 @@
 import constant from "../constants/constant";
 import { callApi, startLoader, stopLoader, launchSuccess } from "./utilities.action";
 import { processLogout } from "./auth.action";
-
+import { sendEmailToCustomer } from "./email.action";
 export const findCustomerListInLord = (query = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
@@ -25,6 +25,7 @@ export const createACustomerInLord = (body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`customer/detail`, "POST", body);
+    await dispatch(sendEmailToCustomer(payload.customer_token, body.customer_info.name));
     await dispatch(findCustomerListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
