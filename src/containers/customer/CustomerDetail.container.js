@@ -14,7 +14,7 @@ import { findCustomerOrderListInLord, setCurrentCustomerInLord } from "../../act
 import { findCustomerNoteListInLord, createCustomerNoteListInLord } from "../../actions/note.action";
 import { createNewAddressInstance } from "../../actions/address.action";
 import { setCustomerChat } from "../../actions/message.action";
-import { sendEmailToConfirm } from "../../actions/email.action";
+import { sendEmailToCustomer } from "../../actions/email.action";
 class CustomerDetail extends Component {
   state = {
     showAddingOrderModal: false,
@@ -58,7 +58,7 @@ class CustomerDetail extends Component {
       note_list_for_customer,
       order_list_in_customer,
       setCustomerChat,
-      sendEmailToConfirm
+      sendEmailToCustomer
     } = this.props;
     const { customer_token } = match.params;
 
@@ -95,7 +95,7 @@ class CustomerDetail extends Component {
           </div>
           <div>
             <CustomerDetailCard
-              sendEmailToConfirm={sendEmailToConfirm}
+              sendEmailToCustomer={sendEmailToCustomer}
               customer_token={customer_token}
               setCustomerChat={setCustomerChat}
               handleDetailButtonClicked={this.handleEditingCustomerInformation}
@@ -178,7 +178,7 @@ const mapDispatchToProps = {
   setCurrentCustomerInLord,
   setCustomerChat,
 
-  sendEmailToConfirm
+  sendEmailToCustomer
 };
 
 export default connect(
