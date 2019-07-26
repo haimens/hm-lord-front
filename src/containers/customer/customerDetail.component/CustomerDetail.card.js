@@ -12,7 +12,6 @@ class CustomerDetailCard extends Component {
   handleSendSmsConfirmToCustomer = () => {
     const { sendEmailToCustomer, customer_token, customer_detail_in_lord } = this.props;
     const { name, username } = customer_detail_in_lord;
-
     sendEmailToCustomer(customer_token, name, username);
   };
   render() {

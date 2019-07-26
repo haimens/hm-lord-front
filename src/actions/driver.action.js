@@ -25,7 +25,7 @@ export const createADriverInLord = (body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`driver/detail`, "POST", body);
-    await dispatch(sendEmailToDriver(payload.driver_token, body.name));
+    await dispatch(sendEmailToDriver(payload.driver_token, body.name, payload.username));
     await dispatch(findDriverListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);

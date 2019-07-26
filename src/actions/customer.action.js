@@ -25,7 +25,7 @@ export const createACustomerInLord = (body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`customer/detail`, "POST", body);
-    await dispatch(sendEmailToCustomer(payload.customer_token, body.customer_info.name));
+    await dispatch(sendEmailToCustomer(payload.customer_token, body.customer_info.name, payload.username));
     await dispatch(findCustomerListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);

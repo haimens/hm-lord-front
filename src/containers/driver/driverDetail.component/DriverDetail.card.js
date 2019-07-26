@@ -10,7 +10,7 @@ class DriverDetailCard extends Component {
   };
   handleSendEmailToDriver = () => {
     const { sendEmailToDriver, driver_token, driver_detail_in_lord } = this.props;
-    sendEmailToDriver(driver_token, driver_detail_in_lord.basic_info.name);
+    sendEmailToDriver(driver_token, driver_detail_in_lord.basic_info.name, driver_detail_in_lord.basic_info.username);
   };
   render() {
     const { sum, driver_detail_in_lord } = this.props;

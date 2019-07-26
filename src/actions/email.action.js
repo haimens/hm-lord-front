@@ -13,7 +13,8 @@ export const sendEmailToConfirm = (customer_token, body = {}) => async dispatch 
   }
 };
 
-export const sendEmailToCustomer = (customer_token, name) => async dispatch => {
+export const sendEmailToCustomer = (customer_token, name, username) => async dispatch => {
+  console.log(username);
   try {
     let msg = `<!DOCTYPE html>
     <html>
@@ -106,6 +107,9 @@ export const sendEmailToCustomer = (customer_token, name) => async dispatch => {
         border: 0;
         outline: none;
       }
+      .font-bold{
+        font-weight: bold;
+      }
       </style>
     
     </head>
@@ -187,7 +191,7 @@ export const sendEmailToCustomer = (customer_token, name) => async dispatch => {
             <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
               <p style="margin: 0;">Welcome to ${localStorage.getItem(
                 "company_name"
-              )}. We have received your registration. Thank you again for registration. If you have any questions, please let us know!
+              )}. We have received your registration. Your Username is <span class="font-bold">${username}</span> Thank you again for registration. If you have any questions, please let us know!
             </td>
           </tr>
           <!-- end copy -->
@@ -256,7 +260,7 @@ export const sendEmailToCustomer = (customer_token, name) => async dispatch => {
   }
 };
 
-export const sendEmailToDriver = (driver_token, name) => async dispatch => {
+export const sendEmailToDriver = (driver_token, name, username) => async dispatch => {
   let msg = `<!DOCTYPE html>
   <html>
   <head>
@@ -348,6 +352,9 @@ export const sendEmailToDriver = (driver_token, name) => async dispatch => {
       border: 0;
       outline: none;
     }
+    .font-bold{
+      font-weight: bold;
+    }
     </style>
   
   </head>
@@ -429,7 +436,7 @@ export const sendEmailToDriver = (driver_token, name) => async dispatch => {
           <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
             <p style="margin: 0;">Welcome to ${localStorage.getItem(
               "company_name"
-            )}. We have received your registration. Thank you again for registration. If you have any questions, please let us know!
+            )}. We have received your registration. Your Username is <span class="font-bold">${username}</span> Thank you again for registration. If you have any questions, please let us know!
           </td>
         </tr>
         <!-- end copy -->
