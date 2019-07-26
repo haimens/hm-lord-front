@@ -144,7 +144,7 @@ export default class PaymentCard extends Component {
   render() {
     const { cashButton } = this.state;
     return (
-      <div className="row pt-2 mb-4" id="sq-ccbox">
+      <div className="row pt-2 mb-4 pb-5" id="sq-ccbox">
         <div className="col-8">
           <div className="rounded-custom bg-white shadow-sm">
             <div className="d-flex justify-content-between align-items-center px-3 border-bottom-custom h-100">
@@ -269,7 +269,7 @@ export default class PaymentCard extends Component {
               </div>
             </div>
           </div>
-          <div className="d-flex justify-content-end mt-5">
+          <div className="d-flex justify-content-end mt-5 pb-5">
             <button
               className="btn trip-button-width rounded-custom text-white button-main-background shadow-sm hm-text-12"
               onClick={this.handleFinishOrder}
