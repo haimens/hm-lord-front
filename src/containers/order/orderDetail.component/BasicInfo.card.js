@@ -14,12 +14,17 @@ export default function BasicInfo(props) {
     is_paid
   } = props.order_detail.order_info;
   const handlePayOrderAction = () => {
+    props.history.push(`/order/creation/${props.order_token}`);
+  };
+
+  const handleFinalizeAndPayOrderAction = () => {
     props.applyFinalOrder(props.order_token);
     props.history.push(`/order/creation/${props.order_token}`);
   };
   const handleCancelOrder = () => {
     props.cancelOrder(props.order_token, props.history);
   };
+
   const handleConfirmOrder = () => {
     props.confirmOrder(props.order_token);
   };
@@ -90,18 +95,39 @@ export default function BasicInfo(props) {
         <div className="mb-4 px-3">
           <button
             className="border-0 shadow-sm  hm-text-12 text-white font-weight-bold rounded-custom mr-3"
-            style={{ height: "43px", backgroundColor: "#f5365d" }}
+            style={{ height: "43px", width: "98px", backgroundColor: "#f5365d" }}
             onClick={handleCancelOrder}
           >
             Cancel
           </button>
-          <button
-            className="border-0 shadow-sm  hm-text-12 text-white font-weight-bold rounded-custom mr-3"
-            style={{ height: "43px", backgroundColor: "#2ece89" }}
-            onClick={handlePayOrderAction}
-          >
-            Finalize & Pay
-          </button>
+          {status_str === "CONFIRMED" && status_str !== "FINALZIED" && (
+            <button
+              className="border-0 shadow-sm  hm-text-12 text-white font-weight-bold rounded-custom mr-3"
+              style={{ height: "43px", width: "98px", backgroundColor: "#2ece89" }}
+              onClick={handlePayOrderAction}
+            >
+              Pay
+            </button>
+          )}
+          {status_str === "FINALZIED" && status_str !== "CONFIRMED" && (
+            <button
+              className="border-0 shadow-sm  hm-text-12 text-white font-weight-bold rounded-custom mr-3"
+              style={{ height: "43px", width: "98px", backgroundColor: "#2ece89" }}
+              onClick={handlePayOrderAction}
+            >
+              Pay
+            </button>
+          )}
+          {status_str !== "FINALZIED" && status_str !== "CONFIRMED" && (
+            <button
+              className="border-0 shadow-sm  hm-text-12 text-white font-weight-bold rounded-custom mr-3"
+              style={{ height: "43px", backgroundColor: "#2ece89" }}
+              onClick={handleFinalizeAndPayOrderAction}
+            >
+              Finalize & Pay
+            </button>
+          )}
+
           {status_str === "FINALIZED" && (
             <button
               className="border-0 shadow-sm hm-text-12 text-white font-weight-bold rounded-custom"
