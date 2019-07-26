@@ -25,10 +25,13 @@ export default class BasicInfo extends Component {
         flight_str: `${airlineCodeID} ${flightNumber}`,
         note
       });
-      this.handleClose();
-    } else {
-      alertify.alert("Error!", "Please Finish The Form!");
     }
+    if (note !== "") {
+      updateTripBasicInfo(trip_token, {
+        note
+      });
+    }
+    this.handleClose();
   };
 
   componentDidMount() {

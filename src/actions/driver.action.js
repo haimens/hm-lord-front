@@ -1,7 +1,7 @@
 import constant from "../constants/constant";
 import { callApi, startLoader, stopLoader, launchSuccess } from "./utilities.action";
 import { processLogout } from "./auth.action";
-
+import { sendEmailToDriver } from "./email.action";
 export const findDriverListInLord = (query = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
@@ -24,7 +24,8 @@ export const findDriverListInLord = (query = {}) => async dispatch => {
 export const createADriverInLord = (body = {}) => async dispatch => {
   try {
     await startLoader(dispatch);
-    await callApi(`driver/detail`, "POST", body);
+    const { payload } = await callApi(`driver/detail`, "POST", body);
+    await dispatch(sendEmailToDriver(payload.driver_token, body.name));
     await dispatch(findDriverListInLord());
     await launchSuccess(dispatch);
     await stopLoader(dispatch);
