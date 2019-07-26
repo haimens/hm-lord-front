@@ -152,6 +152,17 @@ export default class Sidebar extends Component {
 
         <section className="accordion">
           <NavItem
+            onToggle={() => this.handleClick("/invoice")}
+            image={`${process.env.PUBLIC_URL}/img/tabicon_invoice.svg`}
+            name="Invoice"
+            path="invoice"
+            history={this.props.parentProps.history}
+            showArrow={false}
+          />
+        </section>
+
+        <section className="accordion">
+          <NavItem
             onToggle={() => this.handleClick("/payable")}
             image={`${process.env.PUBLIC_URL}/img/tabicon_payable.svg`}
             name="Driver Payable"

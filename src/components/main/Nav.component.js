@@ -24,7 +24,11 @@ class Nav extends Component {
 
   handleChangePassword = () => {
     this.props.parentProps.resetPassword(localStorage.getItem("username"));
-    alertify.notify("已发送修改密码连接至Email", "已发送修改密码连接至Email", 5);
+    alertify.notify(
+      "The password reset email has been sent to your on-file email address.",
+      "The password reset email has been sent to your on-file email address.",
+      5
+    );
   };
 
   handleSideBarBeenOpened = () => {

@@ -33,6 +33,9 @@ import EmailResource from "./containers/settings/Email.container/Email.container
 import CouponResource from "./containers/settings/Coupon.container/Coupon.container";
 import VehicleResource from "./containers/settings/Vehicle.container/Vehicle.container";
 import GeneralSetting from "./containers/settings/General.container/General.container";
+
+import InvoiceContainer from "./containers/invoice/Invoice.container";
+
 const Login = React.lazy(() => import("./containers/login/Login.container"));
 const ResetPassword = React.lazy(() => import("./containers/resetPassword/ResetPassword.container"));
 
@@ -82,14 +85,13 @@ class App extends Component {
 
               <ProtectedRoute exact path="/trip/ongoing" component={TripContainer} />
               <ProtectedRoute exact path="/trip/ongoing/detail/:trip_token" component={TripDetailContainer} />
-
               <ProtectedRoute exact path="/trip/upcoming" component={TripContainer} />
               <ProtectedRoute exact path="/trip/upcoming/detail/:trip_token" component={TripDetailContainer} />
-
               <ProtectedRoute exact path="/trip/finished" component={TripContainer} />
               <ProtectedRoute exact path="/trip/finished/detail/:trip_token" component={TripDetailContainer} />
-
               <ProtectedRoute exact path="/trip/abnormal" component={TripContainer} />
+
+              <ProtectedRoute exact path="/invoice" component={InvoiceContainer} />
 
               <ProtectedRoute exact path="/payable" component={DriverPayable} />
 
