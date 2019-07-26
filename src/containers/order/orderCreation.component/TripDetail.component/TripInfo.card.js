@@ -222,7 +222,32 @@ class TripInfo extends Component {
               <div className="form-group my-4 ">
                 <label className="text-main-color hm-text-14 font-weight-bold">
                   Flight Number
-                  <i className="far fa-question-circle ml-2 hm-pointer-cursor" style={{ color: "#aeb5bd" }} />
+                  <div className="btn-group dropup">
+                    <button
+                      type="button"
+                      className="dropdown-toggle removeAfter"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      style={{ border: "none", outline: "none" }}
+                    >
+                      <i className="far fa-question-circle" style={{ fontSize: "16px", color: "#aeb5bd" }} />
+                    </button>
+                    <div
+                      className="dropdown-menu hm-main-text-12 border-0 shadow hm-main-textColor-sub p-3 triangle-bottom"
+                      style={{ width: "260px" }}
+                    >
+                      Airline code is the operating airline code, ex. UA. Flight number refers to the numeric part of a
+                      flight code. If you are not sure,
+                      <a
+                        className="hm-main-text-12"
+                        target="_blank"
+                        href="https://www.iata.org/publications/Pages/code-search.aspx"
+                      >
+                        search here.
+                      </a>
+                    </div>
+                  </div>
                 </label>
                 <div className="input-group mt-2">
                   <input
@@ -241,6 +266,7 @@ class TripInfo extends Component {
                     value={flightNumber}
                     onChange={handleInputChange}
                   />
+
                   <i
                     className="fas fa-search d-flex justify-content-center align-items-center rounded-circle button-main-background text-white hm-pointer-cursor ml-3"
                     style={{ height: "46px", width: "46px" }}
