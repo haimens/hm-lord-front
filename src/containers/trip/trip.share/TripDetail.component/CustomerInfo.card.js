@@ -5,7 +5,7 @@ export default function CustomerInfoCard(props) {
   const { customer_info } = trip_detail_in_lord;
   return (
     <div>
-      <div className="purple-border">
+      <div className="purple-border p-3">
         <div className="d-flex justify-content-between align-items-center  ">
           <div className="hm-text-16 font-weight-bold text-modal-color">Customer Information</div>
           {showEditButton && (
@@ -20,7 +20,7 @@ export default function CustomerInfoCard(props) {
           <img
             src={`${process.env.PUBLIC_URL}/img/icon_chat.svg`}
             alt="Customer"
-            className="rounded-circle my-3 hm-pointer-cursor"
+            className="rounded-circle hm-pointer-cursor"
             style={{ height: "25px", width: "25px" }}
             onClick={() =>
               setCustomerChat({
@@ -36,29 +36,30 @@ export default function CustomerInfoCard(props) {
           className="rounded-circle my-3 mr-3"
           style={{ height: "74px", width: "74px" }}
         />
-      </div>
-      <div className="mb-4">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Customer Name</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">{customer_info.name}</div>
-      </div>
-      <div className="mb-4">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Cell</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">{customer_info.cell}</div>
-      </div>
-      <div className="mb-4">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Email</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">{customer_info.email}</div>
-      </div>
-      <div className="mb-4">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Address</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">
-          {customer_info.addr_str ? customer_info.addr_str : "N/A"}
+
+        <div className="mb-4">
+          <div className="text-secondary-color font-weight-500 hm-text-14">Customer Name</div>
+          <div className="hm-text-14 font-weight-bold text-modal-color">{customer_info.name}</div>
         </div>
-      </div>
-      {/* <div className="mb-4 px-3">
+        <div className="mb-4">
+          <div className="text-secondary-color font-weight-500 hm-text-14">Cell</div>
+          <div className="hm-text-14 font-weight-bold text-modal-color">{customer_info.cell}</div>
+        </div>
+        <div className="mb-4">
+          <div className="text-secondary-color font-weight-500 hm-text-14">Email</div>
+          <div className="hm-text-14 font-weight-bold text-modal-color">{customer_info.email}</div>
+        </div>
+        <div className="mb-4">
+          <div className="text-secondary-color font-weight-500 hm-text-14">Address</div>
+          <div className="hm-text-14 font-weight-bold text-modal-color">
+            {customer_info.addr_str ? customer_info.addr_str : "N/A"}
+          </div>
+        </div>
+        {/* <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Order ID</div>
         <div className="hm-text-14 font-weight-bold text-modal-color">{123}</div>
       </div> */}
+      </div>
     </div>
   );
 }
