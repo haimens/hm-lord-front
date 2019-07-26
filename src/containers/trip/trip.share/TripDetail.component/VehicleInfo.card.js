@@ -5,7 +5,7 @@ export default function VehicleInfoCard(props) {
   const { identifier, plate_num, description, img_path } = trip_detail_in_lord.car_info;
   return (
     <div>
-      <div className="purple-border p-3">
+      <div className="purple-border">
         <div className="d-flex justify-content-between align-items-center  ">
           <div className="hm-text-16 font-weight-bold text-modal-color">Vehicle Information</div>
           {showEditButton && (

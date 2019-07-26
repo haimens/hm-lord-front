@@ -51,7 +51,9 @@ export default function CustomerInfoCard(props) {
       </div>
       <div className="mb-4">
         <div className="text-secondary-color font-weight-500 hm-text-14">Address</div>
-        <div className="hm-text-14 font-weight-bold text-modal-color">{"N/A"}</div>
+        <div className="hm-text-14 font-weight-bold text-modal-color">
+          {customer_info.addr_str ? customer_info.addr_str : "N/A"}
+        </div>
       </div>
       {/* <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Order ID</div>
