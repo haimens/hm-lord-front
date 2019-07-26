@@ -59,10 +59,14 @@ class TripInfo extends Component {
   };
 
   handleSearchFlight = async () => {
-    const { date } = this.state;
+    const { date, time } = this.state;
     const { airlineCode, flightNumber, findFlightListInLord } = this.props;
     if (date !== "" && airlineCode !== "" && flightNumber !== "") {
-      await findFlightListInLord({ date: convertLocalToUTC(date), airlineCode, flightNumber });
+      await findFlightListInLord({
+        date: convertLocalToUTC(`${moment(date).format("YYYY-MM-DD")} ${moment(time).format("HH:mm:ss")}`),
+        airlineCode,
+        flightNumber
+      });
       await this.handleFlightDetailBeenClicked();
     } else {
       alertify.alert("Error!", "Please Finished Date, Air Line Code, and Flight Number before search!");
