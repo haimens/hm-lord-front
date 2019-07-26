@@ -24,6 +24,7 @@ import { findVehicleListInLord } from "../../actions/vehicle.action";
 import { findWageListInDriver, createWageInDriver, findSumWageInDriver } from "../../actions/wage.action";
 import { findSalaryListInDriver, createSalaryInDriver, findSumSalaryInDriver } from "../../actions/salary.action";
 
+import { sendEmailToDriver } from "../../actions/email.action";
 import "./DriverDetail.container.css";
 class DriverDetail extends Component {
   state = {
@@ -149,7 +150,8 @@ class DriverDetail extends Component {
       wage_sum_list_in_driver,
       salary_sum_list_in_driver,
       findVehicleListInLord,
-      requestDriverShareLocation
+      requestDriverShareLocation,
+      sendEmailToDriver
     } = this.props;
     return (
       <main className="container-fluid">
@@ -203,6 +205,7 @@ class DriverDetail extends Component {
           </div>
           <div>
             <DriverDetailCard
+              sendEmailToDriver={sendEmailToDriver}
               driver_token={driver_token}
               sum={wage_sum_list_in_driver.sum - salary_sum_list_in_driver.sum}
               handleDetailButtonClicked={this.handleDetailButtonClicked}
@@ -357,7 +360,9 @@ const mapDispatchToProps = {
   createWageInDriver,
   createSalaryInDriver,
   findSumWageInDriver,
-  findSumSalaryInDriver
+  findSumSalaryInDriver,
+
+  sendEmailToDriver
 };
 
 export default connect(

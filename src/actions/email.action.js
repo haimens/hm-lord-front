@@ -12,3 +12,14 @@ export const sendEmailToConfirm = (customer_token, body = {}) => async dispatch 
     dispatch(processLogout(err));
   }
 };
+export const sendEmailToDriver = (driver_token, body = {}) => async dispatch => {
+  try {
+    await startLoader(dispatch);
+    await callApi(`email/send/driver/${driver_token}`, "POST", body);
+    await launchSuccess(dispatch);
+    await stopLoader(dispatch);
+  } catch (err) {
+    await stopLoader(dispatch);
+    dispatch(processLogout(err));
+  }
+};
