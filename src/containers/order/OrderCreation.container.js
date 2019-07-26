@@ -21,6 +21,10 @@ class OrderCreation extends Component {
     this.setState(state => ({ round_trip: !state.round_trip }));
   };
 
+  handleSetOrderPosition = () => {
+    this.setState({ position: 2 });
+  };
+
   handleSetCurrentCustomer = currentCustomer => {
     this.props.setCurrentCustomerInLord(currentCustomer);
   };
@@ -44,6 +48,7 @@ class OrderCreation extends Component {
           <div className="mb-4">
             <OrderHeader
               titles={["Add Order", "Customer Information", "Trip Detail", "Complete Order", "Payment Information"]}
+              handleSetOrderPosition={this.handleSetOrderPosition}
               position={position}
             />
           </div>

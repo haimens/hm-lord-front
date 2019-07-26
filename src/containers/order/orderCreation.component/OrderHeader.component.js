@@ -2,6 +2,10 @@ import React from "react";
 
 export default function OrderHeader(props) {
   const { titles, position } = props;
+
+  const handleSetOrderPosition = () => {
+    props.handleSetOrderPosition();
+  };
   return (
     <div>
       <div className="d-flex align-items-center justify-content-between mb-4 text-white">
@@ -12,7 +16,9 @@ export default function OrderHeader(props) {
             alt="company"
             className="hm-header-size mr-3"
           />
-          <h4 className="hm-header-size text-white mr-3 hm-pointer-cursor">Order</h4>
+          <h4 className="hm-header-size text-white mr-3 hm-pointer-cursor" onClick={handleSetOrderPosition}>
+            Order
+          </h4>
           {titles.slice(0, position).map((title, index) => (
             <div className=" d-flex align-items-center" key={index}>
               <i className="fas fa-circle text-light-grey text-right mr-3" style={{ fontSize: "6px" }} />
