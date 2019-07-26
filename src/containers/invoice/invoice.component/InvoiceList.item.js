@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { parseAmount, convertUTCtoLocal } from "../../../actions/utilities.action";
 export default class WageList extends Component {
   render() {
-    const { handlePayableItemClicked, parentProps } = this.props;
-    const { cdate, company_name, receipt, amount, status_str } = parentProps;
+    const { cdate, company_name, receipt, amount, status_str } = this.props.parentProps;
     return (
       <tr className="border-bottom">
         <td data-label="Created Date" className="items-height align-middle text-center">
