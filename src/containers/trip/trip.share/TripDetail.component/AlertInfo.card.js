@@ -22,7 +22,7 @@ export default function AlertInfoCard(props) {
             <img
               src={`${process.env.PUBLIC_URL}/img/icon_edit.svg`}
               alt="Customer"
-              className="rounded-circle my-3 hm-pointer-cursor"
+              className="rounded-circle hm-pointer-cursor"
               style={{ height: "25px", width: "25px" }}
               onClick={() => handleDetailButtonClicked("alert")}
             />

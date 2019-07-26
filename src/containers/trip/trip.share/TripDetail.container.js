@@ -21,7 +21,8 @@ import {
   AlertInfoModal,
   CustomerInfoModal,
   AlertEditModal,
-  AddonService
+  AddonService,
+  AddonModal
 } from "./TripDetail.component";
 import { findTripNoteListInLord, createTripNoteListInLord } from "../../../actions/note.action";
 import { findVehicleListInLord, findDriverListForACar } from "../../../actions/vehicle.action";
@@ -29,7 +30,9 @@ import {
   findTripDetailInLord,
   createAnAlertForATrip,
   updateTripOperationInfo,
-  updateTripBasicInfo
+  updateTripBasicInfo,
+  createAddonToTrip,
+  deleteAddonItem
 } from "../../../actions/trip.action";
 import {
   findMessageDetailWithCustomer,
@@ -54,7 +57,7 @@ class TripDetailContainer extends Component {
     showDriverInfoModal: false,
     showVehicleInfoModal: false,
     showAlertInfoModal: false,
-    showTimeStampInfoModal: false,
+    showAddOnModal: false,
     alert_token: "",
     alert_type: "",
     showEditAlertModal: "",
@@ -80,8 +83,8 @@ class TripDetailContainer extends Component {
     if (type === "alert") {
       this.setState(state => ({ showAlertInfoModal: !state.showAlertInfoModal }));
     }
-    if (type === "stamps") {
-      this.setState(state => ({ showTimeStampInfoModal: !state.showTimeStampInfoModal }));
+    if (type === "add-on") {
+      this.setState(state => ({ showAddOnModal: !state.showAddOnModal }));
     }
   };
   handleUpdatingVehicle = car_token => {
@@ -150,6 +153,10 @@ class TripDetailContainer extends Component {
   handleSearchDriver = keywords => {
     this.props.findDriverListInLord({ keywords });
   };
+  handleDeleteAnAddon = addon_token => {
+    const { trip_token } = this.props.match.params;
+    this.props.deleteAddonItem(this.props.trip_detail_in_lord.basic_info.order_token, trip_token, addon_token, "first");
+  };
   async componentDidMount() {
     const {
       match,
@@ -203,7 +210,8 @@ class TripDetailContainer extends Component {
       flight_list_in_lord,
       updateTripBasicInfo,
       driver_list_for_a_car,
-      setCustomerChat
+      setCustomerChat,
+      createAddonToTrip
     } = this.props;
     const { trip_token } = match.params;
 
@@ -217,6 +225,7 @@ class TripDetailContainer extends Component {
       showVehicleInfoModal,
       showAlertInfoModal,
       showAddingLogInCustomer,
+      showAddOnModal,
       alert_token,
       alert_type,
       showEditAlertModal,
@@ -277,13 +286,16 @@ class TripDetailContainer extends Component {
             onClose={() => this.handleInfoModal("alert")}
           />
         )}
-        {/* {showTimeStampInfoModal && (
-          <TimeStampsModal
+        {showAddOnModal && (
+          <AddonModal
+            title="An Add-on"
             trip_token={trip_token}
-            updateTripBasicInfo={updateTripBasicInfo}
-            onClose={() => this.handleInfoModal("stamps")}
+            position={"first"}
+            createAddonToTrip={createAddonToTrip}
+            order_token={trip_detail_in_lord.basic_info.order_token}
+            onClose={() => this.handleInfoModal("add-on")}
           />
-        )} */}
+        )}
         {showEditAlertModal && (
           <AlertEditModal
             trip_token={trip_token}
@@ -351,11 +363,12 @@ class TripDetailContainer extends Component {
               </div>
               <div className="col-lg-6 col-12 mb-4">
                 <AddonService
-                  hideDelete={true}
                   addon_list={trip_detail_in_lord.addon_list}
                   handleDetailButtonClicked={this.handleInfoModal}
                   trip_detail_in_lord={trip_detail_in_lord}
-                  showEditButton={false}
+                  showEditButton={trip_detail_in_lord.basic_info.status_str === "PENDING"}
+                  hideDelete={!trip_detail_in_lord.basic_info.status_str === "PENDING"}
+                  handleDeleteAnAddon={this.handleDeleteAnAddon}
                 />
               </div>
             </div>
@@ -486,7 +499,9 @@ const mapDispatchToProps = {
   findMessageAndResetData,
   findFlightListInLord,
   findDriverListForACar,
-  setCustomerChat
+  setCustomerChat,
+  createAddonToTrip,
+  deleteAddonItem
 };
 
 export default connect(

@@ -7,8 +7,8 @@ import VehicleInfo from "./VehicleInfo.card";
 import BasicInfoModal from "./BasicInfo.modal";
 import AlertInfoModal from "./AlertInfo.modal";
 import CustomerInfoModal from "./CustomerInfo.modal";
-import TimeStampsModal from "./TimeStamps.modal";
 import AlertEditModal from "./AlertEdit.modal";
+import AddonModal from "./Addon.modal";
 export {
   AlertInfo,
   BasicInfo,
@@ -19,6 +19,6 @@ export {
   BasicInfoModal,
   AlertInfoModal,
   CustomerInfoModal,
-  TimeStampsModal,
-  AlertEditModal
+  AlertEditModal,
+  AddonModal
 };

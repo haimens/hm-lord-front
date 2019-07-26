@@ -1,16 +1,20 @@
 import React from "react";
 import { parseAmount } from "../../../../actions/utilities.action";
-export default function TimeStapsCard(props) {
-  const { showEditButton, addon_list } = props;
+export default function AddonService(props) {
+  const { showEditButton, addon_list, handleDetailButtonClicked, handleDeleteAnAddon } = props;
   return (
     <div>
       <div className="purple-border p-3">
         <div className="d-flex justify-content-between align-items-center  ">
           <div className="hm-text-16 font-weight-bold text-modal-color">Add-on Service</div>
           {showEditButton && (
-            <button className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center">
-              <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
-            </button>
+            <img
+              src={`${process.env.PUBLIC_URL}/img/icon_edit.svg`}
+              alt="Customer"
+              className="rounded-circle hm-pointer-cursor"
+              style={{ height: "25px", width: "25px" }}
+              onClick={() => handleDetailButtonClicked("add-on")}
+            />
           )}
         </div>
       </div>
@@ -39,6 +43,7 @@ export default function TimeStapsCard(props) {
                               className="hm-pointer-cursor ml-auto"
                               alt="delete"
                               style={{ height: "25px", width: "25px" }}
+                              onClick={() => handleDeleteAnAddon(addon.addon_token)}
                             />
                           )}
                         </div>
