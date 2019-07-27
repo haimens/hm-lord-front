@@ -289,8 +289,8 @@ class TripInfo extends Component {
           </div>
         </div>
 
-        <div className="col-12 col-lg-4">
-          <div className="rounded-custom bg-white shadow-sm" style={{ height: "737px", overflow: "auto" }}>
+        <div className="col-12 col-lg-4 h-100">
+          <div className="rounded-custom bg-white shadow-sm" style={{ height: "753px", overflow: "auto" }}>
             <div
               className="d-flex justify-content-between align-items-center p-3 border-bottom-custom"
               style={{ height: "65px" }}
