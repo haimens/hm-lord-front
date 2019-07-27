@@ -184,13 +184,13 @@ class TripInfo extends Component {
                     getGoogleAddress={this.saveFromAddress}
                     defaultValue={pickup_location}
                   />
-                  <button
-                    className=" d-flex justify-content-center ml-2 align-items-center border-left-0 btn button-main-background text-white"
-                    style={{ width: "46px" }}
+
+                  <img
+                    src={`${process.env.PUBLIC_URL}/img/btn_paste.svg`}
                     onClick={this.handlePastAddressToPickUp}
-                  >
-                    Paste
-                  </button>
+                    alt="paste"
+                    className="ml-2"
+                  />
                 </div>
               </div>
               <div className="form-group mb-4">
@@ -202,13 +202,12 @@ class TripInfo extends Component {
                     getGoogleAddress={this.saveToAddress}
                     defaultValue={dropoff_location}
                   />
-                  <button
-                    className=" d-flex justify-content-center ml-2 align-items-center border-left-0 btn button-main-background text-white"
-                    style={{ width: "46px" }}
+                  <img
+                    src={`${process.env.PUBLIC_URL}/img/btn_paste.svg`}
                     onClick={this.handlePastAddressToDropOff}
-                  >
-                    Paste
-                  </button>
+                    alt="paste"
+                    className="ml-2"
+                  />
                 </div>
               </div>
               <div className="form-group input-group mb-4">
