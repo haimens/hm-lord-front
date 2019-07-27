@@ -126,7 +126,8 @@ const initialState = {
     record_list: [],
     count: 0,
     end: 0
-  }
+  },
+  showMap: false
 };
 
 export default (state = initialState, action) => {
@@ -140,7 +141,7 @@ export default (state = initialState, action) => {
     case constant.TRIP_LIST_IN_LORD:
       return { ...state, trip_list_in_lord: action.payload };
     case constant.TRIP_DETAIL_IN_LORD:
-      return { ...state, trip_detail_in_lord: action.payload };
+      return { ...state, trip_detail_in_lord: action.payload, showMap: true };
     case constant.TRIP_DETAIL_IN_LORD_AGAIN:
       return { ...state, trip_detail_in_lord_again: action.payload };
     case constant.TRIP_COUNT_IN_LORD_ACTIVE:
@@ -151,6 +152,8 @@ export default (state = initialState, action) => {
       return { ...state, trip_count_in_lord_failed: action.payload };
     case constant.TRIP_ADD_ON_LIST:
       return { ...state, trip_add_on_list: action.payload };
+    case constant.SET_MAP_TO_FALSE_IN_TRIP:
+      return { ...state, showMap: false };
     default:
       return state;
   }

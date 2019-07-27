@@ -158,7 +158,6 @@ export const findDriverPayableListInLord = (query = {}) => async dispatch => {
 };
 
 export const requestDriverShareLocation = driver_token => async dispatch => {
-  console.log(driver_token);
   try {
     await startLoader(dispatch);
     await callApi(`driver/share/${driver_token}`, "PATCH");

@@ -37,6 +37,7 @@ import LogItem from "./LogList.item";
 import ChatModal from "./ChatModal";
 import ChatModalContainer from "./Chat.modal";
 import EmailPreviewModal from "./EmailPreviewModal.modal";
+import GMapWithThreeMarker from "./GMapWithThreeMarker";
 export {
   LoaderAlt,
   IconButton,
@@ -76,5 +77,6 @@ export {
   LogItem,
   ChatModal,
   ChatModalContainer,
-  EmailPreviewModal
+  EmailPreviewModal,
+  GMapWithThreeMarker
 };

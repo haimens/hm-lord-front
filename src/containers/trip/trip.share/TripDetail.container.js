@@ -9,7 +9,8 @@ import {
   AddingDriverModal,
   LogItem,
   AddingNote,
-  FlightDetailModal
+  FlightDetailModal,
+  GMapWithThreeMarker
 } from "../../../components/shared";
 import {
   BasicInfo,
@@ -42,7 +43,7 @@ import {
   findMessageAndResetData,
   setCustomerChat
 } from "../../../actions/message.action";
-import { findCarListForADriver, findDriverListInLord } from "../../../actions/driver.action";
+import { findCarListForADriver, findDriverListInLord, findDriverDetailInLord } from "../../../actions/driver.action";
 import { editAlertInfoInTrip } from "../../../actions/alert.action";
 import { convertUTCtoLocal } from "../../../actions/utilities.action";
 import { findFlightListInLord } from "../../../actions/flight.action";
@@ -165,7 +166,8 @@ class TripDetailContainer extends Component {
       findCarListForADriver,
       findDriverListInLord,
       findTripNoteListInLord,
-      findDriverListForACar
+      findDriverListForACar,
+      findDriverDetailInLord
     } = this.props;
     const { trip_token } = match.params;
     await Promise.all([
@@ -194,6 +196,11 @@ class TripDetailContainer extends Component {
     if (this.props.trip_detail_in_lord.car_info.car_token) {
       findDriverListForACar(this.props.trip_detail_in_lord.car_info.car_token);
     }
+    if (this.props.trip_detail_in_lord.driver_info) {
+      if (this.props.trip_detail_in_lord.driver_info.driver_token) {
+        findDriverDetailInLord(this.props.trip_detail_in_lord.driver_info.driver_token);
+      }
+    }
   }
   render() {
     const {
@@ -211,7 +218,9 @@ class TripDetailContainer extends Component {
       updateTripBasicInfo,
       driver_list_for_a_car,
       setCustomerChat,
-      createAddonToTrip
+      createAddonToTrip,
+      showMap,
+      driver_detail_in_lord
     } = this.props;
     const { trip_token } = match.params;
 
@@ -378,6 +387,27 @@ class TripDetailContainer extends Component {
         <section className="mb-4">
           <ListHeader
             parentProps={{
+              title: "Location"
+            }}
+            hideButton={true}
+            buttonWidth={"70px"}
+          />
+          <div className="bg-white p-3">
+            <div className="col-12" style={{ height: "300px" }}>
+              {showMap && (
+                <GMapWithThreeMarker
+                  driver_detail_in_lord={driver_detail_in_lord}
+                  from_address_info={trip_detail_in_lord.from_address_info}
+                  to_address_info={trip_detail_in_lord.to_address_info}
+                />
+              )}
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-4">
+          <ListHeader
+            parentProps={{
               title: "Timeline"
             }}
             hideButton={true}
@@ -478,7 +508,9 @@ const mapStateToProps = state => {
     trip_add_on_list: state.tripReducer.trip_add_on_list,
     message_detail_with_customer: state.smsReducer.message_detail_with_customer,
     flight_list_in_lord: state.flightReducer.flight_list_in_lord,
-    driver_list_for_a_car: state.vehicleReducer.driver_list_for_a_car
+    driver_list_for_a_car: state.vehicleReducer.driver_list_for_a_car,
+    showMap: state.tripReducer.showMap,
+    driver_detail_in_lord: state.driverReducer.driver_detail_in_lord
   };
 };
 const mapDispatchToProps = {
@@ -501,7 +533,8 @@ const mapDispatchToProps = {
   findDriverListForACar,
   setCustomerChat,
   createAddonToTrip,
-  deleteAddonItem
+  deleteAddonItem,
+  findDriverDetailInLord
 };
 
 export default connect(

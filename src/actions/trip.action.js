@@ -78,6 +78,9 @@ export const findTripActiveListInLord = (query = {}) => async dispatch => {
 };
 export const findTripDetailInLord = trip_token => async dispatch => {
   try {
+    await dispatch({
+      type: constant.SET_MAP_TO_FALSE_IN_TRIP
+    });
     await startLoader(dispatch);
     const { payload } = await callApi(`trip/detail/${trip_token}`, "GET");
     await dispatch({

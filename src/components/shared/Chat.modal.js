@@ -62,10 +62,9 @@ class ChatModalContainer extends Component {
                     className={`rounded-circle ${message.type === 1 ? "ml-4" : "mr-4"} `}
                   />
                   <div
-                    className={` hm-text-16 d-flex justify-content-center align-items-center font-weight-500 p-3  ${message.type ===
-                      1 && "messenger-green text-white"} ${
-                      message.type === 2 ? "messenger-purple text-white chat-modal-box" : "chat-modal-box-reverse"
-                    }`}
+                    className={` hm-text-16 d-flex justify-content-center align-items-center font-weight-500 p-3  ${
+                      message.type === 1 ? "messenger-green text-white chat-modal-box-reverse" : "chat-modal-box"
+                    } ${message.type === 2 && "messenger-purple text-white chat-modal-box"}`}
                     style={{ letterSpacing: 0, color: "#8e8e92", lineHeight: "20px" }}
                   >
                     {message.message}

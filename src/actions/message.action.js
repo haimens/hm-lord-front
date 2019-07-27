@@ -72,7 +72,6 @@ export const createAMessageWithCustomer = (customer_token, body) => async dispat
 };
 
 export const findMessageAndResetData = (customer_token, query = {}) => async dispatch => {
-  console.log(customer_token);
   try {
     await startLoader(dispatch);
     const { payload } = await callApi(`message/all/detail/customer/${customer_token}`, "GET", null, {

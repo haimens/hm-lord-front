@@ -35,12 +35,13 @@ export default function AlertInfoCard(props) {
               {showbutton ? convertUTCtoLocal(alert_list[0].record_time, "YYYY-MM-DD HH:mm") : "N/A"}
             </div>
             {showbutton && (
-              <button
-                className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
+              <img
+                src={`${process.env.PUBLIC_URL}/img/icon_edit.svg`}
+                alt="Customer"
+                className="rounded-circle hm-pointer-cursor"
+                style={{ height: "25px", width: "25px" }}
                 onClick={() => handleEditButton("ETA Alert", alert_list[0].alert_token)}
-              >
-                <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
-              </button>
+              />
             )}
           </div>
           {showbutton && (
@@ -54,12 +55,13 @@ export default function AlertInfoCard(props) {
               {showbutton ? convertUTCtoLocal(alert_list[1].record_time, "YYYY-MM-DD HH:mm") : "N/A"}
             </div>
             {showbutton && (
-              <button
-                className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
+              <img
+                src={`${process.env.PUBLIC_URL}/img/icon_edit.svg`}
+                alt="Customer"
+                className="rounded-circle hm-pointer-cursor"
+                style={{ height: "25px", width: "25px" }}
                 onClick={() => handleEditButton("ARRIVAL Alert", alert_list[1].alert_token)}
-              >
-                <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
-              </button>
+              />
             )}
           </div>
           {showbutton && (
@@ -73,12 +75,13 @@ export default function AlertInfoCard(props) {
               {showbutton ? convertUTCtoLocal(alert_list[2].record_time, "YYYY-MM-DD HH:mm") : "N/A"}
             </div>
             {showbutton && (
-              <button
-                className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
+              <img
+                src={`${process.env.PUBLIC_URL}/img/icon_edit.svg`}
+                alt="Customer"
+                className="rounded-circle hm-pointer-cursor"
+                style={{ height: "25px", width: "25px" }}
                 onClick={() => handleEditButton("COB Alert", alert_list[2].alert_token)}
-              >
-                <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
-              </button>
+              />
             )}
           </div>
           {showbutton && (
