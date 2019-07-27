@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { Modal } from "../../../components/shared";
 import { findTripActiveListInLord, findTripListInLord } from "../../../actions/trip.action";
 import moment from "moment";
+import { convertUTCtoLocal, convertLocalToUTC } from "../../../actions/utilities.action";
 class Calendar extends Component {
   state = {
     currStatus: ""
@@ -15,39 +16,51 @@ class Calendar extends Component {
     const { curr_date, findTripActiveListInLord, findTripListInLord } = this.props;
     if (curr_date.title.includes("Ongoing")) {
       findTripActiveListInLord({
-        date_from: moment(curr_date.start)
-          .startOf("day")
-          .format("YYYY-MM-DD HH:mm"),
-        date_to: moment(curr_date.end)
-          .endOf("day")
-          .format("YYYY-MM-DD HH:mm"),
-        from_key: "pickup_time_local",
-        to_key: "pickup_time_local"
+        date_from: convertUTCtoLocal(
+          moment(curr_date.start)
+            .startOf("day")
+            .format("YYYY-MM-DD HH:mm")
+        ),
+        date_to: convertLocalToUTC(
+          moment(curr_date.end)
+            .endOf("day")
+            .format("YYYY-MM-DD HH:mm")
+        ),
+        from_key: "pickup_time",
+        to_key: "pickup_time"
       });
       this.setState({ currStatus: "ongoing" });
     } else if (curr_date.title.includes("Finished")) {
       findTripListInLord({
-        date_from: moment(curr_date.start)
-          .startOf("day")
-          .format("YYYY-MM-DD HH:mm"),
-        date_to: moment(curr_date.end)
-          .endOf("day")
-          .format("YYYY-MM-DD HH:mm"),
-        from_key: "pickup_time_local",
-        to_key: "pickup_time_local",
+        date_from: convertLocalToUTC(
+          moment(curr_date.start)
+            .startOf("day")
+            .format("YYYY-MM-DD HH:mm")
+        ),
+        date_to: convertLocalToUTC(
+          moment(curr_date.end)
+            .endOf("day")
+            .format("YYYY-MM-DD HH:mm")
+        ),
+        from_key: "pickup_time",
+        to_key: "pickup_time",
         status: 7
       });
       this.setState({ currStatus: "finished" });
     } else if (curr_date.title.includes("Abnormal")) {
       findTripListInLord({
-        date_from: moment(curr_date.start)
-          .startOf("day")
-          .format("YYYY-MM-DD HH:mm"),
-        date_to: moment(curr_date.end)
-          .endOf("day")
-          .format("YYYY-MM-DD HH:mm"),
-        from_key: "pickup_time_local",
-        to_key: "pickup_time_local",
+        date_from: convertLocalToUTC(
+          moment(curr_date.start)
+            .startOf("day")
+            .format("YYYY-MM-DD HH:mm")
+        ),
+        date_to: convertLocalToUTC(
+          moment(curr_date.end)
+            .endOf("day")
+            .format("YYYY-MM-DD HH:mm")
+        ),
+        from_key: "pickup_time",
+        to_key: "pickup_time",
         status: 8
       });
       this.setState({ currStatus: "abnormal" });
