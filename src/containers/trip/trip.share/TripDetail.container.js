@@ -10,7 +10,8 @@ import {
   LogItem,
   AddingNote,
   FlightDetailModal,
-  GMapWithThreeMarker
+  GMapWithThreeMarker,
+  GMapLocation
 } from "../../../components/shared";
 import {
   BasicInfo,
@@ -43,7 +44,7 @@ import {
   findMessageAndResetData,
   setCustomerChat
 } from "../../../actions/message.action";
-import { findCarListForADriver, findDriverListInLord, findDriverDetailInLord } from "../../../actions/driver.action";
+import { findCarListForADriver, findDriverListInLord } from "../../../actions/driver.action";
 import { editAlertInfoInTrip } from "../../../actions/alert.action";
 import { convertUTCtoLocal } from "../../../actions/utilities.action";
 import { findFlightListInLord } from "../../../actions/flight.action";
@@ -166,8 +167,7 @@ class TripDetailContainer extends Component {
       findCarListForADriver,
       findDriverListInLord,
       findTripNoteListInLord,
-      findDriverListForACar,
-      findDriverDetailInLord
+      findDriverListForACar
     } = this.props;
     const { trip_token } = match.params;
     await Promise.all([
@@ -196,11 +196,6 @@ class TripDetailContainer extends Component {
     if (this.props.trip_detail_in_lord.car_info.car_token) {
       findDriverListForACar(this.props.trip_detail_in_lord.car_info.car_token);
     }
-    if (this.props.trip_detail_in_lord.driver_info) {
-      if (this.props.trip_detail_in_lord.driver_info.driver_token) {
-        findDriverDetailInLord(this.props.trip_detail_in_lord.driver_info.driver_token);
-      }
-    }
   }
   render() {
     const {
@@ -219,8 +214,7 @@ class TripDetailContainer extends Component {
       driver_list_for_a_car,
       setCustomerChat,
       createAddonToTrip,
-      showMap,
-      driver_detail_in_lord
+      showMap
     } = this.props;
     const { trip_token } = match.params;
 
@@ -394,11 +388,29 @@ class TripDetailContainer extends Component {
           />
           <div className="bg-white p-3">
             <div className="col-12" style={{ height: "300px" }}>
-              {showMap && (
+              {showMap && trip_detail_in_lord.driver_info.lat && (
                 <GMapWithThreeMarker
-                  driver_detail_in_lord={driver_detail_in_lord}
+                  driver_info={trip_detail_in_lord.driver_info}
                   from_address_info={trip_detail_in_lord.from_address_info}
                   to_address_info={trip_detail_in_lord.to_address_info}
+                />
+              )}
+              {showMap && !trip_detail_in_lord.driver_info.lat && (
+                <GMapLocation
+                  position={{
+                    center: {
+                      lat: trip_detail_in_lord.from_address_info.lat,
+                      lng: trip_detail_in_lord.from_address_info.lng
+                    },
+                    origin: {
+                      lat: trip_detail_in_lord.from_address_info.lat,
+                      lng: trip_detail_in_lord.from_address_info.lng
+                    },
+                    destination: {
+                      lat: trip_detail_in_lord.to_address_info.lat,
+                      lng: trip_detail_in_lord.to_address_info.lng
+                    }
+                  }}
                 />
               )}
             </div>
@@ -509,8 +521,7 @@ const mapStateToProps = state => {
     message_detail_with_customer: state.smsReducer.message_detail_with_customer,
     flight_list_in_lord: state.flightReducer.flight_list_in_lord,
     driver_list_for_a_car: state.vehicleReducer.driver_list_for_a_car,
-    showMap: state.tripReducer.showMap,
-    driver_detail_in_lord: state.driverReducer.driver_detail_in_lord
+    showMap: state.tripReducer.showMap
   };
 };
 const mapDispatchToProps = {
@@ -533,8 +544,7 @@ const mapDispatchToProps = {
   findDriverListForACar,
   setCustomerChat,
   createAddonToTrip,
-  deleteAddonItem,
-  findDriverDetailInLord
+  deleteAddonItem
 };
 
 export default connect(

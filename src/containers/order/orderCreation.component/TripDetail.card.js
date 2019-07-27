@@ -11,6 +11,7 @@ import {
   setMapToFalse,
   setMapToFalseAgain
 } from "../../../actions/quote.action";
+import { findCustomerDetailInLord } from "../../../actions/customer.action";
 import alertify from "alertifyjs";
 class TripDetail extends Component {
   state = {
@@ -85,7 +86,12 @@ class TripDetail extends Component {
   handleCarBeenClickedAgain = quote_token_again => {
     this.setState({ quote_token_again });
   };
-  componentDidMount() {}
+  componentDidMount() {
+    const { currentCustomer, findCustomerDetailInLord } = this.props;
+    if (currentCustomer.customer_token) {
+      findCustomerDetailInLord(currentCustomer.customer_token);
+    }
+  }
   render() {
     const { flightNumber, airlineCode, flightNumberAgain, airlineCodeAgain } = this.state;
     const {
@@ -98,10 +104,72 @@ class TripDetail extends Component {
       showMap,
       showMapAgain,
       currentCustomer,
-      findFlightListInLord
+      findFlightListInLord,
+      customer_detail_in_lord
     } = this.props;
     return (
       <div>
+        <div className="row pt-2 mb-4">
+          <div className="col-12 ">
+            <div className="rounded-custom bg-white shadow-sm">
+              <div className="d-flex justify-content-between align-items-center px-3 border-bottom-custom h-100">
+                <h6
+                  className="d-block d-flex align-items-center hm-title-sub-size text-main-color font-weight-bold"
+                  style={{ height: "65px" }}
+                >
+                  Customer Information
+                </h6>
+              </div>
+              <div />
+              <div className="bg-white rounded-custom shadow-sm">
+                <div className="row" style={{ padding: "40px" }}>
+                  <div className="col-lg-2 col-12 mb-4 d-flex justify-content-center">
+                    <img
+                      className="rounded-circle"
+                      style={{ height: "90px", width: "90px" }}
+                      src={customer_detail_in_lord.img_path}
+                      alt="avatar"
+                    />
+                  </div>
+                  <div className="col-lg-8 col-12">
+                    <div className="row text-modal-color">
+                      <div className="col-12 mb-4">
+                        <div className="row">
+                          <div className="mb-4 col-6">
+                            <div className="text-secondary-color font-weight-500 hm-text-14">Name</div>
+                            <div className="hm-text-14 font-weight-bold">{customer_detail_in_lord.name}</div>
+                          </div>
+                          <div className="mb-4 col-6">
+                            <div className="text-secondary-color font-weight-500 hm-text-14">Username</div>
+                            <div className="hm-text-14 font-weight-bold">{customer_detail_in_lord.username}</div>
+                          </div>
+                          <div className="mb-4 col-6">
+                            <div className="text-secondary-color font-weight-500 hm-text-14">Cell</div>
+                            <div className="hm-text-14 font-weight-bold">{customer_detail_in_lord.cell}</div>
+                          </div>
+                          <div className="mb-4 col-6">
+                            <div className="text-secondary-color font-weight-500 hm-text-14">Address</div>
+                            <div className="hm-text-14 font-weight-bold">{customer_detail_in_lord.addr_str}</div>
+                          </div>
+                          <div className="mb-4 col-6">
+                            <div className="text-secondary-color font-weight-500 hm-text-14">Email</div>
+                            <div className="hm-text-14 font-weight-bold">{customer_detail_in_lord.email}</div>
+                          </div>
+                          <div className="mb-4 col-6">
+                            <div className="text-secondary-color font-weight-500 hm-text-14">Special Note</div>
+                            <div className="hm-text-14 font-weight-bold">
+                              {customer_detail_in_lord.note ? customer_detail_in_lord.note : "N/A"}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <TripInfo
           findFlightListInLord={findFlightListInLord}
           currentCustomer={currentCustomer}
@@ -165,7 +233,8 @@ const mapStateToProps = state => {
     quote_in_lord: state.quoteReducer.quote_in_lord,
     quote_in_lord_again: state.quoteReducer.quote_in_lord_again,
     showMap: state.quoteReducer.showMap,
-    showMapAgain: state.quoteReducer.showMapAgain
+    showMapAgain: state.quoteReducer.showMapAgain,
+    customer_detail_in_lord: state.customerReducer.customer_detail_in_lord
   };
 };
 const mapDispatchToProps = {
@@ -174,7 +243,8 @@ const mapDispatchToProps = {
   createOrderInLord,
   setMapToFalse,
   setMapToFalseAgain,
-  findFlightListInLord
+  findFlightListInLord,
+  findCustomerDetailInLord
 };
 
 export default connect(

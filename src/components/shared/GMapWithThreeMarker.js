@@ -9,21 +9,21 @@ class GMapWithMarker extends Component {
     };
   }
   componentDidMount() {
-    const { from_address_info, to_address_info, driver_detail_in_lord } = this.props;
-    console.log(driver_detail_in_lord);
+    const { from_address_info, to_address_info, driver_info } = this.props;
     let position = [
       { lat: from_address_info.lat, lng: from_address_info.lng },
       { lat: to_address_info.lat, lng: to_address_info.lng }
     ];
 
-    if (driver_detail_in_lord && driver_detail_in_lord.location_info) {
-      position.unshift({
-        lat: driver_detail_in_lord.location_info.lat,
-        lng: driver_detail_in_lord.location_info.lng,
-        name: driver_detail_in_lord.basic_info.name
-      });
+    if (driver_info) {
+      if (driver_info.lat !== 0 || driver_info.lng !== 0) {
+        position.unshift({
+          lat: driver_info.lat,
+          lng: driver_info.lng,
+          name: driver_info.name
+        });
+      }
     }
-    console.log(position);
     this.setState({ shelters: position });
   }
   handleClick = (marker, event) => {

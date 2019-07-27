@@ -25,8 +25,8 @@ class OrderCreation extends Component {
     this.setState({ position: 2 });
   };
 
-  handleSetCurrentCustomer = currentCustomer => {
-    this.props.setCurrentCustomerInLord(currentCustomer);
+  handleSetCurrentCustomer = async currentCustomer => {
+    await this.props.setCurrentCustomerInLord(currentCustomer);
   };
   async componentDidMount() {
     if (this.props.history.location.pathname.includes("withCustomer")) {
@@ -37,6 +37,7 @@ class OrderCreation extends Component {
     if (order_token) {
       await this.setState({ position: 5 });
     }
+    await this.props.setCurrentCustomerInLord("");
   }
   render() {
     const { position, round_trip } = this.state;
@@ -62,7 +63,7 @@ class OrderCreation extends Component {
           )}
         </section>
         <section>
-          {position === 3 && (
+          {position === 3 && curr_customer !== "" && (
             <TripDetailCard
               round_trip={round_trip}
               handleRoundTrip={this.handleRoundTrip}
