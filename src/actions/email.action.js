@@ -14,7 +14,6 @@ export const sendEmailToConfirm = (customer_token, body = {}) => async dispatch 
 };
 
 export const sendEmailToCustomer = (customer_token, name, username) => async dispatch => {
-  console.log(username);
   try {
     let msg = `<!DOCTYPE html>
     <html>
