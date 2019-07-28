@@ -404,9 +404,7 @@ class CompleteOrderCard extends Component {
               <div className="col-12">
                 <div className="d-flex justify-content-between border-bottom-custom py-2">
                   <div className="text-secondary-color hm-text-14 font-weight-bold">Trip 1 Subtotal:</div>
-                  <div className="hm-text-14 font-weight-bold text-modal-color">
-                    +{parseAmount(first_trip_total, 2)}
-                  </div>
+                  <div className="hm-text-14 font-weight-bold text-modal-color">{parseAmount(first_trip_total, 2)}</div>
                 </div>
               </div>
               {round_trip && (
@@ -414,7 +412,7 @@ class CompleteOrderCard extends Component {
                   <div className="d-flex justify-content-between border-bottom-custom py-2">
                     <div className="text-secondary-color hm-text-14 font-weight-bold">Trip 2 Subtotal:</div>
                     <div className="hm-text-14 font-weight-bold text-modal-color">
-                      +{parseAmount(second_trip_total, 2)}
+                      {parseAmount(second_trip_total, 2)}
                     </div>
                   </div>
                 </div>

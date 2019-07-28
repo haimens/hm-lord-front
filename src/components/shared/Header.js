@@ -102,7 +102,7 @@ export default class Header extends Component {
                 onClick={() => this.handleOrderButtonClicked(2)}
                 style={{ width: "90px" }}
               >
-                Finalize
+                Finalized
               </button>
               <button
                 className={`mr-3 btn ${
@@ -111,7 +111,7 @@ export default class Header extends Component {
                 onClick={() => this.handleOrderButtonClicked(3)}
                 style={{ width: "90px" }}
               >
-                Confirm
+                Confirmed
               </button>
               <button
                 className={`mr-3 btn ${

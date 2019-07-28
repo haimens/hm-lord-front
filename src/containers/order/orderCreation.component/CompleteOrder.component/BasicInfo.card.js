@@ -21,12 +21,11 @@ export default class BasicInfo extends Component {
           <div className="d-flex justify-content-between align-items-center  ">
             <div className="hm-text-16 font-weight-bold text-modal-color">Basic Information</div>
             {showEditButton && (
-              <button
-                className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
+              <img
+                src={`${process.env.PUBLIC_URL}/img/icon_edit.svg`}
                 onClick={() => handleIconBeenClicked(basic_info.trip_token, basic_info.flight_str)}
-              >
-                <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
-              </button>
+                alt="Edit"
+              />
             )}
           </div>
         </div>

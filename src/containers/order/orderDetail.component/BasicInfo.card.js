@@ -1,6 +1,6 @@
 import React from "react";
 import { convertLocalToUTC, parseAmount } from "../../../actions/utilities.action";
-
+import alertify from "alertifyjs";
 export default function BasicInfo(props) {
   const {
     receipt,
@@ -22,7 +22,15 @@ export default function BasicInfo(props) {
     props.history.push(`/order/creation/${props.order_token}`);
   };
   const handleCancelOrder = () => {
-    props.cancelOrder(props.order_token, props.history);
+    alertify.confirm(
+      "Are You Sure to Delete This Order",
+      () => {
+        props.cancelOrder(props.order_token, props.history);
+      },
+      function() {
+        alertify.error("Cancel");
+      }
+    );
   };
 
   const handleConfirmOrder = () => {
@@ -34,12 +42,11 @@ export default function BasicInfo(props) {
         <div className="d-flex justify-content-between align-items-center  ">
           <div className="hm-text-16 font-weight-bold text-modal-color">Basic Information</div>
 
-          <button
-            className="rounded-circle bg-white company-detail-button d-flex justify-content-center align-items-center"
+          <img
+            src={`${process.env.PUBLIC_URL}/img/icon_edit.svg`}
             onClick={() => props.handleUpdateBasicInfo()}
-          >
-            <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
-          </button>
+            alt="Edit"
+          />
         </div>
       </div>
       <div className="mb-4 px-3">
