@@ -45,12 +45,15 @@ export default class EmailModal extends Component {
           onClose={this.handleClose}
           position="center"
           getWidth={"467px"}
-          getHeight={"350px"}
+          getHeight={"380px"}
           zIndex="3"
         >
           <div className="container">
             <div className="p-3">
               <div className="form-group pt-3">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="SendGrid Api Key">
+                  SendGrid Api Key
+                </label>
                 <input
                   type="text"
                   className="form-control hm-input-height"
@@ -62,6 +65,9 @@ export default class EmailModal extends Component {
               </div>
 
               <div className="form-group pt-3">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="SendGrid From Email">
+                  SendGrid From Email
+                </label>
                 <input
                   type="email"
                   className="form-control hm-input-height"

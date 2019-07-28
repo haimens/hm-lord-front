@@ -47,12 +47,15 @@ export default class MessageModal extends Component {
           onClose={this.handleClose}
           position="center"
           getWidth={"467px"}
-          getHeight={"400px"}
+          getHeight={"500px"}
           zIndex="3"
         >
           <div className="container">
             <div className="p-3">
               <div className="form-group pt-3">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Twilio Account Id">
+                  Twilio Account Id
+                </label>
                 <input
                   type="text"
                   className="form-control hm-input-height"
@@ -64,6 +67,9 @@ export default class MessageModal extends Component {
               </div>
 
               <div className="form-group pt-3">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Twilio Auth Token">
+                  Twilio Auth Token
+                </label>
                 <input
                   type="email"
                   className="form-control hm-input-height"
@@ -75,6 +81,9 @@ export default class MessageModal extends Component {
               </div>
 
               <div className="form-group pt-3">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Twilio From Num">
+                  Twilio From Num
+                </label>
                 <input
                   type="text"
                   className="form-control hm-input-height"

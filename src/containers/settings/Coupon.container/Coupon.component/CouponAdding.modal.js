@@ -71,10 +71,13 @@ export default class CouponAdding extends Component {
     const { code, amount, min_price, available_usage, type } = this.state;
     return (
       <div>
-        <Modal title="Add Coupon" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"540px"}>
+        <Modal title="Add Coupon" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"660px"}>
           <div className="container">
             <div className="p-3">
               <div className="form-group mb-4">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Coupon Code">
+                  Coupon Code
+                </label>
                 <input
                   className="form-control hm-input-height mt-3"
                   id="code"
@@ -84,9 +87,15 @@ export default class CouponAdding extends Component {
                 />
               </div>
               <div className="form-group mb-4">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Expiration Date">
+                  Expiration Date
+                </label>
                 <DatePicker placeholder={"Expiration Date"} onChange={this.handleDatePicker} />
               </div>
               <div className="form-group input-group mb-4 d-flex">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Coupon Amount">
+                  Coupon Amount
+                </label>
                 <input
                   type="number"
                   className="form-control hm-input-height "
@@ -118,6 +127,9 @@ export default class CouponAdding extends Component {
               </div>
 
               <div className="form-group mb-4">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Minimal Amount">
+                  Minimal Amount
+                </label>
                 <input
                   type="number"
                   className="form-control hm-input-height "
@@ -130,6 +142,9 @@ export default class CouponAdding extends Component {
               </div>
 
               <div className="form-group mb-4">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Available Usage">
+                  Available Usage
+                </label>
                 <input
                   type="number"
                   className="form-control hm-input-height "
