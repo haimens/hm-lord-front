@@ -30,7 +30,7 @@ export default class GeneralListItem extends Component {
             className="hm-pointer-cursor"
             alt="delete"
             style={{ height: "25px", width: "25px" }}
-            onClick={() => this.props.updateGeneralSettingListInLord(setting_token, { status: 0 })}
+            onClick={() => this.props.updateGeneralSettingListInLord(setting_token)}
           />
         </td>
       </tr>

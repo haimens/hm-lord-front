@@ -5,6 +5,7 @@ import { ListView, Header, ListHeader } from "../../../components/shared";
 import VehicleListItem from "./Vehicle.component/VehicleList.item";
 import VehicleAdding from "./Vehicle.component/VehicleAdding.modal";
 import { findVehicleTypeListInLord, createACarTypeInLord, updateACarTypeInLord } from "../../../actions/vehicle.action";
+import alertify from "alertifyjs";
 
 class Vehicle extends Component {
   state = {
@@ -14,7 +15,15 @@ class Vehicle extends Component {
     this.setState(state => ({ showAddVehicle: !state.showAddVehicle }));
   };
   handleCarTypeBeenClicked = car_type_token => {
-    this.props.updateACarTypeInLord(car_type_token, { status: 0 });
+    alertify.confirm(
+      "Are You Sure To Delete This Vehicle Type?",
+      () => {
+        this.props.updateACarTypeInLord(car_type_token, { status: 0 });
+      },
+      function() {
+        alertify.error("Cancel");
+      }
+    );
   };
   componentDidMount() {
     this.props.findVehicleTypeListInLord();

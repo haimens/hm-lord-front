@@ -77,7 +77,7 @@ export default class VehicleAdding extends Component {
                   Name
                 </label>
                 <input
-                  className="form-control hm-input-height mt-3"
+                  className="form-control hm-input-height"
                   name="name"
                   id="name"
                   placeholder={"Name"}

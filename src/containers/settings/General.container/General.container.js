@@ -10,6 +10,7 @@ import {
   findGeneralSettingListInLord,
   updateGeneralSettingListInLord
 } from "../../../actions/settings.action";
+import alertify from "alertifyjs";
 class General extends Component {
   state = {
     showAddGeneral: false,
@@ -21,6 +22,17 @@ class General extends Component {
   };
   handleShowGeneralModal = () => {
     this.setState(state => ({ showAddGeneral: !state.showAddGeneral }));
+  };
+  updateGeneralSettingListInLord = setting_token => {
+    alertify.confirm(
+      "Are You Sure To Delete This Vehicle Type?",
+      () => {
+        this.props.updateGeneralSettingListInLord(setting_token, { status: 0 });
+      },
+      function() {
+        alertify.error("Cancel");
+      }
+    );
   };
   componentDidMount() {
     this.props.findGeneralSettingListInLord();
@@ -74,7 +86,7 @@ class General extends Component {
                 editGeneralListItem={this.editGeneralListItem}
                 general={general}
                 key={index}
-                onClick={this.handlePunchItemClick}
+                updateGeneralSettingListInLord={this.updateGeneralSettingListInLord}
               />
             ))}
           </ListView>
