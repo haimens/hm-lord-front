@@ -16,32 +16,24 @@ class Calendar extends Component {
     const { curr_date, findTripActiveListInLord, findTripListInLord } = this.props;
     if (curr_date.title.includes("Ongoing")) {
       findTripActiveListInLord({
-        date_from: convertUTCtoLocal(
-          moment(curr_date.start)
-            .startOf("day")
-            .format("YYYY-MM-DD HH:mm")
-        ),
-        date_to: convertLocalToUTC(
-          moment(curr_date.end)
-            .endOf("day")
-            .format("YYYY-MM-DD HH:mm")
-        ),
+        date_from: moment(curr_date.start)
+          .startOf("day")
+          .format("YYYY-MM-DD HH:mm"),
+        date_to: moment(curr_date.end)
+          .endOf("day")
+          .format("YYYY-MM-DD HH:mm"),
         from_key: "pickup_time",
         to_key: "pickup_time"
       });
       this.setState({ currStatus: "ongoing" });
     } else if (curr_date.title.includes("Finished")) {
       findTripListInLord({
-        date_from: convertLocalToUTC(
-          moment(curr_date.start)
-            .startOf("day")
-            .format("YYYY-MM-DD HH:mm")
-        ),
-        date_to: convertLocalToUTC(
-          moment(curr_date.end)
-            .endOf("day")
-            .format("YYYY-MM-DD HH:mm")
-        ),
+        date_from: moment(curr_date.start)
+          .startOf("day")
+          .format("YYYY-MM-DD HH:mm"),
+        date_to: moment(curr_date.end)
+          .endOf("day")
+          .format("YYYY-MM-DD HH:mm"),
         from_key: "pickup_time",
         to_key: "pickup_time",
         status: 7
@@ -49,16 +41,12 @@ class Calendar extends Component {
       this.setState({ currStatus: "finished" });
     } else if (curr_date.title.includes("Abnormal")) {
       findTripListInLord({
-        date_from: convertLocalToUTC(
-          moment(curr_date.start)
-            .startOf("day")
-            .format("YYYY-MM-DD HH:mm")
-        ),
-        date_to: convertLocalToUTC(
-          moment(curr_date.end)
-            .endOf("day")
-            .format("YYYY-MM-DD HH:mm")
-        ),
+        date_from: moment(curr_date.start)
+          .startOf("day")
+          .format("YYYY-MM-DD HH:mm"),
+        date_to: moment(curr_date.end)
+          .endOf("day")
+          .format("YYYY-MM-DD HH:mm"),
         from_key: "pickup_time",
         to_key: "pickup_time",
         status: 8

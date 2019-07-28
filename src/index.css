@@ -351,3 +351,6 @@ input, select, textarea{
   background-color: #ffffff;
 }
 
+.removeAfter{
+  background-color: white !important
+}
