@@ -34,12 +34,10 @@ export default function AddonService(props) {
                     <div className="row text-white">
                       <div className="col-12">
                         <div className="d-flex align-items-center mt-auto">
-                          <div className="hm-text-16 font-weight-500" style={{ color: "#2ece89" }}>
-                            {parseAmount(addon.amount, 2)}
-                          </div>
+                          <div className="hm-text-16 font-weight-500 text-white">{parseAmount(addon.amount, 2)}</div>
                           {!props.hideDelete && (
                             <img
-                              src={`${process.env.PUBLIC_URL}/img/icon_delete.svg`}
+                              src={`${process.env.PUBLIC_URL}/img/icon_delete_white.svg`}
                               className="hm-pointer-cursor ml-auto"
                               alt="delete"
                               style={{ height: "25px", width: "25px" }}

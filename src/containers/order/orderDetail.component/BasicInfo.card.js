@@ -1,5 +1,5 @@
 import React from "react";
-import { convertLocalToUTC, parseAmount } from "../../../actions/utilities.action";
+import { convertLocalToUTC, parseAmount, convertUTCtoLocal } from "../../../actions/utilities.action";
 import alertify from "alertifyjs";
 export default function BasicInfo(props) {
   const {
@@ -59,7 +59,7 @@ export default function BasicInfo(props) {
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Order Placed Time</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{convertLocalToUTC(cdate)}</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">{convertUTCtoLocal(cdate)}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Payment Status</div>

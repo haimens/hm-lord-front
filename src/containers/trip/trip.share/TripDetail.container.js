@@ -426,8 +426,8 @@ class TripDetailContainer extends Component {
             buttonWidth={"70px"}
           />
           <div className="container-fluid bg-white rounded-custom-bottom shadowsm">
-            <div className="d-flex justify-content-between p-5">
-              <div className="d-flex justify-content-center align-items-center flex-column">
+            <div className="row p-5">
+              <div className="col-lg-3 mt-3 mt-md-0 col-6 d-flex justify-content-center align-items-center flex-column">
                 <img
                   src={`${process.env.PUBLIC_URL}/img/start.svg`}
                   alt="timeline"
@@ -440,7 +440,7 @@ class TripDetailContainer extends Component {
                     : "N/A"}
                 </div>
               </div>
-              <div className="d-flex justify-content-center align-items-center flex-column">
+              <div className="col-lg-3 mt-3 mt-md-0 col-6 d-flex justify-content-center align-items-center flex-column">
                 <img
                   src={`${process.env.PUBLIC_URL}/img/pickup.svg`}
                   alt="timeline"
@@ -455,7 +455,7 @@ class TripDetailContainer extends Component {
                     : "N/A"}
                 </div>
               </div>
-              <div className="d-flex justify-content-center align-items-center flex-column">
+              <div className="col-lg-3 mt-3 mt-md-0 col-6 d-flex justify-content-center align-items-center flex-column">
                 <img
                   src={`${process.env.PUBLIC_URL}/img/ongoing.svg`}
                   alt="timeline"
@@ -468,7 +468,7 @@ class TripDetailContainer extends Component {
                     : "N/A"}
                 </div>
               </div>
-              <div className="d-flex justify-content-center align-items-center flex-column">
+              <div className="col-lg-3 mt-3 mt-md-0 col-6 d-flex justify-content-center align-items-center flex-column">
                 <img
                   src={`${process.env.PUBLIC_URL}/img/finish.svg`}
                   alt="timeline"
