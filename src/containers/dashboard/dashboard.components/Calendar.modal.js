@@ -21,8 +21,8 @@ class Calendar extends Component {
         date_to: moment(curr_date.end)
           .endOf("day")
           .format("YYYY-MM-DD HH:mm"),
-        from_key: "pickup_time",
-        to_key: "pickup_time"
+        from_key: "pickup_time_local",
+        to_key: "pickup_time_local"
       });
       this.setState({ currStatus: "ongoing" });
     } else if (curr_date.title.includes("Finished")) {
@@ -33,8 +33,8 @@ class Calendar extends Component {
         date_to: moment(curr_date.end)
           .endOf("day")
           .format("YYYY-MM-DD HH:mm"),
-        from_key: "pickup_time",
-        to_key: "pickup_time",
+        from_key: "pickup_time_local",
+        to_key: "pickup_time_local",
         status: 7
       });
       this.setState({ currStatus: "finished" });
@@ -46,8 +46,8 @@ class Calendar extends Component {
         date_to: moment(curr_date.end)
           .endOf("day")
           .format("YYYY-MM-DD HH:mm"),
-        from_key: "pickup_time",
-        to_key: "pickup_time",
+        from_key: "pickup_time_local",
+        to_key: "pickup_time_local",
         status: 8
       });
       this.setState({ currStatus: "abnormal" });
