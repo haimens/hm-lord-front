@@ -55,38 +55,53 @@ class AlertNotificationModal extends Component {
               View All
             </div>
           </header>
-          {alert_list_in_lord.record_list.map((alert, index) => {
-            if (index < 3) {
-              return (
-                <div
-                  className="border-bottom-custom d-flex align-items-center px-2 hm-pointer-cursor"
-                  key={index}
-                  style={{ height: "83px" }}
-                  onClick={() => history.push("/notification/alert")}
-                >
-                  <div className="col-3">
-                    <img
-                      className="rounded-circle"
-                      src={alert.customer_img_path}
-                      alt={"customer"}
-                      style={{ height: "48px", width: "48px" }}
-                    />
-                  </div>
-                  <div className="col-9">
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div>
-                        <div className="font-weight-bold hm-text-14 text-modal-color">{alert.customer_name}</div>
-                        <div className=" hm-text-14 text-modal-color">{alert.type_str}</div>
+          {alert_list_in_lord.record_list.length > 0 &&
+            alert_list_in_lord.record_list.map((alert, index) => {
+              if (index < 3) {
+                return (
+                  <div
+                    className="border-bottom-custom d-flex align-items-center px-2 hm-pointer-cursor"
+                    key={index}
+                    style={{ height: "83px" }}
+                    onClick={() => history.push("/notification/alert")}
+                  >
+                    <div className="col-3">
+                      <img
+                        className="rounded-circle"
+                        src={alert.customer_img_path}
+                        alt={"customer"}
+                        style={{ height: "48px", width: "48px" }}
+                      />
+                    </div>
+                    <div className="col-9">
+                      <div className="d-flex justify-content-between align-items-center">
+                        <div>
+                          <div className="font-weight-bold hm-text-14 text-modal-color">{alert.customer_name}</div>
+                          <div className=" hm-text-14 text-modal-color">{alert.type_str}</div>
+                        </div>
+                        <div className="ext-secondary-color hm-text-13">{`${moment(alert.record_time).fromNow()}`}</div>
                       </div>
-                      <div className="ext-secondary-color hm-text-13">{`${moment(alert.record_time).fromNow()}`}</div>
                     </div>
                   </div>
+                );
+              }
+              return null;
+            })}
+          {alert_list_in_lord.record_list.length === 0 && (
+            <div
+              className="border-bottom-custom d-flex align-items-center px-2 hm-pointer-cursor"
+              style={{ height: "83px" }}
+              onClick={() => history.push("/notification/alert")}
+            >
+              <div className="col-12">
+                <div className="d-flex justify-content-between align-items-center">
+                  <div>
+                    <div className="font-weight-bold hm-text-14 text-modal-color">No Record</div>
+                  </div>
                 </div>
-              );
-            }
-            return null;
-          })}
-
+              </div>
+            </div>
+          )}
           <header
             className={`sticky-top d-flex justify-content-between align-items-center px-4`}
             style={{ backgroundColor: "#f7f9fc", height: "53px" }}
@@ -96,54 +111,70 @@ class AlertNotificationModal extends Component {
               View All
             </div>
           </header>
-          {message_list_in_lord.record_list.map((message, index) => {
-            if (index < 3) {
-              return (
-                <div
-                  className="border-bottom-custom d-flex align-items-center px-2 hm-pointer-cursor"
-                  key={index}
-                  style={{ height: "83px" }}
-                  onClick={() => {
-                    this.handleClose();
-                    setCustomerChat({
-                      customer_token: message.customer_token,
-                      customer_name: message.name
-                    });
-                  }}
-                >
-                  <div className="col-3">
-                    <img
-                      className="rounded-circle"
-                      src={message.img_path}
-                      alt={"message"}
-                      style={{ height: "48px", width: "48px" }}
-                    />
-                  </div>
-                  <div className="col-9">
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div>
-                        <div
-                          className={`hm-text-14 font-weight-bold ${
-                            message.is_read === 0 ? "text-purple" : "text-modal-color"
-                          }`}
-                        >
-                          {message.name}
+          {message_list_in_lord.record_list.length > 0 &&
+            message_list_in_lord.record_list.map((message, index) => {
+              if (index < 3) {
+                return (
+                  <div
+                    className="border-bottom-custom d-flex align-items-center px-2 hm-pointer-cursor"
+                    key={index}
+                    style={{ height: "83px" }}
+                    onClick={() => {
+                      this.handleClose();
+                      setCustomerChat({
+                        customer_token: message.customer_token,
+                        customer_name: message.name
+                      });
+                    }}
+                  >
+                    <div className="col-3">
+                      <img
+                        className="rounded-circle"
+                        src={message.img_path}
+                        alt={"message"}
+                        style={{ height: "48px", width: "48px" }}
+                      />
+                    </div>
+                    <div className="col-9">
+                      <div className="d-flex justify-content-between align-items-center">
+                        <div>
+                          <div
+                            className={`hm-text-14 font-weight-bold ${
+                              message.is_read === 0 ? "text-purple" : "text-modal-color"
+                            }`}
+                          >
+                            {message.name}
+                          </div>
+                          <div
+                            className={`hm-text-14  ${message.is_read === 0 ? "text-purple" : "text-modal-color"}`}
+                            style={{ width: "183px", height: "16px", overflow: "hidden" }}
+                          >
+                            {message.message}
+                          </div>
                         </div>
-                        <div
-                          className={`hm-text-14  ${message.is_read === 0 ? "text-purple" : "text-modal-color"}`}
-                          style={{ width: "183px", height: "16px", overflow: "hidden" }}
-                        >
-                          {message.message}
-                        </div>
+                        <div className="ext-secondary-color hm-text-13">{`${moment(message.udate).fromNow()}`}</div>
                       </div>
-                      <div className="ext-secondary-color hm-text-13">{`${moment(message.udate).fromNow()}`}</div>
                     </div>
                   </div>
+                );
+              }
+              return null;
+            })}
+          {message_list_in_lord.record_list.length === 0 && (
+            <div
+              className="border-bottom-custom d-flex align-items-center px-2 hm-pointer-cursor"
+              style={{ height: "83px" }}
+              onClick={() => history.push("/notification/alert")}
+            >
+              <div className="col-12">
+                <div className="d-flex justify-content-between align-items-center">
+                  <div>
+                    <div className="font-weight-bold hm-text-14 text-modal-color">No Record</div>
+                  </div>
                 </div>
-              );
-            }
-            return null;
-          })}
+              </div>
+            </div>
+          )}
         </section>
       </main>
     );

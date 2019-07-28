@@ -86,10 +86,12 @@ class Modal extends Component {
         />
         <section className={`${curr} rounded d-flex flex-column`} id="onlyScroll" style={widthHeight}>
           <header
-            className={`sticky-top d-flex justify-content-center align-items-center`}
+            className={`sticky-top d-flex justify-content-between align-items-center`}
             style={{ backgroundColor: "#f7f9fc", height: "53px" }}
           >
+            <div />
             <h5 className="hm-text-14 text-modal-color font-weight-bold">{this.props.name}</h5>
+            <i className="fas fa-times mr-3 hm-pointer-cursor" onClick={this.handleClose} />
           </header>
           <div id="scrolldiv" style={{ height: "409px", overflow: "auto" }} onScroll={this.handleScroll}>
             {this.props.children}

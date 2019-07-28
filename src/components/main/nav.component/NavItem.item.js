@@ -52,7 +52,11 @@ export default class NavItem extends Component {
 
   handleToggle = () => {
     if (this.props.onToggle) this.props.onToggle();
-    this.setState(state => ({ collapse: !state.collapse }));
+    if (this.state.collapse) {
+      this.setState(state => ({ collapse: false, arrowClassName: "d-block fas fa-angle-right hm-text-14 text-grey" }));
+    } else {
+      this.setState(state => ({ collapse: true, arrowClassName: "d-block fas fa-angle-down hm-text-14 text-purple" }));
+    }
   };
 
   render() {

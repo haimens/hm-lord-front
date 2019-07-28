@@ -159,11 +159,11 @@ export default class Sidebar extends Component {
             showArrow={true}
           >
             <SubNavItem
-              onClick={() => this.handleClick("/invoice")}
+              onClick={() => this.handleClick("/invoice/invoiceList")}
               name="Invoice"
               history={this.props.parentProps.history}
-              path="invoice"
-              is_target={parsedLocation[2] === "invoice"}
+              path="invoiceList"
+              is_target={parsedLocation[3] === "invoiceList"}
             />
             <SubNavItem
               onClick={() => this.handleClick("/invoice/fee")}

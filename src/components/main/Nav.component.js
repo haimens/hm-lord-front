@@ -119,8 +119,8 @@ class Nav extends Component {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                {localStorage.getItem("username").toUpperCase()}
-                <i className="fas fa-sort-down ml-1" />
+                <div>{localStorage.getItem("username") && localStorage.getItem("username").toUpperCase()}</div>
+                <i className="fas fa-sort-down ml-1 mb-1" />
               </button>
 
               <div className="dropdown-menu shadow-sm p-3">
@@ -134,7 +134,7 @@ class Nav extends Component {
                     }}
                   >
                     <small>
-                      <i className="fas fa-cog mr-3" />
+                      <i className="fas fa-unlock-alt mr-3" />
                     </small>
                     Change Password
                   </button>

@@ -27,7 +27,6 @@ class ChatModalContainer extends Component {
         token={token}
         list={list}
         name={name}
-        title="Add Driver"
         onClose={this.handleClose}
         position="right"
         getWidth={"500px"}

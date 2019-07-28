@@ -92,7 +92,7 @@ class App extends Component {
               <ProtectedRoute exact path="/trip/finished/detail/:trip_token" component={TripDetailContainer} />
               <ProtectedRoute exact path="/trip/abnormal" component={TripContainer} />
 
-              <ProtectedRoute exact path="/invoice" component={InvoiceContainer} />
+              <ProtectedRoute exact path="/invoice/invoiceList" component={InvoiceContainer} />
               <ProtectedRoute exact path="/invoice/fee" component={FeeContainer} />
 
               <ProtectedRoute exact path="/payable" component={DriverPayable} />
