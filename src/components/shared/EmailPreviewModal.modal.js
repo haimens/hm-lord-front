@@ -17,7 +17,7 @@ export default class EmailPreviewModal extends Component {
     const { customer_info } = this.props.order_detail;
 
     await this.props.sendEmailToConfirm(customer_info.customer_token, {
-      title: "order_confirmation",
+      title: "Order Confirmation",
       msg: this.html
     });
     this.handleClose();
