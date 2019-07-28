@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { ListView, Header, ListHeader, ChatModalContainer } from "../../components/shared";
+import { ListView, Header, ListHeader } from "../../components/shared";
 import NotificationMessageListItem from "./notificationMessage.component/NotificationMessageList.item";
 import { findMessageListInLord, setCustomerChat } from "../../actions/message.action";
 class NotificationMessage extends Component {
