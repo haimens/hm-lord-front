@@ -30,9 +30,9 @@ class CustomerDetail extends Component {
     const { customer_token } = this.props.match.params;
     this.props.findCustomerNoteListInLord(customer_token, { start });
   };
-  handleJumpToOrder = () => {
+  handleJumpToOrder = async () => {
     const { history, setCurrentCustomerInLord, customer_detail_in_lord } = this.props;
-    setCurrentCustomerInLord(customer_detail_in_lord);
+    await setCurrentCustomerInLord(customer_detail_in_lord);
     history.push("/order/withCustomer");
   };
 
