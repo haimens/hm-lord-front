@@ -11,10 +11,14 @@ export default function BasicInfo(props) {
         }, and Pickup Time is ${convertUTCtoLocal(trip.pickup_time)}`)
     );
 
-    props.createAMessageWithCustomer(customer_token, {
-      message: `Your Trip has been confirmed. ${message}`,
-      title: `From Admin-${localStorage.getItem("name")}`
-    });
+    props.createAMessageWithCustomer(
+      customer_token,
+      {
+        message: `Your Trip has been confirmed. ${message}`,
+        title: `From Admin-${localStorage.getItem("name")}`
+      },
+      true
+    );
   };
   const { order_detail, history, setCustomerChat } = props;
   const { name, cell, email, img_path, addr_str, note, customer_token } = order_detail.customer_info;

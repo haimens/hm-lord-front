@@ -59,11 +59,13 @@ export const setChatToFalse = customer_token => async dispatch => {
   }
 };
 
-export const createAMessageWithCustomer = (customer_token, body) => async dispatch => {
+export const createAMessageWithCustomer = (customer_token, body, bool) => async dispatch => {
   try {
     await startLoader(dispatch);
     await callApi(`message/send/customer/${customer_token}`, "POST", body);
-    await dispatch(findMessageAndResetData(customer_token));
+    if (!bool) {
+      await dispatch(findMessageAndResetData(customer_token));
+    }
     await stopLoader(dispatch);
   } catch (err) {
     await stopLoader(dispatch);

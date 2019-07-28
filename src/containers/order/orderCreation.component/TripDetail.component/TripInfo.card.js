@@ -189,7 +189,7 @@ class TripInfo extends Component {
                     src={`${process.env.PUBLIC_URL}/img/btn_paste.svg`}
                     onClick={this.handlePastAddressToPickUp}
                     alt="paste"
-                    className="ml-2"
+                    className="ml-2 hm-pointer-cursor"
                   />
                 </div>
               </div>
@@ -206,7 +206,7 @@ class TripInfo extends Component {
                     src={`${process.env.PUBLIC_URL}/img/btn_paste.svg`}
                     onClick={this.handlePastAddressToDropOff}
                     alt="paste"
-                    className="ml-2"
+                    className="ml-2 hm-pointer-cursor"
                   />
                 </div>
               </div>

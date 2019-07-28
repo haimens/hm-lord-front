@@ -23,7 +23,7 @@ export default class FlightDetail extends Component {
         onClose={this.handleClose}
         position="center"
         getWidth={"700px"}
-        getHeight={"570px"}
+        getHeight={"300px"}
       >
         <div className="container-fluid">
           <div className="row">
