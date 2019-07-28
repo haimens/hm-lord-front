@@ -11,6 +11,7 @@ export default function TipCard(props) {
             <img
               src={`${process.env.PUBLIC_URL}/img/icon_add.svg`}
               onClick={() => props.handleAddingAddon(trip_token, "A Tip")}
+              className="hm-pointer-cursor"
               alt="Edit"
             />
           )}
