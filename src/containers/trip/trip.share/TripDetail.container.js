@@ -370,7 +370,7 @@ class TripDetailContainer extends Component {
                   handleDetailButtonClicked={this.handleInfoModal}
                   trip_detail_in_lord={trip_detail_in_lord}
                   showEditButton={trip_detail_in_lord.basic_info.status_str === "PENDING"}
-                  hideDelete={!trip_detail_in_lord.basic_info.status_str === "PENDING"}
+                  hideDelete={trip_detail_in_lord.basic_info.status_str !== "PENDING"}
                   handleDeleteAnAddon={this.handleDeleteAnAddon}
                 />
               </div>

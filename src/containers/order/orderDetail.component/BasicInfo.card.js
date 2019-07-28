@@ -43,7 +43,7 @@ export default function BasicInfo(props) {
         </div>
       </div>
       <div className="mb-4 px-3">
-        <div className="text-secondary-color font-weight-500 hm-text-14">Order ID</div>
+        <div className="text-secondary-color font-weight-500 hm-text-14">Payment Receipt</div>
         <div className="hm-text-14 text-modal-color font-weight-bold">{receipt ? receipt : "N/A"}</div>
       </div>
       <div className="mb-4 px-3">
@@ -53,6 +53,10 @@ export default function BasicInfo(props) {
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Order Placed Time</div>
         <div className="hm-text-14 text-modal-color font-weight-bold">{convertLocalToUTC(cdate)}</div>
+      </div>
+      <div className="mb-4 px-3">
+        <div className="text-secondary-color font-weight-500 hm-text-14">Payment Status</div>
+        <div className="hm-text-14 text-modal-color font-weight-bold">{is_paid === 0 ? "Not Paid" : "Paid"}</div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Contact Name</div>
