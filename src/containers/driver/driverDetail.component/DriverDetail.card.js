@@ -80,6 +80,7 @@ class DriverDetailCard extends Component {
                     style={{ backgroundColor: "#5e72e4" }}
                     onClick={this.handleSendEmailToDriver}
                   >
+                    <i className="fas fa-envelope mr-3" />
                     Send Email Confirmation
                   </div>
                 </div>
@@ -90,6 +91,7 @@ class DriverDetailCard extends Component {
                     style={{ backgroundColor: "#5e72e4" }}
                     onClick={this.handleRequestDriverShareLocation}
                   >
+                    <i className="fas fa-location-arrow mr-3" />
                     Send Location Sharing Request
                   </div>
                 </div>

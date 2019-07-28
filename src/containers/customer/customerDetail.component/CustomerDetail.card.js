@@ -73,6 +73,7 @@ class CustomerDetailCard extends Component {
                     className="text-white btn messenger-purple rounded"
                     onClick={this.handleSendSmsConfirmToCustomer}
                   >
+                    <i className="fas fa-envelope mr-3" />
                     Send Confirmation Email
                   </button>
                 </div>

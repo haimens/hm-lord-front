@@ -13,7 +13,7 @@ import {
 } from "../../actions/vehicle.action";
 import { findDriverListInLord } from "../../actions/driver.action";
 import EditVehicle from "./vehicleDetail.component/EditVehicle.modal";
-
+import alertify from "alertifyjs";
 class VehicleDetail extends Component {
   state = {
     showAddingDriverModal: false,
@@ -31,9 +31,17 @@ class VehicleDetail extends Component {
   };
 
   handleDeleteButtonClicked = () => {
-    const { car_token } = this.props.match.params;
-    this.props.updateACarInLord(car_token, { status: 0 });
-    this.props.history.push("/vehicle");
+    alertify.confirm(
+      "Are You Sure to Delete This Vehicle?",
+      () => {
+        const { car_token } = this.props.match.params;
+        this.props.updateACarInLord(car_token, { status: 0 });
+        this.props.history.push("/vehicle");
+      },
+      function() {
+        alertify.error("Cancel");
+      }
+    );
   };
   handleCreateCarToADriverInLord = driver_token => {
     const {

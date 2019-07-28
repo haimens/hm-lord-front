@@ -109,7 +109,7 @@ export default class VehicleAdding extends Component {
               </div>
 
               <AddingImage
-                title={"Logo:"}
+                title={"Image:"}
                 parentProps={{ img_url: img_path, handleShowPreview: this.handleShowPreview }}
                 handleShowImage={this.handleShowImage}
               />

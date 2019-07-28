@@ -43,10 +43,10 @@ export default class OrderCard extends Component {
                   <i className="fas fa-circle success-text-color mr-3 pl-0" style={{ fontSize: "6px" }} />
                   <div className="text-modal-color hm-text-14  font-weight-500">DISPATCHED</div>
                 </div>
-              ) : status_str === "ON-THE-WAY" ? (
+              ) : status_str === "ON-THE-WAY" || status_str === "PENDING" ? (
                 <div className="d-flex align-items-center ">
                   <i className="fas fa-circle pending-text-color mr-3 pl-0" style={{ fontSize: "6px" }} />
-                  <div className="text-modal-color hm-text-14  font-weight-500">ON-THE-WAY</div>
+                  <div className="text-modal-color hm-text-14  font-weight-500">{status_str}</div>
                 </div>
               ) : (
                 <div className="d-flex align-items-center ">

@@ -12,13 +12,17 @@ export default class AddingSalaryModal extends Component {
     this.setState({ [id]: value });
   };
   handleCreatingWage = () => {
-    const { createSalaryInDriver, driver_token } = this.props;
+    const { createSalaryInDriver, driver_token, sum } = this.props;
     const { amount } = this.state;
     if (amount !== "") {
-      createSalaryInDriver(driver_token, {
-        amount: amount * 100
-      });
-      this.handleClose();
+      if (amount * 100 <= sum && amount !== 0) {
+        createSalaryInDriver(driver_token, {
+          amount: amount * 100
+        });
+        this.handleClose();
+      } else {
+        alertify.alert("Error!", "Please Input Correct Amount!");
+      }
     } else {
       alertify.alert("Error!", "Please Finish The Form!");
     }

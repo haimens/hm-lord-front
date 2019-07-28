@@ -165,7 +165,7 @@ export default class EditCustomer extends Component {
 
               <div className="form-group mb-4">
                 <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Cell">
-                  Special Instruction
+                  Special Note
                 </label>
                 <textarea
                   className="form-control hm-input-height"
