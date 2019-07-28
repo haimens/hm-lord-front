@@ -1,5 +1,5 @@
 import React from "react";
-import { convertLocalToUTC, parseAmount, convertUTCtoLocal } from "../../../actions/utilities.action";
+import { parseAmount, convertUTCtoLocal } from "../../../actions/utilities.action";
 import alertify from "alertifyjs";
 export default function BasicInfo(props) {
   const {

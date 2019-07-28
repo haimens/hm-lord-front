@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 import { Modal } from "../../../components/shared";
 import { findTripActiveListInLord, findTripListInLord } from "../../../actions/trip.action";
 import moment from "moment";
-import { convertUTCtoLocal, convertLocalToUTC } from "../../../actions/utilities.action";
 class Calendar extends Component {
   state = {
     currStatus: ""

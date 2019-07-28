@@ -88,15 +88,15 @@ class Dashboard extends Component {
   handleGenerateDateItems = () => {
     const { trip_count_in_lord_active, trip_count_in_lord_finished, trip_count_in_lord_failed } = this.props;
     let tripArray = [];
-    trip_count_in_lord_active.map((active, index) => {
+    trip_count_in_lord_active.map((active, index) =>
       tripArray.push({
         id: active.date,
         title: `${active.count} Ongoing Trip`,
         allDay: true,
         start: active.date,
         end: active.date
-      });
-    });
+      })
+    );
     trip_count_in_lord_finished.map((finished, index) =>
       tripArray.push({
         id: finished.date,
