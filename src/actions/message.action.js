@@ -75,6 +75,7 @@ export const createAMessageWithCustomer = (customer_token, body, bool) => async 
 
 export const findMessageAndResetData = (customer_token, query = {}) => async dispatch => {
   try {
+    await dispatch(setChatToFalse(customer_token));
     await startLoader(dispatch);
     const { payload } = await callApi(`message/all/detail/customer/${customer_token}`, "GET", null, {
       order_key: "cdate",
@@ -113,13 +114,11 @@ export const updateSmsStatus = (sms_token, body = {}, customer_token) => async d
 
 export const setCustomerChat = payload => async dispatch => {
   try {
-    await startLoader(dispatch);
-    await dispatch(findMessageAndResetData(payload.customer_token));
     await dispatch({
       type: constant.SET_CHAT_USER,
       payload
     });
-    await stopLoader(dispatch);
+    await dispatch(findMessageAndResetData(payload.customer_token));
   } catch (err) {
     await stopLoader(dispatch);
     dispatch(processLogout(err));

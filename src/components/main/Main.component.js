@@ -47,7 +47,7 @@ export class Main extends Component {
     const { showChat, updateSmsStatus, message_detail_with_customer, createAMessageWithCustomer } = this.props;
     return (
       <main>
-        {showChat && (
+        {showChat && message_detail_with_customer && (
           <ChatModalContainer
             updateSmsStatus={updateSmsStatus}
             name={this.props.current_customer.customer_name}

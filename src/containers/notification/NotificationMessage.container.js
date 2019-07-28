@@ -3,27 +3,15 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { ListView, Header, ListHeader, ChatModalContainer } from "../../components/shared";
 import NotificationMessageListItem from "./notificationMessage.component/NotificationMessageList.item";
-import {
-  findMessageListInLord,
-  findMessageDetailWithCustomer,
-  setChatToFalse,
-  createAMessageWithCustomer,
-  updateSmsStatus,
-  findMessageAndResetData
-} from "../../actions/message.action";
+import { findMessageListInLord, setCustomerChat } from "../../actions/message.action";
 class NotificationMessage extends Component {
-  state = {
-    customer_token: "",
-    showChatWithCustomer: false,
-    current_name: ""
-  };
   handleChatWithCustomer = async (customer_token, current_name) => {
-    this.setState({ customer_token, current_name });
-    await this.props.findMessageAndResetData(customer_token);
+    this.props.setCustomerChat({ customer_name: current_name, customer_token });
   };
   handlePageChange = start => {
     this.props.findMessageListInLord({ start });
   };
+
   handleShowChatWithCustomer = async () => {
     this.props.setChatToFalse();
   };
@@ -35,27 +23,9 @@ class NotificationMessage extends Component {
     this.props.findMessageListInLord();
   }
   render() {
-    const {
-      message_list_in_lord,
-      message_detail_with_customer,
-      createAMessageWithCustomer,
-      showChat,
-      updateSmsStatus
-    } = this.props;
-    const { customer_token, current_name } = this.state;
+    const { message_list_in_lord } = this.props;
     return (
       <main className="container-fluid">
-        {showChat && (
-          <ChatModalContainer
-            name={current_name}
-            updateSmsStatus={updateSmsStatus}
-            findMoreList={this.findMoreList}
-            token={customer_token}
-            list={message_detail_with_customer}
-            createAMessageWithCustomer={createAMessageWithCustomer}
-            handleClose={this.handleShowChatWithCustomer}
-          />
-        )}
         <section className="mb-4">
           <Header title="Notification" subTitle="Message Center" tabicon={"icon_notification_white.svg"} />
         </section>
@@ -90,18 +60,12 @@ class NotificationMessage extends Component {
 }
 const mapStateToProps = state => {
   return {
-    message_list_in_lord: state.smsReducer.message_list_in_lord,
-    message_detail_with_customer: state.smsReducer.message_detail_with_customer,
-    showChat: state.smsReducer.showChat
+    message_list_in_lord: state.smsReducer.message_list_in_lord
   };
 };
 const mapDispatchToProps = {
   findMessageListInLord,
-  findMessageDetailWithCustomer,
-  setChatToFalse,
-  createAMessageWithCustomer,
-  updateSmsStatus,
-  findMessageAndResetData
+  setCustomerChat
 };
 
 export default connect(
