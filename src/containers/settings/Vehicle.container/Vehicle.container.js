@@ -39,7 +39,7 @@ class Vehicle extends Component {
         <section className="mb-4">
           <ListHeader
             parentProps={{
-              title: "Vehicle",
+              title: "Vehicle Type",
               clickFunction: this.handleAddingVehicle,
               clickTitle: "Vehicle Type"
             }}

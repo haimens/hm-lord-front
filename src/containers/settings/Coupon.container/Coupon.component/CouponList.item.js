@@ -3,13 +3,16 @@ import { parseAmount, convertUTCtoLocal, parseRate } from "../../../../actions/u
 export default class CouponList extends Component {
   render() {
     const { onClick, parentProps } = this.props;
-    const { cdate, amount, min_price, rate, type, discount_token, available_usage } = parentProps;
+    const { cdate, amount, min_price, rate, type, discount_token, available_usage, code } = parentProps;
     return (
       <tr className="border-bottom">
         <td data-label="Last Updated" className="align-middle items-height">
           <section className="text-lg-center text-right text-main-color font-weight-bold hm-text-14">
             {convertUTCtoLocal(cdate)}
           </section>
+        </td>
+        <td data-label="Code" className="align-middle items-height">
+          <section className="text-lg-center text-right text-main-color font-weight-bold hm-text-14">{code}</section>
         </td>
 
         {type === 1 ? (

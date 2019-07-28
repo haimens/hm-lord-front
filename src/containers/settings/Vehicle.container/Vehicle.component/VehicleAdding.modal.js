@@ -63,10 +63,19 @@ export default class VehicleAdding extends Component {
         )}
         {showPreview && <PreviewImageModal image={img_path} onClose={() => this.setState({ showPreview: false })} />}
 
-        <Modal title="Add Driver" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"449px"}>
+        <Modal
+          title="Add Vehicle Type"
+          onClose={this.handleClose}
+          position="center"
+          getWidth={"467px"}
+          getHeight={"510px"}
+        >
           <div className="container">
             <div className="p-3">
               <div className="form-group mb-4">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Name">
+                  Name
+                </label>
                 <input
                   className="form-control hm-input-height mt-3"
                   name="name"
@@ -78,6 +87,9 @@ export default class VehicleAdding extends Component {
               </div>
 
               <div className="form-group mb-4">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Price Prefix">
+                  Price Prefix
+                </label>
                 <input
                   type="text"
                   className="form-control hm-input-height "
@@ -90,6 +102,9 @@ export default class VehicleAdding extends Component {
               </div>
 
               <div className="form-group mb-4">
+                <label className="text-main-color font-weight-bold hm-text-14 w-100" htmlFor="Max Capacity">
+                  Max Capacity
+                </label>
                 <input
                   type="text"
                   className="form-control hm-input-height "
@@ -101,11 +116,13 @@ export default class VehicleAdding extends Component {
                 />
               </div>
 
-              <AddingImage
-                title={"Logo:"}
-                parentProps={{ img_url: img_path, handleShowPreview: this.handleShowPreview }}
-                handleShowImage={this.handleShowImage}
-              />
+              <div>
+                <AddingImage
+                  title={"Image:"}
+                  parentProps={{ img_url: img_path, handleShowPreview: this.handleShowPreview }}
+                  handleShowImage={this.handleShowImage}
+                />
+              </div>
 
               <div className="form-group text-right pt-3">
                 <button

@@ -48,7 +48,7 @@ class Coupon extends Component {
           <ListView
             totalCount={30}
             title="Coupon"
-            fieldNames={["Created On", "Amount", "Min Amount", "Available Usage", "Delete"]}
+            fieldNames={["Created On", "Code", "Amount", "Min Amount", "Available Usage", "Delete"]}
             hideHeader={true}
             onPageChange={this.handlePageChange}
           >
