@@ -133,7 +133,7 @@ export default function BasicInfo(props) {
               Pay
             </button>
           )}
-          {status_str !== "FINALZIED" && status_str !== "CONFIRMED" && (
+          {status_str !== "FINALIZED" && status_str !== "CONFIRMED" && (
             <button
               className="border-0 shadow-sm  hm-text-12 text-white font-weight-bold rounded-custom mr-3"
               style={{ height: "43px", backgroundColor: "#2ece89" }}

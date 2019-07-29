@@ -57,9 +57,10 @@ class PaymentInfo extends Component {
 
   componentDidMount() {
     const { findOrderDetailInLord, current_order } = this.props;
-
     if (current_order && current_order.order_token) {
       findOrderDetailInLord(current_order.order_token);
+    } else if (this.props.match && this.props.match.params && this.props.match.params.order_token) {
+      findOrderDetailInLord(this.props.match.params.order_token);
     } else {
       this.props.history.push("/order/list");
     }
