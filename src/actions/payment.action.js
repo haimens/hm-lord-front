@@ -6,7 +6,7 @@ export const handleSubmitAPaymentInLord = (order_token, body = {}, history) => a
     await startLoader(dispatch);
     const { payload } = await callApi(`payment/web/${order_token}`, "POST", body);
     await launchSuccess(dispatch);
-    history.push("/order/list");
+    history.push(`/order/detail/${order_token}`);
     await stopLoader(dispatch);
     return payload;
   } catch (err) {
