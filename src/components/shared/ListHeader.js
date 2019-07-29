@@ -12,6 +12,10 @@ export default class ListHeader extends Component {
     this.setState({ whichButton: 2 });
     this.props.handleSecondButton();
   };
+  handleThirdBeenClicked = () => {
+    this.setState({ whichButton: 3 });
+    this.props.handleThirdBeenClicked();
+  };
   render() {
     let { buttonWidth } = this.props;
     if (!buttonWidth) {
@@ -75,6 +79,17 @@ export default class ListHeader extends Component {
                     }`}
                     style={{ width: "88px", height: "28px" }}
                     onClick={this.handleSecondBeenClicked}
+                  >
+                    Active
+                  </button>
+                  <button
+                    className={`mr-3 rounded-custom ${
+                      this.state.whichButton === 3
+                        ? "button-main-background text-white border-0"
+                        : "border-0 bg-white text-purple shadow-sm "
+                    }`}
+                    style={{ width: "88px", height: "28px" }}
+                    onClick={this.handleThirdBeenClicked}
                   >
                     History
                   </button>

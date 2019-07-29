@@ -35,7 +35,8 @@ class DriverDetail extends Component {
     showUpdatingDriverModal: false,
     showMap: false,
     available: 0,
-    keywords: ""
+    keywords: "",
+    showAllActiveTrip: true
   };
 
   handleSearch = keywords => {
@@ -45,10 +46,17 @@ class DriverDetail extends Component {
   handleUpcomingFilter = () => {
     const { driver_token } = this.props.match.params;
     this.props.findTripListInDriver(driver_token, { status: 2 });
+    this.setState({ showAllActiveTrip: false });
+  };
+  handleShowAllActive = () => {
+    const { driver_token } = this.props.match.params;
+    this.props.findActiveTripListInDriver(driver_token);
+    this.setState({ showAllActiveTrip: true });
   };
   handleShowAll = () => {
     const { driver_token } = this.props.match.params;
     this.props.findTripListInDriver(driver_token);
+    this.setState({ showAllActiveTrip: false });
   };
   handleShowAddingTripModal = () => {
     this.setState(state => ({ showAddingTripModal: !state.showAddingTripModal }));
@@ -130,7 +138,8 @@ class DriverDetail extends Component {
       showAddingWageModal,
       showAddingSalaryModal,
       showUpdatingDriverModal,
-      showMap
+      showMap,
+      showAllActiveTrip
     } = this.state;
     const {
       history,
@@ -151,7 +160,8 @@ class DriverDetail extends Component {
       salary_sum_list_in_driver,
       findVehicleListInLord,
       requestDriverShareLocation,
-      sendEmailToDriver
+      sendEmailToDriver,
+      trip_active_list_in_driver
     } = this.props;
     return (
       <main className="container-fluid">
@@ -228,26 +238,44 @@ class DriverDetail extends Component {
             showSearch={true}
             showExtra={true}
             handleFirstButton={this.handleUpcomingFilter}
-            handleSecondButton={this.handleShowAll}
+            handleSecondButton={this.handleShowAllActive}
+            handleThirdBeenClicked={this.handleShowAll}
             onSubmit={this.handleSearch}
           />
           <div className="container-fluid">
             <div className="row triplist-scroll p-1">
-              {trip_list_in_driver.record_list.map((trip, index) => (
-                <TripCard
-                  parentProps={{
-                    tripCustomer: trip.customer_name,
-                    tripPickUp: trip.pickup_time,
-                    tripFrom: trip.from_addr_str,
-                    tripTo: trip.to_addr_str,
-                    tripStatus: trip.status_str,
-                    trip_token: trip.trip_token
-                  }}
-                  history={history}
-                  key={index}
-                  hideDriver={true}
-                />
-              ))}
+              {!showAllActiveTrip &&
+                trip_list_in_driver.record_list.map((trip, index) => (
+                  <TripCard
+                    parentProps={{
+                      tripCustomer: trip.customer_name,
+                      tripPickUp: trip.pickup_time,
+                      tripFrom: trip.from_addr_str,
+                      tripTo: trip.to_addr_str,
+                      tripStatus: trip.status_str,
+                      trip_token: trip.trip_token
+                    }}
+                    history={history}
+                    key={index}
+                    hideDriver={true}
+                  />
+                ))}
+              {showAllActiveTrip &&
+                trip_active_list_in_driver.record_list.map((trip, index) => (
+                  <TripCard
+                    parentProps={{
+                      tripCustomer: trip.customer_name,
+                      tripPickUp: trip.pickup_time,
+                      tripFrom: trip.from_addr_str,
+                      tripTo: trip.to_addr_str,
+                      tripStatus: trip.status_str,
+                      trip_token: trip.trip_token
+                    }}
+                    history={history}
+                    key={index}
+                    hideDriver={true}
+                  />
+                ))}
             </div>
           </div>
         </section>
@@ -336,6 +364,7 @@ const mapStateToProps = state => {
     vehicle_list_in_lord: state.vehicleReducer.vehicle_list_in_lord,
     car_list_for_a_driver: state.driverReducer.car_list_for_a_driver,
     trip_list_in_driver: state.tripReducer.trip_list_in_driver,
+    trip_active_list_in_driver: state.tripReducer.trip_active_list_in_driver,
     wage_list_in_driver: state.wageReducer.wage_list_in_driver,
     wage_sum_list_in_driver: state.wageReducer.wage_sum_list_in_driver,
     salary_list_in_driver: state.salaryReducer.salary_list_in_driver,

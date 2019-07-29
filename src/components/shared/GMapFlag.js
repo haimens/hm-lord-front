@@ -41,7 +41,7 @@ const MapWithAMarkerWithLabel = compose(
   withGoogleMap
 )(props => (
   <GoogleMap
-    defaultZoom={8}
+    defaultZoom={14}
     defaultCenter={{ lat: props.lat, lng: props.lng }}
     defaultOptions={{
       styles: [

@@ -42,7 +42,7 @@ const MapWithAMarker = compose(
 )(props => {
   return (
     <GoogleMap
-      defaultZoom={8}
+      defaultZoom={14}
       defaultCenter={{ lat: props.markers[0].lat, lng: props.markers[0].lng }}
       defaultOptions={{
         styles: [
