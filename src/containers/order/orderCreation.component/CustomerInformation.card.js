@@ -207,7 +207,9 @@ class CustomerInformation extends Component {
                     <div className="d-flex justify-content-between align-items-center">
                       <div>
                         <div className="font-weight-bold hm-text-16 text-modal-color">{customer.name}</div>
-                        {/* <div className=" hm-text-14 text-modal-color d-none d-xlg-block">{customer.cell}</div> */}
+                        <div className=" hm-text-14 text-modal-color">
+                          <small>{customer.cell}</small>
+                        </div>
                       </div>
                       <div>
                         <button
