@@ -105,7 +105,7 @@ export default class EditCustomer extends Component {
           onClose={this.handleClose}
           position="center"
           getWidth={"467px"}
-          getHeight={"680px"}
+          getHeight={"500px"}
         >
           <div className="container">
             <div className="p-3">

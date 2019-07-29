@@ -71,7 +71,7 @@ export default class CouponAdding extends Component {
     const { code, amount, min_price, available_usage, type } = this.state;
     return (
       <div>
-        <Modal title="Add Coupon" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"660px"}>
+        <Modal title="Add Coupon" onClose={this.handleClose} position="center" getWidth={"467px"} getHeight={"500px"}>
           <div className="container">
             <div className="p-3">
               <div className="form-group mb-4">

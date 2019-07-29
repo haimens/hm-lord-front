@@ -15,7 +15,7 @@ export default class ImagePreview extends Component {
         zIndex="2000"
         position={"center"}
         getWidth={"600px"}
-        getHeight={"600px"}
+        getHeight={"500px"}
         onClose={this.handleClose}
       >
         <section className="d-flex justify-content-center align-items-center">

@@ -99,7 +99,7 @@ export default class UpdatingDriverInfo extends Component {
           onClose={this.handleClose}
           position="center"
           getWidth={"467px"}
-          getHeight={"660px"}
+          getHeight={"500px"}
         >
           <div className="container">
             <div className="p-3">

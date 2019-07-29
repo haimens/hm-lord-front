@@ -25,7 +25,7 @@ export default class TripCard extends Component {
     return (
       <div className={this.props.fullWidth ? "col-6" : "col-12 col-md-6 mb-4"}>
         <div
-          className="px-4 py-3 shadow-sm rounded-custom bg-white border  hm-pointer-cursor"
+          className="px-4 py-3 shadow-sm rounded-custom bg-white border  hm-pointer-cursor h-100"
           onClick={() => this.handleTripCardPushed(trip_token)}
         >
           <div className="row">

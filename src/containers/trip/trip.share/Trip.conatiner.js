@@ -66,7 +66,6 @@ class TripContainer extends Component {
           {trip_list_in_lord.record_list.map((trip, index) => (
             <TripCard
               parentProps={{
-                tripDriver: "Kobe",
                 tripCustomer: trip.customer_name,
                 tripPickUp: trip.pickup_time,
                 tripFrom: trip.from_addr_str,
