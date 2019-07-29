@@ -524,13 +524,13 @@ export default class EmailPreviewModal extends Component {
                       <tr>
                         <td class="attributes_content">
                           <table width="100%" cellpadding="0" cellspacing="0">
-                            <tr>
-                              <td class="attributes_item"><strong>Amount Due:</strong>${parseAmount(
-                                order_info.amount,
-                                2
-                              )}</td>
-                            </tr>
-                          </table>
+                          <tr>
+                            <td class="attributes_item align-center"><strong>Amount Total: </strong>${parseAmount(
+                              order_info.amount,
+                              2
+                            )}</td>
+                          </tr>
+                        </table>
                         </td>
                       </tr>
                     </table>
