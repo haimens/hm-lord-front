@@ -58,7 +58,7 @@ export default function AddonCard(props) {
               style={{ height: "110px" }}
             >
               <div className="row text-white">
-                <div className="col-12 hm-text-14 font-weight-500">Tip</div>
+                <div className="col-12 hm-text-14 font-weight-500">Add On</div>
               </div>
               <div className="row text-white">
                 <div className="col-12">

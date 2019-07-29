@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import alertify from "alertifyjs";
+import { parseAmount } from "../../../../actions/utilities.action";
 
 export default class PaymentCard extends Component {
   constructor(props) {
@@ -143,6 +144,7 @@ export default class PaymentCard extends Component {
 
   render() {
     const { cashButton } = this.state;
+    const { order_detail } = this.props;
     return (
       <div className="row pt-2 mb-4 pb-5" id="sq-ccbox">
         <div className="col-8">
@@ -154,11 +156,19 @@ export default class PaymentCard extends Component {
               >
                 Pay Now
               </h6>
-              <div>
+              {/* <div>
                 <img className="ml-2" src={`${process.env.PUBLIC_URL}/img/logo_visa.png`} alt="visa" />
                 <img className="ml-2" src={`${process.env.PUBLIC_URL}/img/logo_master.png`} alt="master" />
                 <img className="ml-2" src={`${process.env.PUBLIC_URL}/img/logo_ae.png`} alt="ae" />
                 <img className="ml-2" src={`${process.env.PUBLIC_URL}/img/logo_discover.png`} alt="discover" />
+              </div> */}
+              <div>
+                <div className="hm-title-sub-size text-main-color font-weight-bold">
+                  Total:{" "}
+                  <span className="hm-title-sub-size text-main-color font-weight-bold">
+                    {order_detail && parseAmount(order_detail.order_info.amount, 2)}
+                  </span>
+                </div>
               </div>
             </div>
 

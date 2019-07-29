@@ -21,7 +21,6 @@ import {
   updateTripOperationInfo,
   updateTripBasicInfo
 } from "../../../actions/trip.action";
-import { createOrderNoteListInLord } from "../../../actions/note.action";
 import CompleteTop from "./CompleteOrder.component/CompleteTop.card";
 import AddonModal from "./CompleteOrder.component/Addon.modal";
 import EditAmountModal from "./CompleteOrder.component/EditAmount.card";
@@ -94,20 +93,18 @@ class CompleteOrderCard extends Component {
     );
   };
 
-  handleMovingToPayment = () => {
-    const {
-      current_order,
-      handleMoveNext,
-      applyFinalOrder,
-      updateOrderDetailInLord,
-      createOrderNoteListInLord
-    } = this.props;
+  handleMovingToPayment = async () => {
+    const { current_order, handleMoveNext, applyFinalOrder, updateOrderDetailInLord } = this.props;
     const { name, area, cell, special_instruction } = this.state;
-    updateOrderDetailInLord(current_order.order_token, { contact_name: name, contact_cell: `${area} ${cell}` }, true);
-    if (special_instruction) {
-      createOrderNoteListInLord(current_order.order_token, { type: 1, note: special_instruction });
-    }
-    applyFinalOrder(current_order.order_token);
+    await updateOrderDetailInLord(
+      current_order.order_token,
+      { contact_name: name, contact_cell: `${area} ${cell}`, note: special_instruction },
+      true
+    );
+    // if (special_instruction) {
+    //   createOrderNoteListInLord(current_order.order_token, { type: 1, note: special_instruction });
+    // }
+    await applyFinalOrder(current_order.order_token);
     handleMoveNext(1);
   };
 
@@ -476,8 +473,7 @@ const mapDispatchToProps = {
   updateOrderDetailInLord,
   findFlightListInLord,
   updateTripOperationInfo,
-  updateTripBasicInfo,
-  createOrderNoteListInLord
+  updateTripBasicInfo
 };
 
 export default connect(

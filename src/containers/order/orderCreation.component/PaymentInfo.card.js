@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import PaymentCard from "./PaymentInfo.component/PaymentCard";
 import { findRealmDetailInLord } from "../../../actions/settings.action";
 import { handleSubmitAPaymentInLord } from "../../../actions/payment.action";
+import { findOrderDetailInLord } from "../../../actions/order.action";
 import "./PaymentInfo.card.css";
 class PaymentInfo extends Component {
   constructor(props) {
@@ -54,13 +55,24 @@ class PaymentInfo extends Component {
     document.getElementsByTagName("head")[0].appendChild(sqPaymentScript);
   }
 
+  componentDidMount() {
+    const { findOrderDetailInLord, current_order } = this.props;
+
+    if (current_order && current_order.order_token) {
+      findOrderDetailInLord(current_order.order_token);
+    } else {
+      this.props.history.push("/order/list");
+    }
+  }
+
   render() {
-    const { realm_list_in_lord } = this.props;
+    const { realm_list_in_lord, order_detail } = this.props;
     const { loaded } = this.state;
     return (
       <div>
         {loaded && (
           <PaymentCard
+            order_detail={order_detail}
             handleFinishOrder={this.handleFinishOrder}
             handleNoneReceived={this.handleNoneReceived}
             realm_list_in_lord={realm_list_in_lord}
@@ -75,10 +87,11 @@ class PaymentInfo extends Component {
 const mapStateToProps = state => {
   return {
     realm_list_in_lord: state.settingsReducer.realm_list_in_lord,
+    order_detail: state.orderReducer.order_detail,
     current_order: state.orderReducer.current_order
   };
 };
-const mapDispatchToProps = { findRealmDetailInLord, handleSubmitAPaymentInLord };
+const mapDispatchToProps = { findRealmDetailInLord, findOrderDetailInLord, handleSubmitAPaymentInLord };
 
 export default connect(
   mapStateToProps,
