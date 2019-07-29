@@ -130,11 +130,6 @@ export default class PaymentCard extends Component {
             default:
               break;
           }
-        },
-        paymentFormLoaded: function() {
-          if (document.getElementById("name").style.display) {
-            document.getElementById("name").style.display = "inline-flex";
-          }
         }
       }
     };

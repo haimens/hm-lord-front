@@ -41,7 +41,7 @@ class OrderCreation extends Component {
   }
   render() {
     const { position, round_trip } = this.state;
-    const { curr_customer } = this.props;
+    const { curr_customer, current_order } = this.props;
 
     return (
       <main className="container-fluid">
@@ -75,13 +75,17 @@ class OrderCreation extends Component {
         <section>
           {position === 4 && <CompleteOrderCard round_trip={round_trip} handleMoveNext={this.handleChangePosition} />}
         </section>
-        <section>{position === 5 && <PaymentInfoCard handleMoveNext={this.handleChangePosition} />}</section>
+        <section>
+          {position === 5 && current_order.order_token && (
+            <PaymentInfoCard handleMoveNext={this.handleChangePosition} />
+          )}
+        </section>
       </main>
     );
   }
 }
 const mapStateToProps = state => {
-  return { curr_customer: state.orderReducer.curr_customer };
+  return { curr_customer: state.orderReducer.curr_customer, current_order: state.orderReducer.current_order };
 };
 const mapDispatchToProps = {
   setCurrentOrderInLord,
