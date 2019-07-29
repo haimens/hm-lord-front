@@ -79,8 +79,10 @@ export default function BasicInfo(props) {
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Note</div>
-        <div className={`hm-text-14 text-modal-color font-weight-bold ${note && "text-danger"}`}>
-          {note ? note : "N/A"}
+        <div
+          className={`hm-text-14 text-modal-color font-weight-bold ${note && note !== "undefined" && "text-danger"}`}
+        >
+          {note && note !== "undefined" ? note : "N/A"}
         </div>
       </div>
       <div className="mb-4 px-3">
@@ -111,7 +113,7 @@ export default function BasicInfo(props) {
             style={{ height: "43px", width: "98px", backgroundColor: "#f5365d" }}
             onClick={handleCancelOrder}
           >
-            Cancel
+            Delete
           </button>
           {status_str === "CONFIRMED" && status_str !== "FINALZIED" && (
             <button
