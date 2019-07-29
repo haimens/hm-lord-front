@@ -11,8 +11,8 @@ class GMapWithMarker extends Component {
   componentDidMount() {
     const { from_address_info, to_address_info, driver_info } = this.props;
     let position = [
-      { lat: from_address_info.lat, lng: from_address_info.lng },
-      { lat: to_address_info.lat, lng: to_address_info.lng }
+      { lat: from_address_info.lat, lng: from_address_info.lng, name: from_address_info.street_line_1 },
+      { lat: to_address_info.lat, lng: to_address_info.lng, name: to_address_info.street_line_1 }
     ];
 
     if (driver_info) {
@@ -20,7 +20,8 @@ class GMapWithMarker extends Component {
         position.unshift({
           lat: driver_info.lat,
           lng: driver_info.lng,
-          name: driver_info.name
+          name: driver_info.name,
+          img_path: driver_info.img_path
         });
       }
     }

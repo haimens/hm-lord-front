@@ -436,7 +436,7 @@ class TripDetailContainer extends Component {
                 <div className="text-secondary-color hm-text-14 font-weight-500 mt-3">Driver Start Trip</div>
                 <div className="text-modal-color hm-text-14 font-weight-500 mt-2">
                   {trip_detail_in_lord.basic_info.start_time
-                    ? convertUTCtoLocal(trip_detail_in_lord.basic_info.start_time, "HH:mm a")
+                    ? convertUTCtoLocal(trip_detail_in_lord.basic_info.start_time)
                     : "N/A"}
                 </div>
               </div>
@@ -451,7 +451,7 @@ class TripDetailContainer extends Component {
                 </div>
                 <div className="text-modal-color hm-text-14 font-weight-500 mt-2">
                   {trip_detail_in_lord.basic_info.eta_time
-                    ? convertUTCtoLocal(trip_detail_in_lord.basic_info.eta_time, "HH:mm a")
+                    ? convertUTCtoLocal(trip_detail_in_lord.basic_info.eta_time)
                     : "N/A"}
                 </div>
               </div>
@@ -464,7 +464,7 @@ class TripDetailContainer extends Component {
                 <div className="text-secondary-color hm-text-14 font-weight-500 mt-3">Customer On Board</div>
                 <div className="text-modal-color hm-text-14 font-weight-500 mt-2">
                   {trip_detail_in_lord.basic_info.cob_time
-                    ? convertUTCtoLocal(trip_detail_in_lord.basic_info.cob_time, "HH:mm a")
+                    ? convertUTCtoLocal(trip_detail_in_lord.basic_info.cob_time)
                     : "N/A"}
                 </div>
               </div>
@@ -477,7 +477,7 @@ class TripDetailContainer extends Component {
                 <div className="text-secondary-color hm-text-14 font-weight-500 mt-3">Customer Arrival Destination</div>
                 <div className="text-modal-color hm-text-14 font-weight-500 mt-2">
                   {trip_detail_in_lord.basic_info.arrive_time
-                    ? convertUTCtoLocal(trip_detail_in_lord.basic_info.arrive_time, "HH:mm a")
+                    ? convertUTCtoLocal(trip_detail_in_lord.basic_info.arrive_time)
                     : "N/A"}
                 </div>
               </div>
