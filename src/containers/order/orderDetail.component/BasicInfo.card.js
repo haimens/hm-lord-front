@@ -79,7 +79,9 @@ export default function BasicInfo(props) {
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Note</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{note ? note : "N/A"}</div>
+        <div className={`hm-text-14 text-modal-color font-weight-bold ${note && "text-danger"}`}>
+          {note ? note : "N/A"}
+        </div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Status</div>
