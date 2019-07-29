@@ -33,7 +33,7 @@ class NotificationAlert extends Component {
           <ListView
             totalCount={alert_list_in_lord.count}
             title="Trip Alert"
-            fieldNames={["Driver img", "Alert Time", "Driver Name", "Type", "Trip Detail", "Mute"]}
+            fieldNames={["Driver img", "Alert Time", "Driver Name", "Type", "Mute", "Trip Detail"]}
             hideHeader={true}
             onPageChange={this.handlePageChange}
           >

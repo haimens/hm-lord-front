@@ -36,20 +36,20 @@ export default class NotifficationAlertItem extends Component {
         </td>
         <td data-label="Trip Detail" className="items-height align-middle test-center">
           <img
-            src={`${process.env.PUBLIC_URL}/img/icon_detail.svg`}
-            alt="Customer"
-            className="rounded-circle my-3 hm-pointer-cursor"
-            style={{ height: "25px", width: "25px" }}
-            onClick={() => this.handleTripAlert(trip_token)}
-          />
-        </td>
-        <td data-label="Trip Detail" className="items-height align-middle test-center">
-          <img
             src={`${process.env.PUBLIC_URL}/img/icon_mute.svg`}
             alt="Customer"
             className="rounded-circle my-3 hm-pointer-cursor"
             style={{ height: "25px", width: "25px" }}
             onClick={() => this.muteAlertInfoInTrip(alert_token)}
+          />
+        </td>
+        <td data-label="Trip Detail" className="items-height align-middle test-center">
+          <img
+            src={`${process.env.PUBLIC_URL}/img/icon_detail.svg`}
+            alt="Customer"
+            className="rounded-circle my-3 hm-pointer-cursor"
+            style={{ height: "25px", width: "25px" }}
+            onClick={() => this.handleTripAlert(trip_token)}
           />
         </td>
       </tr>
