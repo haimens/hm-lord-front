@@ -22,11 +22,11 @@ export class Login extends React.Component {
         {/* {this.props.isLoading && <Loader />} */}
         {/* {<SuccessModal />} */}
         <section style={styles.resetpassContainer}>
-          <h3 className="mb-3 text-center">重置密码</h3>
+          <h3 className="mb-3 text-center">Reset Password</h3>
           <div className="rounded bg-white p-5">
             <form onSubmit={this.handleSubmit}>
               <div className="mb-3">
-                <label className="d-block">登录用户名</label>
+                <label className="d-block">Login Username</label>
                 <input
                   required
                   type="text"
@@ -40,7 +40,7 @@ export class Login extends React.Component {
               </div>
               <div className="text-center">
                 <button onClick={() => this.handleClick()} className="btn hm-bg-green text-white  pl-4 pr-4">
-                  重置密码
+                  Reset Password
                 </button>
               </div>
             </form>

@@ -36,9 +36,17 @@ class TripInfo extends Component {
   };
   saveFromAddress = address => {
     this.setState({ from_address: address[0].formatted_address });
+    if (this.props.getFromAddress) {
+      let inputFrom = document.getElementById("from").value;
+      this.props.getFromAddress(inputFrom);
+    }
   };
   saveToAddress = address => {
     this.setState({ to_address: address[0].formatted_address });
+    if (this.props.getToAddress) {
+      let inputFrom = document.getElementById("to").value;
+      this.props.getToAddress(inputFrom);
+    }
   };
 
   handlePastAddressToPickUp = () => {
@@ -46,6 +54,10 @@ class TripInfo extends Component {
       pickup_location: this.props.currentCustomer.addr_str,
       from_address: this.props.currentCustomer.addr_str
     });
+    if (this.props.getFromAddress) {
+      let inputFrom = this.props.currentCustomer.addr_str;
+      this.props.getFromAddress(inputFrom);
+    }
   };
 
   handlePastAddressToDropOff = () => {
@@ -53,6 +65,10 @@ class TripInfo extends Component {
       dropoff_location: this.props.currentCustomer.addr_str,
       to_address: this.props.currentCustomer.addr_str
     });
+    if (this.props.getToAddress) {
+      let inputFrom = this.props.currentCustomer.addr_str;
+      this.props.getToAddress(inputFrom);
+    }
   };
   handleFlightDetailBeenClicked = async () => {
     await this.setState(state => ({ showFlightDetail: !state.showFlightDetail }));
@@ -127,6 +143,7 @@ class TripInfo extends Component {
 
   handleInputHasChanged = async () => {
     await this.props.setMapToFalse();
+    await this.setState({ currIndex: "" });
   };
   handleCardBeenClicked = async (currIndex, quote_token) => {
     await this.setState({ currIndex });
@@ -139,6 +156,16 @@ class TripInfo extends Component {
   saveFlightToken = flight_token => {
     this.props.saveFlightToken(flight_token);
   };
+
+  componentDidMount() {
+    const { to_address, from_address } = this.props;
+    if (from_address) {
+      this.setState({ pickup_location: to_address, from_address });
+    }
+    if (to_address) {
+      this.setState({ dropoff_location: from_address, to_address });
+    }
+  }
 
   render() {
     const { pickup_location, dropoff_location, showFlightDetail } = this.state;

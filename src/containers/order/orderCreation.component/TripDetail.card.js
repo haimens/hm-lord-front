@@ -15,6 +15,8 @@ import { findCustomerDetailInLord } from "../../../actions/customer.action";
 import alertify from "alertifyjs";
 class TripDetail extends Component {
   state = {
+    from_address: "",
+    to_address: "",
     flight_token: "",
     flight_token_again: "",
     quote_token: "",
@@ -74,6 +76,12 @@ class TripDetail extends Component {
   saveFlightTokenAgain = flight_token_again => {
     this.setState({ flight_token_again });
   };
+  getFromAddress = address => {
+    this.setState({ from_address: address });
+  };
+  getToAddress = address => {
+    this.setState({ to_address: address });
+  };
   handleFindQuoteInLord = info => {
     this.props.findQuoteInLord({ ...info });
   };
@@ -81,6 +89,7 @@ class TripDetail extends Component {
     this.props.findQuoteInLordAgain({ ...info });
   };
   handleCarBeenClicked = quote_token => {
+    console.log(quote_token);
     this.setState({ quote_token });
   };
   handleCarBeenClickedAgain = quote_token_again => {
@@ -93,7 +102,7 @@ class TripDetail extends Component {
     }
   }
   render() {
-    const { flightNumber, airlineCode, flightNumberAgain, airlineCodeAgain } = this.state;
+    const { flightNumber, airlineCode, flightNumberAgain, airlineCodeAgain, from_address, to_address } = this.state;
     const {
       round_trip,
       flight_list_in_lord,
@@ -174,6 +183,8 @@ class TripDetail extends Component {
           findFlightListInLord={findFlightListInLord}
           currentCustomer={currentCustomer}
           round_trip={false}
+          getFromAddress={this.getFromAddress}
+          getToAddress={this.getToAddress}
           setMapToFalse={setMapToFalse}
           showMap={showMap}
           handleInputChange={this.handleInputChange}
@@ -192,6 +203,8 @@ class TripDetail extends Component {
             findFlightListInLord={findFlightListInLord}
             currentCustomer={currentCustomer}
             round_trip={true}
+            from_address={from_address}
+            to_address={to_address}
             setMapToFalse={setMapToFalseAgain}
             showMap={showMapAgain}
             handleInputChange={this.handleInputChange}
