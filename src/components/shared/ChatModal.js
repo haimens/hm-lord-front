@@ -108,7 +108,7 @@ class Modal extends Component {
                   placeholder="Type a message here..."
                 />
                 <i
-                  className="chat-icon-position hm-pointer-cursor fas fa-paper-plane shadow-sm text-white rounded-circle d-flex justify-content-center align-items-center messenger-green"
+                  className="hm-pointer-cursor ml-2 fas fa-paper-plane shadow-sm text-white rounded-circle d-flex justify-content-center align-items-center messenger-green"
                   onClick={this.handleSubmit}
                   style={{ height: "52px", width: "52px" }}
                 />
