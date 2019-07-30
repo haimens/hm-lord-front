@@ -2,7 +2,7 @@ import React from "react";
 import { convertUTCtoLocal, parseAmount } from "../../../../actions/utilities.action";
 export default function BasicInfoCard(props) {
   const { showEditButton, handleDetailButtonClicked, trip_detail_in_lord, handleFlightButton } = props;
-  const { basic_info, from_address_info, to_address_info } = trip_detail_in_lord;
+  const { basic_info, from_address_info, to_address_info, flight_info } = trip_detail_in_lord;
   return (
     <div>
       <div className="purple-border p-3">
@@ -48,6 +48,27 @@ export default function BasicInfoCard(props) {
           >
             {basic_info.flight_str !== " " ? basic_info.flight_str : "N/A"}
           </button>
+          {basic_info.flight_str && basic_info.flight_str !== " " && flight_info && !flight_info.flight_token && (
+            <div className="btn-group dropup">
+              <button
+                type="button"
+                className="dropdown-toggle removeAfter"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                style={{ border: "none", outline: "none" }}
+              >
+                <i className="fas fa-exclamation-circle text-danger ml-3" style={{ fontSize: "16px" }} />
+              </button>
+
+              <div
+                className="dropdown-menu hm-main-text-12 border-0 shadow hm-main-textColor-sub p-3 triangle-bottom"
+                style={{ width: "260px" }}
+              >
+                Flight string existed but no flight selected!
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div className="mb-4 px-3">
