@@ -81,7 +81,30 @@ export default function BasicInfoCard(props) {
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Note</div>
-        <div className="hm-text-14 text-modal-color font-weight-bold">{basic_info.note || "N/A"}</div>
+        <div className="d-flex">
+          <div className="hm-text-14 text-modal-color font-weight-bold">{basic_info.note || "N/A"}</div>
+          {!basic_info.note && basic_info.order_note && basic_info.order_note !== " " && (
+            <div className="btn-group dropup">
+              <button
+                type="button"
+                className="dropdown-toggle removeAfter"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                style={{ border: "none", outline: "none" }}
+              >
+                <i className="fas fa-exclamation-circle text-danger ml-3" style={{ fontSize: "16px" }} />
+              </button>
+
+              <div
+                className="dropdown-menu hm-main-text-12 border-0 shadow hm-main-textColor-sub p-3 triangle-bottom"
+                style={{ width: "260px" }}
+              >
+                Order note existed but no trip note
+              </div>
+            </div>
+          )}
+        </div>
       </div>
       <div className="mb-4 px-3">
         <div className="text-secondary-color font-weight-500 hm-text-14">Type</div>
