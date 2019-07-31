@@ -1,22 +1,31 @@
 import React from "react";
 import { convertUTCtoLocal, parseAmount } from "../../../../actions/utilities.action";
 export default function BasicInfoCard(props) {
-  const { showEditButton, handleDetailButtonClicked, trip_detail_in_lord, handleFlightButton } = props;
+  const { showEditButton, handleDetailButtonClicked, trip_detail_in_lord, handleFlightButton, history } = props;
   const { basic_info, from_address_info, to_address_info, flight_info } = trip_detail_in_lord;
   return (
     <div>
       <div className="purple-border p-3">
         <div className="d-flex justify-content-between align-items-center  ">
           <div className="hm-text-16 font-weight-bold text-modal-color">Basic Information</div>
-          {showEditButton && (
+          <div>
+            {showEditButton && (
+              <img
+                src={`${process.env.PUBLIC_URL}/img/icon_edit.svg`}
+                alt="Customer"
+                className="rounded-circle hm-pointer-cursor mr-2"
+                style={{ height: "25px", width: "25px" }}
+                onClick={() => handleDetailButtonClicked("basic", trip_detail_in_lord)}
+              />
+            )}
             <img
-              src={`${process.env.PUBLIC_URL}/img/icon_edit.svg`}
+              src={`${process.env.PUBLIC_URL}/img/icon_vieworder.svg`}
               alt="Customer"
-              className="rounded-circle hm-pointer-cursor"
+              className="rounded-circle hm-pointer-cursor "
               style={{ height: "25px", width: "25px" }}
-              onClick={() => handleDetailButtonClicked("basic", trip_detail_in_lord)}
+              onClick={() => history.push(`/order/detail/${basic_info.order_token}`)}
             />
-          )}
+          </div>
         </div>
       </div>
       <div className="mb-4 px-3">

@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function CustomerInfoCard(props) {
-  const { showEditButton, handleDetailButtonClicked, setCustomerChat, trip_detail_in_lord } = props;
+  const { showEditButton, handleDetailButtonClicked, setCustomerChat, trip_detail_in_lord, history } = props;
   const { customer_info } = trip_detail_in_lord;
   return (
     <div>
@@ -17,18 +17,27 @@ export default function CustomerInfoCard(props) {
               <i className="fas fa-pencil-alt" style={{ color: "#fb6240" }} />
             </button>
           )}
-          <img
-            src={`${process.env.PUBLIC_URL}/img/icon_chat.svg`}
-            alt="Customer"
-            className="rounded-circle hm-pointer-cursor"
-            style={{ height: "25px", width: "25px" }}
-            onClick={() =>
-              setCustomerChat({
-                customer_name: customer_info.name,
-                customer_token: customer_info.customer_token
-              })
-            }
-          />
+          <div>
+            <img
+              src={`${process.env.PUBLIC_URL}/img/icon_chat.svg`}
+              alt="Customer"
+              className="rounded-circle hm-pointer-cursor mr-2"
+              style={{ height: "25px", width: "25px" }}
+              onClick={() =>
+                setCustomerChat({
+                  customer_name: customer_info.name,
+                  customer_token: customer_info.customer_token
+                })
+              }
+            />
+            <img
+              src={`${process.env.PUBLIC_URL}/img/icon_detail.svg`}
+              alt="Customer"
+              className="rounded-circle hm-pointer-cursor"
+              style={{ height: "25px", width: "25px" }}
+              onClick={() => history.push(`/customer/detail/${customer_info.customer_token}`)}
+            />
+          </div>
         </div>
         <img
           src={customer_info.img_path}

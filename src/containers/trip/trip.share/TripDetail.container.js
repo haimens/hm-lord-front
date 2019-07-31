@@ -328,6 +328,7 @@ class TripDetailContainer extends Component {
             <div className="row" style={{ padding: "40px" }}>
               <div className="col-lg-6 col-12 mb-4">
                 <BasicInfo
+                  history={history}
                   handleFlightButton={this.handleFlightButton}
                   trip_detail_in_lord={trip_detail_in_lord}
                   handleDetailButtonClicked={this.handleInfoModal}
@@ -336,6 +337,7 @@ class TripDetailContainer extends Component {
               </div>
               <div className="col-lg-6 col-12 mb-4">
                 <CustomerInfo
+                  history={history}
                   setCustomerChat={setCustomerChat}
                   trip_detail_in_lord={trip_detail_in_lord}
                   handleDetailButtonClicked={this.handleChatWithCustomer}
