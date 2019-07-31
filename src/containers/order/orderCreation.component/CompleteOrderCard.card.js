@@ -193,7 +193,9 @@ class CompleteOrderCard extends Component {
       createAddonToTrip,
       flight_list_in_lord,
       findCouponListInLord,
-      updateTripBasicInfo
+      updateTripBasicInfo,
+      showMap,
+      showMapAgain
     } = this.props;
     const { basic_info, addon_list } = trip_detail_in_lord;
 
@@ -261,6 +263,7 @@ class CompleteOrderCard extends Component {
         <div className="mb-4">
           <CompleteTop
             position={"first"}
+            showMap={showMap}
             handleFlightButton={this.handleFlightButton}
             sum={first_trip_total}
             deleteAddonItem={this.handleDeleteAddonItem}
@@ -275,6 +278,7 @@ class CompleteOrderCard extends Component {
           <div className="mb-4">
             <CompleteTop
               position={"second"}
+              showMap={showMapAgain}
               handleFlightButton={this.handleFlightButton}
               sum={second_trip_total}
               deleteAddonItem={this.handleDeleteAddonItem}
@@ -457,7 +461,9 @@ const mapStateToProps = state => {
     trip_detail_in_lord: state.tripReducer.trip_detail_in_lord,
     trip_detail_in_lord_again: state.tripReducer.trip_detail_in_lord_again,
     coupon_list_in_lord: state.couponReducer.coupon_list_in_lord,
-    flight_list_in_lord: state.flightReducer.flight_list_in_lord
+    flight_list_in_lord: state.flightReducer.flight_list_in_lord,
+    showMap: state.tripReducer.showMap,
+    showMapAgain: state.tripReducer.showMapAgain
   };
 };
 const mapDispatchToProps = {

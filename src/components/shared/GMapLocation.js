@@ -11,7 +11,6 @@ class GMapLocation extends Component {
   }
 
   async componentDidMount() {
-    console.log(this.props);
     await this.setState({ position: this.props.position });
   }
 

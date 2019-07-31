@@ -95,6 +95,9 @@ export const findTripDetailInLord = trip_token => async dispatch => {
 };
 export const findTripDetailInLordAgain = trip_token => async dispatch => {
   try {
+    await dispatch({
+      type: constant.SET_MAP_TO_FALSE_IN_TRIP_AGAIN
+    });
     await startLoader(dispatch);
     const { payload } = await callApi(`trip/detail/${trip_token}`, "GET");
     await dispatch({

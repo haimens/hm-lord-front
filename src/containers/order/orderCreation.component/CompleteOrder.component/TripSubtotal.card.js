@@ -13,7 +13,7 @@ export default function TripSubtotal(props) {
             </button>
           )}
         </div>
-        {from_address_info.addr_str !== "" && (
+        {from_address_info.addr_str !== "" && from_address_info.lat !== "" && (
           <div style={{ height: "183px" }}>
             <GMapLocation
               position={{

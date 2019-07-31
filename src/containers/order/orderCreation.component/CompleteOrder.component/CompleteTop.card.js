@@ -20,7 +20,7 @@ export default class CompleteTop extends Component {
     this.props.handleIconBeenClicked(trip_token, basic_info.amount, this.props.position, currFlightStr);
   };
   render() {
-    const { trip_detail_in_lord, addon_list, deleteAddonItem, position, sum } = this.props;
+    const { trip_detail_in_lord, addon_list, deleteAddonItem, position, sum, showMap } = this.props;
     const { basic_info, from_address_info, to_address_info } = trip_detail_in_lord;
     return (
       <div className="bg-white rounded-custom shadow-sm">
@@ -46,7 +46,7 @@ export default class CompleteTop extends Component {
                 </span>
                 {parseAmount(sum, 2)}
               </div>
-              <TripSubtotal from_address_info={from_address_info} to_address_info={to_address_info} />
+              {showMap && <TripSubtotal from_address_info={from_address_info} to_address_info={to_address_info} />}
             </div>
             <div className="col-lg-6 col-12 mb-4">
               <TipCard

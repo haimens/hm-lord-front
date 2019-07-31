@@ -127,7 +127,8 @@ const initialState = {
     count: 0,
     end: 0
   },
-  showMap: false
+  showMap: false,
+  showMapAgain: false
 };
 
 export default (state = initialState, action) => {
@@ -143,7 +144,7 @@ export default (state = initialState, action) => {
     case constant.TRIP_DETAIL_IN_LORD:
       return { ...state, trip_detail_in_lord: action.payload, showMap: true };
     case constant.TRIP_DETAIL_IN_LORD_AGAIN:
-      return { ...state, trip_detail_in_lord_again: action.payload };
+      return { ...state, trip_detail_in_lord_again: action.payload, showMapAgain: true };
     case constant.TRIP_COUNT_IN_LORD_ACTIVE:
       return { ...state, trip_count_in_lord_active: action.payload };
     case constant.TRIP_COUNT_IN_LORD_FINISHED:
@@ -154,6 +155,8 @@ export default (state = initialState, action) => {
       return { ...state, trip_add_on_list: action.payload };
     case constant.SET_MAP_TO_FALSE_IN_TRIP:
       return { ...state, showMap: false };
+    case constant.SET_MAP_TO_FALSE_IN_TRIP_AGAIN:
+      return { ...state, showMapAgain: false };
     default:
       return state;
   }
