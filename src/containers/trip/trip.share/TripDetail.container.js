@@ -10,7 +10,6 @@ import {
   LogItem,
   AddingNote,
   FlightDetailModal,
-  GMapWithThreeMarker,
   GMapLocation
 } from "../../../components/shared";
 import {
