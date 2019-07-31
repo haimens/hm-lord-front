@@ -131,7 +131,7 @@ function Page404(props) {
         className="mt-4"
       />
       <a className="btn hm-bg-darkblue text-white mt-4" href="/dashboard">
-        返回
+        Return
       </a>
     </main>
   );
