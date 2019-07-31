@@ -390,15 +390,16 @@ class TripDetailContainer extends Component {
           />
           <div className="bg-white p-3">
             <div className="col-12" style={{ height: "300px" }}>
-              {showMap && trip_detail_in_lord.driver_info.lat && (
+              {/* {showMap && trip_detail_in_lord.driver_info.lat && (
                 <GMapWithThreeMarker
                   driver_info={trip_detail_in_lord.driver_info}
                   from_address_info={trip_detail_in_lord.from_address_info}
                   to_address_info={trip_detail_in_lord.to_address_info}
                 />
-              )}
-              {showMap && !trip_detail_in_lord.driver_info.lat && (
+              )} */}
+              {showMap && (
                 <GMapLocation
+                  driver_info={trip_detail_in_lord.driver_info}
                   position={{
                     center: {
                       lat: trip_detail_in_lord.from_address_info.lat,
