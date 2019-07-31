@@ -108,13 +108,15 @@ export default function BasicInfo(props) {
       </div>
       {is_paid === 0 && (
         <div className="mb-4 px-3">
-          <button
-            className="border-0 shadow-sm  hm-text-12 text-white font-weight-bold rounded-custom mr-3"
-            style={{ height: "43px", width: "98px", backgroundColor: "#f5365d" }}
-            onClick={handleCancelOrder}
-          >
-            Delete
-          </button>
+          {status_str !== "COMPLETED" && (
+            <button
+              className="border-0 shadow-sm  hm-text-12 text-white font-weight-bold rounded-custom mr-3"
+              style={{ height: "43px", width: "98px", backgroundColor: "#f5365d" }}
+              onClick={handleCancelOrder}
+            >
+              Delete
+            </button>
+          )}
           {status_str === "CONFIRMED" && status_str !== "FINALZIED" && (
             <button
               className="border-0 shadow-sm  hm-text-12 text-white font-weight-bold rounded-custom mr-3"
