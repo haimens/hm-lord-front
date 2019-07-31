@@ -40,7 +40,7 @@ export default function CustomerInfoCard(props) {
           </div>
         </div>
         <img
-          src={customer_info.img_path}
+          src={customer_info && customer_info.img_path ? customer_info.img_path : "N/A"}
           alt="Customer"
           className="rounded-circle my-3 mr-3"
           style={{ height: "74px", width: "74px" }}

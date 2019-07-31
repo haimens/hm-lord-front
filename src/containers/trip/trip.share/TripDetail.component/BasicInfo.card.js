@@ -74,7 +74,10 @@ export default function BasicInfoCard(props) {
                 className="dropdown-menu hm-main-text-12 border-0 shadow hm-main-textColor-sub p-3 triangle-bottom"
                 style={{ width: "260px" }}
               >
-                Flight string existed but no flight selected!
+                Flight string existed but no flight selected!{" "}
+                <span className="btn-link hm-pointer-cursor" onClick={() => handleFlightButton(basic_info)}>
+                  Select a flight now
+                </span>
               </div>
             </div>
           )}
@@ -109,7 +112,13 @@ export default function BasicInfoCard(props) {
                 className="dropdown-menu hm-main-text-12 border-0 shadow hm-main-textColor-sub p-3 triangle-bottom"
                 style={{ width: "260px" }}
               >
-                Order note existed but no trip note
+                Order note existed but no trip note.
+                <span
+                  className="btn-link hm-pointer-cursor"
+                  onClick={() => history.push(`/order/detail/${basic_info.order_token}`)}
+                >
+                  Click here to see order detail
+                </span>
               </div>
             </div>
           )}
