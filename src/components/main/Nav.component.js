@@ -35,8 +35,8 @@ class Nav extends Component {
     this.props.handleSideBarBeenOpened();
   };
 
-  handleShowAlert = () => {
-    this.setState(state => ({ showAlertNotification: !state.showAlertNotification }));
+  handleShowAlert = async () => {
+    await this.setState(state => ({ showAlertNotification: !state.showAlertNotification }));
   };
   componentDidMount() {
     const { findAlertListInLord, findMessageListInLord } = this.props;

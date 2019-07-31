@@ -21,7 +21,9 @@ class AlertNotificationModal extends Component {
   };
   handleClose = e => {
     if (e) e.preventDefault();
-    if (this.props.onClose) this.props.onClose();
+    if (this.props.onClose) {
+      this.props.onClose();
+    }
   };
   handleJumpLocation = type => {
     this.props.history.push(`/notification/${type}`);
@@ -63,7 +65,7 @@ class AlertNotificationModal extends Component {
                     className="border-bottom-custom d-flex align-items-center px-2 hm-pointer-cursor"
                     key={index}
                     style={{ height: "83px" }}
-                    onClick={() => history.push("/notification/alert")}
+                    onClick={() => this.handleJumpLocation("alert")}
                   >
                     <div className="col-3">
                       <img
@@ -79,7 +81,9 @@ class AlertNotificationModal extends Component {
                           <div className="font-weight-bold hm-text-14 text-modal-color">{alert.customer_name}</div>
                           <div className=" hm-text-14 text-modal-color">{alert.type_str}</div>
                         </div>
-                        <div className="ext-secondary-color hm-text-13">{`${moment(alert.record_time).fromNow()}`}</div>
+                        <div className="text-secondary-color hm-text-13">{`${moment(
+                          alert.record_time
+                        ).fromNow()}`}</div>
                       </div>
                     </div>
                   </div>
@@ -147,12 +151,12 @@ class AlertNotificationModal extends Component {
                           </div>
                           <div
                             className={`hm-text-14  ${message.is_read === 0 ? "text-purple" : "text-modal-color"}`}
-                            style={{ width: "183px", height: "16px", overflow: "hidden" }}
+                            style={{ width: "183px", height: "20px", overflow: "hidden" }}
                           >
                             {message.message}
                           </div>
                         </div>
-                        <div className="ext-secondary-color hm-text-13">{`${moment(message.udate).fromNow()}`}</div>
+                        <div className="text-secondary-color hm-text-13">{`${moment(message.udate).fromNow()}`}</div>
                       </div>
                     </div>
                   </div>

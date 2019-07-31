@@ -519,7 +519,7 @@ export default class EmailPreviewModal extends Component {
                     <h1>Hi ${customer_info.name},</h1>
                     <p>Thanks for using ${localStorage.getItem(
                       "company_name"
-                    )}. This is an receipt for your recent purchase.</p>
+                    )}. Your order has been confirmed. This is an receipt for your recent purchase.</p>
                     <table class="attributes" width="100%" cellpadding="0" cellspacing="0">
                       <tr>
                         <td class="attributes_content">
