@@ -141,7 +141,11 @@ const MapWithAMarker = compose(
             {props.selectedMarker === marker && (
               <InfoWindow>
                 <div className="d-flex justify-content-center align-items-center">
-                  <img src={marker.img_path} style={{ width: "30px", height: "30px" }} alt="driver" />
+                  <img
+                    src={marker.img_path}
+                    style={{ width: "30px", height: "30px" }}
+                    alt="driver"
+                  />
                   <div className="ml-2 text-modal-color">{marker.name}</div>
                 </div>
               </InfoWindow>
