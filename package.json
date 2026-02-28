@@ -27,7 +27,7 @@
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",
     "react-router-scroll-top": "^0.1.1",
-    "react-scripts": "2.1.8",
+    "react-scripts": "5.0.1",
     "react-window-size": "^1.2.2",
     "recompose": "^0.30.0",
     "redux": "^4.0.1",
